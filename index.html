@@ -227,6 +227,29 @@ select:focus{border-color:var(--accent)}
   .nav-tab-main span{display:none}
   .kpi-grid{grid-template-columns:1fr 1fr}
 }
+/* ─── REAL COST MODULE ─── */
+.cost-section{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;margin-bottom:16px}
+.cost-section-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cost-section-title i{color:var(--accent)}
+.cost-row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:8px;margin-bottom:8px}
+.cost-row input[type=text],.cost-row input[type=number]{padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);font-family:inherit;outline:none;transition:border-color .2s;width:100%}
+.cost-row input:focus{border-color:var(--accent)}
+.cost-row select{padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--bg);color:var(--text);font-family:inherit;outline:none}
+.cost-total-bar{background:var(--accent-bg);border:1px solid rgba(26,108,246,.2);border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.cost-total-lbl{font-size:13px;color:var(--accent);font-weight:600}
+.cost-total-val{font-size:20px;font-weight:700;color:var(--accent);font-family:'IBM Plex Mono',monospace}
+.add-row-btn{border:1px dashed var(--border2);background:transparent;border-radius:8px;padding:7px 14px;font-size:12px;color:var(--text3);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .2s;font-family:inherit;width:100%;justify-content:center;margin-top:4px}
+.add-row-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.del-row-btn{border:none;background:transparent;color:var(--danger);cursor:pointer;font-size:16px;padding:4px;border-radius:6px;transition:background .15s;flex-shrink:0}
+.del-row-btn:hover{background:var(--danger-bg)}
+.salary-freq{font-size:11px;color:var(--text3);text-align:center;padding:2px 0}
+.rc-compare-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px}
+.rc-compare-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px}
+.rc-compare-card.positive{border-color:var(--success);background:var(--success-bg)}
+.rc-compare-card.negative{border-color:var(--danger);background:var(--danger-bg)}
+.rc-compare-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px}
+.rc-compare-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)}
+.rc-compare-row:last-child{border:none;font-weight:600;font-size:13px;padding-top:8px;margin-top:4px}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .section{animation:fadeIn .3s ease forwards}
 .main-page.active .logic-block,.main-page.active .ref-card,.main-page.active .source-card{animation:fadeIn .25s ease both}
@@ -249,6 +272,9 @@ select:focus{border-color:var(--accent)}
       </button>
       <button class="nav-tab-main" onclick="showMainPage('sources',this)">
         <i class="ti ti-books"></i><span id="nt-src">المصادر</span>
+      </button>
+      <button class="nav-tab-main" onclick="showMainPage('realcost',this)">
+        <i class="ti ti-coins"></i><span id="nt-realcost">التكلفة الأصلية</span>
       </button>
     </div>
     <div class="nav-right">
@@ -543,111 +569,116 @@ select:focus{border-color:var(--accent)}
 
   <!-- ═══ BIG PICTURE ═══ -->
   <div class="logic-block" style="border-right: 4px solid var(--accent);">
-    <div class="logic-title"><i class="ti ti-map"></i> الصورة الكبيرة — كيف يشتغل النموذج؟</div>
+    <div class="logic-title"><i class="ti ti-map"></i> <span data-ar="الصورة الكبيرة — كيف يشتغل النموذج؟" data-en="The Big Picture — How Does the Model Work?">الصورة الكبيرة — كيف يشتغل النموذج؟</span></div>
     <div class="logic-desc" style="font-size:14px; line-height:1.9;">
-      النموذج يسألك أسئلة عن شركتك، ثم يحسب لك <strong>ثلاثة أسعار</strong> بثلاث طرق مختلفة. كل طريقة تنظر للتكلفة من زاوية مختلفة — مثل المحاسبة التكاليفية لما تحسب تكلفة منتج من ثلاث طرق للتأكد من الرقم.
+      <span data-ar="النموذج يسألك أسئلة عن شركتك، ثم يحسب لك" data-en="The model asks questions about your company, then calculates">النموذج يسألك أسئلة عن شركتك، ثم يحسب لك</span> <strong data-ar="ثلاثة أسعار" data-en="three prices">ثلاثة أسعار</strong> <span data-ar="بثلاث طرق مختلفة. كل طريقة تنظر للتكلفة من زاوية مختلفة — مثل المحاسبة التكاليفية لما تحسب تكلفة منتج من ثلاث طرق للتأكد من الرقم." data-en="using three different methods. Each method views cost from a different angle — like cost accounting when you calculate a product's cost three ways to verify the number.">بثلاث طرق مختلفة. كل طريقة تنظر للتكلفة من زاوية مختلفة — مثل المحاسبة التكاليفية لما تحسب تكلفة منتج من ثلاث طرق للتأكد من الرقم.</span>
     </div>
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin-top:14px;">
       <div style="background:var(--accent-bg); border:1px solid rgba(26,108,246,.2); border-radius:10px; padding:14px; border-top: 3px solid var(--accent);">
-        <div style="font-size:11px; color:var(--accent); font-family:'IBM Plex Mono',monospace; font-weight:600; margin-bottom:6px;">طريقة ① — حجم البيانات</div>
-        <div style="font-size:12px; color:var(--text2); line-height:1.6;">السعر مبني على كمية البيانات اللي تُراقَب يومياً. كلما زادت الأجهزة والخوادم، زادت البيانات، وارتفع السعر.</div>
-        <div style="margin-top:8px; font-size:11px; color:var(--accent);">✓ موصى به للعروض التجارية</div>
+        <div style="font-size:11px; color:var(--accent); font-family:'IBM Plex Mono',monospace; font-weight:600; margin-bottom:6px;" data-ar="طريقة ① — حجم البيانات" data-en="Method ① — Data Volume">طريقة ① — حجم البيانات</div>
+        <div style="font-size:12px; color:var(--text2); line-height:1.6;" data-ar="السعر مبني على كمية البيانات اللي تُراقَب يومياً. كلما زادت الأجهزة والخوادم، زادت البيانات، وارتفع السعر." data-en="Price is based on the volume of data monitored daily. More devices and servers means more data and a higher price.">السعر مبني على كمية البيانات اللي تُراقَب يومياً. كلما زادت الأجهزة والخوادم، زادت البيانات، وارتفع السعر.</div>
+        <div style="margin-top:8px; font-size:11px; color:var(--accent);" data-ar="✓ موصى به للعروض التجارية" data-en="✓ Recommended for commercial proposals">✓ موصى به للعروض التجارية</div>
       </div>
       <div style="background:var(--success-bg); border:1px solid rgba(29,158,117,.2); border-radius:10px; padding:14px; border-top: 3px solid var(--success);">
-        <div style="font-size:11px; color:var(--success); font-family:'IBM Plex Mono',monospace; font-weight:600; margin-bottom:6px;">طريقة ② — تكلفة الموظفين</div>
-        <div style="font-size:12px; color:var(--text2); line-height:1.6;">السعر مبني على الموظفين (محللو الأمن) اللي تحتاجهم الشركة فعلياً. مثل تسعير خدمات مراجعة الحسابات بعدد ساعات المحاسبين.</div>
-        <div style="margin-top:8px; font-size:11px; color:var(--success);">✓ أساس التكلفة الداخلية</div>
+        <div style="font-size:11px; color:var(--success); font-family:'IBM Plex Mono',monospace; font-weight:600; margin-bottom:6px;" data-ar="طريقة ② — تكلفة الموظفين" data-en="Method ② — Analyst Capacity">طريقة ② — تكلفة الموظفين</div>
+        <div style="font-size:12px; color:var(--text2); line-height:1.6;" data-ar="السعر مبني على الموظفين (محللو الأمن) اللي تحتاجهم الشركة فعلياً. مثل تسعير خدمات مراجعة الحسابات بعدد ساعات المحاسبين." data-en="Price is based on the security analysts the company actually needs. Like pricing audit services by accountant hours.">السعر مبني على الموظفين (محللو الأمن) اللي تحتاجهم الشركة فعلياً. مثل تسعير خدمات مراجعة الحسابات بعدد ساعات المحاسبين.</div>
+        <div style="margin-top:8px; font-size:11px; color:var(--success);" data-ar="✓ أساس التكلفة الداخلية" data-en="✓ Internal cost baseline">✓ أساس التكلفة الداخلية</div>
       </div>
       <div style="background:var(--warn-bg); border:1px solid rgba(186,117,23,.2); border-radius:10px; padding:14px; border-top: 3px solid var(--warn);">
-        <div style="font-size:11px; color:var(--warn); font-family:'IBM Plex Mono',monospace; font-weight:600; margin-bottom:6px;">طريقة ③ — تكلفة الأنشطة</div>
-        <div style="font-size:12px; color:var(--text2); line-height:1.6;">السعر مبني على كل نشاط بشكل منفصل: مراقبة + تحقيق + تقارير + ضبط + اجتماعات. كل نشاط له ساعات وسعر ساعة.</div>
-        <div style="margin-top:8px; font-size:11px; color:var(--warn);">✓ الأدق للتفاوض على العقود</div>
+        <div style="font-size:11px; color:var(--warn); font-family:'IBM Plex Mono',monospace; font-weight:600; margin-bottom:6px;" data-ar="طريقة ③ — تكلفة الأنشطة" data-en="Method ③ — Activity-Based Costing">طريقة ③ — تكلفة الأنشطة</div>
+        <div style="font-size:12px; color:var(--text2); line-height:1.6;" data-ar="السعر مبني على كل نشاط بشكل منفصل: مراقبة + تحقيق + تقارير + ضبط + اجتماعات. كل نشاط له ساعات وسعر ساعة." data-en="Price is built from each activity separately: monitoring + investigation + reports + tuning + meetings. Each activity has hours and an hourly rate.">السعر مبني على كل نشاط بشكل منفصل: مراقبة + تحقيق + تقارير + ضبط + اجتماعات. كل نشاط له ساعات وسعر ساعة.</div>
+        <div style="margin-top:8px; font-size:11px; color:var(--warn);" data-ar="✓ الأدق للتفاوض على العقود" data-en="✓ Most precise for contract negotiation">✓ الأدق للتفاوض على العقود</div>
       </div>
     </div>
   </div>
 
   <!-- ═══ STEP 1: COMPLEXITY ═══ -->
   <div class="logic-block">
-    <div class="logic-title"><i class="ti ti-stairs"></i> الخطوة الأولى — تحديد درجة تعقيد العميل (من 1 إلى 4)</div>
-    <div class="logic-desc">قبل أي حساب، النموذج يجمع نقاطاً من إجاباتك ليحدد إلى أي "شريحة" تنتمي. هذه الشريحة تحكم كل الأسعار بعدها — مثل تصنيف العميل في البنك (عادي / مميز / VIP / مؤسسي).</div>
+    <div class="logic-title"><i class="ti ti-stairs"></i> <span data-ar="الخطوة الأولى — تحديد درجة تعقيد العميل (من 1 إلى 4)" data-en="Step One — Determining Client Complexity Level (1 to 4)">الخطوة الأولى — تحديد درجة تعقيد العميل (من 1 إلى 4)</span></div>
+    <div class="logic-desc" data-ar='قبل أي حساب، النموذج يجمع نقاطاً من إجاباتك ليحدد إلى أي "شريحة" تنتمي. هذه الشريحة تحكم كل الأسعار بعدها — مثل تصنيف العميل في البنك (عادي / مميز / VIP / مؤسسي).' data-en='Before any calculation, the model collects points from your answers to determine which "tier" you belong to. This tier governs all subsequent prices — like a bank client classification (Standard / Premium / VIP / Corporate).'>قبل أي حساب، النموذج يجمع نقاطاً من إجاباتك ليحدد إلى أي "شريحة" تنتمي. هذه الشريحة تحكم كل الأسعار بعدها — مثل تصنيف العميل في البنك (عادي / مميز / VIP / مؤسسي).</div>
 
     <div style="margin-bottom:14px;">
-      <div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="ti ti-plus" style="color:var(--accent)"></i> النقاط تُجمَع من إجاباتك هكذا:</div>
+      <div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="ti ti-plus" style="color:var(--accent)"></i> <span data-ar="النقاط تُجمَع من إجاباتك هكذا:" data-en="Points are collected from your answers as follows:">النقاط تُجمَع من إجاباتك هكذا:</span></div>
       <div class="ref-card" style="margin-bottom:0">
         <table class="ref-table">
-          <thead><tr><th>السؤال</th><th>إجابة منخفضة التكلفة</th><th>إجابة متوسطة</th><th>إجابة مرتفعة التكلفة</th></tr></thead>
+          <thead><tr><th data-ar="السؤال" data-en="Question">السؤال</th><th data-ar="إجابة منخفضة التكلفة" data-en="Low-cost Answer">إجابة منخفضة التكلفة</th><th data-ar="إجابة متوسطة" data-en="Medium Answer">إجابة متوسطة</th><th data-ar="إجابة مرتفعة التكلفة" data-en="High-cost Answer">إجابة مرتفعة التكلفة</th></tr></thead>
           <tbody>
             <tr>
-              <td style="font-weight:500">نوع التغطية المطلوبة</td>
-              <td><span class="tag tag-green">ساعات العمل 8/5 = 0 نقطة</span></td>
-              <td><span class="tag tag-amber">ممتد 16/5 = +2 نقطة</span></td>
-              <td><span class="tag tag-red">على مدار الساعة 24/7 = +3 نقاط</span></td>
+              <td style="font-weight:500" data-ar="نوع التغطية المطلوبة" data-en="Coverage Type">نوع التغطية المطلوبة</td>
+              <td><span class="tag tag-green" data-ar="ساعات العمل 8/5 = 0 نقطة" data-en="Business Hours 8/5 = 0 pts">ساعات العمل 8/5 = 0 نقطة</span></td>
+              <td><span class="tag tag-amber" data-ar="ممتد 16/5 = +2 نقطة" data-en="Extended 16/5 = +2 pts">ممتد 16/5 = +2 نقطة</span></td>
+              <td><span class="tag tag-red" data-ar="على مدار الساعة 24/7 = +6 نقاط ⚠ حد أدنى شريحة 2" data-en="Round-the-clock 24/7 = +6 pts ⚠ Min Tier 2">على مدار الساعة 24/7 = +6 نقاط ⚠ حد أدنى شريحة 2</span></td>
             </tr>
             <tr>
-              <td style="font-weight:500">القطاع</td>
-              <td><span class="tag tag-green">تجزئة / تصنيع = 0 نقطة</span></td>
-              <td><span class="tag tag-amber">اتصالات / صحة = +2 نقطة</span></td>
-              <td><span class="tag tag-red">حكومة / بنوك = +3 نقاط</span></td>
+              <td style="font-weight:500" data-ar="القطاع" data-en="Sector">القطاع</td>
+              <td><span class="tag tag-green" data-ar="تجزئة / تصنيع = 0 نقطة" data-en="Retail / Manufacturing = 0 pts">تجزئة / تصنيع = 0 نقطة</span></td>
+              <td><span class="tag tag-amber" data-ar="اتصالات / صحة = +2 نقطة" data-en="Telecom / Healthcare = +2 pts">اتصالات / صحة = +2 نقطة</span></td>
+              <td><span class="tag tag-red" data-ar="حكومة / بنوك = +3 نقاط" data-en="Government / Banking = +3 pts">حكومة / بنوك = +3 نقاط</span></td>
             </tr>
             <tr>
-              <td style="font-weight:500">عدد الموظفين</td>
-              <td><span class="tag tag-green">أقل من 200 = 0 نقطة</span></td>
-              <td><span class="tag tag-amber">200–1,000 = +1 نقطة</span></td>
-              <td><span class="tag tag-red">فوق 5,000 = +3 نقاط</span></td>
+              <td style="font-weight:500" data-ar="عدد الموظفين" data-en="Employee Count">عدد الموظفين</td>
+              <td><span class="tag tag-green" data-ar="أقل من 200 = 0 نقطة" data-en="Under 200 = 0 pts">أقل من 200 = 0 نقطة</span></td>
+              <td><span class="tag tag-amber" data-ar="200–1,000 = +1 نقطة" data-en="200–1,000 = +1 pt">200–1,000 = +1 نقطة</span></td>
+              <td><span class="tag tag-red" data-ar="فوق 5,000 = +3 نقاط" data-en="Over 5,000 = +3 pts">فوق 5,000 = +3 نقاط</span></td>
             </tr>
             <tr>
-              <td style="font-weight:500">الحوادث الشهرية</td>
-              <td><span class="tag tag-green">أقل من 5 = 0 نقطة</span></td>
-              <td><span class="tag tag-amber">5 إلى 20 = +1 نقطة</span></td>
-              <td><span class="tag tag-red">أكثر من 50 = +3 نقاط</span></td>
+              <td style="font-weight:500" data-ar="الحوادث الشهرية" data-en="Monthly Incidents">الحوادث الشهرية</td>
+              <td><span class="tag tag-green" data-ar="أقل من 5 = 0 نقطة" data-en="Under 5 = 0 pts">أقل من 5 = 0 نقطة</span></td>
+              <td><span class="tag tag-amber" data-ar="5 إلى 20 = +1 نقطة" data-en="5 to 20 = +1 pt">5 إلى 20 = +1 نقطة</span></td>
+              <td><span class="tag tag-red" data-ar="أكثر من 50 = +3 نقاط" data-en="Over 50 = +3 pts">أكثر من 50 = +3 نقاط</span></td>
             </tr>
             <tr>
-              <td style="font-weight:500">الأطر التنظيمية</td>
-              <td><span class="tag tag-green">لا يوجد = 0 نقطة</span></td>
-              <td><span class="tag tag-amber">1–2 إطار = +1 نقطة</span></td>
-              <td><span class="tag tag-red">3 أطر أو أكثر = +3 نقاط</span></td>
+              <td style="font-weight:500" data-ar="الأطر التنظيمية" data-en="Regulatory Frameworks">الأطر التنظيمية</td>
+              <td><span class="tag tag-green" data-ar="لا يوجد = 0 نقطة" data-en="None = 0 pts">لا يوجد = 0 نقطة</span></td>
+              <td><span class="tag tag-amber" data-ar="1–2 إطار = +1 نقطة" data-en="1–2 frameworks = +1 pt">1–2 إطار = +1 نقطة</span></td>
+              <td><span class="tag tag-red" data-ar="3 أطر أو أكثر = +3 نقاط" data-en="3+ frameworks = +3 pts">3 أطر أو أكثر = +3 نقاط</span></td>
             </tr>
             <tr>
-              <td style="font-weight:500">SLA وقت الاستجابة</td>
-              <td><span class="tag tag-green">أقل من 4 ساعات = 0 نقطة</span></td>
-              <td><span class="tag tag-amber">أقل من ساعة = +1 نقطة</span></td>
-              <td><span class="tag tag-red">أقل من 15 دقيقة = +2 نقطة</span></td>
+              <td style="font-weight:500" data-ar="SLA وقت الاستجابة" data-en="Response SLA">SLA وقت الاستجابة</td>
+              <td><span class="tag tag-green" data-ar="أقل من 4 ساعات = 0 نقطة" data-en="Under 4 hours = 0 pts">أقل من 4 ساعات = 0 نقطة</span></td>
+              <td><span class="tag tag-amber" data-ar="أقل من ساعة = +1 نقطة" data-en="Under 1 hour = +1 pt">أقل من ساعة = +1 نقطة</span></td>
+              <td><span class="tag tag-red" data-ar="أقل من 15 دقيقة = +2 نقطة" data-en="Under 15 minutes = +2 pts">أقل من 15 دقيقة = +2 نقطة</span></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="ti ti-arrow-left" style="color:var(--accent)"></i> نتيجة النقاط تحدد الشريحة:</div>
+    <div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="ti ti-arrow-left" style="color:var(--accent)"></i> <span data-ar="نتيجة النقاط تحدد الشريحة:" data-en="Score result determines the tier:">نتيجة النقاط تحدد الشريحة:</span></div>
+    <div style="margin-bottom:10px; padding:10px 14px; background:var(--warn-bg); border:1px solid rgba(186,117,23,.3); border-radius:8px; font-size:12px; color:var(--warn);">
+      <i class="ti ti-alert-triangle"></i> <strong data-ar="قاعدة الحد الأدنى للتغطية 24/7:" data-en="24/7 Coverage Minimum Rule:">قاعدة الحد الأدنى للتغطية 24/7:</strong>
+      <span data-ar=" أي عميل يطلب تغطية 24/7 يُصنَّف تلقائياً في شريحة 2 على الأقل — بصرف النظر عن باقي النقاط — لأن التشغيل على مدار الساعة يتطلب ورديات متعددة وموارد مضاعفة." data-en=" Any client requesting 24/7 coverage is automatically classified at Tier 2 minimum — regardless of other scores — because round-the-clock operation requires multiple shifts and doubled resources."> أي عميل يطلب تغطية 24/7 يُصنَّف تلقائياً في شريحة 2 على الأقل — بصرف النظر عن باقي النقاط — لأن التشغيل على مدار الساعة يتطلب ورديات متعددة وموارد مضاعفة.</span>
+    </div>
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(170px,1fr)); gap:10px;">
       <div style="background:var(--success-bg); border-radius:8px; padding:12px; text-align:center; border: 1px solid rgba(29,158,117,.25);">
         <div style="font-size:22px; font-weight:700; color:var(--success); font-family:'IBM Plex Mono',monospace;">0–5</div>
-        <div style="font-size:12px; font-weight:600; color:var(--success); margin:3px 0;">شريحة 1 — بسيط</div>
-        <div style="font-size:11px; color:var(--text3);">شركة صغيرة، تجارة عامة، مراقبة أساسية</div>
+        <div style="font-size:12px; font-weight:600; color:var(--success); margin:3px 0;" data-ar="شريحة 1 — بسيط" data-en="Tier 1 — Simple">شريحة 1 — بسيط</div>
+        <div style="font-size:11px; color:var(--text3);" data-ar="شركة صغيرة، تجارة عامة، 8/5 فقط" data-en="Small company, general trade, 8/5 only">شركة صغيرة، تجارة عامة، 8/5 فقط</div>
       </div>
-      <div style="background:var(--accent-bg); border-radius:8px; padding:12px; text-align:center; border: 1px solid rgba(26,108,246,.25);">
+      <div style="background:var(--accent-bg); border-radius:8px; padding:12px; text-align:center; border: 1px solid rgba(26,108,246,.25); position:relative;">
+        <div style="position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--warn);color:#fff;font-size:9px;padding:2px 8px;border-radius:4px;font-family:'IBM Plex Mono',monospace;white-space:nowrap;" data-ar="حد أدنى 24/7" data-en="24/7 Minimum">حد أدنى 24/7</div>
         <div style="font-size:22px; font-weight:700; color:var(--accent); font-family:'IBM Plex Mono',monospace;">6–10</div>
-        <div style="font-size:12px; font-weight:600; color:var(--accent); margin:3px 0;">شريحة 2 — متوسط</div>
-        <div style="font-size:11px; color:var(--text3);">شركة متوسطة، قطاع منظَّم، 24/7 جزئي</div>
+        <div style="font-size:12px; font-weight:600; color:var(--accent); margin:3px 0;" data-ar="شريحة 2 — متوسط" data-en="Tier 2 — Medium">شريحة 2 — متوسط</div>
+        <div style="font-size:11px; color:var(--text3);" data-ar="شركة متوسطة أو أي عميل 24/7" data-en="Mid-size company or any 24/7 client">شركة متوسطة أو أي عميل 24/7</div>
       </div>
       <div style="background:var(--warn-bg); border-radius:8px; padding:12px; text-align:center; border: 1px solid rgba(186,117,23,.25);">
         <div style="font-size:22px; font-weight:700; color:var(--warn); font-family:'IBM Plex Mono',monospace;">11–16</div>
-        <div style="font-size:12px; font-weight:600; color:var(--warn); margin:3px 0;">شريحة 3 — كبير</div>
-        <div style="font-size:11px; color:var(--text3);">مؤسسة كبيرة، بنوك/حكومة، متطلبات عالية</div>
+        <div style="font-size:12px; font-weight:600; color:var(--warn); margin:3px 0;" data-ar="شريحة 3 — كبير" data-en="Tier 3 — Large">شريحة 3 — كبير</div>
+        <div style="font-size:11px; color:var(--text3);" data-ar="مؤسسة كبيرة، بنوك/حكومة، متطلبات عالية" data-en="Large enterprise, banking/government, high requirements">مؤسسة كبيرة، بنوك/حكومة، متطلبات عالية</div>
       </div>
       <div style="background:var(--purple-bg); border-radius:8px; padding:12px; text-align:center; border: 1px solid rgba(83,74,183,.25);">
         <div style="font-size:22px; font-weight:700; color:var(--purple); font-family:'IBM Plex Mono',monospace;">17+</div>
-        <div style="font-size:12px; font-weight:600; color:var(--purple); margin:3px 0;">شريحة 4 — مؤسسي</div>
-        <div style="font-size:11px; color:var(--text3);">نفط وغاز، بنوك كبرى، حكومة، OT/ICS</div>
+        <div style="font-size:12px; font-weight:600; color:var(--purple); margin:3px 0;" data-ar="شريحة 4 — مؤسسي" data-en="Tier 4 — Enterprise">شريحة 4 — مؤسسي</div>
+        <div style="font-size:11px; color:var(--text3);" data-ar="نفط وغاز، بنوك كبرى، حكومة، OT/ICS" data-en="Oil & gas, major banks, government, OT/ICS">نفط وغاز، بنوك كبرى، حكومة، OT/ICS</div>
       </div>
     </div>
   </div>
 
   <!-- ═══ MODEL 1: GB/DAY — WORKED EXAMPLE ═══ -->
   <div class="logic-block">
-    <div class="logic-title"><i class="ti ti-database"></i> الطريقة ① — التسعير بحجم البيانات (مثال حقيقي بالأرقام)</div>
+    <div class="logic-title"><i class="ti ti-database"></i> <span data-ar="الطريقة ① — التسعير بحجم البيانات (مثال حقيقي بالأرقام)" data-en="Method ① — Data Volume Pricing (Worked Example with Real Numbers)">الطريقة ① — التسعير بحجم البيانات (مثال حقيقي بالأرقام)</span></div>
     <div class="logic-desc">
-      <strong>الفكرة ببساطة:</strong> كل جهاز في شركتك ينتج بيانات أمنية يومياً (logs). النموذج يحسب إجمالي هذه البيانات ويضربها في سعر المعالجة، ثم يضيف تكاليف الموظفين والبنية التحتية والربح.
+      <strong data-ar="الفكرة ببساطة:" data-en="The Simple Idea:">الفكرة ببساطة:</strong> <span data-ar="كل جهاز في شركتك ينتج بيانات أمنية يومياً (logs). النموذج يحسب إجمالي هذه البيانات ويضربها في سعر المعالجة، ثم يضيف تكاليف الموظفين والبنية التحتية والربح." data-en="Every device in your company produces daily security data (logs). The model calculates total data volume and multiplies by the processing rate, then adds staff costs, infrastructure, and profit.">كل جهاز في شركتك ينتج بيانات أمنية يومياً (logs). النموذج يحسب إجمالي هذه البيانات ويضربها في سعر المعالجة، ثم يضيف تكاليف الموظفين والبنية التحتية والربح.</span>
     </div>
 
     <div style="background: var(--bg3); border-radius: 10px; padding: 14px; margin-bottom:16px; border: 1px solid var(--border);">
@@ -733,9 +764,9 @@ select:focus{border-color:var(--accent)}
 
   <!-- ═══ MODEL 2: ANALYST CAPACITY ═══ -->
   <div class="logic-block">
-    <div class="logic-title"><i class="ti ti-users"></i> الطريقة ② — التسعير بتكلفة الموظفين (مثال حقيقي بالأرقام)</div>
+    <div class="logic-title"><i class="ti ti-users"></i> <span data-ar="الطريقة ② — التسعير بتكلفة الموظفين (مثال حقيقي بالأرقام)" data-en="Method ② — Analyst Capacity Pricing (Worked Example)">الطريقة ② — التسعير بتكلفة الموظفين (مثال حقيقي بالأرقام)</span></div>
     <div class="logic-desc">
-      <strong>الفكرة ببساطة:</strong> كل محلل أمن يخدم عدداً محدداً من العملاء حسب تعقيدهم. نحسب حصة العميل من تكلفة المحلل + الأدوات + الإدارة، ثم نضيف الربح.
+      <strong data-ar="الفكرة ببساطة:" data-en="The Simple Idea:">الفكرة ببساطة:</strong> <span data-ar="كل محلل أمن يخدم عدداً محدداً من العملاء حسب تعقيدهم. نحسب حصة العميل من تكلفة المحلل + الأدوات + الإدارة، ثم نضيف الربح." data-en="Each security analyst serves a defined number of clients based on their complexity. We calculate the client's share of analyst cost + tools + management, then add profit.">كل محلل أمن يخدم عدداً محدداً من العملاء حسب تعقيدهم. نحسب حصة العميل من تكلفة المحلل + الأدوات + الإدارة، ثم نضيف الربح.</span>
     </div>
 
     <!-- The key concept: sharing ratio -->
@@ -743,69 +774,78 @@ select:focus{border-color:var(--accent)}
       <div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:10px;">📌 المفهوم الأساسي — كم عميل يخدم محلل واحد؟</div>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:8px;">
         <div style="background:var(--bg2); border-radius:8px; padding:10px; text-align:center; border: 1px solid var(--border);">
-          <div style="font-size:11px; color:var(--success); margin-bottom:4px;">شريحة 1 — بسيط</div>
-          <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--text);">12</div>
+          <div style="font-size:11px; color:var(--success); margin-bottom:4px;">شريحة 1 — بسيط (8/5)</div>
+          <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--text);">10</div>
           <div style="font-size:11px; color:var(--text3);">عميل لكل محلل</div>
         </div>
-        <div style="background:var(--bg2); border-radius:8px; padding:10px; text-align:center; border: 1px solid var(--border);">
-          <div style="font-size:11px; color:var(--accent); margin-bottom:4px;">شريحة 2 — متوسط</div>
-          <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--text);">8</div>
+        <div style="background:var(--bg2); border-radius:8px; padding:10px; text-align:center; border: 2px solid var(--warn);">
+          <div style="font-size:11px; color:var(--accent); margin-bottom:2px;">شريحة 2 — متوسط</div>
+          <div style="font-size:9px; color:var(--warn); margin-bottom:3px; font-family:'IBM Plex Mono',monospace;">8/5: 5 عملاء · 24/7: 3 عملاء</div>
+          <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--warn);">3–5</div>
           <div style="font-size:11px; color:var(--text3);">عملاء لكل محلل</div>
         </div>
         <div style="background:var(--bg2); border-radius:8px; padding:10px; text-align:center; border: 1px solid var(--border);">
           <div style="font-size:11px; color:var(--warn); margin-bottom:4px;">شريحة 3 — كبير</div>
-          <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--text);">5</div>
-          <div style="font-size:11px; color:var(--text3);">عملاء لكل محلل</div>
-        </div>
-        <div style="background:var(--bg2); border-radius:8px; padding:10px; text-align:center; border: 1px solid var(--border);">
-          <div style="font-size:11px; color:var(--purple); margin-bottom:4px;">شريحة 4 — مؤسسي</div>
           <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--text);">2</div>
           <div style="font-size:11px; color:var(--text3);">عميل لكل محلل</div>
         </div>
+        <div style="background:var(--bg2); border-radius:8px; padding:10px; text-align:center; border: 1px solid var(--border);">
+          <div style="font-size:11px; color:var(--purple); margin-bottom:4px;">شريحة 4 — مؤسسي</div>
+          <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--text);">0.5</div>
+          <div style="font-size:11px; color:var(--text3);">محلل مخصص جزئياً</div>
+        </div>
       </div>
-      <div style="font-size:11px; color:var(--text3); margin-top:8px;">💡 العميل الأكثر تعقيداً يستهلك وقتاً أكبر من المحلل، لذا حصته من التكلفة أكبر.</div>
+      <div style="font-size:11px; color:var(--text3); margin-top:8px; line-height:1.6;">💡 العميل الأكثر تعقيداً يستهلك وقتاً أكبر من المحلل، لذا حصته من التكلفة أكبر.</div>
+      <div style="font-size:11px; color:var(--warn); margin-top:6px; padding:8px 10px; background:var(--warn-bg); border-radius:6px; border:1px solid rgba(186,117,23,.25);">
+        ⚠ <strong>قاعدة 24/7:</strong> تغطية على مدار الساعة تتطلب 3 ورديات × 7 أيام. المحلل الواحد يعمل وردية واحدة فقط، لذا يحتاج فريق 24/7 الحقيقي إلى <strong>4–5 محللين لكل وردية</strong> (مع احتساب الإجازات والتدريب). هذا يرفع حصة العميل من التكلفة بنسبة 40–50% مقارنة بالعميل ذي التغطية 8/5.
+      </div>
     </div>
 
     <!-- Worked example -->
     <div style="margin-bottom:16px;">
-      <div style="font-size:12px; font-weight:600; color:var(--text3); margin-bottom:10px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.05em;">مثال: نفس الشركة المتوسطة — شريحة 2 (8 عملاء لكل محلل)</div>
+      <div style="font-size:12px; font-weight:600; color:var(--text3); margin-bottom:10px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.05em;">مثال: شركة متوسطة — شريحة 2 بتغطية 24/7 (3 عملاء لكل محلل)</div>
       <div class="ref-card" style="margin-bottom:0">
         <table class="ref-table">
-          <thead><tr><th>بند التكلفة</th><th>التكلفة الكاملة للمحلل/شهر</th><th>حصة هذا العميل (÷ 8)</th></tr></thead>
+          <thead><tr><th>بند التكلفة</th><th>التكلفة الكاملة للمحلل/شهر</th><th>حصة هذا العميل (÷ 3)</th></tr></thead>
           <tbody>
             <tr>
               <td style="font-weight:500">① راتب محلل الأمن</td>
               <td class="mono-val" style="color:var(--text3)">22,000 ر.س</td>
-              <td class="mono-val c-blue">2,750 ر.س</td>
+              <td class="mono-val c-blue">7,333 ر.س</td>
             </tr>
             <tr>
-              <td style="font-weight:500">② حصة من مدير SOC</td>
-              <td class="mono-val" style="color:var(--text3)">30,000 ر.س ÷ 10 عملاء</td>
-              <td class="mono-val c-blue">3,000 ر.س</td>
+              <td style="font-weight:500">② مكافأة الوردية الليلية (25%)</td>
+              <td class="mono-val" style="color:var(--text3)">5,500 ر.س</td>
+              <td class="mono-val c-blue">1,833 ر.س</td>
             </tr>
             <tr>
-              <td style="font-weight:500">③ أدوات ومنصات (SIEM + EDR)</td>
+              <td style="font-weight:500">③ حصة من مدير SOC</td>
+              <td class="mono-val" style="color:var(--text3)">30,000 ر.س ÷ 6 عملاء</td>
+              <td class="mono-val c-blue">5,000 ر.س</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">④ أدوات ومنصات (SIEM + EDR)</td>
               <td class="mono-val" style="color:var(--text3)">11,250 ر.س</td>
-              <td class="mono-val c-blue">1,406 ر.س</td>
+              <td class="mono-val c-blue">3,750 ر.س</td>
             </tr>
             <tr>
-              <td style="font-weight:500">④ بنية تحتية + مكتب</td>
+              <td style="font-weight:500">⑤ بنية تحتية + مكتب</td>
               <td class="mono-val" style="color:var(--text3)">5,625 ر.س</td>
-              <td class="mono-val c-blue">703 ر.س</td>
+              <td class="mono-val c-blue">1,875 ر.س</td>
             </tr>
             <tr style="background:var(--bg3);">
               <td style="font-weight:700">إجمالي التكلفة على العميل</td>
               <td></td>
-              <td class="mono-val" style="font-weight:700;">7,859 ر.س</td>
+              <td class="mono-val" style="font-weight:700;">19,791 ر.س</td>
             </tr>
             <tr>
-              <td style="font-weight:500">⑤ هامش الربح</td>
-              <td style="font-size:12px; color:var(--text2);">7,859 × 35%</td>
-              <td class="mono-val c-green">2,751 ر.س</td>
+              <td style="font-weight:500">⑥ هامش الربح</td>
+              <td style="font-size:12px; color:var(--text2);">19,791 × 35%</td>
+              <td class="mono-val c-green">6,927 ر.س</td>
             </tr>
             <tr style="background:var(--success-bg);">
-              <td colspan="2" style="font-weight:700; font-size:14px; color:var(--success)">💰 السعر النهائي للعميل</td>
-              <td class="mono-val c-green" style="font-size:16px; font-weight:700;">10,610 ر.س/شهر</td>
+              <td colspan="2" style="font-weight:700; font-size:14px; color:var(--success)">💰 السعر النهائي للعميل (24/7)</td>
+              <td class="mono-val c-green" style="font-size:16px; font-weight:700;">26,718 ر.س/شهر</td>
             </tr>
           </tbody>
         </table>
@@ -813,15 +853,15 @@ select:focus{border-color:var(--accent)}
     </div>
     <div class="alert-box alert-warn" style="margin-bottom:0; font-size:12px;">
       <i class="ti ti-alert-triangle"></i>
-      <span><strong>لاحظ الفرق بين الطريقتين:</strong> الطريقة الأولى أعطت 91,554 ر.س والثانية أعطت 10,610 ر.س للمثال نفسه. لأن الأولى تحسب بحجم البيانات الكبير جداً (جدران نارية 4 × 20GB)، بينما الثانية تحسب فقط حصة الموظفين. الحقيقة دائماً بين الرقمين.</span>
+      <span><strong>مقارنة تأثير 24/7:</strong> نفس العميل المتوسط بتغطية 8/5 تكلفته ~10,610 ر.س/شهر، بينما بتغطية 24/7 تصبح ~26,718 ر.س/شهر — أي زيادة <strong>151%</strong>. هذا منطقي لأن 24/7 تعني ثلاثة أضعاف ساعات العمل + مكافآت الوردية الليلية + تكاليف التأهب الدائم.</span>
     </div>
   </div>
 
   <!-- ═══ MODEL 3: ABC ═══ -->
   <div class="logic-block">
-    <div class="logic-title"><i class="ti ti-list-check"></i> الطريقة ③ — التسعير بالأنشطة (مثال حقيقي بالأرقام)</div>
+    <div class="logic-title"><i class="ti ti-list-check"></i> <span data-ar="الطريقة ③ — التسعير بالأنشطة (مثال حقيقي بالأرقام)" data-en="Method ③ — Activity-Based Costing (Worked Example)">الطريقة ③ — التسعير بالأنشطة (مثال حقيقي بالأرقام)</span></div>
     <div class="logic-desc">
-      <strong>الفكرة ببساطة:</strong> نفصّل كل نشاط يؤديه فريق الأمن لهذا العميل شهرياً، ونحسب تكلفته بالساعة. مثل فاتورة مكتب المحاماة اللي تفصّل: 5 ساعات مراجعة + 3 ساعات مرافعة + ساعة اجتماع.
+      <strong data-ar="الفكرة ببساطة:" data-en="The Simple Idea:">الفكرة ببساطة:</strong> <span data-ar="نفصّل كل نشاط يؤديه فريق الأمن لهذا العميل شهرياً، ونحسب تكلفته بالساعة. مثل فاتورة مكتب المحاماة اللي تفصّل: 5 ساعات مراجعة + 3 ساعات مرافعة + ساعة اجتماع." data-en="We break down every activity the security team performs for this client monthly and calculate its hourly cost. Like a law firm invoice itemizing: 5 review hours + 3 litigation hours + 1 meeting hour.">نفصّل كل نشاط يؤديه فريق الأمن لهذا العميل شهرياً، ونحسب تكلفته بالساعة. مثل فاتورة مكتب المحاماة اللي تفصّل: 5 ساعات مراجعة + 3 ساعات مرافعة + ساعة اجتماع.</span>
     </div>
 
     <div style="font-size:12px; font-weight:600; color:var(--text3); margin-bottom:10px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.05em;">مثال: نفس الشركة المتوسطة — شريحة 2</div>
@@ -887,10 +927,8 @@ select:focus{border-color:var(--accent)}
 
   <!-- ═══ ADJUSTMENTS / MULTIPLIERS ═══ -->
   <div class="logic-block">
-    <div class="logic-title"><i class="ti ti-adjustments"></i> التعديلات على السعر الأساسي — لماذا يختلف السعر من عميل لآخر؟</div>
-    <div class="logic-desc">
-      بعد حساب السعر الأساسي، النموذج يطبّق تعديلات (زيادة أو خصم) بناءً على ظروف العميل. الفكرة نفس فكرة التأمين — العميل "الأعلى مخاطرة" يدفع أكثر.
-    </div>
+    <div class="logic-title"><i class="ti ti-adjustments"></i> <span data-ar="التعديلات على السعر الأساسي — لماذا يختلف السعر من عميل لآخر؟" data-en="Price Adjustments — Why Does the Price Vary Between Clients?">التعديلات على السعر الأساسي — لماذا يختلف السعر من عميل لآخر؟</span></div>
+    <div class="logic-desc" data-ar="بعد حساب السعر الأساسي، النموذج يطبّق تعديلات (زيادة أو خصم) بناءً على ظروف العميل. الفكرة نفس فكرة التأمين — العميل الأعلى مخاطرة يدفع أكثر." data-en="After calculating the base price, the model applies adjustments (increases or discounts) based on the client's circumstances. Same logic as insurance — the higher-risk client pays more.">بعد حساب السعر الأساسي، النموذج يطبّق تعديلات (زيادة أو خصم) بناءً على ظروف العميل. الفكرة نفس فكرة التأمين — العميل "الأعلى مخاطرة" يدفع أكثر.</div>
 
     <div class="ref-card" style="margin-bottom:14px;">
       <div class="ref-card-header"><i class="ti ti-building-bank"></i> التعديل الأول — القطاع (لماذا البنوك تدفع أكثر من محلات التجزئة؟)</div>
@@ -935,8 +973,8 @@ select:focus{border-color:var(--accent)}
 
   <!-- ═══ HOW THE THREE PRICES RELATE ═══ -->
   <div class="logic-block" style="border-right:4px solid var(--success);">
-    <div class="logic-title"><i class="ti ti-scale"></i> كيف تستخدم الأسعار الثلاثة معاً؟</div>
-    <div class="logic-desc">الأسعار الثلاثة ليست بديلة عن بعضها — هي أدوات مختلفة لنفس القرار. تخيّلها مثل ثلاث طرق لتقدير سعر شقة: تكلفة البناء، أسعار السوق، والدخل المتوقع من الإيجار.</div>
+    <div class="logic-title"><i class="ti ti-scale"></i> <span data-ar="كيف تستخدم الأسعار الثلاثة معاً؟" data-en="How Do You Use the Three Prices Together?">كيف تستخدم الأسعار الثلاثة معاً؟</span></div>
+    <div class="logic-desc" data-ar="الأسعار الثلاثة ليست بديلة عن بعضها — هي أدوات مختلفة لنفس القرار. تخيّلها مثل ثلاث طرق لتقدير سعر شقة: تكلفة البناء، أسعار السوق، والدخل المتوقع من الإيجار." data-en="The three prices are not alternatives to each other — they are different tools for the same decision. Think of them as three ways to estimate an apartment price: construction cost, market prices, and expected rental income.">الأسعار الثلاثة ليست بديلة عن بعضها — هي أدوات مختلفة لنفس القرار. تخيّلها مثل ثلاث طرق لتقدير سعر شقة: تكلفة البناء، أسعار السوق، والدخل المتوقع من الإيجار.</div>
     <div class="ref-card" style="margin-bottom:0">
       <table class="ref-table">
         <thead><tr><th>الطريقة</th><th>استخدمها لـ</th><th>ميزتها</th><th>متى تكون الأعلى؟</th></tr></thead>
@@ -1072,10 +1110,10 @@ select:focus{border-color:var(--accent)}
     <div class="ref-card-header"><i class="ti ti-chart-area"></i> حجم السوق السعودي — بيانات 2024–2026</div>
     <div style="padding:16px 16px 4px">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px">
-        <div class="kpi-card"><div class="kpi-label">سوق الأمن السيبراني KSA</div><div class="kpi-val" style="font-size:18px">15.2 مليار</div><div class="kpi-sub">ريال سعودي — 2024 (NCA)</div></div>
-        <div class="kpi-card green-b"><div class="kpi-label">سوق MSSP عالمياً</div><div class="kpi-val" style="font-size:18px">39.5 مليار</div><div class="kpi-sub">دولار — 2025 (MnM)</div></div>
-        <div class="kpi-card amber-b"><div class="kpi-label">معدل النمو السعودي</div><div class="kpi-val" style="font-size:18px">14%</div><div class="kpi-sub">CAGR سنوي (NCA 2025)</div></div>
-        <div class="kpi-card purple-b"><div class="kpi-label">معدل النمو العالمي MSSP</div><div class="kpi-val" style="font-size:18px">11.1%</div><div class="kpi-sub">CAGR 2025–2030 (MnM)</div></div>
+        <div class="kpi-card"><div class="kpi-label" id="ref-kpi-ksa-lbl">سوق الأمن السيبراني KSA</div><div class="kpi-val" style="font-size:18px">15.2 مليار</div><div class="kpi-sub" id="ref-kpi-ksa-sub">ريال سعودي — 2024 (NCA)</div></div>
+        <div class="kpi-card green-b"><div class="kpi-label" id="ref-kpi-mssp-lbl">سوق MSSP عالمياً</div><div class="kpi-val" style="font-size:18px">39.5 مليار</div><div class="kpi-sub" id="ref-kpi-mssp-sub">دولار — 2025 (MnM)</div></div>
+        <div class="kpi-card amber-b"><div class="kpi-label" id="ref-kpi-growth-lbl">معدل النمو السعودي</div><div class="kpi-val" style="font-size:18px">14%</div><div class="kpi-sub" id="ref-kpi-growth-sub">CAGR سنوي (NCA 2025)</div></div>
+        <div class="kpi-card purple-b"><div class="kpi-label" id="ref-kpi-global-lbl">معدل النمو العالمي MSSP</div><div class="kpi-val" style="font-size:18px">11.1%</div><div class="kpi-sub" id="ref-kpi-global-sub">CAGR 2025–2030 (MnM)</div></div>
       </div>
     </div>
   </div>
@@ -1098,12 +1136,12 @@ select:focus{border-color:var(--accent)}
 
   <!-- ══ COUNTER STRIP ══ -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px;">
-    <div class="kpi-card"><div class="kpi-label">إجمالي المصادر</div><div class="kpi-val">15</div><div class="kpi-sub">مصدراً أولياً</div></div>
-    <div class="kpi-card green-b"><div class="kpi-label">بيانات السوق</div><div class="kpi-val">5</div><div class="kpi-sub">تقارير بحثية</div></div>
-    <div class="kpi-card amber-b"><div class="kpi-label">بيانات التسعير</div><div class="kpi-val">5</div><div class="kpi-sub">مصادر تسعير</div></div>
-    <div class="kpi-card purple-b"><div class="kpi-label">أدوات SIEM</div><div class="kpi-val">3</div><div class="kpi-sub">مصادر أسعار</div></div>
+    <div class="kpi-card"><div class="kpi-label" id="src-kpi-total-lbl">إجمالي المصادر</div><div class="kpi-val">15</div><div class="kpi-sub" id="src-kpi-total-sub">مصدراً أولياً</div></div>
+    <div class="kpi-card green-b"><div class="kpi-label" id="src-kpi-mkt-lbl">بيانات السوق</div><div class="kpi-val">5</div><div class="kpi-sub" id="src-kpi-mkt-sub">تقارير بحثية</div></div>
+    <div class="kpi-card amber-b"><div class="kpi-label" id="src-kpi-price-lbl">بيانات التسعير</div><div class="kpi-val">5</div><div class="kpi-sub" id="src-kpi-price-sub">مصادر تسعير</div></div>
+    <div class="kpi-card purple-b"><div class="kpi-label" id="src-kpi-siem-lbl">أدوات SIEM</div><div class="kpi-val">3</div><div class="kpi-sub" id="src-kpi-siem-sub">مصادر أسعار</div></div>
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;border-right:3px solid var(--warn);">
-      <div class="kpi-label">الرواتب</div><div class="kpi-val" style="font-size:20px;font-family:'IBM Plex Mono',monospace;font-weight:700;">2</div><div class="kpi-sub">Glassdoor + Levels.fyi</div>
+      <div class="kpi-label" id="src-kpi-sal-lbl">الرواتب</div><div class="kpi-val" style="font-size:20px;font-family:'IBM Plex Mono',monospace;font-weight:700;">2</div><div class="kpi-sub">Glassdoor + Levels.fyi</div>
     </div>
   </div>
 
@@ -1508,6 +1546,147 @@ select:focus{border-color:var(--accent)}
 
 </div><!-- end page-sources -->
 
+<!-- ══════════════════════════════════════════════
+     PAGE 5 — REAL COST MODULE
+══════════════════════════════════════════════ -->
+<div id="page-realcost" class="main-page">
+  <div class="module-header">
+    <div class="module-icon" style="background:var(--warn-bg);color:var(--warn)"><i class="ti ti-coins"></i></div>
+    <div>
+      <div class="section-tag">REAL COST</div>
+      <div class="module-title" id="rc-title">التكلفة الأصلية</div>
+      <div class="module-sub" id="rc-sub">أدخل تكاليفك الفعلية لمقارنتها مع نماذج التسعير — جميع المبالغ بالريال السعودي</div>
+    </div>
+  </div>
+
+  <!-- STAFF SECTION -->
+  <div class="cost-section">
+    <div class="cost-section-title">
+      <span><i class="ti ti-users" style="color:var(--accent)"></i> &nbsp;<span id="rc-lbl-staff">الموظفون</span></span>
+      <button class="btn-secondary" style="padding:5px 10px;font-size:12px" onclick="addStaffRow()"><i class="ti ti-plus"></i> <span id="rc-lbl-addstaff">إضافة موظف</span></button>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:6px;font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;padding:0 2px">
+      <span id="rc-th-role">المسمى / الدور</span>
+      <span id="rc-th-count">العدد</span>
+      <span id="rc-th-salary">الراتب</span>
+      <span id="rc-th-period">الفترة</span>
+    </div>
+    <div id="staff-rows"></div>
+    <div class="cost-total-bar" style="margin-top:12px">
+      <span class="cost-total-lbl" id="rc-lbl-stafftotal">إجمالي تكلفة الموظفين / شهر</span>
+      <span class="cost-total-val" id="rc-val-stafftotal">0 ر.س</span>
+    </div>
+  </div>
+
+  <!-- LICENSES SECTION -->
+  <div class="cost-section">
+    <div class="cost-section-title">
+      <span><i class="ti ti-key" style="color:var(--purple)"></i> &nbsp;<span id="rc-lbl-lic">رخص سير العمل والأدوات</span></span>
+      <button class="btn-secondary" style="padding:5px 10px;font-size:12px" onclick="addLicRow()"><i class="ti ti-plus"></i> <span id="rc-lbl-addlic">إضافة رخصة</span></button>
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:10px" id="rc-hint-lic">أضف أي رخصة أو اشتراك — SIEM، EDR، Microsoft 365، أي شيء تحتاجه</div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:6px;font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;padding:0 2px">
+      <span id="rc-th-licname">اسم الرخصة</span>
+      <span id="rc-th-liccost">التكلفة</span>
+      <span id="rc-th-licperiod">الفترة</span>
+      <span></span>
+    </div>
+    <div id="lic-rows"></div>
+    <div class="cost-total-bar" style="margin-top:12px;background:var(--purple-bg);border-color:rgba(83,74,183,.2)">
+      <span class="cost-total-lbl" style="color:var(--purple)" id="rc-lbl-lictotal">إجمالي تكلفة الرخص / شهر</span>
+      <span class="cost-total-val" style="color:var(--purple)" id="rc-val-lictotal">0 ر.س</span>
+    </div>
+  </div>
+
+  <!-- OVERHEAD SECTION -->
+  <div class="cost-section">
+    <div class="cost-section-title">
+      <span><i class="ti ti-building" style="color:var(--teal)"></i> &nbsp;<span id="rc-lbl-oh">التكاليف التشغيلية (Overhead)</span></span>
+      <button class="btn-secondary" style="padding:5px 10px;font-size:12px" onclick="addOhRow()"><i class="ti ti-plus"></i> <span id="rc-lbl-addoh">إضافة بند</span></button>
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:10px" id="rc-hint-oh">إيجار، اتصالات، كهرباء، تدريب — أي تكلفة تشغيلية</div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:8px;margin-bottom:6px;font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;padding:0 2px">
+      <span id="rc-th-ohname">البند</span>
+      <span id="rc-th-ohcost">التكلفة</span>
+      <span id="rc-th-ohperiod">الفترة</span>
+      <span></span>
+    </div>
+    <div id="oh-rows"></div>
+    <div class="cost-total-bar" style="margin-top:12px;background:var(--teal-bg);border-color:rgba(14,116,144,.2)">
+      <span class="cost-total-lbl" style="color:var(--teal)" id="rc-lbl-ohtotal">إجمالي الـ Overhead / شهر</span>
+      <span class="cost-total-val" style="color:var(--teal)" id="rc-val-ohtotal">0 ر.س</span>
+    </div>
+  </div>
+
+  <!-- CLIENT MIX SECTION -->
+  <div class="cost-section" style="border:1.5px solid var(--accent);background:var(--accent-bg)">
+    <div class="cost-section-title" style="border-bottom:1px solid rgba(26,108,246,.2)">
+      <span><i class="ti ti-users-group" style="color:var(--accent)"></i> &nbsp;<span id="rc-lbl-clientmix">مزيج العملاء — لتوزيع التكلفة ذكياً</span></span>
+    </div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:14px;line-height:1.6" id="rc-hint-clientmix">
+      أدخل عدد عملاء كل Class. النظام سيوزّع تكاليف القسم بذكاء حسب: <strong>ساعات المحلل</strong> (توزيع الرواتب) · <strong>استهلاك GB</strong> (توزيع الرخص) · <strong>الأنشطة الفعلية</strong> (ABC)
+      <div style="margin-top:8px;padding:8px 12px;background:var(--warn-bg);border:1px solid rgba(186,117,23,.25);border-radius:8px;font-size:11px;color:var(--warn);">
+        ⚠ <strong>ملاحظة 24/7:</strong> إذا كانت خدمتك تشمل تغطية على مدار الساعة، يُطبَّق معامل ×1.45 تلقائياً على تكاليف الموظفين، ويُستخدَم عدد عملاء/محلل مخفّض (6/3/1.2/0.3 بدلاً من 10/5/2/0.5). هذا يعكس الحاجة لـ 3 ورديات ومكافآت العمل الليلي.
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px">
+      <div style="background:var(--bg2);border:1px solid var(--success);border-radius:10px;padding:12px">
+        <div style="font-size:10px;font-weight:600;color:var(--success);font-family:'IBM Plex Mono',monospace;margin-bottom:3px">CLASS 0 — بسيط</div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:2px">≤50 موظف · 8/5: ~40 ساعة/شهر</div>
+        <div style="font-size:10px;color:var(--warn);margin-bottom:8px">24/7: ~58 ساعة/شهر (×1.45)</div>
+        <div class="num-row"><input type="number" id="rc-clients-simple" class="num-input" min="0" value="0" oninput="rcCalc()" style="width:72px"><span class="num-unit">عميل</span></div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--accent);border-radius:10px;padding:12px">
+        <div style="font-size:10px;font-weight:600;color:var(--accent);font-family:'IBM Plex Mono',monospace;margin-bottom:3px">CLASS 1 — متوسط</div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:2px">50–500 موظف · 8/5: ~80 ساعة/شهر</div>
+        <div style="font-size:10px;color:var(--warn);margin-bottom:8px">24/7: ~116 ساعة/شهر (×1.45)</div>
+        <div class="num-row"><input type="number" id="rc-clients-medium" class="num-input" min="0" value="0" oninput="rcCalc()" style="width:72px"><span class="num-unit">عميل</span></div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--warn);border-radius:10px;padding:12px">
+        <div style="font-size:10px;font-weight:600;color:var(--warn);font-family:'IBM Plex Mono',monospace;margin-bottom:3px">CLASS 2 — كبير</div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:2px">500–5000 موظف · 8/5: ~140 ساعة/شهر</div>
+        <div style="font-size:10px;color:var(--warn);margin-bottom:8px">24/7: ~203 ساعة/شهر (×1.45)</div>
+        <div class="num-row"><input type="number" id="rc-clients-large" class="num-input" min="0" value="0" oninput="rcCalc()" style="width:72px"><span class="num-unit">عميل</span></div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--danger);border-radius:10px;padding:12px">
+        <div style="font-size:10px;font-weight:600;color:var(--danger);font-family:'IBM Plex Mono',monospace;margin-bottom:3px">CLASS 3 — مؤسسي</div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:2px">&gt;5000 موظف · 8/5: ~220 ساعة/شهر</div>
+        <div style="font-size:10px;color:var(--warn);margin-bottom:8px">24/7: ~319 ساعة/شهر (×1.45)</div>
+        <div class="num-row"><input type="number" id="rc-clients-enterprise" class="num-input" min="0" value="0" oninput="rcCalc()" style="width:72px"><span class="num-unit">عميل</span></div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:var(--accent);font-family:'IBM Plex Mono',monospace;background:var(--bg2);border-radius:8px;padding:9px 13px;border:1px dashed rgba(26,108,246,.3)">
+      <i class="ti ti-bulb" style="margin-left:4px"></i> مثال: 3 محللين (60k) + Sentinel (50k) + Overhead (15k) = 125k/شهر — عندك 5 عملاء متوسط + 2 كبير → النظام يوزع التكلفة الحقيقية لكل شريحة تلقائياً
+    </div>
+  </div>
+
+  <!-- GRAND TOTAL + COMPARISON -->
+  <div style="background:var(--bg2);border:2px solid var(--accent);border-radius:var(--radius-lg);padding:18px;margin-bottom:16px">
+    <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px"><i class="ti ti-calculator" style="color:var(--accent)"></i> <span id="rc-lbl-grandtitle">إجمالي التكلفة الأصلية الشهرية</span></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px">
+      <div class="metric-card"><div class="metric-lbl" id="rc-ml-staff">الموظفون</div><div class="metric-val" id="rc-mv-staff">0</div><div class="metric-sub">ر.س/شهر</div></div>
+      <div class="metric-card"><div class="metric-lbl" id="rc-ml-lic">الرخص</div><div class="metric-val" id="rc-mv-lic">0</div><div class="metric-sub">ر.س/شهر</div></div>
+      <div class="metric-card"><div class="metric-lbl" id="rc-ml-oh">Overhead</div><div class="metric-val" id="rc-mv-oh">0</div><div class="metric-sub">ر.س/شهر</div></div>
+      <div class="metric-card" style="border:1.5px solid var(--accent)"><div class="metric-lbl" id="rc-ml-total">الإجمالي</div><div class="metric-val" style="color:var(--accent)" id="rc-mv-total">0</div><div class="metric-sub">ر.س/شهر</div></div>
+    </div>
+
+    <!-- Comparison with pricing models -->
+    <div id="rc-compare-section" style="display:none">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;padding-top:12px;border-top:1px solid var(--border)" id="rc-lbl-compare">مقارنة مع نماذج التسعير</div>
+      <div style="font-size:12px;color:var(--text3);margin-bottom:12px" id="rc-hint-compare">تكلفتك الأصلية مقارنة بسعر البيع لكل نموذج — يساعدك تحديد هامش الربح الفعلي</div>
+      <div class="rc-compare-grid" id="rc-compare-grid"></div>
+      <div class="alert-box alert-info" style="margin-top:12px;font-size:12px" id="rc-note-compare">
+        <i class="ti ti-info-circle"></i>
+        <span id="rc-note-compare-text">احسب التسعير أولاً من "نموذج التسعير" لتظهر المقارنة.</span>
+      </div>
+    </div>
+    <div id="rc-no-data-msg" style="text-align:center;padding:16px;color:var(--text3);font-size:13px">
+      <i class="ti ti-arrow-up" style="font-size:20px;display:block;margin-bottom:6px"></i>
+      <span id="rc-msg-enterdata">أدخل تكاليفك أعلاه لتظهر الإجماليات والمقارنة</span>
+    </div>
+  </div>
+</div><!-- end page-realcost -->
+
 </div><!-- end wrapper -->
 
 <!-- ══════════════════════════════════════════════
@@ -1616,7 +1795,7 @@ function syncAnswers() {
 // ─── COMPLEXITY SCORING ───────────────────────
 function calcComplexity() {
   let p = 0;
-  if (answers.coverage === '24x7') p += 3; else if (answers.coverage === '16x5') p += 2;
+  if (answers.coverage === '24x7') p += 6; else if (answers.coverage === '16x5') p += 2;
   if (answers.sector === 'government' || answers.sector === 'banking') p += 3;
   else if (['telecom','healthcare','energy'].includes(answers.sector)) p += 2;
   if (answers.cloud === 'multi-cloud') p += 2; else if (['cloud-first','hybrid'].includes(answers.cloud)) p += 1;
@@ -1629,6 +1808,8 @@ function calcComplexity() {
   if (answers.geo === 'global') p += 2; else if (answers.geo === 'regional') p += 1;
   if ((answers.services || []).includes('forensics')) p += 2;
   if ((answers.services || []).includes('threat-hunt')) p += 1;
+  // قاعدة الحد الأدنى: 24/7 لا يمكن أن يكون في شريحة 1 أبداً
+  if (answers.coverage === '24x7') p = Math.max(p, 6);
   return p;
 }
 
@@ -1665,9 +1846,13 @@ function calcM1(gb, tier) {
   const siemKey = answers.siem || 'sentinel';
   const siemMonthly = gb * 30 * (siemRates[siemKey] || 11.10);
 
-  // Analyst hours × SAR rate (avg 22,000 SAR/month → ~168 SAR/hr for 130hr effective)
+  // معامل التغطية: 24/7 يرفع تكلفة المحللين 45% (3 ورديات + مكافآت ليلية)
+  // 16/5 يرفعها 20% (وردية ممتدة + بعض الوردية الليلية)
+  const coverageMult = answers.coverage === '24x7' ? 1.45 : answers.coverage === '16x5' ? 1.20 : 1.0;
+
+  // Analyst hours × SAR rate (avg 22,000 SAR/month ÷ 130 effective hrs = ~169 SAR/hr)
   const hrs = [40, 80, 140, 220][tier];
-  const analystCost = hrs * 168.75; // ~168 SAR/hr
+  const analystCost = hrs * 168.75 * coverageMult;
 
   // Infrastructure: storage + servers in SAR
   const infra = gb * 0.1 * 30 * 30; // ~30 SAR/GB/month storage
@@ -1675,44 +1860,69 @@ function calcM1(gb, tier) {
   const overhead = (siemMonthly + analystCost + infra) * 0.15;
   const sub = siemMonthly + analystCost + infra + overhead;
   const profit = sub * 0.35;
-  return { siemMonthly, analystCost, infra, overhead, profit, total: sub + profit };
+  return { siemMonthly, analystCost, infra, overhead, profit, total: sub + profit, coverageMult };
 }
 
 // Model 2: Analyst Capacity
 function calcM2(tier) {
-  const cpa = [12, 8, 5, 2][tier]; // clients per analyst
-  const avgSalary = 22000; // SAR/month (Glassdoor KSA 2025)
-  const mgrSalary = 30000; // SOC Manager SAR/month
-  const toolsCost = 11250; // SAR/month per full analyst slot
+  // عدد العملاء لكل محلل حسب التغطية والشريحة
+  // 24/7 تعني 3 ورديات × 7 أيام → المحلل يغطي عملاء أقل بكثير
+  const is247  = answers.coverage === '24x7';
+  const is16x5 = answers.coverage === '16x5';
+  // cpa: clients per analyst
+  // شريحة 1: 10 (8/5) | شريحة 2: 5 (8/5) أو 3 (24/7) | شريحة 3: 2 | شريحة 4: 0.5
+  const cpaBase = [10, 5, 2, 0.5][tier];
+  const cpa = is247 ? Math.max(cpaBase * 0.6, 0.5) : is16x5 ? cpaBase * 0.8 : cpaBase;
 
-  const analystShare = avgSalary / cpa;
-  const socMgr = mgrSalary / [15, 10, 6, 3][tier];
-  const tools = toolsCost / cpa;
-  const office = 5625 / cpa; // office + infra
-  const sub = analystShare + socMgr + tools + office;
-  const profit = sub * 0.35;
-  return { analystShare, socMgr, tools, office, profit, total: sub + profit, analysts: 1 / cpa };
+  const avgSalary   = 22000; // SAR/month (Glassdoor KSA 2025)
+  // مكافأة الوردية الليلية: 25% من الراتب للعملاء 24/7، 10% لـ 16/5
+  const nightBonus  = is247 ? avgSalary * 0.25 : is16x5 ? avgSalary * 0.10 : 0;
+  const totalSalary = avgSalary + nightBonus;
+
+  const mgrSalary   = 30000; // SOC Manager SAR/month
+  const toolsCost   = 11250; // SAR/month per full analyst slot
+
+  const analystShare = totalSalary / cpa;
+  // مدير SOC: يغطي عملاء أقل في 24/7 بسبب التعقيد التشغيلي الأعلى
+  const mgrClients   = is247 ? [6,4,2,1][tier] : [12,6,3,1][tier];
+  const socMgr       = mgrSalary / mgrClients;
+  const tools        = toolsCost / cpa;
+  const office       = 5625 / cpa;
+  const sub          = analystShare + socMgr + tools + office;
+  const profit       = sub * 0.35;
+  return { analystShare, socMgr, tools, office, profit, total: sub + profit, analysts: 1 / cpa, nightBonus, cpa };
 }
 
 // Model 3: Activity-Based Costing (ABC)
 function calcM3(tier) {
-  // Hours per activity per month (by tier 0→3)
-  const mH =  [40, 80, 130, 200][tier];
-  const iH =  [5,  15, 30,  55][tier];
-  const rH =  [3,  6,  10,  18][tier];
-  const tH =  [4,  10, 18,  28][tier];
-  const mtH = [2,  4,  6,   10][tier];
+  // معامل التغطية: 24/7 يرفع ساعات المراقبة الفعلية 3× (3 ورديات كاملة)
+  // ويرفع ساعات التحقيق والتنسيق بنسبة أعلى بسبب الضغط المستمر
+  const coverageMult = answers.coverage === '24x7' ? 1.45 : answers.coverage === '16x5' ? 1.20 : 1.0;
+
+  // Hours per activity per month (by tier 0→3) — baseline for 8/5
+  const mH =  [40,  80,  130, 200][tier];
+  const iH =  [5,   15,  30,  55][tier];
+  const rH =  [3,   6,   10,  18][tier];
+  const tH =  [4,   10,  18,  28][tier];
+  const mtH = [2,   4,   6,   10][tier];
+
+  // تطبيق معامل التغطية على ساعات المراقبة والتحقيق فقط
+  // (التقارير والضبط والاجتماعات لا تتغير كثيراً بين 8/5 و24/7)
+  const mH_adj  = mH  * coverageMult;
+  const iH_adj  = iH  * coverageMult;
 
   // SAR hourly rates (converted from KSA market rates)
-  const mC  = mH  * 168.75; // Monitoring — SOC Analyst T2 rate
-  const iC  = iH  * 318.75; // Investigation — Senior Analyst
-  const rC  = rH  * 243.75; // Reporting — Analyst T2
-  const tC  = tH  * 281.25; // SIEM Tuning — Engineer
-  const mtC = mtH * 206.25; // Meetings — T1 Analyst
+  // معدل الساعة الليلية أعلى 25% للمحللين في وردية 24/7
+  const nightPrem = answers.coverage === '24x7' ? 1.25 : answers.coverage === '16x5' ? 1.10 : 1.0;
+  const mC  = mH_adj * 168.75 * nightPrem; // Monitoring — SOC Analyst T2 rate
+  const iC  = iH_adj * 318.75 * nightPrem; // Investigation — Senior Analyst
+  const rC  = rH  * 243.75;                // Reporting — Analyst T2
+  const tC  = tH  * 281.25;                // SIEM Tuning — Engineer
+  const mtC = mtH * 206.25;               // Meetings — T1 Analyst
 
   const sub = mC + iC + rC + tC + mtC;
   const profit = sub * 0.35;
-  return { mC, iC, rC, tC, mtC, profit, total: sub + profit };
+  return { mC, iC, rC, tC, mtC, profit, total: sub + profit, coverageMult };
 }
 
 // ─── RENDER RESULTS ───────────────────────────
@@ -1723,6 +1933,13 @@ function renderResults() {
   const m1 = calcM1(gb, tier);
   const m2 = calcM2(tier);
   const m3 = calcM3(tier);
+  // Save for real-cost comparison
+  lastPricingResults = {m1, m2, m3};
+  // Refresh RC comparison if user already entered cost data
+  const rcGrand = (rcStaff.filter(Boolean).reduce((s,r)=>s+rcFreqToMonth(r.salary,r.freq)*(r.count||1),0)) +
+    (rcLic.filter(Boolean).reduce((s,r)=>s+rcFreqToMonth(r.cost,r.freq),0)) +
+    (rcOh.filter(Boolean).reduce((s,r)=>s+rcFreqToMonth(r.cost,r.freq),0));
+  if (rcGrand > 0) renderRcComparison(rcGrand, lastPricingResults);
   const hasDeclined = Object.values(declined).some(v => v);
   const tierCls = ['cx-0','cx-1','cx-2','cx-3'][tier];
   const tierName = ['بسيط / صغير','متوسط','كبير','مؤسسي'][tier];
@@ -1734,84 +1951,221 @@ function renderResults() {
   if (answers.siem && answers.siem !== 'none') tags.push(answers.siem.toUpperCase());
   (answers.regulations || []).slice(0, 3).forEach(r => tags.push(r.toUpperCase()));
 
+  const isAr = lang === 'ar';
   const methods = [
     {
-      name: 'تسعير حجم GB/Day',
-      desc: 'تسعير معياري في الصناعة بناءً على حجم اللوجات. شفاف ومرتبط مباشرةً بتكاليف ترخيص SIEM. الأنسب للعروض التجارية الأولية.',
-      badge: 'موصى به للمبيعات', badgeCls: '', rec: true, icon: 'ti-database', total: m1.total,
+      name: isAr ? 'تسعير حجم GB/Day' : 'GB/Day Volume Pricing',
+      desc: isAr ? 'تسعير معياري في الصناعة بناءً على حجم اللوجات. شفاف ومرتبط مباشرةً بتكاليف ترخيص SIEM. الأنسب للعروض التجارية الأولية.' : 'Industry-standard pricing based on log volume. Transparent and directly tied to SIEM licensing costs. Best for initial commercial proposals.',
+      badge: isAr ? 'موصى به للمبيعات' : 'Recommended for Sales', badgeCls: '', rec: true, icon: 'ti-database', total: m1.total,
       rows: [
-        {l:'ترخيص SIEM', v: fmtSAR(m1.siemMonthly)},
-        {l:'تكلفة المحللين', v: fmtSAR(m1.analystCost)},
-        {l:'البنية التحتية', v: fmtSAR(m1.infra)},
-        {l:'الإدارة والعبء (15%)', v: fmtSAR(m1.overhead)},
-        {l:'هامش الربح (35%)', v: fmtSAR(m1.profit)},
-        {l:'الإجمالي / شهر', v: fmtSAR(m1.total)}
+        {l: isAr ? 'ترخيص SIEM' : 'SIEM License', v: fmtSAR(m1.siemMonthly)},
+        {l: isAr ? 'تكلفة المحللين' : 'Analyst Cost', v: fmtSAR(m1.analystCost)},
+        {l: isAr ? 'البنية التحتية' : 'Infrastructure', v: fmtSAR(m1.infra)},
+        {l: isAr ? 'الإدارة والعبء (15%)' : 'Overhead (15%)', v: fmtSAR(m1.overhead)},
+        {l: isAr ? 'هامش الربح (35%)' : 'Profit Margin (35%)', v: fmtSAR(m1.profit)},
+        {l: isAr ? 'الإجمالي / شهر' : 'Total / Month', v: fmtSAR(m1.total)}
       ]
     },
     {
-      name: 'نموذج طاقة المحللين',
-      desc: 'نموذج قائم على الكوادر يربط تكلفة الخدمة باستخدام المحللين الفعلي. يحمي هامش الربح للعملاء ذوي التعقيد العالي.',
-      badge: 'خط أساس التكلفة', badgeCls: 'green', rec: false, icon: 'ti-users', total: m2.total,
+      name: isAr ? 'نموذج طاقة المحللين' : 'Analyst Capacity Model',
+      desc: isAr ? 'نموذج قائم على الكوادر يربط تكلفة الخدمة باستخدام المحللين الفعلي. يحمي هامش الربح للعملاء ذوي التعقيد العالي.' : 'Staff-based model linking service cost to actual analyst utilization. Protects margin for high-complexity clients.',
+      badge: isAr ? 'خط أساس التكلفة' : 'Cost Baseline', badgeCls: 'green', rec: false, icon: 'ti-users', total: m2.total,
       rows: [
-        {l:'حصة تكلفة المحلل', v: fmtSAR(m2.analystShare)},
-        {l:'إدارة SOC', v: fmtSAR(m2.socMgr)},
-        {l:'الأدوات والمنصات', v: fmtSAR(m2.tools)},
-        {l:'البنية التحتية', v: fmtSAR(m2.office)},
-        {l:'هامش الربح (35%)', v: fmtSAR(m2.profit)},
-        {l:'الإجمالي / شهر', v: fmtSAR(m2.total)}
+        {l: isAr ? `حصة تكلفة المحلل (÷ ${m2.cpa.toFixed(1)} عميل/محلل)` : `Analyst Cost Share (÷ ${m2.cpa.toFixed(1)} clients/analyst)`, v: fmtSAR(m2.analystShare)},
+        ...(m2.nightBonus > 0 ? [{l: isAr ? `مكافأة الوردية الليلية (${answers.coverage === '24x7' ? '25%' : '10%'})` : `Night Shift Premium (${answers.coverage === '24x7' ? '25%' : '10%'})`, v: fmtSAR(m2.nightBonus / m2.cpa)}] : []),
+        {l: isAr ? 'إدارة SOC' : 'SOC Management', v: fmtSAR(m2.socMgr)},
+        {l: isAr ? 'الأدوات والمنصات' : 'Tools & Platforms', v: fmtSAR(m2.tools)},
+        {l: isAr ? 'البنية التحتية' : 'Infrastructure', v: fmtSAR(m2.office)},
+        {l: isAr ? 'هامش الربح (35%)' : 'Profit Margin (35%)', v: fmtSAR(m2.profit)},
+        {l: isAr ? 'الإجمالي / شهر' : 'Total / Month', v: fmtSAR(m2.total)}
       ]
     },
     {
-      name: 'التكلفة على أساس النشاط (ABC)',
-      desc: 'أدق توزيع للتكاليف. يربط كل نشاط خدمي بالوقت والسعر بالساعة. مثالي للتكلفة الداخلية والتفاوض على العقود المعقدة.',
-      badge: 'الأكثر دقة', badgeCls: 'amber', rec: false, icon: 'ti-chart-dots', total: m3.total,
+      name: isAr ? 'التكلفة على أساس النشاط (ABC)' : 'Activity-Based Costing (ABC)',
+      desc: isAr ? 'أدق توزيع للتكاليف. يربط كل نشاط خدمي بالوقت والسعر بالساعة. مثالي للتكلفة الداخلية والتفاوض على العقود المعقدة.' : 'Most precise cost allocation. Links each service activity to hours and hourly rate. Ideal for internal costing and complex contract negotiation.',
+      badge: isAr ? 'الأكثر دقة' : 'Most Precise', badgeCls: 'amber', rec: false, icon: 'ti-chart-dots', total: m3.total,
       rows: [
-        {l:'المراقبة (ساعات × معدل)', v: fmtSAR(m3.mC)},
-        {l:'التحقيق (ساعات × معدل)', v: fmtSAR(m3.iC)},
-        {l:'التقارير (ساعات × معدل)', v: fmtSAR(m3.rC)},
-        {l:'ضبط SIEM (ساعات × معدل)', v: fmtSAR(m3.tC)},
-        {l:'الاجتماعات (ساعات × معدل)', v: fmtSAR(m3.mtC)},
-        {l:'هامش الربح (35%)', v: fmtSAR(m3.profit)},
-        {l:'الإجمالي / شهر', v: fmtSAR(m3.total)}
+        {l: isAr ? `المراقبة (×${m3.coverageMult.toFixed(2)} معامل التغطية)` : `Monitoring (×${m3.coverageMult.toFixed(2)} coverage)`, v: fmtSAR(m3.mC)},
+        {l: isAr ? `التحقيق (×${m3.coverageMult.toFixed(2)} معامل التغطية)` : `Investigation (×${m3.coverageMult.toFixed(2)} coverage)`, v: fmtSAR(m3.iC)},
+        {l: isAr ? 'التقارير (ساعات × معدل)' : 'Reporting (hrs × rate)', v: fmtSAR(m3.rC)},
+        {l: isAr ? 'ضبط SIEM (ساعات × معدل)' : 'SIEM Tuning (hrs × rate)', v: fmtSAR(m3.tC)},
+        {l: isAr ? 'الاجتماعات (ساعات × معدل)' : 'Meetings (hrs × rate)', v: fmtSAR(m3.mtC)},
+        {l: isAr ? 'هامش الربح (35%)' : 'Profit Margin (35%)', v: fmtSAR(m3.profit)},
+        {l: isAr ? 'الإجمالي / شهر' : 'Total / Month', v: fmtSAR(m3.total)}
       ]
     }
   ];
 
+  // ── Compute real-cost-based price for THIS client (using engine data for this tier) ──
+  // Pull dept totals from Real Cost module
+  const rcStaffTotal = rcStaff.filter(Boolean).reduce((s,r) => s + rcFreqToMonth(r.salary,r.freq)*(r.count||1), 0);
+  const rcLicTotal   = rcLic.filter(Boolean).reduce((s,r) => s + rcFreqToMonth(r.cost,r.freq), 0);
+  const rcOhTotal    = rcOh.filter(Boolean).reduce((s,r) => s + rcFreqToMonth(r.cost,r.freq), 0);
+  const rcDeptTotal  = rcStaffTotal + rcLicTotal + rcOhTotal;
+  const rcHasData    = rcDeptTotal > 0;
+
+  // Total analyst count & total hours demanded across all clients in the mix
+  const rcTotalAnalysts   = rcStaff.filter(Boolean).reduce((s,r) => s + (r.count||1), 0) || 1;
+  // 8h/day × 22 days = 176 gross, minus admin/training/handover = 130 effective
+  const rcAnalystHoursPool = rcTotalAnalysts * 130;
+  // Weighted totals from the client mix (for allocation denominators)
+  rcCalcClientEngineInputs();
+  const rcMixTotalHours   = rcClientMix.reduce((s,c,i) => s + c.count * CLASS_ANALYST_HRS[i], 0);
+  const rcMixTotalLicW    = rcClientMix.reduce((s,c,i) => s + c.count * CLASS_LIC_WEIGHT[i], 0);
+  const rcMixTotalClients = rcClientMix.reduce((s,c) => s + c.count, 0);
+
+  // For this specific client (tier), compute per-client real cost
+  let rc1 = null, rc2 = null, rc3 = null; // real-cost prices per method
+  if (rcHasData) {
+    const hoursThisClient = CLASS_ANALYST_HRS[tier];
+    const licWeightThis   = CLASS_LIC_WEIGHT[tier];
+    const rcCoverageMult  = answers.coverage === '24x7' ? 1.45 : answers.coverage === '16x5' ? 1.20 : 1.0;
+    const rcCoverageLabel = answers.coverage === '24x7' ? (isAr?'×1.45 (24/7)':'×1.45 (24/7)') : answers.coverage === '16x5' ? (isAr?'×1.20 (16/5)':'×1.20 (16/5)') : '';
+
+    // M1: Staff by hours ratio × coverage mult, lic by GB weight, OH equally
+    const denom_h = rcMixTotalHours > 0 ? rcMixTotalHours : hoursThisClient;
+    const denom_l = rcMixTotalLicW  > 0 ? rcMixTotalLicW  : licWeightThis;
+    const denom_c = rcMixTotalClients > 0 ? rcMixTotalClients : 1;
+    const rc1_staff_base = (hoursThisClient / denom_h) * rcStaffTotal;
+    const rc1_staff = rc1_staff_base * rcCoverageMult;
+    const rc1_lic   = (licWeightThis  / denom_l) * rcLicTotal;
+    const rc1_oh    = rcOhTotal / denom_c;
+    const rc1_cost  = rc1_staff + rc1_lic + rc1_oh;
+    rc1 = { cost: rc1_cost, price: rc1_cost * 1.35,
+            rows: [
+              {l: (isAr?'موظفون (حصة الساعات)':'Staff (hours share)') + (rcCoverageLabel ? ' ' + rcCoverageLabel : ''), v: fmtSAR(rc1_staff)},
+              {l: isAr?'رخص (حصة GB)':'Licenses (GB share)', v: fmtSAR(rc1_lic)},
+              {l: isAr?'Overhead (متساوٍ)':'Overhead (equal split)', v: fmtSAR(rc1_oh)},
+              {l: isAr?'التكلفة/عميل':'Cost/client', v: fmtSAR(rc1_cost)},
+              {l: isAr?'هامش 35%':'Margin 35%', v: fmtSAR(rc1_cost * 0.35)},
+            ]};
+
+    // M2: Staff = avgSalary / clientsPerAnalyst, mgr/tools/infra from lic & OH
+    const avgSalaryPerAnalyst = rcStaffTotal / rcTotalAnalysts;
+    const nightBonusRc = answers.coverage === '24x7' ? avgSalaryPerAnalyst * 0.25 : answers.coverage === '16x5' ? avgSalaryPerAnalyst * 0.10 : 0;
+    const rcAnalystShare = answers.coverage === '24x7' ? CLASS_ANALYST_SHARE_247[tier] : answers.coverage === '16x5' ? CLASS_ANALYST_SHARE[tier] * 0.8 : CLASS_ANALYST_SHARE[tier];
+    const rc2_staff = (avgSalaryPerAnalyst + nightBonusRc) / rcAnalystShare;
+    const rc2_tools = rc1_lic;
+    const rc2_mgr   = rc1_oh * 0.5;
+    const rc2_infra = rc1_oh * 0.5;
+    const rc2_cost  = rc2_staff + rc2_tools + rc2_mgr + rc2_infra;
+    rc2 = { cost: rc2_cost, price: rc2_cost * 1.35,
+            rows: [
+              {l: isAr?'حصة المحلل':'Analyst share', v: fmtSAR(rc2_staff)},
+              {l: isAr?'أدوات ورخص':'Tools & Licenses', v: fmtSAR(rc2_tools)},
+              {l: isAr?'إدارة SOC':'SOC Mgmt', v: fmtSAR(rc2_mgr)},
+              {l: isAr?'بنية تحتية':'Infra', v: fmtSAR(rc2_infra)},
+              {l: isAr?'التكلفة/عميل':'Cost/client', v: fmtSAR(rc2_cost)},
+              {l: isAr?'هامش 35%':'Margin 35%', v: fmtSAR(rc2_cost * 0.35)},
+            ]};
+
+    // M3: ABC using real hourly rate derived from dept salaries
+    const realHrRate = rcMixTotalHours > 0 ? rcStaffTotal / rcMixTotalHours : rcStaffTotal / (rcTotalAnalysts * 130);
+    const mH = hoursThisClient * 0.65, iH = hoursThisClient * 0.20;
+    const rH = [3,6,10,18][tier], tH = [4,10,18,28][tier], mtH = [2,4,6,10][tier];
+    const rc3_mC  = mH  * realHrRate;
+    const rc3_iC  = iH  * realHrRate * 1.4;
+    const rc3_rC  = rH  * realHrRate;
+    const rc3_tC  = tH  * realHrRate * 1.3;
+    const rc3_mtC = mtH * realHrRate;
+    const rc3_nonStaff = rc1_lic + rc1_oh;
+    const rc3_cost = rc3_mC + rc3_iC + rc3_rC + rc3_tC + rc3_mtC + rc3_nonStaff;
+    rc3 = { cost: rc3_cost, price: rc3_cost * 1.35,
+            rows: [
+              {l: isAr?`مراقبة (${Math.round(mH)}س × ${fmt(realHrRate)} ر.س)`:`Monitor (${Math.round(mH)}h × ${fmt(realHrRate)})`, v: fmtSAR(rc3_mC)},
+              {l: isAr?`تحقيق (${Math.round(iH)}س × senior)`:`Investig. (${Math.round(iH)}h × senior)`, v: fmtSAR(rc3_iC)},
+              {l: isAr?`تقارير (${rH}س)`:`Reports (${rH}h)`, v: fmtSAR(rc3_rC)},
+              {l: isAr?`ضبط SIEM (${tH}س)`:`Tuning (${tH}h)`, v: fmtSAR(rc3_tC)},
+              {l: isAr?'رخص + OH':'Lic + OH', v: fmtSAR(rc3_nonStaff)},
+              {l: isAr?'التكلفة/عميل':'Cost/client', v: fmtSAR(rc3_cost)},
+              {l: isAr?'هامش 35%':'Margin 35%', v: fmtSAR(rc3_cost * 0.35)},
+            ]};
+  }
+
+  // Attach rc objects to methods array
+  const rcPerMethod = [rc1, rc2, rc3];
+
+  const noRcNote = isAr
+    ? 'أدخل تكاليفك في تبويب <strong>"التكلفة الأصلية"</strong> لتظهر التسعيرة المبنية على تكاليفك الحقيقية هنا.'
+    : 'Enter your costs in the <strong>"Real Cost"</strong> tab to show cost-based pricing here.';
+
   document.getElementById('results-container').innerHTML = `
     <div class="section-header">
-      <div class="section-title">تحليل التسعير</div>
-      <div class="section-desc">ثلاث منهجيات تسعير مطبقة على ملفك — جميع الأسعار بالريال السعودي.</div>
+      <div class="section-title">${isAr ? 'تحليل التسعير' : 'Pricing Analysis'}</div>
+      <div class="section-desc">${isAr ? 'ثلاث منهجيات تسعير مطبقة على ملفك — جميع الأسعار بالريال السعودي.' : 'Three pricing methodologies applied to your profile — all amounts in SAR.'}</div>
     </div>
-    ${hasDeclined ? `<div class="alert-box alert-warn"><i class="ti ti-alert-triangle"></i><span>بعض الإجابات رُفضت — التقديرات تستخدم متوسطات السوق للبيانات المفقودة.</span></div>` : ''}
-    <div class="alert-box alert-info"><i class="ti ti-info-circle"></i><span>التقديرات مبنية على بيانات سوق 2025–2026 وإجاباتك. التسعير النهائي يعتمد على التفاوض والاتفاقيات المحددة. · 1 USD = 3.75 SAR</span></div>
-    <div class="complexity-badge ${tierCls}"><i class="ti ti-chart-radar"></i>تعقيد العميل: ${tierName} &nbsp;·&nbsp; ${pts} نقطة</div>
+    ${hasDeclined ? `<div class="alert-box alert-warn"><i class="ti ti-alert-triangle"></i><span>${isAr ? 'بعض الإجابات رُفضت — التقديرات تستخدم متوسطات السوق للبيانات المفقودة.' : 'Some answers were declined — estimates use market averages for missing data.'}</span></div>` : ''}
+    ${answers.coverage === '24x7' ? `<div class="alert-box alert-warn"><i class="ti ti-clock-24"></i><span><strong>${isAr?'تغطية 24/7 مفعّلة — تأثير على التسعير:':'24/7 Coverage Active — Pricing Impact:'}</strong> ${isAr?'تم تطبيق معامل ×1.45 على تكاليف المحللين (3 ورديات + مكافأة وردية ليلية 25%). عدد العملاء لكل محلل انخفض بنسبة 40%. الشريحة مقيدة بالحد الأدنى شريحة 2 بصرف النظر عن باقي النقاط.':'A ×1.45 multiplier applied to analyst costs (3 shifts + 25% night premium). Clients-per-analyst reduced by 40%. Tier locked at minimum Tier 2 regardless of other scores.'}</span></div>` : ''}
+    ${answers.coverage === '16x5' ? `<div class="alert-box alert-info"><i class="ti ti-clock"></i><span><strong>${isAr?'تغطية 16/5 مفعّلة:':'16/5 Coverage Active:'}</strong> ${isAr?'تم تطبيق معامل ×1.20 على تكاليف المحللين (وردية ممتدة + مكافأة 10%).':'A ×1.20 multiplier applied to analyst costs (extended shift + 10% premium).'}</span></div>` : ''}
+    <div class="alert-box alert-info"><i class="ti ti-info-circle"></i><span>${isAr ? 'التقديرات مبنية على بيانات سوق 2025–2026 وإجاباتك. التسعير النهائي يعتمد على التفاوض والاتفاقيات المحددة. · 1 USD = 3.75 SAR' : 'Estimates are based on 2025–2026 market data and your answers. Final pricing depends on negotiation and specific agreements. · 1 USD = 3.75 SAR'}</span></div>
+    ${rcHasData ? '' : `<div class="alert-box alert-warn" style="font-size:12px"><i class="ti ti-coins"></i><span>${noRcNote}</span></div>`}
+    <div class="complexity-badge ${tierCls}"><i class="ti ti-chart-radar"></i>${isAr ? 'تعقيد العميل' : 'Client Complexity'}: ${isAr ? tierName : ['Simple / Small','Medium','Large','Enterprise'][tier]} &nbsp;·&nbsp; ${pts} ${isAr ? 'نقطة' : 'pts'}</div>
     <div class="metrics-grid">
-      <div class="metric-card"><div class="metric-lbl">حجم اللوجات التقديري</div><div class="metric-val">${Math.round(gb)}</div><div class="metric-sub">GB / يوم</div></div>
-      <div class="metric-card"><div class="metric-lbl">المحللون المطلوبون</div><div class="metric-val">${m2.analysts.toFixed(2)}</div><div class="metric-sub">FTE</div></div>
-      <div class="metric-card"><div class="metric-lbl">السعر الشهري (GB/Day)</div><div class="metric-val">${fmt(m1.total)}</div><div class="metric-sub">ر.س / شهر</div></div>
-      <div class="metric-card"><div class="metric-lbl">السعر الشهري (ABC)</div><div class="metric-val">${fmt(m3.total)}</div><div class="metric-sub">ر.س / شهر</div></div>
+      <div class="metric-card"><div class="metric-lbl">${isAr ? 'حجم اللوجات التقديري' : 'Estimated Log Volume'}</div><div class="metric-val">${Math.round(gb)}</div><div class="metric-sub">GB / ${isAr ? 'يوم' : 'day'}</div></div>
+      <div class="metric-card"><div class="metric-lbl">${isAr ? 'المحللون المطلوبون' : 'Required Analysts'}</div><div class="metric-val">${m2.analysts.toFixed(2)}</div><div class="metric-sub">FTE</div></div>
+      <div class="metric-card${answers.coverage === '24x7' ? ' style="border:1.5px solid var(--warn)"' : ''}"><div class="metric-lbl">${isAr ? 'معامل التغطية' : 'Coverage Multiplier'}</div><div class="metric-val" style="color:${answers.coverage==='24x7'?'var(--warn)':answers.coverage==='16x5'?'var(--accent)':'var(--success)'}">×${m1.coverageMult.toFixed(2)}</div><div class="metric-sub">${answers.coverage==='24x7'?(isAr?'24/7 — ورديات متعددة':'24/7 — multi-shift'):answers.coverage==='16x5'?(isAr?'16/5 — ممتد':'16/5 — extended'):(isAr?'8/5 — أساسي':'8/5 — standard')}</div></div>
+      ${rcHasData ? `<div class="metric-card" style="border:1.5px solid var(--success)"><div class="metric-lbl" style="color:var(--success)">${isAr?'سعرك (تكاليفك + 35%)':'Your Price (cost+35%)'}</div><div class="metric-val" style="color:var(--success)">${fmt(rc1.price)}</div><div class="metric-sub">${isAr?'ر.س / شهر':'SAR / month'}</div></div>` : `<div class="metric-card"><div class="metric-lbl">${isAr ? 'السعر الشهري (ABC)' : 'Monthly Price (ABC)'}</div><div class="metric-val">${fmt(m3.total)}</div><div class="metric-sub">${isAr ? 'ر.س / شهر' : 'SAR / month'}</div></div>`}
     </div>
-    <div style="font-size:12px;color:var(--text3);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.04em">وسوم الملف</div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.04em">${isAr ? 'وسوم الملف' : 'Profile Tags'}</div>
     <div class="profile-tags" style="margin-bottom:20px">${tags.map(t => `<span class="ptag">${t}</span>`).join('') || '—'}</div>
     <div class="chart-wrap">
-      <div class="chart-title">مقارنة التسعير الشهري — ريال سعودي</div>
+      <div class="chart-title">${isAr ? 'مقارنة التسعير الشهري — ريال سعودي' : 'Monthly Pricing Comparison — SAR'}</div>
       <div class="chart-canvas-wrap"><canvas id="price-chart"></canvas></div>
     </div>
     <div class="methods-grid">
-      ${methods.map(m => `
+      ${methods.map((m, mi) => {
+        const rc = rcPerMethod[mi];
+        const diffVal  = rc ? (m.total - rc.price) : null;
+        const isPos    = rc ? diffVal >= 0 : null;
+        const diffPct  = rc && rc.price > 0 ? ((Math.abs(diffVal)/rc.price)*100).toFixed(1) : null;
+        return `
         <div class="method-card${m.rec ? ' rec' : ''}">
           <div class="method-badge ${m.badgeCls}">${m.badge}</div>
           <div class="method-top"><i class="ti ${m.icon} method-icon"></i><div class="method-name">${m.name}</div></div>
           <div class="method-desc">${m.desc}</div>
+
+          ${rc ? `
+          <!-- dual price display -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+            <div style="background:var(--bg3);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border)">
+              <div style="font-size:10px;color:var(--text3);font-family:'IBM Plex Mono',monospace;margin-bottom:4px;text-transform:uppercase">${isAr?'سعر السوق':'Market Price'}</div>
+              <div style="font-size:22px;font-weight:700;color:var(--text2);font-family:'IBM Plex Mono',monospace">${fmt(m.total)}</div>
+              <div style="font-size:11px;color:var(--text3)">${isAr?'ر.س/شهر':'SAR/mo'}</div>
+            </div>
+            <div style="background:var(--success-bg);border-radius:10px;padding:12px;text-align:center;border:1.5px solid var(--success)">
+              <div style="font-size:10px;color:var(--success);font-family:'IBM Plex Mono',monospace;margin-bottom:4px;text-transform:uppercase">${isAr?'سعرك الحقيقي':'Your Real Price'}</div>
+              <div style="font-size:22px;font-weight:700;color:var(--success);font-family:'IBM Plex Mono',monospace">${fmt(rc.price)}</div>
+              <div style="font-size:11px;color:var(--success)">${isAr?'ر.س/شهر':'SAR/mo'}</div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;background:${isPos?'var(--success-bg)':'var(--danger-bg)'};border-radius:8px;padding:8px 12px;margin-bottom:12px">
+            <span style="font-size:12px;color:${isPos?'var(--success)':'var(--danger)'}">${isPos?(isAr?'🟢 ميزة تنافسية — يمكنك تقديم سعر أفضل وما تزال تربح':'🟢 Competitive edge — you can price lower & still profit'):(isAr?'🔴 تكلفتك أعلى من سعر السوق':'🔴 Your cost exceeds market price')}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:14px;color:${isPos?'var(--success)':'var(--danger)'}">${isPos?'+':'−'}${diffPct}%</span>
+          </div>
+          ` : `
           <div class="price-display"><span class="price-main">${fmt(m.total)}</span><span class="price-period">ر.س / شهر</span></div>
-          <div class="breakdown">${m.rows.map((r, i) => `<div class="bd-row${i === m.rows.length - 1 ? ' last' : ''}"><span class="bd-lbl">${r.l}</span><span class="bd-val">${r.v}</span></div>`).join('')}</div>
-        </div>`).join('')}
+          `}
+
+          <!-- Two-column breakdown: market vs real cost -->
+          <div style="display:grid;grid-template-columns:${rc?'1fr 1fr':'1fr'};gap:8px">
+            <div>
+              ${rc?`<div style="font-size:10px;color:var(--text3);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;text-transform:uppercase">${isAr?'تفصيل السوق':'Market Breakdown'}</div>`:''}
+              <div class="breakdown">${m.rows.map((r, i) => `<div class="bd-row${i === m.rows.length - 1 ? ' last' : ''}"><span class="bd-lbl">${r.l}</span><span class="bd-val">${r.v}</span></div>`).join('')}</div>
+            </div>
+            ${rc ? `
+            <div>
+              <div style="font-size:10px;color:var(--success);font-family:'IBM Plex Mono',monospace;margin-bottom:6px;text-transform:uppercase;font-weight:600">${isAr?'تفصيل تكاليفك':'Your Cost Breakdown'}</div>
+              <div class="breakdown" style="border:1px solid rgba(29,158,117,.25);background:var(--success-bg)">
+                ${rc.rows.map((r,i) => `<div class="bd-row${i===rc.rows.length-1?' last':''}"><span class="bd-lbl">${r.l}</span><span class="bd-val" style="${i===rc.rows.length-1?'color:var(--success)':''}">${r.v}</span></div>`).join('')}
+                <div class="bd-row last"><span class="bd-lbl" style="color:var(--success);font-weight:600">${isAr?'سعر البيع':'Selling Price'}</span><span class="bd-val" style="color:var(--success);font-size:14px">${fmtSAR(rc.price)}</span></div>
+              </div>
+            </div>` : ''}
+          </div>
+        </div>`;
+      }).join('')}
     </div>
     <div class="market-note">
-      معيار السوق السعودي: 56–281 ر.س/مستخدم/شهر (CompTIA ×3.75) | 
-      Sentinel: 11.1–20.9 ر.س/GB/يوم | Splunk: 30–75 ر.س/GB/يوم | 
-      SOC داخلي كامل: 1.3–2.1 مليون ر.س/سنة (5 محللين) | 
-      المصدر: NCA · MarketsandMarkets · CompTIA · Glassdoor · Meriplex 2025–2026
+      ${isAr ? 'معيار السوق السعودي: 56–281 ر.س/مستخدم/شهر (CompTIA ×3.75) | Sentinel: 11.1–20.9 ر.س/GB/يوم | Splunk: 30–75 ر.س/GB/يوم | SOC داخلي كامل: 1.3–2.1 مليون ر.س/سنة (5 محللين) | المصدر: NCA · MarketsandMarkets · CompTIA · Glassdoor · Meriplex 2025–2026' : 'Saudi Market benchmark: 56–281 SAR/user/month (CompTIA ×3.75) | Sentinel: 11.1–20.9 SAR/GB/day | Splunk: 30–75 SAR/GB/day | Full in-house SOC: 1.3–2.1M SAR/year (5 analysts) | Source: NCA · MarketsandMarkets · CompTIA · Glassdoor · Meriplex 2025–2026'}
     </div>
   `;
 
@@ -1822,22 +2176,31 @@ function renderResults() {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const textColor = isDark ? '#888480' : '#888580';
     const gridColor = isDark ? 'rgba(255,255,255,.05)' : 'rgba(0,0,0,.05)';
+    const labels = isAr ? ['GB/Day حجم البيانات', 'طاقة المحللين', 'ABC الأنشطة'] : ['GB/Day Volume', 'Analyst Capacity', 'ABC'];
+    const datasets = [{
+      label: isAr ? 'سعر السوق' : 'Market Price',
+      data: [Math.round(m1.total), Math.round(m2.total), Math.round(m3.total)],
+      backgroundColor: ['rgba(26,108,246,.8)', 'rgba(29,158,117,.8)', 'rgba(186,117,23,.8)'],
+      borderRadius: 6, borderSkipped: false
+    }];
+    if (rcHasData && rc1 && rc2 && rc3) {
+      datasets.push({
+        label: isAr ? 'سعرك (تكاليفك + 35%)' : 'Your Price (cost+35%)',
+        data: [Math.round(rc1.price), Math.round(rc2.price), Math.round(rc3.price)],
+        backgroundColor: ['rgba(26,108,246,.25)', 'rgba(29,158,117,.25)', 'rgba(186,117,23,.25)'],
+        borderColor: ['rgba(26,108,246,.7)', 'rgba(29,158,117,.7)', 'rgba(186,117,23,.7)'],
+        borderWidth: 2,
+        borderRadius: 6, borderSkipped: false
+      });
+    }
     priceChart = new Chart(canvas, {
       type: 'bar',
-      data: {
-        labels: ['GB/Day Volume', 'Analyst Capacity', 'ABC'],
-        datasets: [{
-          label: 'السعر الشهري',
-          data: [Math.round(m1.total), Math.round(m2.total), Math.round(m3.total)],
-          backgroundColor: ['#1a6cf6', '#1d9e75', '#ba7517'],
-          borderRadius: 8, borderSkipped: false
-        }]
-      },
+      data: { labels, datasets },
       options: {
         responsive: true, maintainAspectRatio: false,
         plugins: {
-          legend: {display: false},
-          tooltip: {callbacks: {label: c => fmt(c.raw) + ' ر.س'}, padding: 10}
+          legend: {display: rcHasData, labels: {color: textColor, font: {size: 11, family: "'IBM Plex Mono',monospace"}}},
+          tooltip: {callbacks: {label: c => c.dataset.label + ': ' + fmt(c.raw) + ' ر.س'}, padding: 10}
         },
         scales: {
           y: {
@@ -1851,12 +2214,517 @@ function renderResults() {
   }, 80);
 }
 
+// ─── REAL COST MODULE ─────────────────────────
+let rcStaff = [], rcLic = [], rcOh = [];
+let lastPricingResults = null;
+
+function rcFreqToMonth(val, freq) {
+  const v = parseFloat(val) || 0;
+  return freq === 'monthly' ? v : freq === 'yearly' ? v / 12 : freq === 'quarterly' ? v / 3 : v;
+}
+
+function addStaffRow() {
+  const idx = rcStaff.length;
+  rcStaff.push({role:'', count:1, salary:0, freq:'monthly'});
+  const d = document.createElement('div');
+  d.id = 'staff-row-' + idx;
+  d.style.cssText = 'display:grid;grid-template-columns:2fr 60px 1fr auto 32px;gap:8px;margin-bottom:8px;align-items:center';
+  const isAr = lang === 'ar';
+  d.innerHTML = `
+    <input type="text" placeholder="${isAr?'مثال: محلل أمن':'e.g. Security Analyst'}" oninput="rcStaff[${idx}].role=this.value" style="padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);font-family:inherit;outline:none;width:100%">
+    <input type="number" min="1" value="1" placeholder="1" oninput="rcStaff[${idx}].count=parseFloat(this.value)||1;rcCalc()" style="padding:7px 8px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;outline:none;width:100%;text-align:center">
+    <input type="number" min="0" placeholder="0" oninput="rcStaff[${idx}].salary=parseFloat(this.value)||0;rcCalc()" style="padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;outline:none;width:100%">
+    <select onchange="rcStaff[${idx}].freq=this.value;rcCalc()" style="padding:7px 8px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--bg);color:var(--text);font-family:inherit;outline:none">
+      <option value="monthly">${isAr?'شهري':'Monthly'}</option>
+      <option value="yearly">${isAr?'سنوي':'Yearly'}</option>
+    </select>
+    <button class="del-row-btn" onclick="removeRcRow('staff-row-${idx}',rcStaff,${idx})"><i class="ti ti-trash"></i></button>`;
+  document.getElementById('staff-rows').appendChild(d);
+  rcCalc();
+}
+
+function addLicRow() {
+  const idx = rcLic.length;
+  rcLic.push({name:'', cost:0, freq:'monthly'});
+  const d = document.createElement('div');
+  d.id = 'lic-row-' + idx;
+  d.style.cssText = 'display:grid;grid-template-columns:2fr 1fr auto 32px;gap:8px;margin-bottom:8px;align-items:center';
+  const isAr = lang === 'ar';
+  d.innerHTML = `
+    <input type="text" placeholder="${isAr?'مثال: Microsoft Sentinel':'e.g. Microsoft Sentinel'}" oninput="rcLic[${idx}].name=this.value" style="padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);font-family:inherit;outline:none;width:100%">
+    <input type="number" min="0" placeholder="0" oninput="rcLic[${idx}].cost=parseFloat(this.value)||0;rcCalc()" style="padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;outline:none;width:100%">
+    <select onchange="rcLic[${idx}].freq=this.value;rcCalc()" style="padding:7px 8px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--bg);color:var(--text);font-family:inherit;outline:none">
+      <option value="monthly">${isAr?'شهري':'Monthly'}</option>
+      <option value="yearly">${isAr?'سنوي':'Yearly'}</option>
+      <option value="quarterly">${isAr?'ربع سنوي':'Quarterly'}</option>
+    </select>
+    <button class="del-row-btn" onclick="removeRcRow('lic-row-${idx}',rcLic,${idx})"><i class="ti ti-trash"></i></button>`;
+  document.getElementById('lic-rows').appendChild(d);
+  rcCalc();
+}
+
+function addOhRow() {
+  const idx = rcOh.length;
+  rcOh.push({name:'', cost:0, freq:'monthly'});
+  const d = document.createElement('div');
+  d.id = 'oh-row-' + idx;
+  d.style.cssText = 'display:grid;grid-template-columns:2fr 1fr auto 32px;gap:8px;margin-bottom:8px;align-items:center';
+  const isAr = lang === 'ar';
+  d.innerHTML = `
+    <input type="text" placeholder="${isAr?'مثال: إيجار المكتب':'e.g. Office Rent'}" oninput="rcOh[${idx}].name=this.value" style="padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);font-family:inherit;outline:none;width:100%">
+    <input type="number" min="0" placeholder="0" oninput="rcOh[${idx}].cost=parseFloat(this.value)||0;rcCalc()" style="padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg);color:var(--text);font-family:'IBM Plex Mono',monospace;outline:none;width:100%">
+    <select onchange="rcOh[${idx}].freq=this.value;rcCalc()" style="padding:7px 8px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--bg);color:var(--text);font-family:inherit;outline:none">
+      <option value="monthly">${isAr?'شهري':'Monthly'}</option>
+      <option value="yearly">${isAr?'سنوي':'Yearly'}</option>
+      <option value="quarterly">${isAr?'ربع سنوي':'Quarterly'}</option>
+    </select>
+    <button class="del-row-btn" onclick="removeRcRow('oh-row-${idx}',rcOh,${idx})"><i class="ti ti-trash"></i></button>`;
+  document.getElementById('oh-rows').appendChild(d);
+  rcCalc();
+}
+
+function removeRcRow(id, arr, idx) {
+  const el = document.getElementById(id);
+  if (el) el.remove();
+  arr[idx] = null;
+  rcCalc();
+}
+
+function rcCalc() {
+  const staffTotal = rcStaff.filter(Boolean).reduce((s,r) => s + rcFreqToMonth(r.salary, r.freq) * (r.count||1), 0);
+  const licTotal = rcLic.filter(Boolean).reduce((s,r) => s + rcFreqToMonth(r.cost, r.freq), 0);
+  const ohTotal = rcOh.filter(Boolean).reduce((s,r) => s + rcFreqToMonth(r.cost, r.freq), 0);
+  const grand = staffTotal + licTotal + ohTotal;
+
+  document.getElementById('rc-val-stafftotal').textContent = fmt(staffTotal) + ' ر.س';
+  document.getElementById('rc-val-lictotal').textContent = fmt(licTotal) + ' ر.س';
+  document.getElementById('rc-val-ohtotal').textContent = fmt(ohTotal) + ' ر.س';
+  document.getElementById('rc-mv-staff').textContent = fmt(staffTotal);
+  document.getElementById('rc-mv-lic').textContent = fmt(licTotal);
+  document.getElementById('rc-mv-oh').textContent = fmt(ohTotal);
+  document.getElementById('rc-mv-total').textContent = fmt(grand);
+
+  const hasData = grand > 0;
+  document.getElementById('rc-no-data-msg').style.display = hasData ? 'none' : 'block';
+
+  if (hasData && lastPricingResults) {
+    renderRcComparison(grand, lastPricingResults);
+  } else if (hasData) {
+    document.getElementById('rc-compare-section').style.display = 'block';
+    document.getElementById('rc-compare-grid').innerHTML = '';
+    document.getElementById('rc-note-compare').style.display = 'flex';
+  }
+}
+
+// ─── INTELLIGENT COST ALLOCATION ENGINE ──────
+// rcClientMix: array of {classKey, count} where classKey in ['simple','medium','large','enterprise']
+let rcClientMix = [
+  {classKey:'simple',    count:0},
+  {classKey:'medium',    count:0},
+  {classKey:'large',     count:0},
+  {classKey:'enterprise',count:0}
+];
+
+// ─── ثوابت الطاقة الاستيعابية — محدّثة لتعكس واقع التغطية ───────
+// CLASS_ANALYST_HRS: ساعات المحلل الفعلية لكل عميل شهرياً (بتغطية 8/5 كمرجع أساسي)
+// CLASS_ANALYST_SHARE: عدد العملاء الذي يخدمهم محلل واحد (بتغطية 8/5)
+// *** معاملات 24/7 تُطبَّق ديناميكياً في الحسابات أدناه ***
+// Tier 0=simple(8/5): 1 analyst serves 10 clients → 130/10=13h each
+// Tier 1=medium(8/5): 1 analyst serves 5 clients  → 130/5=26h each
+// Tier 1=medium(24/7): 1 analyst serves 3 clients → 130/3=43h each (3 ورديات × تكلفة أعلى)
+// Tier 2=large:        1 analyst serves 2 clients  → 130/2=65h each
+// Tier 3=enterprise:   0.5 analysts per client     → 2 analysts × 130=260h
+const CLASS_ANALYST_HRS   = [13,  26,  65,  130]; // effective hrs/client/month — 8/5 baseline
+const CLASS_ANALYST_SHARE = [10,  5,   2,   0.5]; // clients per analyst FTE — 8/5 baseline
+// للتغطية 24/7: نقسم CLASS_ANALYST_SHARE على 1.67 (تقريباً: 3 ورديات ÷ 1 وردية × عامل تداخل)
+const CLASS_ANALYST_SHARE_247 = [6, 3, 1.2, 0.3]; // عملاء/محلل في 24/7
+const CLASS_GB_PER_CLIENT  = [5,   20,  50,  120]; // estimated GB/day per client by class
+const CLASS_LIC_WEIGHT     = [1,   1.5, 2.5, 4];  // relative license usage weight per client class
+const CLASS_OVERHEAD_WEIGHT= [1,   1.3, 1.8, 2.5];// relative overhead usage weight
+
+function rcCalcClientEngineInputs() {
+  // Read client mix from DOM inputs
+  ['simple','medium','large','enterprise'].forEach((k,i) => {
+    const el = document.getElementById('rc-clients-' + k);
+    rcClientMix[i].count = el ? (parseInt(el.value)||0) : 0;
+  });
+}
+
+function smartCostAllocationEngine(rcTotal, m1, m2, m3) {
+  const isAr = lang === 'ar';
+  rcCalcClientEngineInputs();
+
+  // ── تحديد معامل التغطية من اختيار العميل الحالي ──
+  const coverageMult = answers.coverage === '24x7' ? 1.45 : answers.coverage === '16x5' ? 1.20 : 1.0;
+  const is247 = answers.coverage === '24x7';
+  const is16x5 = answers.coverage === '16x5';
+
+  // ── Decompose department costs from real cost input ──
+  const staffTotal = rcStaff.filter(Boolean).reduce((s,r) => s + rcFreqToMonth(r.salary,r.freq)*(r.count||1), 0);
+  const licTotal   = rcLic.filter(Boolean).reduce((s,r) => s + rcFreqToMonth(r.cost,r.freq), 0);
+  const ohTotal    = rcOh.filter(Boolean).reduce((s,r) => s + rcFreqToMonth(r.cost,r.freq), 0);
+
+  // Total analyst headcount from staff table
+  const totalAnalysts = rcStaff.filter(Boolean).reduce((s,r) => s + (r.count||1), 0) || 1;
+
+  // Total weighted client units for allocation
+  const mix = rcClientMix;
+  const totalLicWeighted = mix.reduce((s,c,i) => s + c.count * CLASS_LIC_WEIGHT[i], 0);
+  const totalOhWeighted  = mix.reduce((s,c,i) => s + c.count * CLASS_OVERHEAD_WEIGHT[i], 0);
+  const totalClients     = mix.reduce((s,c) => s + c.count, 0);
+
+  // Total capacity: realistic analyst hours model
+  // 8 hrs/day × 22 working days = 176 gross hours/month
+  // Minus: ~20h meetings/admin + ~10h training + ~16h handovers/shift overlap = 130 effective billable hrs
+  const ANALYST_EFFECTIVE_HRS = 130; // realistic billable capacity per analyst per month
+  const analystHoursPool = totalAnalysts * ANALYST_EFFECTIVE_HRS;
+  // Total hours demanded by current mix
+  const totalHoursDemanded = mix.reduce((s,c,i) => s + c.count * CLASS_ANALYST_HRS[i], 0);
+  // Capacity utilization
+  const utilization = totalHoursDemanded > 0 ? Math.min(totalHoursDemanded / analystHoursPool, 1) : 0;
+
+  // ── Per-client cost by CLASS for each of the 3 methods ──
+  const results = mix.map((c, tier) => {
+    if (c.count === 0) return null;
+    const cls = c.classKey;
+
+    // ═══ METHOD 1: GB/Day — allocate licenses by GB weight, staff by hours, overhead equally ═══
+    // Staff cost per client based on analyst hours ratio — مع تطبيق معامل التغطية
+    const hoursPerClient_m1 = CLASS_ANALYST_HRS[tier];
+    const staffCostPerClient_m1_base = totalHoursDemanded > 0
+      ? (hoursPerClient_m1 / totalHoursDemanded) * staffTotal
+      : staffTotal / Math.max(totalClients,1);
+    // تطبيق معامل التغطية على تكلفة الموظفين فقط
+    const staffCostPerClient_m1 = staffCostPerClient_m1_base * coverageMult;
+
+    // License cost: allocated by license weight (proxy for GB/data consumption)
+    const licCostPerClient_m1 = totalLicWeighted > 0
+      ? (CLASS_LIC_WEIGHT[tier] / totalLicWeighted) * licTotal
+      : licTotal / Math.max(totalClients,1);
+
+    // Overhead: split equally per client
+    const ohCostPerClient_m1 = totalClients > 0 ? ohTotal / totalClients : 0;
+
+    // Estimate GB/day from license cost (Sentinel proxy: ~11.1 SAR/GB/day)
+    // Real license cost per client implies storage/volume
+    const impliedGB = licCostPerClient_m1 / (11.10 * 30); // monthly lic ÷ (rate × days)
+    const impliedGB_final = Math.max(impliedGB, CLASS_GB_PER_CLIENT[tier]);
+
+    const m1_rc_cost = staffCostPerClient_m1 + licCostPerClient_m1 + ohCostPerClient_m1;
+    const m1_rc_price = m1_rc_cost * 1.35;
+
+    // ═══ METHOD 2: Analyst Capacity — staff allocated by capacity share ═══
+    // عدد العملاء/محلل يعتمد على التغطية المختارة
+    const analystShare_tier = is247 ? CLASS_ANALYST_SHARE_247[tier] : is16x5 ? CLASS_ANALYST_SHARE[tier] * 0.8 : CLASS_ANALYST_SHARE[tier];
+    const analystAvgSalary = totalAnalysts > 0 ? staffTotal / totalAnalysts : staffTotal;
+    // مكافأة الوردية الليلية
+    const nightBonus = is247 ? analystAvgSalary * 0.25 : is16x5 ? analystAvgSalary * 0.10 : 0;
+    const staffCostPerClient_m2 = (analystAvgSalary + nightBonus) / analystShare_tier;
+
+    // Mgr overhead: we treat OH as mgr+infra pool divided by capacity ratio
+    const managerShare = ohCostPerClient_m1 * 0.5;
+    const infraShare   = ohCostPerClient_m1 * 0.5;
+
+    // Tools per client: weighted by class license usage
+    const toolsCostPerClient_m2 = licCostPerClient_m1;
+
+    const m2_rc_cost  = staffCostPerClient_m2 + managerShare + toolsCostPerClient_m2 + infraShare;
+    const m2_rc_price = m2_rc_cost * 1.35;
+
+    // ═══ METHOD 3: ABC — activity-based from real analyst cost per hour ═══
+    const realHourlyRate = totalHoursDemanded > 0 ? staffTotal / totalHoursDemanded : 168.75;
+    // معدل الساعة الليلية أعلى في 24/7
+    const nightHrPrem = is247 ? 1.25 : is16x5 ? 1.10 : 1.0;
+    // Activity hours per client per month — مع تطبيق معامل التغطية على المراقبة والتحقيق
+    const mH_base = CLASS_ANALYST_HRS[tier] * 0.65;
+    const iH_base = CLASS_ANALYST_HRS[tier] * 0.20;
+    const mH  = mH_base * coverageMult;
+    const iH  = iH_base * coverageMult;
+    const rH  = [3,6,10,18][tier];
+    const tH  = [4,10,18,28][tier];
+    const mtH = [2,4,6,10][tier];
+
+    // Real rate derived from actual salary data
+    const seniorMultiplier  = 1.4;
+    const engineerMultiplier = 1.3;
+
+    const mC_rc  = mH  * realHourlyRate * nightHrPrem;
+    const iC_rc  = iH  * realHourlyRate * seniorMultiplier * nightHrPrem;
+    const rC_rc  = rH  * realHourlyRate;
+    const tC_rc  = tH  * realHourlyRate * engineerMultiplier;
+    const mtC_rc = mtH * realHourlyRate;
+
+    // Add proportional share of licenses + overhead per activity
+    const nonStaff_per_client = licCostPerClient_m1 + ohCostPerClient_m1;
+    const m3_rc_cost  = mC_rc + iC_rc + rC_rc + tC_rc + mtC_rc + nonStaff_per_client;
+    const m3_rc_price = m3_rc_cost * 1.35;
+
+    // Market prices for this tier
+    const gb_market = estimateLogGB ? CLASS_GB_PER_CLIENT[tier] : CLASS_GB_PER_CLIENT[tier];
+    const m1_mkt = calcM1(CLASS_GB_PER_CLIENT[tier], tier).total;
+    const m2_mkt = calcM2(tier).total;
+    const m3_mkt = calcM3(tier).total;
+
+    return {
+      tier, cls, count: c.count,
+      impliedGB: impliedGB_final,
+      analystHoursPool,
+      utilization,
+      // M1
+      m1_rc_cost, m1_rc_price, m1_mkt,
+      m1_staff: staffCostPerClient_m1, m1_lic: licCostPerClient_m1, m1_oh: ohCostPerClient_m1,
+      // M2
+      m2_rc_cost, m2_rc_price, m2_mkt,
+      m2_staff: staffCostPerClient_m2, m2_mgr: managerShare, m2_tools: toolsCostPerClient_m2, m2_infra: infraShare,
+      // M3
+      m3_rc_cost, m3_rc_price, m3_mkt,
+      m3_mC: mC_rc, m3_iC: iC_rc, m3_rC: rC_rc, m3_tC: tC_rc, m3_mtC: mtC_rc, m3_nonStaff: nonStaff_per_client,
+      realHourlyRate
+    };
+  }).filter(Boolean);
+
+  return { results, staffTotal, licTotal, ohTotal, totalAnalysts, analystHoursPool, totalHoursDemanded, utilization, totalClients };
+}
+
+function renderRcComparison(rcTotal, {m1, m2, m3}) {
+  const isAr = lang === 'ar';
+  document.getElementById('rc-compare-section').style.display = 'block';
+  document.getElementById('rc-note-compare').style.display = 'none';
+
+  const engine = smartCostAllocationEngine(rcTotal, m1, m2, m3);
+  const { results, totalAnalysts, analystHoursPool, totalHoursDemanded, utilization, totalClients } = engine;
+
+  const classNames = isAr
+    ? ['بسيط / صغير','متوسط','كبير','مؤسسي']
+    : ['Simple / Small','Medium','Large','Enterprise'];
+  const classColors = ['var(--success)','var(--accent)','var(--warn)','var(--danger)'];
+
+  const utilizationPct = (utilization * 100).toFixed(0);
+  const utilizationColor = utilization < 0.7 ? 'var(--success)' : utilization < 0.9 ? 'var(--warn)' : 'var(--danger)';
+  const utilizationLabel = utilization < 0.7
+    ? (isAr ? '✅ طاقة فائضة — يمكن استيعاب عملاء جدد' : '✅ Spare capacity — can onboard new clients')
+    : utilization < 0.9
+    ? (isAr ? '⚠️ استخدام مرتفع — راجع التوسعة' : '⚠️ High utilization — review capacity expansion')
+    : (isAr ? '🔴 طاقة مستنفدة — لا يمكن قبول عملاء جدد بدون توظيف' : '🔴 Capacity maxed — cannot onboard clients without hiring');
+
+  if (totalClients === 0) {
+    // Fallback: no client mix entered — simple single-client comparison using current tier
+    const pts = calcComplexity();
+    const tier = complexityTier(pts);
+    const rcBasedPrice = rcTotal * 1.35;
+    const m1Cost = m1.siemMonthly + m1.analystCost + m1.infra + m1.overhead;
+    const m2Cost = m2.analystShare + m2.socMgr + m2.tools + m2.office;
+    const m3Cost = m3.mC + m3.iC + m3.rC + m3.tC + m3.mtC;
+    const models = [
+      {label: isAr?'طريقة ① — حجم GB/Day':'Method ① — GB/Day Volume', color:'var(--accent)', marketPrice:m1.total, rcPrice:rcBasedPrice},
+      {label: isAr?'طريقة ② — طاقة المحللين':'Method ② — Analyst Capacity', color:'var(--success)', marketPrice:m2.total, rcPrice:rcBasedPrice},
+      {label: isAr?'طريقة ③ — الأنشطة (ABC)':'Method ③ — Activity-Based (ABC)', color:'var(--warn)', marketPrice:m3.total, rcPrice:rcBasedPrice},
+    ];
+    document.getElementById('rc-compare-grid').innerHTML = `
+      <div class="alert-box alert-warn" style="margin-bottom:12px;font-size:12px">
+        <i class="ti ti-users-group"></i>
+        <span>${isAr?'أدخل عدد عملاء كل Class في الجدول أعلاه للحصول على تسعير ذكي مخصص. الآن يعمل بوضع المقارنة البسيطة (عميل واحد بالـ tier الحالي).':'Enter client count per Class in the table above for smart per-client pricing. Currently showing simple single-client comparison using the current tier.'}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px">` +
+      models.map(m => {
+        const diff = m.marketPrice - m.rcPrice;
+        const isPos = diff >= 0;
+        const pct = m.rcPrice > 0 ? ((Math.abs(diff)/m.rcPrice)*100).toFixed(1):'—';
+        return `<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;border-top:3px solid ${m.color}">
+          <div style="font-size:12px;font-weight:600;color:${m.color};margin-bottom:10px">${m.label}</div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text2)">${isAr?'سعر السوق':'Market Price'}</span><span style="font-family:'IBM Plex Mono',monospace;color:${m.color};font-weight:600">${fmt(m.marketPrice)} ${isAr?'ر.س':'SAR'}</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)"><span style="color:var(--text2)">${isAr?'سعرك (تكلفتك + 35%)':'Your Price (cost+35%)'}</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:600">${fmt(m.rcPrice)} ${isAr?'ر.س':'SAR'}</span></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px">
+            <span style="font-size:11px;color:var(--text3)">${isPos?(isAr?'🟢 ميزة تنافسية':'🟢 Competitive edge'):(isAr?'🔴 تكلفتك أعلى':'🔴 Cost exceeds market')}</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:700;color:${isPos?'var(--success)':'var(--danger)'}">${isPos?'+':'−'}${pct}%</span>
+          </div>
+        </div>`;
+      }).join('') + '</div>';
+    return;
+  }
+
+  // ── FULL INTELLIGENT COMPARISON ──
+  let html = `
+  <!-- Capacity Dashboard -->
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px">
+    <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:7px"><i class="ti ti-cpu" style="color:var(--accent)"></i>${isAr?'لوحة طاقة القسم الفعلية':'Department Capacity Dashboard'}</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px">
+      <div class="metric-card"><div class="metric-lbl">${isAr?'محللون في القسم':'Dept Analysts'}</div><div class="metric-val">${totalAnalysts}</div><div class="metric-sub">FTE</div></div>
+      <div class="metric-card"><div class="metric-lbl">${isAr?'ساعات فعلية/شهر':'Effective Hrs/Mo'}</div><div class="metric-val">${fmt(analystHoursPool)}</div><div class="metric-sub">${isAr?'130ساعة × عدد المحللين (8س/يوم − إداري−تدريب)':'130h/analyst (8h/day minus admin/training)'}</div></div>
+      <div class="metric-card"><div class="metric-lbl">${isAr?'ساعات مطلوبة/شهر':'Required Hrs/Mo'}</div><div class="metric-val">${fmt(totalHoursDemanded)}</div><div class="metric-sub">${isAr?'لـ':'for'} ${totalClients} ${isAr?'عميل':'clients'}</div></div>
+      <div class="metric-card" style="border:1.5px solid ${utilizationColor}"><div class="metric-lbl">${isAr?'استخدام الطاقة':'Capacity Utilization'}</div><div class="metric-val" style="color:${utilizationColor}">${utilizationPct}%</div><div class="metric-sub">${isAr?'من الطاقة الكاملة':'of full capacity'}</div></div>
+    </div>
+    <div style="background:var(--bg3);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text2)">${utilizationLabel}</div>
+  </div>`;
+
+  // Per-class cards
+  results.forEach(r => {
+    const cn = classNames[r.tier];
+    const cc = classColors[r.tier];
+    html += `
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;margin-bottom:14px;overflow:hidden">
+    <!-- Class Header -->
+    <div style="background:var(--bg3);padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span style="background:${cc};color:#fff;border-radius:6px;padding:2px 10px;font-size:11px;font-family:'IBM Plex Mono',monospace;font-weight:600">${cn}</span>
+        <span style="font-size:13px;font-weight:600;color:var(--text)">${r.count} ${isAr?'عميل':'clients'}</span>
+      </div>
+      <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace">
+        ${isAr?'معدل الساعة الفعلي':'Real hourly rate'}: <strong>${fmt(r.realHourlyRate)} ${isAr?'ر.س':'SAR'}/hr</strong>
+        &nbsp;·&nbsp;GB/day ~${Math.round(r.impliedGB)}
+      </div>
+    </div>
+    <!-- Three Methods Comparison -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0">
+
+      <!-- M1: GB/Day -->
+      <div style="padding:14px;border-left:1px solid var(--border)">
+        <div style="font-size:11px;font-weight:600;color:var(--accent);font-family:'IBM Plex Mono',monospace;margin-bottom:10px">① GB/Day ${isAr?'(حجم البيانات)':'(Volume)'}</div>
+        <table style="width:100%;font-size:11.5px;border-collapse:collapse">
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'تكلفة الموظفين':'Staff cost'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m1_staff)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'تكلفة الرخص':'Licenses'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m1_lic)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">Overhead</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m1_oh)}</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td style="color:var(--text2);padding:4px 0;font-weight:600">${isAr?'تكلفة/عميل':'Cost/client'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--text)">${fmt(r.m1_rc_cost)}</td></tr>
+          <tr><td style="color:var(--text);padding:3px 0;font-weight:600">${isAr?'سعرك (+35%)':'Your price (+35%)'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--accent);font-size:13px">${fmt(r.m1_rc_price)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'سعر السوق':'Market price'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text3)">${fmt(r.m1_mkt)}</td></tr>
+        </table>
+        ${renderDiffBadge(r.m1_mkt, r.m1_rc_price, isAr)}
+      </div>
+
+      <!-- M2: Analyst Capacity -->
+      <div style="padding:14px;border-left:1px solid var(--border)">
+        <div style="font-size:11px;font-weight:600;color:var(--success);font-family:'IBM Plex Mono',monospace;margin-bottom:10px">② ${isAr?'طاقة المحللين':'Analyst Capacity'}</div>
+        <table style="width:100%;font-size:11.5px;border-collapse:collapse">
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'حصة المحلل':'Analyst share'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m2_staff)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'إدارة SOC':'SOC mgmt'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m2_mgr)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'أدوات':'Tools'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m2_tools)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'بنية تحتية':'Infra'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m2_infra)}</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td style="color:var(--text2);padding:4px 0;font-weight:600">${isAr?'تكلفة/عميل':'Cost/client'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--text)">${fmt(r.m2_rc_cost)}</td></tr>
+          <tr><td style="color:var(--text);padding:3px 0;font-weight:600">${isAr?'سعرك (+35%)':'Your price (+35%)'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--success);font-size:13px">${fmt(r.m2_rc_price)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'سعر السوق':'Market price'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text3)">${fmt(r.m2_mkt)}</td></tr>
+        </table>
+        ${renderDiffBadge(r.m2_mkt, r.m2_rc_price, isAr)}
+      </div>
+
+      <!-- M3: ABC -->
+      <div style="padding:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--warn);font-family:'IBM Plex Mono',monospace;margin-bottom:10px">③ ABC ${isAr?'(الأنشطة)':'(Activity-Based)'}</div>
+        <table style="width:100%;font-size:11.5px;border-collapse:collapse">
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'مراقبة':'Monitoring'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m3_mC)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'تحقيق':'Investigation'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m3_iC)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'تقارير':'Reports'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m3_rC)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'ضبط SIEM':'SIEM Tuning'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m3_tC)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'رخص+OH':'Lic+OH'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text)">${fmt(r.m3_nonStaff)}</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td style="color:var(--text2);padding:4px 0;font-weight:600">${isAr?'تكلفة/عميل':'Cost/client'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--text)">${fmt(r.m3_rc_cost)}</td></tr>
+          <tr><td style="color:var(--text);padding:3px 0;font-weight:600">${isAr?'سعرك (+35%)':'Your price (+35%)'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--warn);font-size:13px">${fmt(r.m3_rc_price)}</td></tr>
+          <tr><td style="color:var(--text3);padding:3px 0">${isAr?'سعر السوق':'Market price'}</td><td style="text-align:left;font-family:'IBM Plex Mono',monospace;color:var(--text3)">${fmt(r.m3_mkt)}</td></tr>
+        </table>
+        ${renderDiffBadge(r.m3_mkt, r.m3_rc_price, isAr)}
+      </div>
+    </div>
+  </div>`;
+  });
+
+  // Summary totals
+  const totalM1Rev = results.reduce((s,r) => s + r.m1_rc_price * r.count, 0);
+  const totalM2Rev = results.reduce((s,r) => s + r.m2_rc_price * r.count, 0);
+  const totalM3Rev = results.reduce((s,r) => s + r.m3_rc_price * r.count, 0);
+  const totalM1Mkt = results.reduce((s,r) => s + r.m1_mkt * r.count, 0);
+  const totalM2Mkt = results.reduce((s,r) => s + r.m2_mkt * r.count, 0);
+  const totalM3Mkt = results.reduce((s,r) => s + r.m3_mkt * r.count, 0);
+
+  html += `
+  <div style="background:var(--bg2);border:2px solid var(--accent);border-radius:12px;padding:16px;margin-top:4px">
+    <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:7px">
+      <i class="ti ti-report-money" style="color:var(--accent)"></i>
+      ${isAr?'ملخص الإيراد الشهري المتوقع — الكامل للقسم':'Expected Monthly Revenue Summary — Full Department'}
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">
+      <div class="metric-card"><div class="metric-lbl">${isAr?'إيرادك — GB/Day':'Your Rev — GB/Day'}</div><div class="metric-val" style="color:var(--accent);font-size:18px">${fmt(totalM1Rev)}</div><div class="metric-sub">${isAr?'ر.س/شهر':'SAR/mo'}</div></div>
+      <div class="metric-card"><div class="metric-lbl">${isAr?'إيرادك — Capacity':'Your Rev — Capacity'}</div><div class="metric-val" style="color:var(--success);font-size:18px">${fmt(totalM2Rev)}</div><div class="metric-sub">${isAr?'ر.س/شهر':'SAR/mo'}</div></div>
+      <div class="metric-card"><div class="metric-lbl">${isAr?'إيرادك — ABC':'Your Rev — ABC'}</div><div class="metric-val" style="color:var(--warn);font-size:18px">${fmt(totalM3Rev)}</div><div class="metric-sub">${isAr?'ر.س/شهر':'SAR/mo'}</div></div>
+      <div class="metric-card" style="border:1.5px solid var(--border2)"><div class="metric-lbl">${isAr?'تكاليف القسم':'Dept Total Cost'}</div><div class="metric-val" style="font-size:18px">${fmt(rcTotal)}</div><div class="metric-sub">${isAr?'ر.س/شهر':'SAR/mo'}</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;font-size:12px">
+      ${[
+        {label:'① GB/Day', rev:totalM1Rev, mkt:totalM1Mkt, color:'var(--accent)'},
+        {label:'② Capacity', rev:totalM2Rev, mkt:totalM2Mkt, color:'var(--success)'},
+        {label:'③ ABC', rev:totalM3Rev, mkt:totalM3Mkt, color:'var(--warn)'}
+      ].map(x => {
+        const profit = x.rev - rcTotal;
+        const margin = x.rev > 0 ? ((profit/x.rev)*100).toFixed(1) : '0';
+        const isProfit = profit >= 0;
+        return `<div style="background:var(--bg3);border-radius:8px;padding:10px;text-align:center">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:${x.color};font-weight:600;margin-bottom:4px">${x.label}</div>
+          <div style="font-size:11px;color:var(--text3)">${isAr?'هامش الربح':'Profit Margin'}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:700;color:${isProfit?'var(--success)':'var(--danger)'}">${isProfit?'+':''}${margin}%</div>
+          <div style="font-size:10px;color:var(--text3);margin-top:2px">${fmt(profit)} ${isAr?'ر.س':'SAR'}</div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`;
+
+  document.getElementById('rc-compare-grid').innerHTML = html;
+}
+
+function renderDiffBadge(marketPrice, rcPrice, isAr) {
+  const diff = marketPrice - rcPrice;
+  const isPos = diff >= 0;
+  const pct = rcPrice > 0 ? ((Math.abs(diff)/rcPrice)*100).toFixed(1) : '0';
+  return `<div style="display:flex;justify-content:space-between;align-items:center;background:${isPos?'var(--success-bg)':'var(--danger-bg)'};border-radius:6px;padding:6px 10px;margin-top:8px;font-size:11px">
+    <span style="color:${isPos?'var(--success)':'var(--danger)'}">${isPos?(isAr?'🟢 ميزة تنافسية':'🟢 Competitive edge'):(isAr?'🔴 تكلفتك أعلى':'🔴 Cost > Market')}</span>
+    <span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:${isPos?'var(--success)':'var(--danger)'}">${isPos?'+':'−'}${pct}%</span>
+  </div>`;
+}
+
 // ─── THEME TOGGLE ─────────────────────────────
 function toggleTheme() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
   document.getElementById('theme-btn').innerHTML = isDark ? '<i class="ti ti-moon"></i>' : '<i class="ti ti-sun"></i>';
   if (currentStep === 4) renderResults();
+}
+
+// ─── TRANSLATE ALL DATA-AR/DATA-EN ELEMENTS ──────────────────────────────────
+function translateStaticContent(isAr) {
+  document.querySelectorAll('[data-ar][data-en]').forEach(el => {
+    el.textContent = isAr ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+  });
+
+  // Reference module KPIs
+  const refKpis = [
+    ['ref-kpi-ksa-lbl','سوق الأمن السيبراني KSA','KSA Cybersecurity Market'],
+    ['ref-kpi-ksa-sub','ريال سعودي — 2024 (NCA)','SAR — 2024 (NCA)'],
+    ['ref-kpi-mssp-lbl','سوق MSSP عالمياً','Global MSSP Market'],
+    ['ref-kpi-mssp-sub','دولار — 2025 (MnM)','USD — 2025 (MnM)'],
+    ['ref-kpi-growth-lbl','معدل النمو السعودي','Saudi Growth Rate'],
+    ['ref-kpi-growth-sub','CAGR سنوي (NCA 2025)','Annual CAGR (NCA 2025)'],
+    ['ref-kpi-global-lbl','معدل النمو العالمي MSSP','Global MSSP Growth Rate'],
+    ['ref-kpi-global-sub','CAGR 2025–2030 (MnM)','CAGR 2025–2030 (MnM)'],
+  ];
+  refKpis.forEach(([id, ar, en]) => { const el = document.getElementById(id); if(el) el.textContent = isAr ? ar : en; });
+
+  // Sources module KPIs
+  const srcKpis = [
+    ['src-kpi-total-lbl','إجمالي المصادر','Total Sources'],
+    ['src-kpi-total-sub','مصدراً أولياً','primary sources'],
+    ['src-kpi-mkt-lbl','بيانات السوق','Market Data'],
+    ['src-kpi-mkt-sub','تقارير بحثية','research reports'],
+    ['src-kpi-price-lbl','بيانات التسعير','Pricing Data'],
+    ['src-kpi-price-sub','مصادر تسعير','pricing sources'],
+    ['src-kpi-siem-lbl','أدوات SIEM','SIEM Tools'],
+    ['src-kpi-siem-sub','مصادر أسعار','price sources'],
+    ['src-kpi-sal-lbl','الرواتب','Salaries'],
+  ];
+  srcKpis.forEach(([id, ar, en]) => { const el = document.getElementById(id); if(el) el.textContent = isAr ? ar : en; });
+
+  // Sources table header
+  const srcTh = document.getElementById('src-th-wrap');
+  if (srcTh) {
+    srcTh.querySelectorAll('th[data-ar]').forEach(th => {
+      th.textContent = isAr ? th.getAttribute('data-ar') : th.getAttribute('data-en');
+    });
+  }
 }
 
 // ─── LANGUAGE TOGGLE ──────────────────────────
@@ -1873,25 +2741,136 @@ function setLang(l) {
   document.getElementById('hdr-sub').textContent   = isAr ? 'حاسبة التكلفة والتسعير — مركز العمليات الأمنية · السوق السعودي' : 'Managed SOC Cost & Pricing Calculator — Saudi Market';
 
   // Nav tabs
-  document.getElementById('nt-form').textContent = isAr ? 'نموذج التسعير' : 'Pricing Form';
-  document.getElementById('nt-logic').textContent = isAr ? 'منطق التسعير' : 'Pricing Logic';
-  document.getElementById('nt-ref').textContent = isAr ? 'مرجع الأسعار' : 'Price Reference';
-  document.getElementById('nt-src').textContent = isAr ? 'المصادر' : 'Sources';
+  document.getElementById('nt-form').textContent     = isAr ? 'نموذج التسعير'     : 'Pricing Form';
+  document.getElementById('nt-logic').textContent    = isAr ? 'منطق التسعير'      : 'Pricing Logic';
+  document.getElementById('nt-ref').textContent      = isAr ? 'مرجع الأسعار'      : 'Price Reference';
+  document.getElementById('nt-src').textContent      = isAr ? 'المصادر'           : 'Sources';
+  document.getElementById('nt-realcost').textContent = isAr ? 'التكلفة الأصلية'   : 'Real Cost';
+
+  // Step tabs
+  document.getElementById('st0').textContent = isAr ? 'ملف الشركة'          : 'Company Profile';
+  document.getElementById('st1').textContent = isAr ? 'البنية التحتية'       : 'Infrastructure';
+  document.getElementById('st2').textContent = isAr ? 'احتياجات الأمن'       : 'Security Needs';
+  document.getElementById('st3').textContent = isAr ? 'الامتثال'             : 'Compliance';
+  document.getElementById('st4').textContent = isAr ? 'النتائج'              : 'Results';
+
+  // Section titles/desc
+  document.getElementById('s0-title').textContent = isAr ? 'ملف الشركة'               : 'Company Profile';
+  document.getElementById('s0-desc').textContent  = isAr ? 'معلومات أساسية لتحديد احتياجات عمليات الأمان.' : 'Basic information to determine security operations needs.';
+  document.getElementById('s1-title').textContent = isAr ? 'البنية التحتية والأصول'   : 'Infrastructure & Assets';
+  document.getElementById('s1-desc').textContent  = isAr ? 'يتم تقدير حجم اللوجات بناءً على قائمة أصولك.' : 'Log volume is estimated based on your asset inventory.';
+  document.getElementById('s2-title').textContent = isAr ? 'متطلبات العمليات الأمنية' : 'Security Operations Requirements';
+  document.getElementById('s2-desc').textContent  = isAr ? 'حدد نطاق الخدمات المطلوبة.' : 'Define the scope of required services.';
+  document.getElementById('s3-title').textContent = isAr ? 'الامتثال وملف المخاطر'    : 'Compliance & Risk Profile';
+  document.getElementById('s3-desc').textContent  = isAr ? 'الالتزامات التنظيمية تؤثر بشكل كبير على عمق المراقبة والتكلفة.' : 'Regulatory obligations significantly affect monitoring depth and cost.';
+
+  // Question labels
+  const t = {
+    'lbl-sector':       [isAr ? 'القطاع' : 'Sector',                          'hint-sector',   isAr ? 'القطاعات المنظَّمة تتطلب مراقبة وتقارير أكثر كثافة وتؤثر على معامل السعر' : 'Regulated sectors require more intensive monitoring and affect the pricing multiplier'],
+    'lbl-employees':    [isAr ? 'عدد الموظفين' : 'Number of Employees',        'hint-employees',isAr ? 'يُستخدم لتقدير حجم النقاط الطرفية والهوية' : 'Used to estimate endpoint and identity volume'],
+    'lbl-geo':          [isAr ? 'الانتشار الجغرافي' : 'Geographic Spread',     'hint-geo',      isAr ? 'مواقع متعددة تزيد من تعقيد المراقبة وتكلفتها' : 'Multiple locations increase monitoring complexity and cost'],
+    'lbl-coverage':     [isAr ? 'متطلبات التغطية' : 'Coverage Requirements',   null, null],
+    'lbl-winsrv':       [isAr ? 'خوادم Windows' : 'Windows Servers',           null, null],
+    'unit-winsrv':      [isAr ? 'خادم' : 'servers',                             null, null],
+    'lbl-linsrv':       [isAr ? 'خوادم Linux' : 'Linux Servers',               null, null],
+    'unit-linsrv':      [isAr ? 'خادم' : 'servers',                             null, null],
+    'lbl-endpoints':    [isAr ? 'النقاط الطرفية (أجهزة)' : 'Endpoints (devices)', null, null],
+    'unit-endpoints':   [isAr ? 'جهاز' : 'devices',                             null, null],
+    'lbl-firewalls':    [isAr ? 'الجدران النارية / أجهزة الشبكة' : 'Firewalls / Network Devices', null, null],
+    'unit-firewalls':   [isAr ? 'جهاز' : 'devices',                             null, null],
+    'lbl-cloud':        [isAr ? 'البيئة السحابية' : 'Cloud Environment',        null, null],
+    'lbl-siem':         [isAr ? 'منصة SIEM الحالية' : 'Current SIEM Platform',  null, null],
+    'lbl-services':     [isAr ? 'الخدمات المطلوبة' : 'Required Services',       'hint-services', isAr ? 'اختر كل ما ينطبق — كل خدمة إضافية تزيد من حجم العمل والتكلفة' : 'Select all that apply — each additional service increases workload and cost'],
+    'lbl-incidents':    [isAr ? 'الحوادث الشهرية المتوقعة' : 'Expected Monthly Incidents', 'hint-incidents', isAr ? 'متوسط الحوادث الأمنية التي تتطلب تحقيق المحلل' : 'Average security incidents requiring analyst investigation'],
+    'lbl-sla':          [isAr ? 'SLA وقت الاستجابة المطلوب' : 'Required Response SLA', null, null],
+    'lbl-rep-freq':     [isAr ? 'تكرار التقارير' : 'Report Frequency',          null, null],
+    'lbl-regs':         [isAr ? 'الأطر التنظيمية المنطبقة' : 'Applicable Regulatory Frameworks', null, null],
+    'lbl-datatypes':    [isAr ? 'أنواع البيانات الحساسة' : 'Sensitive Data Types', null, null],
+    'lbl-retention':    [isAr ? 'متطلب الاحتفاظ بالسجلات' : 'Log Retention Requirement', null, null],
+    'lbl-budget':       [isAr ? 'الميزانية الشهرية التقريبية' : 'Approximate Monthly Budget', 'hint-budget', isAr ? 'تساعد في تحديد الشريحة السعرية الأنسب لاحتياجاتك' : 'Helps identify the most appropriate pricing tier for your needs'],
+  };
+  Object.entries(t).forEach(([id, vals]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = vals[0];
+    if (vals[1]) { const h = document.getElementById(vals[1]); if (h) h.textContent = vals[2]; }
+  });
+
+  // Decline labels
+  const decLabels = {
+    'dec-lbl-sector':'أفضل عدم الإجابة','dec-lbl-employees':'أفضل عدم الإجابة',
+    'dec-lbl-geo':'أفضل عدم الإجابة','dec-lbl-coverage':'أفضل عدم الإجابة',
+    'dec-lbl-winsrv':'أفضل عدم الإجابة','dec-lbl-linsrv':'أفضل عدم الإجابة',
+    'dec-lbl-endpoints':'أفضل عدم الإجابة','dec-lbl-firewalls':'أفضل عدم الإجابة',
+    'dec-lbl-cloud':'أفضل عدم الإجابة','dec-lbl-siem':'أفضل عدم الإجابة',
+    'dec-lbl-incidents':'أفضل عدم الإجابة','dec-lbl-sla':'أفضل عدم الإجابة',
+    'dec-lbl-rep-freq':'أفضل عدم الإجابة','dec-lbl-datatypes':'أفضل عدم الإجابة',
+    'dec-lbl-retention':'أفضل عدم الإجابة','dec-lbl-budget':'أفضل عدم الإجابة',
+  };
+  const decEn = isAr ? null : 'Prefer not to answer';
+  Object.keys(decLabels).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = isAr ? 'أفضل عدم الإجابة' : 'Prefer not to answer';
+  });
 
   // Module titles
   document.getElementById('logic-title').textContent = isAr ? 'كيف يُحسَب السعر؟' : 'How Is the Price Calculated?';
-  document.getElementById('logic-sub').textContent = isAr ? 'شرح خطوة بخطوة بأرقام حقيقية — كأنك تبني قائمة تكاليف في Excel' : 'Step-by-step with real numbers — like building a cost sheet in Excel';
-  document.getElementById('ref-title').textContent = isAr ? 'موديول مرجع الأسعار' : 'Price Reference Module';
-  document.getElementById('ref-sub').textContent = isAr ? 'نطاقات أسعار تفصيلية للسوق السعودي 2025–2026' : 'Detailed price ranges for the Saudi market 2025–2026';
-  document.getElementById('src-title').textContent = isAr ? 'موديول المصادر والمراجع' : 'Sources & References Module';
-  document.getElementById('src-sub').textContent = isAr ? 'جميع البيانات مستقاة من 14 مصدراً أولياً موثقاً' : 'All data sourced from 14 primary verified references';
+  document.getElementById('logic-sub').textContent   = isAr ? 'شرح خطوة بخطوة بأرقام حقيقية — كأنك تبني قائمة تكاليف في Excel' : 'Step-by-step with real numbers — like building a cost sheet in Excel';
+  document.getElementById('ref-title').textContent   = isAr ? 'موديول مرجع الأسعار' : 'Price Reference Module';
+  document.getElementById('ref-sub').textContent     = isAr ? 'نطاقات أسعار تفصيلية للسوق السعودي 2025–2026' : 'Detailed price ranges for the Saudi market 2025–2026';
+  document.getElementById('src-title').textContent   = isAr ? 'موديول المصادر والمراجع' : 'Sources & References Module';
+  document.getElementById('src-sub').textContent     = isAr ? 'جميع البيانات مستقاة من 14 مصدراً أولياً موثقاً' : 'All data sourced from 14 primary verified references';
+
+  // Real Cost module labels
+  document.getElementById('rc-title').textContent        = isAr ? 'التكلفة الأصلية' : 'Real Cost';
+  document.getElementById('rc-sub').textContent          = isAr ? 'أدخل تكاليفك الفعلية لمقارنتها مع نماذج التسعير — جميع المبالغ بالريال السعودي' : 'Enter your actual costs to compare with pricing models — all amounts in SAR';
+  document.getElementById('rc-lbl-staff').textContent    = isAr ? 'الموظفون' : 'Staff';
+  document.getElementById('rc-lbl-addstaff').textContent = isAr ? 'إضافة موظف' : 'Add Staff';
+  document.getElementById('rc-th-role').textContent      = isAr ? 'المسمى / الدور' : 'Role / Title';
+  document.getElementById('rc-th-count').textContent     = isAr ? 'العدد' : 'Count';
+  document.getElementById('rc-th-salary').textContent    = isAr ? 'الراتب (ر.س)' : 'Salary (SAR)';
+  document.getElementById('rc-th-period').textContent    = isAr ? 'الفترة' : 'Period';
+  document.getElementById('rc-lbl-stafftotal').textContent = isAr ? 'إجمالي تكلفة الموظفين / شهر' : 'Total Staff Cost / Month';
+  document.getElementById('rc-lbl-lic').textContent      = isAr ? 'رخص سير العمل والأدوات' : 'Licenses & Tools';
+  document.getElementById('rc-lbl-addlic').textContent   = isAr ? 'إضافة رخصة' : 'Add License';
+  document.getElementById('rc-hint-lic').textContent     = isAr ? 'أضف أي رخصة أو اشتراك — SIEM، EDR، Microsoft 365، أي شيء تحتاجه' : 'Add any license or subscription — SIEM, EDR, Microsoft 365, anything you need';
+  document.getElementById('rc-th-licname').textContent   = isAr ? 'اسم الرخصة' : 'License Name';
+  document.getElementById('rc-th-liccost').textContent   = isAr ? 'التكلفة (ر.س)' : 'Cost (SAR)';
+  document.getElementById('rc-th-licperiod').textContent = isAr ? 'الفترة' : 'Period';
+  document.getElementById('rc-lbl-lictotal').textContent = isAr ? 'إجمالي تكلفة الرخص / شهر' : 'Total Licenses Cost / Month';
+  document.getElementById('rc-lbl-oh').textContent       = isAr ? 'التكاليف التشغيلية (Overhead)' : 'Operational Overhead';
+  document.getElementById('rc-lbl-addoh').textContent    = isAr ? 'إضافة بند' : 'Add Item';
+  document.getElementById('rc-hint-oh').textContent      = isAr ? 'إيجار، اتصالات، كهرباء، تدريب — أي تكلفة تشغيلية' : 'Rent, internet, electricity, training — any operational cost';
+  document.getElementById('rc-th-ohname').textContent    = isAr ? 'البند' : 'Item';
+  document.getElementById('rc-th-ohcost').textContent    = isAr ? 'التكلفة (ر.س)' : 'Cost (SAR)';
+  document.getElementById('rc-th-ohperiod').textContent  = isAr ? 'الفترة' : 'Period';
+  document.getElementById('rc-lbl-ohtotal').textContent  = isAr ? 'إجمالي الـ Overhead / شهر' : 'Total Overhead / Month';
+  document.getElementById('rc-lbl-grandtitle').textContent = isAr ? 'إجمالي التكلفة الأصلية الشهرية' : 'Total Monthly Real Cost';
+  document.getElementById('rc-ml-staff').textContent     = isAr ? 'الموظفون' : 'Staff';
+  document.getElementById('rc-ml-lic').textContent       = isAr ? 'الرخص' : 'Licenses';
+  document.getElementById('rc-ml-oh').textContent        = isAr ? 'Overhead' : 'Overhead';
+  document.getElementById('rc-ml-total').textContent     = isAr ? 'الإجمالي' : 'Total';
+  document.getElementById('rc-lbl-compare').textContent  = isAr ? 'مقارنة طرق التسعير — سعر السوق مقابل تكلفتك الحقيقية' : 'Pricing Method Comparison — Market Price vs. Your Real Cost';
+  document.getElementById('rc-hint-compare').textContent = isAr ? 'لكل طريقة تسعير: السعر المقترح بأسعار السوق مقابل السعر المقترح بناءً على تكاليفك الحقيقية + هامش 35%' : 'Per pricing method: the proposed market rate price vs. a price built on your actual costs + 35% margin';
+  document.getElementById('rc-note-compare-text').textContent = isAr ? 'احسب التسعير أولاً من "نموذج التسعير" لتظهر المقارنة.' : 'Calculate pricing first from "Pricing Form" to see the comparison.';
+  document.getElementById('rc-msg-enterdata').textContent = isAr ? 'أدخل تكاليفك أعلاه لتظهر الإجماليات والمقارنة' : 'Enter your costs above to see totals and comparison';
+
+  // Translate all static data-ar/data-en elements (logic module, etc.)
+  translateStaticContent(isAr);
 
   // Back/Next
   document.getElementById('lbl-back').textContent = isAr ? 'رجوع' : 'Back';
   const nextLbl = document.getElementById('lbl-next');
-  if (nextLbl) nextLbl.textContent = currentStep === 3 ? (isAr ? 'احسب التسعير' : 'Calculate') : (isAr ? 'التالي' : 'Next');
+  if (nextLbl) nextLbl.textContent = currentStep === 3 ? (isAr ? 'احسب التسعير' : 'Calculate Pricing') : (isAr ? 'التالي' : 'Next');
 
   if (currentStep === 4) renderResults();
+
+  // Re-render comparison if data exists
+  if (lastPricingResults) {
+    const rcGrandNow = (rcStaff.filter(Boolean).reduce((s,r)=>s+rcFreqToMonth(r.salary,r.freq)*(r.count||1),0)) +
+      (rcLic.filter(Boolean).reduce((s,r)=>s+rcFreqToMonth(r.cost,r.freq),0)) +
+      (rcOh.filter(Boolean).reduce((s,r)=>s+rcFreqToMonth(r.cost,r.freq),0));
+    if (rcGrandNow > 0) renderRcComparison(rcGrandNow, lastPricingResults);
+  }
 }
 </script>
 </body>
