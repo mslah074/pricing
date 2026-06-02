@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الدليل الشامل — نموذج تسعير MSSP</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a16;
+  --ink2: #4a4a42;
+  --ink3: #8a8880;
+  --bg: #faf9f5;
+  --bg2: #ffffff;
+  --bg3: #f2f0ea;
+  --rule: #e0ddd5;
+  --blue: #1a6cf6;
+  --blue-bg: #eef4ff;
+  --green: #1d9e75;
+  --green-bg: #e1f5ee;
+  --amber: #ba7517;
+  --amber-bg: #faeeda;
+  --red: #e24b4a;
+  --red-bg: #fcebeb;
+  --purple: #534ab7;
+  --purple-bg: #eeedfe;
+  --teal: #0e7490;
+  --teal-bg: #ecfeff;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* ── SIDEBAR NAV ── */
+.layout { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 280px;
+  flex-shrink: 0;
+  background: var(--ink);
+  color: #e8e5df;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 0 0 40px;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.sidebar-brand {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  margin-bottom: 12px;
+}
+.sidebar-brand .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.sidebar-brand .logo-icon {
+  width: 36px; height: 36px;
+  background: var(--blue);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.sidebar-brand .title { font-size: 14px; font-weight: 600; }
+.sidebar-brand .sub { font-size: 11px; color: #888480; font-family: var(--mono); }
+
+.nav-section { padding: 8px 0; }
+.nav-section-label {
+  padding: 6px 20px;
+  font-size: 10px;
+  font-family: var(--mono);
+  letter-spacing: .12em;
+  color: #666460;
+  text-transform: uppercase;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: #c8c4be;
+  cursor: pointer;
+  transition: all .15s;
+  border-right: 3px solid transparent;
+  text-decoration: none;
+}
+.nav-link:hover { background: rgba(255,255,255,.05); color: #fff; }
+.nav-link.active { color: #fff; border-right-color: var(--blue); background: rgba(26,108,246,.15); }
+.nav-link .nav-num {
+  width: 20px; height: 20px;
+  background: rgba(255,255,255,.1);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  font-family: var(--mono);
+  flex-shrink: 0;
+}
+
+/* ── MAIN CONTENT ── */
+.main { flex: 1; min-width: 0; }
+
+.chapter {
+  display: none;
+  padding: 48px 56px 80px;
+  max-width: 900px;
+}
+.chapter.active { display: block; }
+
+/* ── CHAPTER HEADER ── */
+.ch-header {
+  padding-bottom: 32px;
+  border-bottom: 2px solid var(--rule);
+  margin-bottom: 40px;
+}
+.ch-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--blue);
+  background: var(--blue-bg);
+  border: 1px solid rgba(26,108,246,.2);
+  padding: 3px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+.ch-number {
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--rule);
+  font-family: var(--mono);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.ch-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.ch-desc {
+  font-size: 15px;
+  color: var(--ink2);
+  line-height: 1.7;
+  max-width: 620px;
+}
+
+/* ── TYPOGRAPHY ── */
+h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 40px 0 14px;
+  padding-right: 14px;
+  border-right: 4px solid var(--blue);
+}
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 28px 0 10px;
+}
+p { color: var(--ink2); margin-bottom: 14px; line-height: 1.85; }
+strong { color: var(--ink); font-weight: 600; }
+
+/* ── CALLOUT BOXES ── */
+.box {
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 20px 0;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.box-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.box-content { flex: 1; }
+.box-title { font-weight: 600; margin-bottom: 4px; font-size: 13px; }
+.box.info { background: var(--blue-bg); color: #0f3d8a; border: 1px solid rgba(26,108,246,.2); }
+.box.success { background: var(--green-bg); color: #0a4a35; border: 1px solid rgba(29,158,117,.2); }
+.box.warn { background: var(--amber-bg); color: #6b4200; border: 1px solid rgba(186,117,23,.2); }
+.box.tip { background: var(--purple-bg); color: #2d2580; border: 1px solid rgba(83,74,183,.2); }
+.box.example { background: var(--teal-bg); color: #0a4a55; border: 1px solid rgba(14,116,144,.2); }
+
+/* ── DEFINITION CARDS ── */
+.def-card {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin: 16px 0;
+  border-right: 4px solid var(--blue);
+}
+.def-term {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+.def-ar {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.def-body { font-size: 13.5px; color: var(--ink2); line-height: 1.75; }
+.def-use {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--bg3);
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: var(--ink3);
+}
+.def-use strong { color: var(--ink2); }
+
+/* ── FORMULA BLOCKS ── */
+.formula {
+  background: var(--ink);
+  color: #e8e5df;
+  border-radius: 10px;
+  padding: 20px 22px;
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 2;
+  margin: 20px 0;
+  overflow-x: auto;
+}
+.formula .comment { color: #666460; font-size: 11px; }
+.formula .highlight { color: #6ad4ff; }
+.formula .result { color: #7dde9a; font-weight: 600; }
+.formula .label { color: #ffa94d; }
+
+/* ── STEP CARDS ── */
+.steps { margin: 20px 0; }
+.step {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.step-num {
+  width: 36px; height: 36px;
+  background: var(--blue);
+  color: #fff;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-body { flex: 1; }
+.step-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+.step-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.75; }
+
+/* ── TABLES ── */
+.tbl-wrap { overflow-x: auto; margin: 20px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead tr { background: var(--ink); color: #fff; }
+thead th { padding: 12px 14px; text-align: right; font-weight: 500; font-family: var(--mono); font-size: 11px; letter-spacing: .05em; }
+tbody tr:nth-child(even) { background: var(--bg3); }
+tbody tr:hover { background: var(--blue-bg); }
+tbody td { padding: 11px 14px; border-bottom: 1px solid var(--rule); color: var(--ink2); vertical-align: top; }
+tbody td:first-child { font-family: var(--mono); font-size: 12px; color: var(--blue); font-weight: 600; }
+
+/* ── EXAMPLE CARD ── */
+.example-card {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.example-header {
+  background: var(--bg3);
+  padding: 12px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.example-body { padding: 18px 20px; }
+.example-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+}
+.example-row:last-child { border-bottom: none; font-weight: 600; color: var(--blue); font-size: 14px; }
+.example-label { color: var(--ink2); }
+.example-val { font-family: var(--mono); color: var(--ink); }
+
+/* ── GRID ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 20px 0; }
+
+.mini-card {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 16px;
+}
+.mini-card .mc-label { font-size: 10px; font-family: var(--mono); color: var(--ink3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.mini-card .mc-val { font-size: 22px; font-weight: 700; font-family: var(--mono); color: var(--ink); }
+.mini-card .mc-sub { font-size: 11px; color: var(--ink3); margin-top: 3px; }
+
+/* ── TIER BADGES ── */
+.tier { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; font-family: var(--mono); }
+.tier-0 { background: var(--green-bg); color: var(--green); }
+.tier-1 { background: var(--amber-bg); color: var(--amber); }
+.tier-2 { background: var(--red-bg); color: var(--red); }
+.tier-3 { background: var(--purple-bg); color: var(--purple); }
+
+/* ── SCORE TABLE ── */
+.score-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.score-pts {
+  width: 40px; height: 24px;
+  background: var(--blue-bg);
+  color: var(--blue);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.score-desc { flex: 1; color: var(--ink2); }
+
+/* ── FLOW DIAGRAM ── */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 24px 0;
+  align-items: flex-start;
+}
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+.flow-box {
+  flex: 1;
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 14px 18px;
+}
+.flow-arrow {
+  width: 40px;
+  text-align: center;
+  font-size: 20px;
+  color: var(--blue);
+  padding: 8px 0;
+  flex-shrink: 0;
+}
+.flow-connector {
+  width: 3px;
+  height: 20px;
+  background: var(--rule);
+  margin-right: 18px;
+  border-radius: 2px;
+}
+
+/* ── HIGHLIGHT PILL ── */
+.pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 9px; border-radius: 6px; font-size: 12px;
+  font-family: var(--mono); font-weight: 500; vertical-align: middle;
+}
+.pill-blue { background: var(--blue-bg); color: var(--blue); }
+.pill-green { background: var(--green-bg); color: var(--green); }
+.pill-amber { background: var(--amber-bg); color: var(--amber); }
+.pill-purple { background: var(--purple-bg); color: var(--purple); }
+
+/* ── DIVIDER ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 32px 0;
+}
+
+/* ── TOC ── */
+.toc {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  padding: 24px 26px;
+  margin: 24px 0;
+}
+.toc-title { font-size: 13px; font-weight: 600; color: var(--ink3); font-family: var(--mono); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px; }
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: all .15s;
+}
+.toc-item:last-child { border-bottom: none; }
+.toc-item:hover .toc-name { color: var(--blue); }
+.toc-num { font-family: var(--mono); font-size: 11px; color: var(--ink3); width: 28px; }
+.toc-name { font-size: 14px; color: var(--ink); flex: 1; }
+.toc-tag { font-family: var(--mono); font-size: 10px; padding: 2px 7px; border-radius: 4px; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  .sidebar { display: none; }
+  .chapter { padding: 28px 20px 60px; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+}
+
+/* ── PRINT ── */
+@media print {
+  .sidebar { display: none; }
+  .chapter { display: block !important; page-break-before: always; }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<!-- ═══════════════════════════════════
+     SIDEBAR
+═══════════════════════════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="logo">
+      <div class="logo-icon">🛡️</div>
+      <div>
+        <div class="title">دليل MSSP</div>
+        <div class="sub">الطبعة الشاملة v1.0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">البداية</div>
+    <a class="nav-link active" onclick="showChapter('intro')">
+      <span class="nav-num">0</span> مقدمة وكيف تستخدم الدليل
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">الأساسيات</div>
+    <a class="nav-link" onclick="showChapter('glossary')">
+      <span class="nav-num">1</span> المصطلحات التقنية المشروحة
+    </a>
+    <a class="nav-link" onclick="showChapter('what-is-mssp')">
+      <span class="nav-num">2</span> ما هو MSSP؟
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">الأداة خطوة بخطوة</div>
+    <a class="nav-link" onclick="showChapter('overview')">
+      <span class="nav-num">3</span> نظرة عامة على الأداة
+    </a>
+    <a class="nav-link" onclick="showChapter('step1')">
+      <span class="nav-num">4</span> الخطوة الأولى: بيانات الشركة
+    </a>
+    <a class="nav-link" onclick="showChapter('step2')">
+      <span class="nav-num">5</span> الخطوة الثانية: البنية التقنية
+    </a>
+    <a class="nav-link" onclick="showChapter('step3')">
+      <span class="nav-num">6</span> الخطوة الثالثة: الخدمات والمتطلبات
+    </a>
+    <a class="nav-link" onclick="showChapter('results')">
+      <span class="nav-num">7</span> النتائج وقراءة الأرقام
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">المنطق الداخلي</div>
+    <a class="nav-link" onclick="showChapter('complexity')">
+      <span class="nav-num">8</span> نظام النقاط والشرائح
+    </a>
+    <a class="nav-link" onclick="showChapter('models')">
+      <span class="nav-num">9</span> نماذج التسعير الثلاثة
+    </a>
+    <a class="nav-link" onclick="showChapter('formulas')">
+      <span class="nav-num">10</span> المعادلات التفصيلية
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">الموديولات الإضافية</div>
+    <a class="nav-link" onclick="showChapter('realcost')">
+      <span class="nav-num">11</span> موديول التكلفة الأصلية
+    </a>
+    <a class="nav-link" onclick="showChapter('reference')">
+      <span class="nav-num">12</span> موديول مرجع الأسعار
+    </a>
+    <a class="nav-link" onclick="showChapter('sources')">
+      <span class="nav-num">13</span> المصادر والبيانات
+    </a>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-section-label">التطبيق العملي</div>
+    <a class="nav-link" onclick="showChapter('scenarios')">
+      <span class="nav-num">14</span> سيناريوهات وأمثلة حقيقية
+    </a>
+    <a class="nav-link" onclick="showChapter('faq')">
+      <span class="nav-num">15</span> الأسئلة الشائعة
+    </a>
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════════
+     CHAPTERS
+═══════════════════════════════════ -->
+<main class="main">
+
+<!-- ════════════════════════════ INTRO ════════════════════════════ -->
+<div id="chapter-intro" class="chapter active">
+  <div class="ch-header">
+    <div class="ch-tag">INTRODUCTION</div>
+    <div class="ch-number">00</div>
+    <div class="ch-title">مقدمة وكيف تستخدم هذا الدليل</div>
+    <div class="ch-desc">دليل شامل يشرح كل تفصيلة في أداة تسعير MSSP — مكتوب لكل شخص سواء كان خبيراً أو مبتدئاً في عالم الأمن السيبراني.</div>
+  </div>
+
+  <div class="box info">
+    <div class="box-icon">📖</div>
+    <div class="box-content">
+      <div class="box-title">لمن هذا الدليل؟</div>
+      هذا الدليل مكتوب لأي شخص يريد فهم أداة التسعير — سواء كنت مديراً تنفيذياً، محاسباً، مسؤول تقنية معلومات، مندوب مبيعات، أو حتى شخصاً فضولياً لا يعرف شيئاً عن الأمن السيبراني. كل مصطلح تقني سيُشرح بلغة بسيطة.
+    </div>
+  </div>
+
+  <h2>ما هي هذه الأداة؟</h2>
+  <p>
+    نموذج تسعير MSSP هو <strong>حاسبة ذكية متخصصة</strong> تساعد شركات الأمن السيبراني في السوق السعودي على تحديد السعر المناسب لخدماتها الأمنية المدارة. الأداة تأخذ معلومات عن شركة العميل وتحسب تلقائياً ثلاثة أسعار مقترحة بثلاث طرق مختلفة، مع شرح مفصل لكيفية الوصول إلى كل رقم.
+  </p>
+
+  <h2>فهرس الدليل</h2>
+  <div class="toc">
+    <div class="toc-title">محتويات الدليل</div>
+    <div class="toc-item" onclick="showChapter('glossary')">
+      <span class="toc-num">01</span>
+      <span class="toc-name">المصطلحات التقنية المشروحة — قاموس كامل</span>
+      <span class="toc-tag pill pill-blue">أساسي</span>
+    </div>
+    <div class="toc-item" onclick="showChapter('what-is-mssp')">
+      <span class="toc-num">02</span>
+      <span class="toc-name">ما هو MSSP؟ — الفكرة من الصفر</span>
+      <span class="toc-tag pill pill-blue">أساسي</span>
+    </div>
+    <div class="toc-item" onclick="showChapter('overview')">
+      <span class="toc-num">03</span>
+      <span class="toc-name">نظرة عامة على الأداة وشكلها</span>
+      <span class="toc-tag pill pill-green">الأداة</span>
+    </div>
+    <div class="toc-item" onclick="showChapter('step1')">
+      <span class="toc-num">04–06</span>
+      <span class="toc-name">الخطوات 1–3: كل سؤال بالتفصيل</span>
+      <span class="toc-tag pill pill-green">الأداة</span>
+    </div>
+    <div class="toc-item" onclick="showChapter('results')">
+      <span class="toc-num">07</span>
+      <span class="toc-name">قراءة النتائج وفهم الأرقام</span>
+      <span class="toc-tag pill pill-green">الأداة</span>
+    </div>
+    <div class="toc-item" onclick="showChapter('complexity')">
+      <span class="toc-num">08</span>
+      <span class="toc-name">نظام النقاط والشرائح الأربع</span>
+      <span class="toc-tag pill pill-amber">المنطق</span>
+    </div>
+    <div class="toc-item" onclick="showChapter('models')">
+      <span class="toc-num">09</span>
+      <span class="toc-name">نماذج التسعير الثلاثة بالتفصيل</span>
+      <span class="toc-tag pill pill-amber">المنطق</span>
+    </div>
+    <div class="toc-item" onclick="showChapter('formulas')">
+      <span class="toc-num">10</span>
+      <span class="toc-name">المعادلات الحسابية كاملة</span>
+      <span class="toc-tag pill pill-amber">المنطق</span>
+    </div>
+    <div class="toc-item" onclick="showChapter('scenarios')">
+      <span class="toc-num">14</span>
+      <span class="toc-name">أمثلة حقيقية وسيناريوهات مختلفة</span>
+      <span class="toc-tag pill pill-purple">تطبيق</span>
+    </div>
+  </div>
+
+  <div class="box tip">
+    <div class="box-icon">💡</div>
+    <div class="box-content">
+      <div class="box-title">نصيحة للمبتدئين</div>
+      إذا كنت جديداً في هذا المجال، ابدأ بالفصل الأول (المصطلحات) ثم الفصل الثاني (ما هو MSSP؟). بعدها كل شيء سيكون واضحاً.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ GLOSSARY ════════════════════════════ -->
+<div id="chapter-glossary" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">GLOSSARY</div>
+    <div class="ch-number">01</div>
+    <div class="ch-title">قاموس المصطلحات التقنية</div>
+    <div class="ch-desc">كل مصطلح تقني مستخدم في الأداة مشروح بلغة بسيطة مع مثال من الحياة اليومية.</div>
+  </div>
+
+  <h2>مصطلحات الأمن السيبراني الأساسية</h2>
+
+  <div class="def-card">
+    <div class="def-term">MSSP — Managed Security Service Provider</div>
+    <div class="def-ar">مزود خدمة الأمن السيبراني المدار</div>
+    <div class="def-body">شركة متخصصة توفر خدمات أمن إلكتروني لشركات أخرى بدلاً من أن تبني كل شركة فريق أمن خاص بها. فكر فيها كـ"شركة حراسة" لكن للفضاء الإلكتروني — بدلاً من أن تعين حراساً خاصين، تستأجر شركة حراسة متخصصة.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> هذه الأداة مصممة لمزودي خدمة الأمن المدار (الـ MSSP) ليحسبوا السعر الذي سيقدمونه لعملائهم.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--green)">
+    <div class="def-term">SOC — Security Operations Center</div>
+    <div class="def-ar">مركز عمليات الأمن</div>
+    <div class="def-body">الغرفة أو الفريق المتخصص الذي يراقب جميع الأنشطة الإلكترونية في الشركة على مدار الساعة. يشبه "غرفة العمليات" في الأفلام — شاشات كثيرة ومحللون يراقبون كل شيء. SOC يكتشف الاختراقات ويستجيب لها.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> تكلفة بناء SOC داخلي (1.3–2.1 مليون ريال/سنة) مقارنة باستئجار MSSP هي أحد الأسباب الرئيسية التي تجعل الشركات تلجأ للـ MSSP.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--purple)">
+    <div class="def-term">SIEM — Security Information and Event Management</div>
+    <div class="def-ar">نظام إدارة المعلومات وأحداث الأمن</div>
+    <div class="def-body">برنامج يجمع السجلات (Logs) من جميع الأجهزة والخوادم والشبكة، ويحللها تلقائياً للكشف عن أنماط مشبوهة. تخيله كـ"كاميرا تصوير وذكاء اصطناعي" تراقب كل شيء وتنبهك لو شاف شيء غريب. أمثلة: Microsoft Sentinel، Splunk، IBM QRadar، Elastic Security.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> نوع الـ SIEM يؤثر مباشرة على تكلفة النموذج الأول (حجم البيانات). مثلاً: Sentinel يكلف 11.1 ريال/GB، بينما Splunk يكلف 30 ريال/GB.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--amber)">
+    <div class="def-term">EDR — Endpoint Detection and Response</div>
+    <div class="def-ar">برنامج الكشف والاستجابة على الأجهزة</div>
+    <div class="def-body">برنامج يُثبَّت على كل جهاز كمبيوتر أو لابتوب أو خادم لمراقبته ضد الفيروسات والاختراقات. أذكى بكثير من الـ Antivirus التقليدي — يكتشف السلوكيات الخطيرة حتى لو لم يكن فيروساً معروفاً. أمثلة: CrowdStrike Falcon، Microsoft Defender for Endpoint.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> يظهر كخيار في قائمة الخدمات المطلوبة ويضيف تكلفة إضافية للحساب.</div>
+  </div>
+
+  <div class="def-card">
+    <div class="def-term">Log / Logs / سجلات</div>
+    <div class="def-ar">السجلات الرقمية</div>
+    <div class="def-body">كل جهاز وبرنامج وخادم يسجل كل ما يحدث فيه — مثل "ذاكرة الكمبيوتر" التي تحفظ كل حركة. "من دخل؟" "أي ملف فتح؟" "أي موقع طُلب؟" هذه كلها Logs. الـ SIEM يجمعها ويحللها.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> حجم السجلات اليومي بالـ GB هو أساس النموذج الأول للتسعير. الأداة تقدّر هذا الحجم تلقائياً بناءً على عدد أجهزتك وخوادمك.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--teal)">
+    <div class="def-term">SLA — Service Level Agreement</div>
+    <div class="def-ar">اتفاقية مستوى الخدمة</div>
+    <div class="def-body">عقد يحدد مدى سرعة الاستجابة عند اكتشاف مشكلة أمنية. مثل "ضمان وقت الاستجابة" — لو اكتشفنا اختراقاً، نتصل بك خلال 15 دقيقة أو ساعة أو 4 ساعات. كلما كان وقت الاستجابة أسرع، كلما كانت التكلفة أعلى.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> SLA أقل من 15 دقيقة يضيف نقطتين لنظام التعقيد، وساعة تضيف نقطة واحدة.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--red)">
+    <div class="def-term">FTE — Full-Time Equivalent</div>
+    <div class="def-ar">ما يعادل موظف بدوام كامل</div>
+    <div class="def-body">وحدة قياس تقول كم "موظفاً بدوام كامل" تحتاج. مثلاً 0.5 FTE يعني نصف موظف (يعني موظف يعمل لك نصف وقته). هذا المصطلح شائع في المحاسبة وإدارة الموارد البشرية.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> النموذج الثاني يحسب عدد المحللين اللازمين كـ FTE لكل عميل.</div>
+  </div>
+
+  <h2>المصطلحات التنظيمية والامتثال</h2>
+
+  <div class="def-card" style="border-right-color: var(--green)">
+    <div class="def-term">NCA — National Cybersecurity Authority</div>
+    <div class="def-ar">الهيئة الوطنية للأمن السيبراني</div>
+    <div class="def-body">الجهة الحكومية السعودية المسؤولة عن تنظيم وحماية الفضاء الإلكتروني في المملكة. تضع معايير وإطار عمل إلزامي للشركات تسمى ECC (ضوابط الأمن السيبراني الأساسية). كل شركة حكومية أو مؤسسة حيوية ملزمة بتطبيق هذه المعايير.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> وجود NCA كإطار تنظيمي يضيف نقاطاً لنظام التعقيد، ويؤثر على تكلفة الاحتفاظ بالسجلات (الحد الأدنى سنة).</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--amber)">
+    <div class="def-term">SAMA — Saudi Arabian Monetary Authority</div>
+    <div class="def-ar">البنك المركزي السعودي (ساما)</div>
+    <div class="def-body">يُلزم المصارف وشركات التأمين والمؤسسات المالية السعودية بمعايير أمن سيبراني صارمة جداً. SAMA يتطلب الاحتفاظ بالسجلات لمدة 3 سنوات كحد أدنى.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> القطاع البنكي يحصل تلقائياً على 3 نقاط إضافية في نظام التعقيد بسبب متطلبات SAMA.</div>
+  </div>
+
+  <div class="def-card">
+    <div class="def-term">PDPL — Personal Data Protection Law</div>
+    <div class="def-ar">نظام حماية البيانات الشخصية</div>
+    <div class="def-body">نظام سعودي يحمي البيانات الشخصية للمواطنين، مشابه لقانون GDPR الأوروبي. يُلزم الشركات التي تتعامل مع بيانات شخصية بحمايتها وإبلاغ الجهات المختصة عند أي اختراق.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> يظهر كإطار تنظيمي إضافي في الخطوة الثالثة.</div>
+  </div>
+
+  <h2>المصطلحات التقنية للبنية التحتية</h2>
+
+  <div class="def-card" style="border-right-color: var(--blue)">
+    <div class="def-term">Endpoint / النقطة الطرفية</div>
+    <div class="def-ar">أي جهاز متصل بالشبكة</div>
+    <div class="def-body">كل جهاز كمبيوتر أو لابتوب أو هاتف أو طابعة متصلة بشبكة الشركة. "Endpoint" بالعربية = "نقطة طرفية" — أي جهاز عند "طرف" الشبكة (بعيد عن المركز). كل جهاز يُعتبر نقطة دخول محتملة للمخترقين.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> كل endpoint ينتج 0.05 GB/يوم من السجلات (كل 20 جهاز = 1 GB).</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--purple)">
+    <div class="def-term">Firewall / الجدار الناري</div>
+    <div class="def-ar">الحاجز الإلكتروني بين الشبكة والإنترنت</div>
+    <div class="def-body">جهاز أو برنامج يفحص كل البيانات الداخلة والخارجة من شبكة الشركة ويسمح أو يمنع المرور وفق قواعد محددة. مثل "بوابة حراسة ذكية" على مدخل المبنى تفحص كل شخص يدخل.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> كل جدار ناري ينتج 20 GB/يوم من السجلات — الأعلى إنتاجاً لأنه يسجل كل حركة مرور في الشبكة.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--teal)">
+    <div class="def-term">Cloud Environment / البيئة السحابية</div>
+    <div class="def-ar">الخوادم والخدمات على الإنترنت</div>
+    <div class="def-body">بدلاً من وجود خوادم فيزيائية في مبنى الشركة، كثير من الشركات "ترفع" بياناتها وبرامجها إلى "السحابة" (خوادم بعيدة تديرها شركات مثل Microsoft Azure أو Amazon AWS). هذا يزيد التعقيد الأمني لأن البيانات موزعة في أماكن متعددة.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> Cloud-First يزيد حجم السجلات 40%، بينما Multi-Cloud يزيده 60%.</div>
+  </div>
+
+  <h2>مصطلحات التسعير والمالية</h2>
+
+  <div class="def-card" style="border-right-color: var(--green)">
+    <div class="def-term">GB / Gigabyte</div>
+    <div class="def-ar">وحدة قياس البيانات</div>
+    <div class="def-body">وحدة حجم البيانات. 1 GB = حوالي 1 مليار حرف. السجلات الأمنية تُقاس بالـ GB/يوم. جهاز كمبيوتر واحد ينتج حوالي 50 MB/يوم، بينما جدار ناري ينتج 20 GB/يوم.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> حجم السجلات اليومي هو أساس حساب النموذج الأول.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--amber)">
+    <div class="def-term">Overhead / التكاليف العامة</div>
+    <div class="def-ar">التكاليف غير المباشرة</div>
+    <div class="def-body">التكاليف التي ليست مباشرة للعمل ذاته لكنها ضرورية للتشغيل: الإيجار، الكهرباء، الاتصالات، التأمينات الاجتماعية، التدريب... الخ. في الأداة يُحسب كـ 15% من إجمالي التكاليف المباشرة.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> Overhead = (تكلفة SIEM + تكلفة المحللين + التخزين) × 15%</div>
+  </div>
+
+  <div class="def-card">
+    <div class="def-term">Profit Margin / هامش الربح</div>
+    <div class="def-ar">نسبة الربح من السعر</div>
+    <div class="def-body">النسبة المئوية للربح من إجمالي السعر. في الأداة الهامش المستخدم هو 35% — أي لكل 100 ريال تكاليف، يُضاف 35 ريالاً ربحاً ليكون السعر النهائي 135 ريالاً. هذا الرقم مبني على بيانات السوق (ConnectWise Benchmark 2025 يظهر متوسط هامش 52% للـ MSPs).</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> السعر النهائي = التكاليف الكاملة × 1.35 في جميع النماذج الثلاثة.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--blue)">
+    <div class="def-term">Threat Hunting / صيد التهديدات</div>
+    <div class="def-ar">البحث الاستباقي عن التهديدات</div>
+    <div class="def-body">بدلاً من انتظار التنبيهات، يقوم محللون متخصصون بالبحث النشط داخل الشبكة عن علامات الاختراق التي لم تُكتشف بعد. مثل محقق يبحث عن أدلة دون انتظار تقرير جريمة.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--red)">
+    <div class="def-term">Forensics / التحقيق الجنائي الرقمي</div>
+    <div class="def-ar">تحليل الحوادث الأمنية</div>
+    <div class="def-body">تحليل الأدلة الرقمية بعد وقوع حادثة أمنية لمعرفة ما الذي حدث بالضبط، كيف حدث، وما الضرر الناجم. مثل المحقق الجنائي في المسرح الجريمة لكن في العالم الرقمي.</div>
+    <div class="def-use"><strong>الاستخدام في الأداة:</strong> تفعيل خدمة Forensics يضيف نقطتين لنظام التعقيد بسبب تخصصها العالي.</div>
+  </div>
+
+  <h2>مصطلحات التغطية الزمنية</h2>
+
+  <div class="def-card" style="border-right-color: var(--purple)">
+    <div class="def-term">24×7 Coverage</div>
+    <div class="def-ar">مراقبة 24 ساعة × 7 أيام أسبوعياً</div>
+    <div class="def-body">المراقبة لا تتوقف أبداً — 24 ساعة يومياً، 7 أيام أسبوعياً، 365 يوماً سنوياً. يتطلب 3 ورديات عمل كاملة وفرق بشرية متعاقبة. أغلى من 8×5 بنسبة 45% لأن الليل والعطل يتطلبون مكافآت إضافية.</div>
+  </div>
+
+  <div class="def-card">
+    <div class="def-term">16×5 Coverage</div>
+    <div class="def-ar">مراقبة 16 ساعة × 5 أيام عمل</div>
+    <div class="def-body">المراقبة خلال ساعات العمل الممتدة (من الصباح الباكر حتى المساء) في أيام الأسبوع فقط (الأحد للخميس في السعودية). أغلى من 8×5 بنسبة 20%.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--green)">
+    <div class="def-term">8×5 Coverage</div>
+    <div class="def-ar">مراقبة 8 ساعات × 5 أيام عمل</div>
+    <div class="def-body">ساعات العمل الرسمية فقط (8 ساعات × 5 أيام). الأرخص لكن الأقل حماية — أي هجوم يحدث ليلاً أو في العطل قد لا يُكتشف فوراً.</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ WHAT IS MSSP ════════════════════════════ -->
+<div id="chapter-what-is-mssp" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">CONCEPT</div>
+    <div class="ch-number">02</div>
+    <div class="ch-title">ما هو MSSP؟ — الفكرة من الصفر</div>
+    <div class="ch-desc">شرح مبسط لفكرة مزود خدمة الأمن المدار وسبب وجوده وأهميته في السوق السعودي.</div>
+  </div>
+
+  <h2>المشكلة التي يحلها MSSP</h2>
+  <p>تخيل أنك تدير شركة متوسطة بـ 300 موظف. تحتاج إلى حماية أجهزة الكمبيوتر والشبكة والبيانات من الهجمات الإلكترونية. لو أردت بناء فريق أمن إلكتروني خاص بك (ما يسمى SOC)، ستحتاج:</p>
+
+  <div class="grid-3">
+    <div class="mini-card">
+      <div class="mc-label">المحللون (5 أفراد)</div>
+      <div class="mc-val" style="color:var(--red)">825K</div>
+      <div class="mc-sub">ريال / سنة رواتب</div>
+    </div>
+    <div class="mini-card">
+      <div class="mc-label">برامج SIEM + أدوات</div>
+      <div class="mc-val" style="color:var(--amber)">300K</div>
+      <div class="mc-sub">ريال / سنة تراخيص</div>
+    </div>
+    <div class="mini-card">
+      <div class="mc-label">تكاليف إضافية</div>
+      <div class="mc-val" style="color:var(--ink3)">375K</div>
+      <div class="mc-sub">إيجار + تدريب + أجهزة</div>
+    </div>
+  </div>
+
+  <div class="box warn">
+    <div class="box-icon">⚠️</div>
+    <div class="box-content">
+      <div class="box-title">إجمالي تكلفة SOC داخلي</div>
+      1.3 إلى 2.1 مليون ريال سعودي سنوياً — وهذا لشركة صغيرة نسبياً. تخيل الشركات الكبيرة!
+    </div>
+  </div>
+
+  <p>الـ MSSP يحل هذه المشكلة بأن يبني SOC ضخماً يخدم <strong>عشرات الشركات في آنٍ واحد</strong>. يوزع التكلفة على جميع العملاء، فيدفع كل عميل جزءاً صغيراً من التكلفة الكاملة.</p>
+
+  <h2>الفرق بين بناء فريق داخلي وتأجير MSSP</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>وجه المقارنة</th><th>SOC داخلي</th><th>MSSP خارجي</th></tr></thead>
+      <tbody>
+        <tr><td>التكلفة</td><td>1.3–2.1 مليون ريال/سنة</td><td>56,000–563,000 ريال/شهر حسب الحجم</td></tr>
+        <tr><td>وقت البدء</td><td>6–12 شهر للبناء</td><td>أسابيع</td></tr>
+        <tr><td>الخبرة</td><td>محدودة بفريقك</td><td>خبرة مجمعة من مئات العملاء</td></tr>
+        <tr><td>التغطية</td><td>صعب تأمين 24/7</td><td>24/7 بسهولة</td></tr>
+        <tr><td>الامتثال</td><td>أنت مسؤول</td><td>MSSP يساعدك في الامتثال</td></tr>
+        <tr><td>التوسع</td><td>بطيء ومكلف</td><td>مرن وسريع</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>السوق السعودي بالأرقام</h2>
+  <div class="grid-2">
+    <div class="mini-card">
+      <div class="mc-label">حجم سوق MSS السعودي 2024</div>
+      <div class="mc-val" style="color:var(--green)">57.5B</div>
+      <div class="mc-sub">ريال سعودي (Credence Research)</div>
+    </div>
+    <div class="mini-card">
+      <div class="mc-label">معدل نمو السوق العالمي</div>
+      <div class="mc-val" style="color:var(--blue)">11.1%</div>
+      <div class="mc-sub">CAGR 2025–2030 (MarketsandMarkets)</div>
+    </div>
+  </div>
+
+  <div class="box success">
+    <div class="box-icon">🇸🇦</div>
+    <div class="box-content">
+      <div class="box-title">المحركات الرئيسية للسوق السعودي</div>
+      رؤية 2030، التحول الرقمي، متطلبات NCA وSAMA وPDPL، والهجمات المتزايدة على القطاعات الحيوية — كلها تدفع الطلب على خدمات الأمن المدار بشكل كبير.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ OVERVIEW ════════════════════════════ -->
+<div id="chapter-overview" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">TOOL OVERVIEW</div>
+    <div class="ch-number">03</div>
+    <div class="ch-title">نظرة عامة على الأداة</div>
+    <div class="ch-desc">تعرف على شكل الأداة وهيكلها قبل أن تبدأ.</div>
+  </div>
+
+  <h2>الصفحات الخمس للأداة</h2>
+  <p>الأداة مقسمة إلى <strong>5 صفحات رئيسية</strong> يمكنك التنقل بينها من شريط التنقل العلوي:</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" style="background:var(--blue)">①</div>
+      <div class="step-body">
+        <div class="step-title">نموذج التسعير (الصفحة الرئيسية)</div>
+        <div class="step-desc">هنا تُدخل بيانات شركة العميل خلال 3 خطوات، ثم تحصل على النتائج في الخطوة الرابعة. هذه هي قلب الأداة.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--purple)">②</div>
+      <div class="step-body">
+        <div class="step-title">كيف يُحسَب السعر؟ (منطق التسعير)</div>
+        <div class="step-desc">شرح تفاعلي للمعادلات والمنطق خطوة بخطوة — مثل فتح "غطاء المحرك" لترى كيف يعمل الكمبيوتر من الداخل.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--green)">③</div>
+      <div class="step-body">
+        <div class="step-title">مرجع الأسعار</div>
+        <div class="step-desc">جداول تفصيلية بأسعار السوق السعودي 2025-2026 لكل خدمة وكل شريحة.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--amber)">④</div>
+      <div class="step-body">
+        <div class="step-title">التكلفة الأصلية</div>
+        <div class="step-desc">تُدخل تكاليفك الحقيقية (رواتب + رخص + overhead) لمقارنتها مع أسعار السوق وحساب هامش ربحك الفعلي.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:var(--teal)">⑤</div>
+      <div class="step-body">
+        <div class="step-title">المصادر والمراجع</div>
+        <div class="step-desc">توثيق كامل لـ 14 مصدراً أولياً موثقاً استُخدمت بياناتها في الأداة.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>الخطوات الأربع في نموذج التسعير</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>الخطوة</th><th>ماذا تُسأل؟</th><th>عدد الأسئلة</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>بيانات الشركة</td><td>القطاع، عدد الموظفين، التغطية الجغرافية، التغطية الزمنية</td><td>4 أسئلة</td></tr>
+        <tr><td>2</td><td>البنية التقنية</td><td>عدد الخوادم، الأجهزة، الجدران النارية، البيئة السحابية، نوع SIEM</td><td>6 أسئلة</td></tr>
+        <tr><td>3</td><td>الخدمات والمتطلبات</td><td>الخدمات المطلوبة، معدل الحوادث، SLA، التقارير، الأطر التنظيمية، أنواع البيانات، الاحتفاظ، الميزانية</td><td>8 أسئلة</td></tr>
+        <tr><td>4</td><td>النتائج</td><td>يظهر تلقائياً بعد الضغط على "احسب التسعير"</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box info">
+    <div class="box-icon">ℹ️</div>
+    <div class="box-content">
+      <div class="box-title">خيار "أفضل عدم الإجابة"</div>
+      لكل سؤال خيار "أفضل عدم الإجابة". لو اخترته، ستستخدم الأداة متوسطات السوق بدلاً من بيانات حقيقية. هذا ينتج تقديرات أقل دقة لكنه أفضل من ترك الحقل فارغاً.
+    </div>
+  </div>
+
+  <h2>الدارك مود وتبديل اللغة</h2>
+  <p>الأداة تدعم الوضع المظلم (Dark Mode) من زر القمر في الزاوية العلوية، وتبديل اللغة بين العربية والإنجليزية من خلال زر AR/EN. تبديل اللغة لا يؤثر على الأرقام المحفوظة.</p>
+</div>
+
+<!-- ════════════════════════════ STEP 1 ════════════════════════════ -->
+<div id="chapter-step1" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">STEP 1</div>
+    <div class="ch-number">04</div>
+    <div class="ch-title">الخطوة الأولى: بيانات الشركة</div>
+    <div class="ch-desc">شرح كل سؤال في الخطوة الأولى وأثره على الحساب النهائي.</div>
+  </div>
+
+  <h2>السؤال 1: قطاع النشاط</h2>
+  <p>يسألك الأداة: في أي قطاع تعمل الشركة؟ هذا يؤثر على درجة التعقيد لأن بعض القطاعات تخضع لمتطلبات تنظيمية أشد من غيرها.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>القطاع</th><th>نقاط التعقيد</th><th>السبب</th></tr></thead>
+      <tbody>
+        <tr><td>حكومي / بنكي</td><td>+3 نقاط</td><td>أعلى متطلبات NCA وSAMA، أكثر استهدافاً</td></tr>
+        <tr><td>اتصالات / صحة / طاقة</td><td>+2 نقاط</td><td>بنية تحتية حيوية، بيانات حساسة</td></tr>
+        <tr><td>تجزئة / تصنيع / تعليم / أخرى</td><td>0 نقاط</td><td>متطلبات أقل في الغالب</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>السؤال 2: عدد الموظفين</h2>
+  <p>يؤثر على نقاط التعقيد وعلى تقدير حجم السجلات عند غياب بيانات الأجهزة.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>الفئة</th><th>نقاط التعقيد</th><th>تقدير السجلات (احتياطي)</th></tr></thead>
+      <tbody>
+        <tr><td>أقل من 50</td><td>0</td><td>5 GB/يوم</td></tr>
+        <tr><td>50–200</td><td>0</td><td>20 GB/يوم</td></tr>
+        <tr><td>200–500</td><td>+1</td><td>50 GB/يوم</td></tr>
+        <tr><td>500–1000</td><td>+1</td><td>120 GB/يوم</td></tr>
+        <tr><td>1000–5000</td><td>+2</td><td>400 GB/يوم</td></tr>
+        <tr><td>أكثر من 5000</td><td>+3</td><td>1200 GB/يوم</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box tip">
+    <div class="box-icon">💡</div>
+    <div class="box-content">
+      <div class="box-title">لماذا عدد الموظفين يؤثر على حجم السجلات؟</div>
+      إذا لم تُدخل عدد الأجهزة الفعلي في الخطوة الثانية، تستخدم الأداة عدد الموظفين لتقدير حجم السجلات تلقائياً. كل موظف يستخدم تقريباً جهاز واحد ينتج ~50 MB/يوم.
+    </div>
+  </div>
+
+  <h2>السؤال 3: التغطية الجغرافية</h2>
+  <p>هل الشركة تعمل محلياً (السعودية فقط) أم إقليمياً (الخليج) أم عالمياً؟ التغطية الجغرافية الأوسع تعني مواقع أكثر وبروتوكولات أكثر تعقيداً.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>النطاق</th><th>نقاط التعقيد</th></tr></thead>
+      <tbody>
+        <tr><td>محلي (السعودية فقط)</td><td>0</td></tr>
+        <tr><td>إقليمي (الخليج أو MENA)</td><td>+1</td></tr>
+        <tr><td>عالمي (متعدد القارات)</td><td>+2</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>السؤال 4: التغطية الزمنية للمراقبة</h2>
+  <p>هذا أحد أكثر الأسئلة تأثيراً على السعر النهائي. 24/7 يضيف نقاطاً ضخمة ويرفع السعر بنسبة 45%.</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>التغطية</th><th>نقاط التعقيد</th><th>معامل التكلفة</th><th>التفاصيل</th></tr></thead>
+      <tbody>
+        <tr><td>8/5 (ساعات عمل رسمية)</td><td>0</td><td>×1.0</td><td>الأرخص — بدون وردية ليلية أو مكافآت عطل</td></tr>
+        <tr><td>16/5 (ممتد — يومين)</td><td>+2</td><td>×1.20</td><td>وردية ممتدة + مكافأة 10% للليل</td></tr>
+        <tr><td>24/7 (متواصل)</td><td>+6 (الحد الأدنى للنقاط = 6)</td><td>×1.45</td><td>3 ورديات كاملة + مكافأة 25% للوردية الليلية</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box warn">
+    <div class="box-icon">⚠️</div>
+    <div class="box-content">
+      <div class="box-title">قاعدة مهمة: 24/7 لا يمكن أن يكون في الشريحة الأولى أبداً</div>
+      حتى لو كانت الشركة صغيرة جداً، إذا طلبت تغطية 24/7 فستكون في الشريحة الثانية على الأقل (تعقيد متوسط). هذا منطقي لأن التغطية الكاملة تحتاج إلى 3 ورديات عمل بغض النظر عن حجم العميل.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ STEP 2 ════════════════════════════ -->
+<div id="chapter-step2" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">STEP 2</div>
+    <div class="ch-number">05</div>
+    <div class="ch-title">الخطوة الثانية: البنية التقنية</div>
+    <div class="ch-desc">أسئلة الأجهزة والخوادم والبيئة التقنية — وكيف يؤثر كل جهاز على حجم السجلات والسعر.</div>
+  </div>
+
+  <h2>معادلة حجم السجلات اليومي</h2>
+  <p>هذه أهم معادلة في البنية التقنية. كل نوع من الأجهزة ينتج كمية مختلفة من السجلات:</p>
+
+  <div class="formula">
+<span class="comment">-- حجم السجلات اليومي (GB/يوم) --</span>
+<span class="label">حجم_السجلات</span> =
+  (<span class="highlight">خوادم_Windows</span> × <span class="result">1.0 GB</span>)
++ (<span class="highlight">خوادم_Linux</span>   × <span class="result">0.5 GB</span>)
++ (<span class="highlight">الأجهزة</span>        × <span class="result">0.05 GB</span>)
++ (<span class="highlight">الجدران_النارية</span> × <span class="result">20.0 GB</span>)
+
+<span class="comment">-- تعديل البيئة السحابية --</span>
+إذا cloud-first  → الناتج × 1.4 + 10 GB
+إذا multi-cloud  → الناتج × 1.6 + 20 GB
+إذا hybrid       → الناتج × 1.1 (تقريباً)
+
+<span class="comment">-- الحد الأدنى دائماً 5 GB/يوم --</span>
+  </div>
+
+  <div class="box example">
+    <div class="box-icon">📐</div>
+    <div class="box-content">
+      <div class="box-title">مثال تطبيقي</div>
+      شركة عندها: 10 خوادم Windows + 5 Linux + 200 جهاز كمبيوتر + 3 جدران نارية + بيئة cloud-first<br><br>
+      الحساب: (10×1) + (5×0.5) + (200×0.05) + (3×20) = 10 + 2.5 + 10 + 60 = <strong>82.5 GB</strong><br>
+      بعد Cloud: 82.5 × 1.4 + 10 = <strong>125.5 GB/يوم</strong>
+    </div>
+  </div>
+
+  <h2>لماذا الجدار الناري ينتج 20 GB؟</h2>
+  <p>الجدار الناري هو "بوابة" كل حركة المرور في الشبكة. كل طلب إنترنت، كل اتصال داخلي، كل حزمة بيانات — كلها تمر من الجدار الناري ويُسجلها. في شبكة 200 موظف يمكن أن تصل حركة المرور إلى ملايين الحزمة يومياً.</p>
+
+  <h2>سؤال SIEM الحالي</h2>
+  <p>نوع الـ SIEM المستخدم يؤثر مباشرة على تكلفة النموذج الأول لأن كل SIEM له سعر مختلف لمعالجة البيانات:</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>المنصة</th><th>السعر (ريال/GB/يوم)</th><th>أصل السعر (دولار)</th><th>الملاحظة</th></tr></thead>
+      <tbody>
+        <tr><td>بدون SIEM (يُقدَّر)</td><td>9.38</td><td>$2.50</td><td>خط الأساس التقديري</td></tr>
+        <tr><td>Microsoft Sentinel</td><td>11.10</td><td>$2.96 PAYG</td><td>الأشيع في السعودية</td></tr>
+        <tr><td>Elastic Security</td><td>5.63</td><td>$1.50</td><td>الأرخص</td></tr>
+        <tr><td>IBM QRadar</td><td>15.00</td><td>$4.00</td><td>متوسط السعر</td></tr>
+        <tr><td>Splunk</td><td>30.00</td><td>$8.00</td><td>الأغلى — موثوق وشائع دولياً</td></tr>
+        <tr><td>SIEM آخر</td><td>11.25</td><td>$3.00</td><td>متوسط السوق</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box info">
+    <div class="box-icon">💰</div>
+    <div class="box-content">
+      <div class="box-title">لماذا أسعار SIEM تختلف بهذا الفارق؟</div>
+      Microsoft Sentinel يُسعَّر بالـ Pay-As-You-Go (ادفع بقدر الاستخدام) بـ $2.46/GB مع توفيرات للالتزامات الكبيرة تصل 52–65%. Splunk أغلى لكنه الأكثر ميزات وموثوقية في الأوساط المؤسسية.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ STEP 3 ════════════════════════════ -->
+<div id="chapter-step3" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">STEP 3</div>
+    <div class="ch-number">06</div>
+    <div class="ch-title">الخطوة الثالثة: الخدمات والمتطلبات</div>
+    <div class="ch-desc">أكثر خطوة تفصيلاً — تحدد بدقة ما تحتاجه الشركة من خدمات وما يُلزمها به القانون.</div>
+  </div>
+
+  <h2>الخدمات المطلوبة (اختر كل ما ينطبق)</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>الخدمة</th><th>الوصف المبسط</th><th>أثرها على التعقيد</th></tr></thead>
+      <tbody>
+        <tr><td>SOC / المراقبة الأمنية</td><td>المراقبة المستمرة والتنبيه عند أي نشاط مشبوه</td><td>خدمة أساسية</td></tr>
+        <tr><td>EDR</td><td>برنامج حماية على كل جهاز (أذكى من الأنتيفايروس)</td><td>معتدل</td></tr>
+        <tr><td>Vulnerability Assessment</td><td>فحص دوري لاكتشاف نقاط الضعف قبل المخترقين</td><td>معتدل</td></tr>
+        <tr><td>Threat Hunting</td><td>بحث استباقي عن تهديدات مخفية في الشبكة</td><td>+1 نقطة تعقيد</td></tr>
+        <tr><td>Digital Forensics</td><td>تحقيق رقمي عند الحوادث (من دخل؟ ماذا سرق؟)</td><td>+2 نقطة تعقيد</td></tr>
+        <tr><td>Compliance Reporting</td><td>تقارير للهيئات التنظيمية (NCA, SAMA…)</td><td>معتدل</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>الحوادث الشهرية المتوقعة</h2>
+  <p>كم "حادثة أمنية" تتوقع شهرياً تتطلب تحقيقاً من المحللين؟ الحوادث هي الأنشطة المشبوهة التي تحتاج إنساناً لمراجعتها.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>العدد</th><th>نقاط التعقيد</th><th>مثال</th></tr></thead>
+      <tbody>
+        <tr><td>أقل من 5</td><td>0</td><td>شركة صغيرة هادئة</td></tr>
+        <tr><td>5–20</td><td>+1</td><td>شركة متوسطة عادية</td></tr>
+        <tr><td>20–50</td><td>+2</td><td>شركة نشطة أو مستهدفة</td></tr>
+        <tr><td>أكثر من 50</td><td>+3</td><td>قطاع بنكي أو حكومي رفيع</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>الأطر التنظيمية</h2>
+  <p>كلما زادت الأطر التنظيمية التي تخضع لها الشركة، كلما زاد العمل المطلوب والتكلفة:</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>عدد الأطر</th><th>نقاط التعقيد</th></tr></thead>
+      <tbody>
+        <tr><td>لا يوجد</td><td>0</td></tr>
+        <tr><td>1–2 إطار</td><td>+1</td></tr>
+        <tr><td>3 أطر فأكثر</td><td>+3</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>متطلب الاحتفاظ بالسجلات</h2>
+  <p>كم من الوقت يجب الاحتفاظ بالسجلات؟ هذا يؤثر على تكلفة التخزين. المتطلبات القانونية في السعودية:</p>
+
+  <div class="grid-2">
+    <div class="def-card" style="border-right-color: var(--amber)">
+      <div class="def-term">NCA (الهيئة الوطنية)</div>
+      <div class="def-body">الحد الأدنى: <strong>سنة واحدة</strong> للاحتفاظ بالسجلات.</div>
+    </div>
+    <div class="def-card" style="border-right-color: var(--red)">
+      <div class="def-term">SAMA (البنك المركزي)</div>
+      <div class="def-body">الحد الأدنى: <strong>3 سنوات</strong> للقطاع المالي.</div>
+    </div>
+  </div>
+
+  <h2>الميزانية الشهرية التقريبية</h2>
+  <p>هذا السؤال اختياري ويساعد فقط في تحديد "الشريحة السعرية المناسبة" لعرض النتائج. لا يؤثر على المعادلات الحسابية الفعلية.</p>
+</div>
+
+<!-- ════════════════════════════ RESULTS ════════════════════════════ -->
+<div id="chapter-results" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">RESULTS</div>
+    <div class="ch-number">07</div>
+    <div class="ch-title">قراءة النتائج وفهم الأرقام</div>
+    <div class="ch-desc">بعد الضغط على "احسب التسعير"، ستظهر صفحة النتائج. إليك كيف تقرأ كل رقم.</div>
+  </div>
+
+  <h2>ما يظهر في صفحة النتائج</h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">①</div>
+      <div class="step-body">
+        <div class="step-title">بطاقة درجة التعقيد</div>
+        <div class="step-desc">تُظهر الشريحة (1–4) وعدد النقاط المجموعة. مثل: <span class="tier tier-1">متوسط — 8 نقاط</span></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">②</div>
+      <div class="step-body">
+        <div class="step-title">البطاقات المتريكية الأربع</div>
+        <div class="step-desc">حجم السجلات التقديري (GB/يوم) · عدد المحللين اللازمين (FTE) · معامل التغطية (×1.0 أو ×1.20 أو ×1.45) · السعر الشهري بنموذج ABC</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">③</div>
+      <div class="step-body">
+        <div class="step-title">وسوم الملف (Profile Tags)</div>
+        <div class="step-desc">ملخص سريع لأهم خصائص العميل مثل: [القطاع البنكي] [24/7] [Multi-Cloud] [NCA+SAMA] — تساعد في فهم سريع للعميل.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">④</div>
+      <div class="step-body">
+        <div class="step-title">المخطط البياني</div>
+        <div class="step-desc">رسم بياني مقارن للأسعار الثلاثة. إذا أدخلت التكاليف الحقيقية، يظهر أسعارك مقابل أسعار السوق بشريط مزدوج.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">⑤</div>
+      <div class="step-body">
+        <div class="step-title">بطاقات النماذج الثلاثة</div>
+        <div class="step-desc">لكل نموذج: السعر الكامل + تفصيل بنوده + هامش الربح + توصية الاستخدام. البطاقة الموصى بها تُحاط بإطار أزرق.</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>معامل التغطية — ×1.45 ماذا يعني؟</h2>
+  <div class="example-card">
+    <div class="example-header">📊 مثال: تأثير معامل التغطية على التكلفة</div>
+    <div class="example-body">
+      <div class="example-row">
+        <span class="example-label">تكلفة محلل واحد (8/5)</span>
+        <span class="example-val">22,000 ر.س</span>
+      </div>
+      <div class="example-row">
+        <span class="example-label">تكلفة نفس المحلل (16/5) × 1.20</span>
+        <span class="example-val">26,400 ر.س</span>
+      </div>
+      <div class="example-row">
+        <span class="example-label">تكلفة نفس المحلل (24/7) × 1.45</span>
+        <span class="example-val">31,900 ر.س</span>
+      </div>
+      <div class="example-row">
+        <span class="example-label">الفرق بين 8/5 و 24/7</span>
+        <span class="example-val">+9,900 ر.س/شهر</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box success">
+    <div class="box-icon">🟢</div>
+    <div class="box-content">
+      <div class="box-title">ميزة تنافسية — ماذا تعني؟</div>
+      إذا ظهرت "ميزة تنافسية — يمكنك تقديم سعر أفضل وما تزال تربح" — يعني أن تكاليفك الحقيقية (من موديول التكلفة الأصلية) أقل من متوسط السوق، فبإمكانك تقديم عرض أرخص وما تزال تحقق ربحاً.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ COMPLEXITY ════════════════════════════ -->
+<div id="chapter-complexity" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">LOGIC</div>
+    <div class="ch-number">08</div>
+    <div class="ch-title">نظام النقاط والشرائح الأربع</div>
+    <div class="ch-desc">كيف تحدد الأداة "شريحة" العميل وما أثر ذلك على الأسعار.</div>
+  </div>
+
+  <h2>فكرة النظام</h2>
+  <p>قبل أي حساب للسعر، تجمع الأداة <strong>نقاطاً</strong> من إجاباتك على الأسئلة. هذه النقاط تحدد في أي "شريحة تعقيد" تقع الشركة. الشريحة تؤثر على:</p>
+  <ul style="margin-right:20px;color:var(--ink2);line-height:2;">
+    <li>عدد ساعات عمل المحلل المخصصة للعميل</li>
+    <li>عدد العملاء الذين يستطيع محلل واحد خدمتهم</li>
+    <li>عدد ساعات كل نشاط في نموذج ABC</li>
+  </ul>
+
+  <h2>جدول النقاط الكامل</h2>
+  <div class="score-item"><div class="score-pts">+6</div><div class="score-desc"><strong>تغطية 24/7</strong> — ثلاث ورديات عمل كاملة</div></div>
+  <div class="score-item"><div class="score-pts">+2</div><div class="score-desc"><strong>تغطية 16/5</strong> — وردية ممتدة</div></div>
+  <div class="score-item"><div class="score-pts">+3</div><div class="score-desc"><strong>قطاع حكومي أو بنكي</strong> — أعلى متطلبات تنظيمية</div></div>
+  <div class="score-item"><div class="score-pts">+2</div><div class="score-desc"><strong>قطاع اتصالات أو صحة أو طاقة</strong> — بنية تحتية حيوية</div></div>
+  <div class="score-item"><div class="score-pts">+2</div><div class="score-desc"><strong>Multi-Cloud</strong> — تعدد البيئات السحابية يزيد التعقيد</div></div>
+  <div class="score-item"><div class="score-pts">+1</div><div class="score-desc"><strong>Cloud-First أو Hybrid</strong> — وجود جزء سحابي</div></div>
+  <div class="score-item"><div class="score-pts">+3</div><div class="score-desc"><strong>أكثر من 5000 موظف</strong></div></div>
+  <div class="score-item"><div class="score-pts">+2</div><div class="score-desc"><strong>1000–5000 موظف</strong></div></div>
+  <div class="score-item"><div class="score-pts">+1</div><div class="score-desc"><strong>200–1000 موظف</strong></div></div>
+  <div class="score-item"><div class="score-pts">+3</div><div class="score-desc"><strong>أكثر من 50 حادثة/شهر</strong></div></div>
+  <div class="score-item"><div class="score-pts">+2</div><div class="score-desc"><strong>20–50 حادثة/شهر</strong></div></div>
+  <div class="score-item"><div class="score-pts">+1</div><div class="score-desc"><strong>5–20 حادثة/شهر</strong></div></div>
+  <div class="score-item"><div class="score-pts">+3</div><div class="score-desc"><strong>3 أطر تنظيمية أو أكثر</strong></div></div>
+  <div class="score-item"><div class="score-pts">+1</div><div class="score-desc"><strong>1–2 إطار تنظيمي</strong></div></div>
+  <div class="score-item"><div class="score-pts">+2</div><div class="score-desc"><strong>SLA أقل من 15 دقيقة</strong></div></div>
+  <div class="score-item"><div class="score-pts">+1</div><div class="score-desc"><strong>SLA ساعة</strong></div></div>
+  <div class="score-item"><div class="score-pts">+2</div><div class="score-desc"><strong>تغطية جغرافية عالمية</strong></div></div>
+  <div class="score-item"><div class="score-pts">+1</div><div class="score-desc"><strong>تغطية جغرافية إقليمية</strong></div></div>
+  <div class="score-item"><div class="score-pts">+2</div><div class="score-desc"><strong>خدمة التحقيق الجنائي (Forensics)</strong></div></div>
+  <div class="score-item"><div class="score-pts">+1</div><div class="score-desc"><strong>خدمة صيد التهديدات (Threat Hunting)</strong></div></div>
+
+  <h2>الشرائح الأربع</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>الشريحة</th><th>نطاق النقاط</th><th>الوصف</th><th>ساعات المحلل/شهر</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tier tier-0">بسيط / صغير</span></td>
+          <td>0–5 نقاط</td>
+          <td>شركة صغيرة، قطاع عادي، تغطية أساسية</td>
+          <td>40 ساعة</td>
+        </tr>
+        <tr>
+          <td><span class="tier tier-1">متوسط</span></td>
+          <td>6–10 نقاط</td>
+          <td>شركة متوسطة أو قطاع حساس، 24/7 بسيط</td>
+          <td>80 ساعة</td>
+        </tr>
+        <tr>
+          <td><span class="tier tier-2">كبير</span></td>
+          <td>11–16 نقطة</td>
+          <td>شركة كبيرة، متعدد الأطر التنظيمية، بيئة معقدة</td>
+          <td>140 ساعة</td>
+        </tr>
+        <tr>
+          <td><span class="tier tier-3">مؤسسي</span></td>
+          <td>17+ نقطة</td>
+          <td>شركات ضخمة، بنوك، حكومي بكل خدمات 24/7</td>
+          <td>220 ساعة</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box tip">
+    <div class="box-icon">🔑</div>
+    <div class="box-content">
+      <div class="box-title">قاعدة القفل: 24/7 ← الحد الأدنى للنقاط = 6</div>
+      حتى لو جمعت أقل من 6 نقاط، اختيار 24/7 يرفع النقاط إلى 6 تلقائياً. هذا يضمن أن كل عميل بتغطية كاملة يكون في الشريحة الثانية على الأقل لأن تكلفة الورديات المتعددة لا يمكن أن تكون في فئة "بسيط".
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ MODELS ════════════════════════════ -->
+<div id="chapter-models" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">PRICING MODELS</div>
+    <div class="ch-number">09</div>
+    <div class="ch-title">نماذج التسعير الثلاثة</div>
+    <div class="ch-desc">كل نموذج ينظر إلى التكلفة من زاوية مختلفة. الثلاثة معاً تعطيك صورة كاملة.</div>
+  </div>
+
+  <div class="box info">
+    <div class="box-icon">🎯</div>
+    <div class="box-content">
+      <div class="box-title">لماذا ثلاثة نماذج وليس نموذجاً واحداً؟</div>
+      مثل المحاسب الذي يتحقق من تكلفة المنتج من 3 زوايا مختلفة للتأكد من الرقم — التسعير من 3 زوايا يمنحك ثقة أكبر في السعر المقترح، ويعطيك مرونة للتفاوض.
+    </div>
+  </div>
+
+  <h2>النموذج الأول: حجم البيانات (GB/Day)</h2>
+  <p><strong>المنطق:</strong> السعر يُبنى على حجم البيانات التي تُراقَب يومياً. كلما زادت الأجهزة والخوادم، زادت البيانات، ارتفع السعر.</p>
+  <p><strong>المكونات:</strong> تكلفة SIEM + تكلفة المحللين + تكلفة التخزين + Overhead + هامش الربح</p>
+  <p><strong>الأنسب لـ:</strong> العروض التجارية الرسمية وتوقع الفواتير الشهرية.</p>
+
+  <div class="formula">
+<span class="comment">--- النموذج الأول: حجم البيانات ---</span>
+
+<span class="label">تكلفة_SIEM</span>   = GB/يوم × 30 يوم × سعر_GB/يوم
+<span class="label">تكلفة_محللين</span> = ساعات_الشريحة × 168.75 ر.س/ساعة × معامل_التغطية
+<span class="label">تكلفة_تخزين</span>  = GB/يوم × 0.1 × 30 يوم × 30 ر.س/GB
+<span class="label">Overhead</span>       = (SIEM + محللين + تخزين) × 15%
+<span class="label">مجموع_التكاليف</span> = SIEM + محللين + تخزين + Overhead
+<span class="result">السعر_النهائي</span>   = مجموع_التكاليف × 1.35
+  </div>
+
+  <div class="box example">
+    <div class="box-icon">📐</div>
+    <div class="box-content">
+      <div class="box-title">معنى 168.75 ريال/ساعة</div>
+      متوسط راتب محلل أمن في السعودية = 22,000 ريال/شهر (Glassdoor KSA 2025). ÷ 130 ساعة عمل فعلية شهرياً = ~169 ريال/ساعة.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>النموذج الثاني: طاقة المحللين (Analyst Capacity)</h2>
+  <p><strong>المنطق:</strong> السعر يُبنى على عدد المحللين الذين تحتاجهم الخدمة فعلياً. كل محلل يستطيع خدمة عدد محدود من العملاء في وقت واحد.</p>
+  <p><strong>الأنسب لـ:</strong> التحقق الداخلي من التكاليف والتخطيط للموارد البشرية.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>الشريحة</th><th>عدد العملاء/محلل (8/5)</th><th>عدد العملاء/محلل (24/7)</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tier tier-0">بسيط</span></td><td>10 عملاء</td><td>6 عملاء</td></tr>
+        <tr><td><span class="tier tier-1">متوسط</span></td><td>5 عملاء</td><td>3 عملاء</td></tr>
+        <tr><td><span class="tier tier-2">كبير</span></td><td>2 عملاء</td><td>1.2 عميل</td></tr>
+        <tr><td><span class="tier tier-3">مؤسسي</span></td><td>0.5 عميل (محللان لعميل واحد)</td><td>0.3 عميل</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="formula">
+<span class="comment">--- النموذج الثاني: طاقة المحللين ---</span>
+
+<span class="label">حصة_المحلل</span>  = راتب_محلل / عدد_العملاء_للمحلل
+<span class="label">راتب_محلل</span>   = 22,000 ر.س + مكافأة_ليل (0 أو 2,200 أو 5,500)
+<span class="label">حصة_مدير_SOC</span>= 30,000 ر.س / عدد_عملاء_المدير
+<span class="label">أدوات</span>        = 11,250 ر.س / عدد_العملاء_للمحلل
+<span class="label">مكتب</span>         = 5,625 ر.س / عدد_العملاء_للمحلل
+<span class="label">المجموع_الفرعي</span>= حصة_محلل + حصة_مدير + أدوات + مكتب
+<span class="result">السعر_النهائي</span> = المجموع_الفرعي × 1.35
+  </div>
+
+  <hr class="divider">
+
+  <h2>النموذج الثالث: تكلفة الأنشطة (ABC)</h2>
+  <p><strong>المنطق:</strong> كل نشاط (مراقبة، تحقيق، تقرير، ضبط، اجتماعات) له عدد ساعات وسعر ساعة محدد. يُضرب الاثنان ليخرج تكلفة كل نشاط.</p>
+  <p><strong>الأنسب لـ:</strong> التفاوض على العقود وتوضيح ما يدفع العميل مقابله بالضبط.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>النشاط</th><th>شريحة 1</th><th>شريحة 2</th><th>شريحة 3</th><th>شريحة 4</th><th>السعر/ساعة</th></tr></thead>
+      <tbody>
+        <tr><td>مراقبة (Monitoring)</td><td>40 ساعة</td><td>80 ساعة</td><td>130 ساعة</td><td>200 ساعة</td><td>168.75 ر.س</td></tr>
+        <tr><td>تحقيق (Investigation)</td><td>5 ساعات</td><td>15 ساعة</td><td>30 ساعة</td><td>55 ساعة</td><td>225 ر.س</td></tr>
+        <tr><td>تقارير (Reporting)</td><td>3 ساعات</td><td>6 ساعات</td><td>10 ساعات</td><td>18 ساعة</td><td>187.5 ر.س</td></tr>
+        <tr><td>ضبط (Tuning)</td><td>4 ساعات</td><td>10 ساعات</td><td>18 ساعة</td><td>28 ساعة</td><td>206.25 ر.س</td></tr>
+        <tr><td>اجتماعات (Meetings)</td><td>2 ساعة</td><td>4 ساعات</td><td>6 ساعات</td><td>10 ساعات</td><td>187.5 ر.س</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box tip">
+    <div class="box-icon">🔍</div>
+    <div class="box-content">
+      <div class="box-title">لماذا سعر التحقيق أعلى من المراقبة؟</div>
+      التحقيق يتطلب محللين أكثر خبرة وأعلى مستوى. محلل مبتدئ يستطيع المراقبة، لكن تحليل الجنائيات ومتابعة الحوادث المعقدة يحتاج خبيراً. هذا ينعكس في سعر الساعة الأعلى.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ FORMULAS ════════════════════════════ -->
+<div id="chapter-formulas" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">FORMULAS</div>
+    <div class="ch-number">10</div>
+    <div class="ch-title">المعادلات التفصيلية الكاملة</div>
+    <div class="ch-desc">كل معادلة بالكود والأرقام — لمن يريد فهم الأداة بالكامل من الداخل.</div>
+  </div>
+
+  <h2>معادلة حجم السجلات</h2>
+  <div class="formula">
+estimateLogGB():
+  gb = (خوادم_Win × 1.0)
+     + (خوادم_Lin × 0.5)
+     + (أجهزة × 0.05)
+     + (جدران_نارية × 20.0)
+
+  <span class="comment">// إذا كانت كل الأرقام صفراً، استخدم تقدير بعدد الموظفين:</span>
+  إذا gb == 0:
+    {أقل50:5, '50-200':20, '200-500':50,
+     '500-1000':120, '1000-5000':400, gt5000:1200}
+
+  <span class="comment">// تعديل السحابة:</span>
+  إذا cloud-first:  gb = gb × 1.4 + 10
+  إذا multi-cloud:  gb = gb × 1.6 + 20
+
+  <span class="result">الناتج: max(gb, 5)  // الحد الأدنى 5 GB/يوم</span>
+  </div>
+
+  <h2>معادلة حساب التعقيد (calcComplexity)</h2>
+  <div class="formula">
+calcComplexity():
+  نقاط = 0
+  + (التغطية === '24x7' ? 6 : '16x5' ? 2 : 0)
+  + (القطاع === 'حكومي/بنكي' ? 3 : 'اتصالات/صحة/طاقة' ? 2 : 0)
+  + (السحابة === 'multi-cloud' ? 2 : 'cloud-first/hybrid' ? 1 : 0)
+  + {أقل200:0, '200-500':1, '500-1000':1, '1000-5000':2, gt5000:3}[موظفون]
+  + (حوادث === 'gt50' ? 3 : '20-50' ? 2 : '5-20' ? 1 : 0)
+  + (أطر_تنظيمية.length >= 3 ? 3 : >= 1 ? 1 : 0)
+  + (SLA === '15m' ? 2 : '1h' ? 1 : 0)
+  + (جغرافي === 'عالمي' ? 2 : 'إقليمي' ? 1 : 0)
+  + (forensics_مفعّل ? 2 : 0)
+  + (threat_hunt_مفعّل ? 1 : 0)
+
+  <span class="comment">// قاعدة القفل:</span>
+  إذا التغطية === '24x7': نقاط = max(نقاط, 6)
+
+  الشريحة = (نقاط ≤ 5) ? 0 : (≤ 10) ? 1 : (≤ 16) ? 2 : 3
+  </div>
+
+  <h2>معادلة النموذج الأول (GB/Day)</h2>
+  <div class="formula">
+calcM1(gb, tier):
+  <span class="label">أسعار_SIEM (ريال/GB/يوم):</span>
+  {none:9.38, sentinel:11.10, splunk:30.0,
+   qradar:15.0, elastic:5.63, other:11.25}
+
+  siemMonthly   = gb × 30 × siem_rate
+  coverageMult  = (24x7 ? 1.45 : 16x5 ? 1.20 : 1.0)
+  analystCost   = [40,80,140,220][tier] × 168.75 × coverageMult
+  infra         = gb × 0.1 × 30 × 30   <span class="comment">// تخزين 30 ر.س/GB/شهر</span>
+  overhead      = (siemMonthly + analystCost + infra) × 0.15
+  subTotal      = siemMonthly + analystCost + infra + overhead
+  <span class="result">total         = subTotal × 1.35</span>
+  </div>
+
+  <h2>معادلة النموذج الثاني (Analyst Capacity)</h2>
+  <div class="formula">
+calcM2(tier):
+  cpaBase = [10, 5, 2, 0.5][tier]  <span class="comment">// عملاء/محلل بـ 8/5</span>
+  cpa     = (24x7 ? cpaBase×0.6 : 16x5 ? cpaBase×0.8 : cpaBase)
+  cpa     = max(cpa, 0.5)
+
+  راتب_أساسي  = 22,000 ر.س
+  مكافأة_ليل  = (24x7 ? 5,500 : 16x5 ? 2,200 : 0)
+  راتب_كامل   = 22,000 + مكافأة_ليل
+
+  mgrClients  = (24x7 ? [6,4,2,1] : [12,6,3,1])[tier]
+
+  حصة_محلل   = راتب_كامل / cpa
+  حصة_مدير   = 30,000 / mgrClients
+  أدوات       = 11,250 / cpa
+  مكتب        = 5,625 / cpa
+  subTotal    = حصة_محلل + حصة_مدير + أدوات + مكتب
+  <span class="result">total       = subTotal × 1.35</span>
+  </div>
+
+  <h2>معادلة النموذج الثالث (ABC)</h2>
+  <div class="formula">
+calcM3(tier):
+  coverageMult = (24x7 ? 1.45 : 16x5 ? 1.20 : 1.0)
+
+  <span class="comment">// ساعات كل نشاط (الشريحة 0→3):</span>
+  مراقبة    = [40,  80,  130, 200][tier] × coverageMult
+  تحقيق     = [5,   15,  30,  55][tier]  × coverageMult
+  تقارير    = [3,   6,   10,  18][tier]  <span class="comment">// ثابت</span>
+  ضبط       = [4,   10,  18,  28][tier]  <span class="comment">// ثابت</span>
+  اجتماعات  = [2,   4,   6,   10][tier]  <span class="comment">// ثابت</span>
+
+  <span class="comment">// أسعار الساعة (ريال):</span>
+  monitoring:168.75  investigation:225.0  reporting:187.5
+  tuning:206.25      meetings:187.5
+
+  subTotal = مجموع(ساعات × سعر) × 1.15  <span class="comment">// Overhead 15%</span>
+  <span class="result">total    = subTotal × 1.35</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════ REAL COST ════════════════════════════ -->
+<div id="chapter-realcost" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">REAL COST MODULE</div>
+    <div class="ch-number">11</div>
+    <div class="ch-title">موديول التكلفة الأصلية</div>
+    <div class="ch-desc">كيف تستخدم موديول "التكلفة الأصلية" لمقارنة تكاليفك بأسعار السوق وحساب هامش ربحك.</div>
+  </div>
+
+  <h2>فكرة الموديول</h2>
+  <p>هذا الموديول يسألك: <strong>كم تكلفك الفعلي تقديم الخدمة؟</strong> ثم يقارن تكاليفك بأسعار السوق المحسوبة في نموذج التسعير.</p>
+
+  <div class="grid-3">
+    <div class="mini-card">
+      <div class="mc-label">القسم الأول</div>
+      <div class="mc-val" style="font-size:16px;color:var(--blue)">الموظفون</div>
+      <div class="mc-sub">الرواتب + عددهم</div>
+    </div>
+    <div class="mini-card">
+      <div class="mc-label">القسم الثاني</div>
+      <div class="mc-val" style="font-size:16px;color:var(--green)">الرخص</div>
+      <div class="mc-sub">SIEM + EDR + أدوات</div>
+    </div>
+    <div class="mini-card">
+      <div class="mc-label">القسم الثالث</div>
+      <div class="mc-val" style="font-size:16px;color:var(--amber)">Overhead</div>
+      <div class="mc-sub">إيجار + كهرباء + تدريب</div>
+    </div>
+  </div>
+
+  <h2>كيف يحسب "سعرك الحقيقي"؟</h2>
+  <div class="formula">
+سعرك_الحقيقي = (إجمالي_التكاليف_الشهرية) × 1.35
+
+حيث:
+  إجمالي_التكاليف = تكاليف_موظفين + تكاليف_رخص + تكاليف_overhead
+
+<span class="comment">// تحويل التكاليف السنوية إلى شهرية تلقائياً:</span>
+  تكلفة_شهرية = (تكلفة_سنوية / 12)
+  </div>
+
+  <h2>قراءة المقارنة</h2>
+  <p>بعد إدخال التكاليف وحساب التسعير، تظهر لكل نموذج مقارنة:</p>
+
+  <div class="example-card">
+    <div class="example-header">📊 مثال للمقارنة — شركة متوسطة الحجم</div>
+    <div class="example-body">
+      <div class="example-row">
+        <span class="example-label">سعر السوق (نموذج GB/Day)</span>
+        <span class="example-val">85,000 ر.س</span>
+      </div>
+      <div class="example-row">
+        <span class="example-label">تكاليفك الفعلية الشهرية</span>
+        <span class="example-val">45,000 ر.س</span>
+      </div>
+      <div class="example-row">
+        <span class="example-label">سعرك (تكاليف + 35%)</span>
+        <span class="example-val">60,750 ر.س</span>
+      </div>
+      <div class="example-row">
+        <span class="example-label">✅ ميزتك التنافسية</span>
+        <span class="example-val" style="color:var(--green)">+28.6% أرخص من السوق</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="box success">
+    <div class="box-icon">💡</div>
+    <div class="box-content">
+      <div class="box-title">متى يكون هذا مفيداً؟</div>
+      عند تقديم عرض لعميل مهم — إذا كانت تكاليفك أقل من السوق، يمكنك تقديم سعر تنافسي ولا تزال تربح. وإذا كانت تكاليفك أعلى، تعرف أين تخفض قبل المنافسة.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ REFERENCE ════════════════════════════ -->
+<div id="chapter-reference" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">REFERENCE MODULE</div>
+    <div class="ch-number">12</div>
+    <div class="ch-title">موديول مرجع الأسعار</div>
+    <div class="ch-desc">جداول بأسعار السوق السعودي 2025–2026 لكل خدمة وكل شريحة.</div>
+  </div>
+
+  <h2>نطاقات الأسعار حسب الشريحة</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>الشريحة</th><th>النطاق الشهري</th><th>أمثلة</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tier tier-0">بسيط</span></td>
+          <td>15,000 – 56,000 ر.س</td>
+          <td>شركة تجزئة صغيرة، 50–200 موظف، 8/5، بدون تنظيم</td>
+        </tr>
+        <tr>
+          <td><span class="tier tier-1">متوسط</span></td>
+          <td>56,000 – 188,000 ر.س</td>
+          <td>شركة صحية أو تعليمية، 200-500 موظف، 16/5</td>
+        </tr>
+        <tr>
+          <td><span class="tier tier-2">كبير</span></td>
+          <td>188,000 – 563,000 ر.س</td>
+          <td>شركة طاقة أو اتصالات، 500-2000 موظف، 24/7، NCA+SAMA</td>
+        </tr>
+        <tr>
+          <td><span class="tier tier-3">مؤسسي</span></td>
+          <td>563,000+ ر.س</td>
+          <td>بنك أو جهة حكومية رفيعة، +5000 موظف، 24/7 كامل الخدمات</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>معايير السوق السعودي المرجعية</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>المعيار</th><th>القيمة</th><th>المصدر</th></tr></thead>
+      <tbody>
+        <tr><td>متوسط Per-User</td><td>56–281 ريال/مستخدم/شهر</td><td>CompTIA × 3.75</td></tr>
+        <tr><td>Sentinel</td><td>11.1–20.9 ريال/GB/يوم</td><td>Microsoft Pricing + KSA Adj.</td></tr>
+        <tr><td>Splunk</td><td>30–75 ريال/GB/يوم</td><td>تقدير السوق</td></tr>
+        <tr><td>SOC داخلي كامل (5 محللين)</td><td>1.3–2.1 مليون ريال/سنة</td><td>Glassdoor KSA + Meriplex</td></tr>
+        <tr><td>راتب محلل أمن متوسط</td><td>22,000 ريال/شهر</td><td>Glassdoor KSA 2025</td></tr>
+        <tr><td>راتب مدير SOC</td><td>30,000 ريال/شهر</td><td>Glassdoor KSA 2025</td></tr>
+        <tr><td>معدل صرف</td><td>1 دولار = 3.75 ريال</td><td>ثابت رسمي</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════ SOURCES ════════════════════════════ -->
+<div id="chapter-sources" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">SOURCES</div>
+    <div class="ch-number">13</div>
+    <div class="ch-title">المصادر والبيانات المستخدمة</div>
+    <div class="ch-desc">الـ 14 مصدراً الأولياً الموثقة التي بُنيت عليها أرقام الأداة.</div>
+  </div>
+
+  <h2>مصادر السوق</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>المصدر</th><th>البيانات المستخدمة</th><th>التاريخ</th></tr></thead>
+      <tbody>
+        <tr><td>01</td><td>Gartner — MSS Market Guide</td><td>أسعار العقد: $4,000–$75,000+/شهر حسب الحجم والتغطية</td><td>نوفمبر 2024</td></tr>
+        <tr><td>02</td><td>IDC — Saudi IT Security 2025</td><td>نمو MSS السعودي 18.4% CAGR 2024–2029</td><td>يناير 2025</td></tr>
+        <tr><td>03</td><td>SAMA Cyber Framework</td><td>متطلب 24/7 SOC للبنوك، الاحتفاظ 3 سنوات</td><td>2023</td></tr>
+        <tr><td>04</td><td>Credence Research</td><td>سوق MSS السعودي = 57.5 مليار ريال (2024)</td><td>أبريل 2025</td></tr>
+        <tr><td>05</td><td>MarketsandMarkets</td><td>السوق العالمي 39.47 مليار دولار (2025)</td><td>2025</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>مصادر التسعير</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>المصدر</th><th>البيانات المستخدمة</th><th>التاريخ</th></tr></thead>
+      <tbody>
+        <tr><td>06</td><td>Meriplex</td><td>200 موظف = $15,000–$25,000/شهر</td><td>مايو 2026</td></tr>
+        <tr><td>07</td><td>CompTIA Survey via Monetizely</td><td>$15–$75/مستخدم/شهر — أساس Per-User</td><td>أكتوبر 2025</td></tr>
+        <tr><td>08</td><td>PricingLink</td><td>هيكل النماذج الثلاثة + نطاقات Per-Endpoint</td><td>أبريل 2025</td></tr>
+        <tr><td>09</td><td>Corsica Tech</td><td>نسبة Overhead 15%، هامش 35%</td><td>أغسطس 2025</td></tr>
+        <tr><td>10</td><td>ConnectWise IT Nation Benchmark</td><td>متوسط SMB = $9,250/شهر، هامش ربح 52%</td><td>مارس 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>مصادر التقنية والرواتب</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>#</th><th>المصدر</th><th>البيانات المستخدمة</th></tr></thead>
+      <tbody>
+        <tr><td>11</td><td>Microsoft Sentinel Pricing</td><td>$2.46/GB PAYG رسمي</td></tr>
+        <tr><td>12</td><td>G2 Reviews — Sentinel</td><td>التوفيرات عند Commitment الكبيرة 500+ GB</td></tr>
+        <tr><td>13</td><td>CrowdStrike Falcon Pricing</td><td>EDR: $8.99–$17.99/جهاز/شهر</td></tr>
+        <tr><td>14</td><td>Glassdoor KSA 2025</td><td>رواتب محللي الأمن: 22,000 ر.س/شهر متوسط</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════════════════════ SCENARIOS ════════════════════════════ -->
+<div id="chapter-scenarios" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">SCENARIOS</div>
+    <div class="ch-number">14</div>
+    <div class="ch-title">سيناريوهات وأمثلة حقيقية</div>
+    <div class="ch-desc">ثلاثة سيناريوهات كاملة بأرقام حقيقية — من أصغر عميل لأكبره.</div>
+  </div>
+
+  <h2>السيناريو الأول: شركة تجزئة صغيرة</h2>
+  <div class="example-card">
+    <div class="example-header" style="background:#e1f5ee;color:#0a4a35">🏪 شركة تجزئة — 80 موظف — الرياض</div>
+    <div class="example-body">
+      <div class="example-row"><span class="example-label">القطاع</span><span class="example-val">تجزئة</span></div>
+      <div class="example-row"><span class="example-label">الموظفون</span><span class="example-val">50–200</span></div>
+      <div class="example-row"><span class="example-label">الخوادم</span><span class="example-val">2 Windows</span></div>
+      <div class="example-row"><span class="example-label">الأجهزة</span><span class="example-val">80 جهاز</span></div>
+      <div class="example-row"><span class="example-label">الجدران النارية</span><span class="example-val">1</span></div>
+      <div class="example-row"><span class="example-label">SIEM</span><span class="example-val">Microsoft Sentinel</span></div>
+      <div class="example-row"><span class="example-label">التغطية</span><span class="example-val">8/5</span></div>
+      <div class="example-row"><span class="example-label">الأطر التنظيمية</span><span class="example-val">لا يوجد</span></div>
+    </div>
+  </div>
+
+  <div class="formula">
+<span class="comment">--- حساب النقاط ---</span>
+قطاع تجزئة = 0 نقاط
+50-200 موظف = 0 نقاط
+8/5 تغطية  = 0 نقاط
+بدون تنظيم = 0 نقاط
+<span class="result">المجموع = 0 نقاط → الشريحة الأولى (بسيط)</span>
+
+<span class="comment">--- حجم السجلات ---</span>
+(2 × 1.0) + (80 × 0.05) + (1 × 20) = 26 GB/يوم
+
+<span class="comment">--- النموذج الأول ---</span>
+SIEM  = 26 × 30 × 11.10 = 8,658 ر.س
+محللون = 40 × 168.75 × 1.0 = 6,750 ر.س
+تخزين = 26 × 0.1 × 30 × 30 = 2,340 ر.س
+overhead = (8658+6750+2340) × 15% = 2,657 ر.س
+subTotal = 20,405 ر.س
+<span class="result">السعر النهائي = 20,405 × 1.35 ≈ 27,547 ر.س/شهر</span>
+  </div>
+
+  <div class="box success">
+    <div class="box-icon">✅</div>
+    <div class="box-content">التوصية: الشريحة الأولى مناسبة، يُوصى بالنموذج الأول (GB/Day) للعروض التجارية. تكلفة معقولة جداً مقارنة ببناء SOC داخلي بـ 1.3 مليون+.</div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>السيناريو الثاني: مستشفى خاص</h2>
+  <div class="example-card">
+    <div class="example-header" style="background:#eef4ff;color:#0f3d8a">🏥 مستشفى خاص — 500 موظف — جدة</div>
+    <div class="example-body">
+      <div class="example-row"><span class="example-label">القطاع</span><span class="example-val">صحة</span></div>
+      <div class="example-row"><span class="example-label">الموظفون</span><span class="example-val">200–500</span></div>
+      <div class="example-row"><span class="example-label">الخوادم</span><span class="example-val">15 Windows + 5 Linux</span></div>
+      <div class="example-row"><span class="example-label">الأجهزة</span><span class="example-val">300 جهاز</span></div>
+      <div class="example-row"><span class="example-label">الجدران النارية</span><span class="example-val">3</span></div>
+      <div class="example-row"><span class="example-label">التغطية</span><span class="example-val">24/7</span></div>
+      <div class="example-row"><span class="example-label">الأطر التنظيمية</span><span class="example-val">NCA + PDPL</span></div>
+      <div class="example-row"><span class="example-label">الحوادث</span><span class="example-val">5–20/شهر</span></div>
+    </div>
+  </div>
+
+  <div class="formula">
+<span class="comment">--- حساب النقاط ---</span>
+قطاع صحة  = +2
+200-500    = +1
+24/7       = +6 (قفل الحد الأدنى)
+2 أطر تنظيمية = +1
+5-20 حوادث   = +1
+<span class="result">المجموع = 11 نقطة → الشريحة الثالثة (كبير)</span>
+
+<span class="comment">--- حجم السجلات ---</span>
+(15×1) + (5×0.5) + (300×0.05) + (3×20) = 90 GB/يوم
+
+<span class="comment">--- السعر التقريبي ---</span>
+النموذج الأول ≈ 350,000 – 420,000 ر.س/شهر
+  </div>
+
+  <hr class="divider">
+
+  <h2>السيناريو الثالث: بنك تجاري</h2>
+  <div class="example-card">
+    <div class="example-header" style="background:#fcebeb;color:#6b0000">🏦 بنك تجاري — +3000 موظف — الرياض</div>
+    <div class="example-body">
+      <div class="example-row"><span class="example-label">القطاع</span><span class="example-val">بنكي</span></div>
+      <div class="example-row"><span class="example-label">الموظفون</span><span class="example-val">1000–5000</span></div>
+      <div class="example-row"><span class="example-label">الجغرافيا</span><span class="example-val">إقليمي</span></div>
+      <div class="example-row"><span class="example-label">التغطية</span><span class="example-val">24/7 متواصل</span></div>
+      <div class="example-row"><span class="example-label">السحابة</span><span class="example-val">Multi-Cloud</span></div>
+      <div class="example-row"><span class="example-label">الأطر التنظيمية</span><span class="example-val">NCA + SAMA + PDPL</span></div>
+      <div class="example-row"><span class="example-label">SLA</span><span class="example-val">أقل من 15 دقيقة</span></div>
+      <div class="example-row"><span class="example-label">الخدمات</span><span class="example-val">SOC + EDR + Forensics + Threat Hunting</span></div>
+    </div>
+  </div>
+
+  <div class="formula">
+<span class="comment">--- حساب النقاط ---</span>
+قطاع بنكي   = +3
+1000-5000    = +2
+إقليمي      = +1
+24/7         = +6
+multi-cloud  = +2
+3 أطر        = +3
+SLA 15 دق   = +2
+forensics    = +2
+threat hunt  = +1
+<span class="result">المجموع = 22 نقطة → الشريحة الرابعة (مؤسسي) — أعلى مستوى</span>
+
+<span class="comment">--- النطاق السعري ---</span>
+<span class="result">النموذج الأول ≈ 900,000 – 1,200,000+ ر.س/شهر</span>
+  </div>
+
+  <div class="box warn">
+    <div class="box-icon">⚠️</div>
+    <div class="box-content">
+      <div class="box-title">ملاحظة مهمة للبنوك</div>
+      هذا السعر تقديري للتفاوض فقط. العقود البنكية الكبيرة تمر بمراحل تفاوض معقدة وتتضمن متطلبات إضافية لم تُدخل في الأداة مثل الاختبارات الأمنية الدورية وفرق الاستجابة الطارئة المنفصلة.
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════ FAQ ════════════════════════════ -->
+<div id="chapter-faq" class="chapter">
+  <div class="ch-header">
+    <div class="ch-tag">FAQ</div>
+    <div class="ch-number">15</div>
+    <div class="ch-title">الأسئلة الشائعة</div>
+    <div class="ch-desc">أكثر الأسئلة التي قد تخطر على بالك وإجاباتها.</div>
+  </div>
+
+  <h2>أسئلة عامة</h2>
+
+  <div class="def-card">
+    <div class="def-term">هل الأرقام دقيقة 100%؟</div>
+    <div class="def-body">لا — الأداة تنتج تقديرات مبنية على بيانات السوق وليست عروض أسعار نهائية. الأسعار الحقيقية تعتمد على التفاوض والعقود المحددة. الأرقام مبنية على بيانات 14 مصدراً موثقاً من 2024–2026 وهي مؤشرات موثوقة للتخطيط.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--green)">
+    <div class="def-term">ما معنى "أفضل عدم الإجابة"؟</div>
+    <div class="def-body">لو اخترت هذا الخيار لأي سؤال، الأداة ستستخدم متوسطات السوق بدلاً من بياناتك الفعلية. النتائج ستظهر مع تحذير أصفر يذكر بأن بعض البيانات مُقدَّرة.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--amber)">
+    <div class="def-term">لماذا الثلاثة أرقام مختلفة؟</div>
+    <div class="def-body">كل نموذج ينظر للتكلفة من زاوية مختلفة. الاختلاف طبيعي ومتوقع. الرقم الموصى به للعروض التجارية هو النموذج الأول (GB/Day) لأنه مباشر ومرتبط بحجم البيانات الفعلي.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--purple)">
+    <div class="def-term">هل يمكن استخدام الأداة باللغة الإنجليزية؟</div>
+    <div class="def-body">نعم — من زر AR/EN في الزاوية العلوية. جميع العناوين والأسئلة والنتائج تتحول للإنجليزية. الأرقام لا تتغير لأنها مستقلة عن اللغة.</div>
+  </div>
+
+  <div class="def-card">
+    <div class="def-term">لماذا 35% هامش ربح وليس أكثر أو أقل؟</div>
+    <div class="def-body">35% هو الحد المحافظ لهامش ربح MSSP في السوق السعودي. ConnectWise Benchmark 2025 يظهر أن متوسط هامش MSPs العالمي 52%. استُخدم 35% كرقم تحفظي يناسب السوق الناشئ والمنافسة في المملكة. يمكنك استخدام نتائج موديول "التكلفة الأصلية" لمعرفة هامش ربحك الحقيقي بدقة أكبر.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--teal)">
+    <div class="def-term">ما الفرق بين خادم Windows وخادم Linux؟</div>
+    <div class="def-body">من ناحية حجم السجلات: Windows ينتج 1 GB/يوم وLinux ينتج 0.5 GB. السبب: Windows يسجل أحداثاً أكثر بكثير (كل تسجيل دخول، كل ملف، كل إعداد) بينما Linux أكثر "صمتاً" افتراضياً. من ناحية التقنية: كلاهما خادم لكن بنظام تشغيل مختلف.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--red)">
+    <div class="def-term">لماذا الجدار الناري ينتج 20 GB وليس مثل الأجهزة؟</div>
+    <div class="def-body">الجدار الناري يقف عند مدخل الشبكة ويرى كل حركة المرور — كل طلب إنترنت من كل جهاز. في شبكة 300 موظف يمكن أن تصل الحزمات اليومية لمئات الملايين. الأجهزة تسجل فقط ما يحدث فيها، بينما الجدار الناري يسجل كل شيء يعبر منه.</div>
+  </div>
+
+  <h2>أسئلة تقنية</h2>
+
+  <div class="def-card" style="border-right-color: var(--blue)">
+    <div class="def-term">هل البيانات المُدخلة تُحفظ؟</div>
+    <div class="def-body">بيانات نموذج التسعير تبقى في الذاكرة أثناء الجلسة فقط — إذا أغلقت المتصفح ستختفي. موديول التكلفة الأصلية يحفظ البيانات تلقائياً في المتصفح (localStorage) ليستعيدها في المرة القادمة.</div>
+  </div>
+
+  <div class="def-card" style="border-right-color: var(--green)">
+    <div class="def-term">كيف يُحسب "عدد المحللين المطلوبين" في النتائج؟</div>
+    <div class="def-body">يُحسب من النموذج الثاني: (1 ÷ عدد_العملاء_لكل_محلل). مثلاً في الشريحة الثانية بـ 8/5، محلل واحد يخدم 5 عملاء، لذا حصتك = 1/5 = 0.2 FTE. في الشريحة الرابعة بـ 24/7، محلل يخدم 0.3 عميل فقط، أي تحتاج 1÷0.3 ≈ 3.3 محللين FTE.</div>
+  </div>
+
+  <div class="box tip">
+    <div class="box-icon">🚀</div>
+    <div class="box-content">
+      <div class="box-title">أفضل طريقة لاستخدام الأداة في العمل</div>
+      1. أدخل بيانات العميل في نموذج التسعير واحصل على النتائج.<br>
+      2. أضف تكاليفك الفعلية في موديول التكلفة الأصلية.<br>
+      3. قارن النتيجتين — إذا كانت تكاليفك أقل من السوق = ميزة تنافسية.<br>
+      4. استخدم النموذج الأول (GB/Day) للعرض التجاري الرسمي.<br>
+      5. استخدم النموذج الثالث (ABC) للتفاوض التفصيلي على العقد.
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div style="text-align:center;padding:40px 20px;border-top:2px solid var(--rule);margin-top:40px">
+    <div style="font-size:48px;margin-bottom:16px">🛡️</div>
+    <div style="font-size:20px;font-weight:700;color:var(--ink);margin-bottom:8px">نموذج تسعير MSSP</div>
+    <div style="font-size:13px;color:var(--ink3);font-family:var(--mono)">الدليل الشامل — الإصدار 1.0 — السوق السعودي 2025–2026</div>
+    <div style="margin-top:16px;font-size:12px;color:var(--ink3)">جميع البيانات مستقاة من 14 مصدراً موثقاً | 1 USD = 3.75 SAR</div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<script>
+function showChapter(id) {
+  document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  const ch = document.getElementById('chapter-' + id);
+  if (ch) ch.classList.add('active');
+  event && event.currentTarget && event.currentTarget.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Activate nav links on click
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function() {
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
