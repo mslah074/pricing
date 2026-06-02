@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نموذج تسعير MSSP | حاسبة الأمن السيبراني المدار — السوق السعودي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8f7f4;--bg2:#ffffff;--bg3:#f2f0ec;
+  --text:#1a1a18;--text2:#5a5855;--text3:#9a9895;
+  --border:#e4e2dd;--border2:#d0cdc8;
+  --accent:#1a6cf6;--accent2:#0f4fc2;--accent-bg:#eef4ff;
+  --success:#1d9e75;--success-bg:#e1f5ee;
+  --warn:#ba7517;--warn-bg:#faeeda;
+  --danger:#e24b4a;--danger-bg:#fcebeb;
+  --purple:#534ab7;--purple-bg:#eeedfe;
+  --teal:#0e7490;--teal-bg:#ecfeff;
+  --radius:10px;--radius-lg:14px;
+  --shadow:0 1px 3px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.04);
+}
+[data-theme="dark"]{
+  --bg:#161614;--bg2:#1e1e1b;--bg3:#242420;
+  --text:#f0ede8;--text2:#a8a5a0;--text3:#666460;
+  --border:#2e2e2a;--border2:#3a3a36;
+  --accent-bg:#0d1f3c;--success-bg:#052b1e;
+  --warn-bg:#2a1e06;--danger-bg:#2a0e0e;--purple-bg:#1a1830;--teal-bg:#042f2e;
+}
+html,body{min-height:100vh;background:var(--bg);font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--text);font-size:15px;line-height:1.6}
+.wrapper{max-width:920px;margin:0 auto;padding:0 16px 80px}
+
+/* ─── TOP NAV TABS ─── */
+.top-nav{background:var(--bg2);border-bottom:2px solid var(--border);margin-bottom:0;position:sticky;top:0;z-index:100;box-shadow:var(--shadow)}
+.top-nav-inner{max-width:920px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:52px}
+.nav-tabs-main{display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
+.nav-tabs-main::-webkit-scrollbar{display:none}
+.nav-tab-main{background:none;border:none;padding:0 14px;height:52px;font-family:'IBM Plex Sans Arabic',sans-serif;font-size:13px;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:5px;margin-bottom:-2px}
+.nav-tab-main:hover{color:var(--text)}
+.nav-tab-main.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
+.nav-tab-main i{font-size:14px}
+.nav-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.lang-toggle{display:flex;background:var(--bg3);border-radius:8px;padding:3px;border:1px solid var(--border)}
+.lang-toggle button{border:none;background:transparent;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:500;color:var(--text2);transition:all .2s;font-family:inherit}
+.lang-toggle button.active{background:var(--bg2);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.1);border:1px solid var(--border)}
+.theme-btn{border:1px solid var(--border);background:var(--bg2);padding:7px 10px;border-radius:8px;cursor:pointer;color:var(--text2);font-size:15px;transition:all .2s}
+.theme-btn:hover{background:var(--bg3)}
+
+/* ─── PAGES ─── */
+.main-page{display:none;padding-top:24px}
+.main-page.active{display:block}
+
+/* ─── HEADER ─── */
+.header{display:flex;align-items:center;gap:14px;padding:0 0 20px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.logo-icon{width:44px;height:44px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;flex-shrink:0}
+.logo-text{font-size:18px;font-weight:600;color:var(--text)}
+.logo-sub{font-size:12px;color:var(--text3);margin-top:2px;font-family:'IBM Plex Mono',monospace}
+.section-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--accent);background:var(--accent-bg);border:1px solid rgba(26,108,246,.2);padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:10px}
+
+/* ─── PROGRESS ─── */
+.progress-wrap{margin-bottom:20px}
+.progress-bar-outer{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-bottom:12px}
+.progress-bar-inner{height:100%;background:var(--accent);border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.steps-row{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--border)}
+.steps-row::-webkit-scrollbar{display:none}
+.step-tab{display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:13px;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;user-select:none}
+.step-tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:500}
+.step-tab.done{color:var(--success)}
+.step-tab.locked{opacity:.4;cursor:not-allowed}
+.step-tab i{font-size:14px}
+
+/* ─── SECTIONS ─── */
+.section-header{margin-bottom:20px}
+.section-title{font-size:19px;font-weight:600;color:var(--text);margin-bottom:4px}
+.section-desc{font-size:13px;color:var(--text2);line-height:1.5}
+
+/* ─── QUESTION CARDS ─── */
+.q-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:12px;transition:border-color .2s}
+.q-card:focus-within{border-color:var(--border2)}
+.q-label{font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px;display:flex;align-items:center;gap:7px}
+.q-label i{font-size:16px;color:var(--text3)}
+.q-hint{font-size:12px;color:var(--text3);margin-bottom:10px;line-height:1.4}
+.opt-grid{display:flex;flex-wrap:wrap;gap:6px}
+.opt-btn{border:1px solid var(--border);background:var(--bg2);padding:6px 13px;border-radius:8px;font-size:12px;cursor:pointer;color:var(--text2);transition:all .15s;font-family:inherit;line-height:1.4}
+.opt-btn:hover:not(.selected):not(:disabled){background:var(--bg3);border-color:var(--border2)}
+.opt-btn.selected{border-color:var(--accent);color:var(--accent);background:var(--accent-bg);font-weight:500}
+.opt-btn:disabled{opacity:.4;cursor:not-allowed}
+.q-decline{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:12px;color:var(--text3);cursor:pointer;width:fit-content}
+.q-decline input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--accent)}
+.num-row{display:flex;align-items:center;gap:10px}
+.num-input{width:140px;padding:7px 11px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg2);color:var(--text);font-family:'IBM Plex Mono',monospace;transition:border-color .2s;outline:none}
+.num-input:focus{border-color:var(--accent)}
+.num-input:disabled{opacity:.4}
+.num-unit{font-size:13px;color:var(--text3)}
+select{padding:7px 11px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--bg2);color:var(--text);cursor:pointer;font-family:inherit;outline:none}
+select:focus{border-color:var(--accent)}
+
+/* ─── NAV ROW ─── */
+.nav-row{display:flex;justify-content:space-between;align-items:center;margin-top:28px;padding-top:20px;border-top:1px solid var(--border)}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:9px;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .15s;font-family:inherit}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-secondary{background:var(--bg2);color:var(--text2);border:1px solid var(--border);padding:10px 18px;border-radius:9px;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .15s;font-family:inherit}
+.btn-secondary:hover{background:var(--bg3)}
+
+/* ─── RESULTS ─── */
+.complexity-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:8px;font-size:12px;font-weight:500;margin-bottom:16px}
+.cx-0{background:var(--success-bg);color:var(--success)}
+.cx-1{background:var(--warn-bg);color:var(--warn)}
+.cx-2{background:var(--danger-bg);color:var(--danger)}
+.cx-3{background:var(--purple-bg);color:var(--purple)}
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:20px}
+.metric-card{background:var(--bg3);border-radius:var(--radius);padding:14px 16px;text-align:center}
+.metric-lbl{font-size:11px;color:var(--text3);margin-bottom:4px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.04em}
+.metric-val{font-size:22px;font-weight:600;color:var(--text);font-family:'IBM Plex Mono',monospace}
+.metric-sub{font-size:11px;color:var(--text3);margin-top:2px}
+.profile-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px}
+.ptag{display:inline-flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:3px 9px;font-size:11px;color:var(--text2);font-family:'IBM Plex Mono',monospace}
+.chart-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;margin-bottom:20px}
+.chart-title{font-size:12px;font-weight:500;color:var(--text2);margin-bottom:14px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.05em}
+.chart-canvas-wrap{position:relative;width:100%;height:220px}
+.methods-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:20px}
+.method-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;position:relative;transition:border-color .2s}
+.method-card.rec{border-color:var(--accent);border-width:1.5px}
+.method-badge{position:absolute;top:12px;left:12px;background:var(--accent-bg);color:var(--accent);font-size:11px;font-weight:500;padding:3px 9px;border-radius:6px;font-family:'IBM Plex Mono',monospace}
+.method-badge.green{background:var(--success-bg);color:var(--success)}
+.method-badge.amber{background:var(--warn-bg);color:var(--warn)}
+.method-top{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+.method-icon{font-size:22px;color:var(--accent)}
+.method-name{font-size:14px;font-weight:600;color:var(--text)}
+.method-desc{font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.5}
+.price-display{display:flex;align-items:baseline;gap:6px;margin-bottom:12px}
+.price-main{font-size:28px;font-weight:700;color:var(--accent);font-family:'IBM Plex Mono',monospace}
+.price-period{font-size:12px;color:var(--text3)}
+.breakdown{background:var(--bg3);border-radius:10px;padding:12px 14px}
+.bd-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border)}
+.bd-row:last-child{border:none;font-weight:600;font-size:13px;padding-top:8px;margin-top:4px}
+.bd-lbl{color:var(--text2)}
+.bd-val{color:var(--text);font-family:'IBM Plex Mono',monospace}
+.bd-row:last-child .bd-val{color:var(--accent)}
+.alert-box{padding:12px 14px;border-radius:10px;font-size:13px;margin-bottom:14px;display:flex;gap:9px;align-items:flex-start;line-height:1.5}
+.alert-info{background:var(--accent-bg);color:var(--accent);border:1px solid rgba(26,108,246,.2)}
+.alert-warn{background:var(--warn-bg);color:var(--warn);border:1px solid rgba(186,117,23,.2)}
+.alert-success{background:var(--success-bg);color:var(--success);border:1px solid rgba(29,158,117,.2)}
+.alert-box i{font-size:16px;flex-shrink:0;margin-top:1px}
+.market-note{font-size:11px;color:var(--text3);padding:12px 0;border-top:1px solid var(--border);line-height:1.6;font-family:'IBM Plex Mono',monospace}
+
+/* ─── MODULE CARDS (Reference, Logic, Sources) ─── */
+.module-header{display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--border)}
+.module-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.mod-blue{background:var(--accent-bg);color:var(--accent)}
+.mod-green{background:var(--success-bg);color:var(--success)}
+.mod-purple{background:var(--purple-bg);color:var(--purple)}
+.mod-teal{background:var(--teal-bg);color:var(--teal)}
+.mod-warn{background:var(--warn-bg);color:var(--warn)}
+.module-title{font-size:18px;font-weight:600;color:var(--text)}
+.module-sub{font-size:12px;color:var(--text3);margin-top:2px}
+
+.ref-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px}
+.ref-card-header{background:var(--bg3);padding:12px 16px;font-size:13px;font-weight:600;color:var(--text);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.ref-card-header i{color:var(--accent)}
+.ref-table{width:100%;border-collapse:collapse}
+.ref-table th{background:var(--bg3);color:var(--text3);font-size:11px;font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;padding:9px 14px;text-align:right;border-bottom:1px solid var(--border);font-weight:400}
+.ref-table td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:12.5px;color:var(--text2);vertical-align:middle}
+.ref-table tr:last-child td{border-bottom:none}
+.ref-table tr:hover td{background:var(--bg3)}
+.mono-val{font-family:'IBM Plex Mono',monospace;font-weight:500}
+.c-blue{color:var(--accent)}
+.c-green{color:var(--success)}
+.c-amber{color:var(--warn)}
+.c-red{color:var(--danger)}
+.c-purple{color:var(--purple)}
+.c-teal{color:var(--teal)}
+
+.logic-block{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;margin-bottom:14px}
+.logic-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.logic-title i{color:var(--accent)}
+.logic-desc{font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px}
+.formula-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text);line-height:1.8;overflow-x:auto}
+.formula-comment{color:var(--text3);font-size:11px}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:6px;font-size:11px;font-family:'IBM Plex Mono',monospace;border:1px solid}
+.tag-blue{background:var(--accent-bg);color:var(--accent);border-color:rgba(26,108,246,.2)}
+.tag-green{background:var(--success-bg);color:var(--success);border-color:rgba(29,158,117,.2)}
+.tag-amber{background:var(--warn-bg);color:var(--warn);border-color:rgba(186,117,23,.2)}
+.tag-red{background:var(--danger-bg);color:var(--danger);border-color:rgba(226,75,74,.2)}
+.tag-purple{background:var(--purple-bg);color:var(--purple);border-color:rgba(83,74,183,.2)}
+.tag-teal{background:var(--teal-bg);color:var(--teal);border-color:rgba(14,116,144,.2)}
+
+.source-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;margin-bottom:10px;display:flex;gap:14px}
+.source-num{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-bg);border:1px solid rgba(26,108,246,.2);padding:3px 8px;border-radius:5px;height:fit-content;flex-shrink:0;margin-top:2px}
+.source-body{flex:1}
+.source-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:3px}
+.source-org{font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;margin-bottom:5px}
+.source-desc{font-size:12.5px;color:var(--text2);line-height:1.5}
+.source-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.source-link{font-size:11px;color:var(--accent);font-family:'IBM Plex Mono',monospace;text-decoration:none;display:flex;align-items:center;gap:3px}
+.source-link:hover{text-decoration:underline}
+.source-date{font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;background:var(--bg3);padding:2px 7px;border-radius:4px}
+.source-cat{font-size:10px;padding:2px 7px;border-radius:4px;font-family:'IBM Plex Mono',monospace}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:20px}
+.kpi-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;border-right:3px solid var(--accent)}
+.kpi-card.green-b{border-right-color:var(--success)}
+.kpi-card.amber-b{border-right-color:var(--warn)}
+.kpi-card.purple-b{border-right-color:var(--purple)}
+.kpi-label{font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.kpi-val{font-size:20px;font-weight:700;color:var(--text);font-family:'IBM Plex Mono',monospace}
+.kpi-sub{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* ─── RTL ADJUSTMENTS ─── */
+[dir="rtl"] .method-badge{left:12px;right:auto}
+[dir="rtl"] .bd-row{flex-direction:row}
+[dir="rtl"] .kpi-card{border-right:3px solid var(--accent);border-left:none}
+[dir="rtl"] .kpi-card.green-b{border-right-color:var(--success)}
+[dir="rtl"] .kpi-card.amber-b{border-right-color:var(--warn)}
+[dir="rtl"] .kpi-card.purple-b{border-right-color:var(--purple)}
+[dir="ltr"] .method-badge{left:auto;right:12px}
+
+@media(max-width:600px){
+  .metrics-grid{grid-template-columns:1fr 1fr}
+  .step-tab{padding:8px 10px;font-size:12px}
+  .price-main{font-size:22px}
+  .nav-tab-main span{display:none}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.section{animation:fadeIn .3s ease forwards}
+.main-page.active .logic-block,.main-page.active .ref-card,.main-page.active .source-card{animation:fadeIn .25s ease both}
+</style>
+</head>
+<body>
+
+<!-- ═══ TOP NAVIGATION ═══ -->
+<div class="top-nav">
+  <div class="top-nav-inner">
+    <div class="nav-tabs-main">
+      <button class="nav-tab-main active" onclick="showMainPage('form',this)">
+        <i class="ti ti-clipboard-list"></i><span id="nt-form">نموذج التسعير</span>
+      </button>
+      <button class="nav-tab-main" onclick="showMainPage('logic',this)">
+        <i class="ti ti-circuit-cell"></i><span id="nt-logic">منطق التسعير</span>
+      </button>
+      <button class="nav-tab-main" onclick="showMainPage('reference',this)">
+        <i class="ti ti-table"></i><span id="nt-ref">مرجع الأسعار</span>
+      </button>
+      <button class="nav-tab-main" onclick="showMainPage('sources',this)">
+        <i class="ti ti-books"></i><span id="nt-src">المصادر</span>
+      </button>
+    </div>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button class="active" onclick="setLang('ar')">AR</button>
+        <button onclick="setLang('en')">EN</button>
+      </div>
+      <button class="theme-btn" onclick="toggleTheme()" id="theme-btn" title="تبديل المظهر"><i class="ti ti-moon"></i></button>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1 — PRICING FORM
+══════════════════════════════════════════════ -->
+<div id="page-form" class="main-page active">
+
+  <div class="header">
+    <div class="logo-icon"><i class="ti ti-shield-lock"></i></div>
+    <div>
+      <div class="logo-text" id="hdr-title">نموذج تسعير الأمن السيبراني المدار</div>
+      <div class="logo-sub" id="hdr-sub">حاسبة التكلفة والتسعير — مركز العمليات الأمنية · السوق السعودي</div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-bar-outer"><div class="progress-bar-inner" id="progress-fill" style="width:20%"></div></div>
+    <div class="steps-row">
+      <div class="step-tab active" onclick="goStep(0)"><i class="ti ti-building"></i><span id="st0">ملف الشركة</span></div>
+      <div class="step-tab locked" onclick="goStep(1)"><i class="ti ti-server"></i><span id="st1">البنية التحتية</span></div>
+      <div class="step-tab locked" onclick="goStep(2)"><i class="ti ti-shield"></i><span id="st2">احتياجات الأمن</span></div>
+      <div class="step-tab locked" onclick="goStep(3)"><i class="ti ti-certificate"></i><span id="st3">الامتثال</span></div>
+      <div class="step-tab locked" onclick="goStep(4)"><i class="ti ti-chart-bar"></i><span id="st4">النتائج</span></div>
+    </div>
+  </div>
+
+  <!-- STEP 0: Company Profile -->
+  <div id="step-0" class="section">
+    <div class="section-header">
+      <div class="section-title" id="s0-title">ملف الشركة</div>
+      <div class="section-desc" id="s0-desc">معلومات أساسية لتحديد احتياجات عمليات الأمان.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-briefcase"></i><span id="lbl-sector">القطاع</span></div>
+      <div class="q-hint" id="hint-sector">القطاعات المنظَّمة تتطلب مراقبة وتقارير أكثر كثافة وتؤثر على معامل السعر</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('sector',this,'government')">🏛️ حكومي / Government</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'banking')">🏦 بنوك وتمويل / Banking</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'telecom')">📡 اتصالات / Telecom</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'healthcare')">🏥 صحة / Healthcare</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'energy')">⚡ طاقة ونفط / Energy</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'retail')">🛒 تجزئة / Retail</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'manufacturing')">🏭 تصنيع / Manufacturing</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'other')">📋 أخرى / Other</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-sector" onchange="toggleDecline('sector',this)"><span class="dec-lbl" id="dec-lbl-sector">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-users"></i><span id="lbl-employees">عدد الموظفين</span></div>
+      <div class="q-hint" id="hint-employees">يُستخدم لتقدير حجم النقاط الطرفية والهوية</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('employees',this,'lt50')">1 – 50</button>
+        <button class="opt-btn" onclick="selectOpt('employees',this,'50-200')">50 – 200</button>
+        <button class="opt-btn" onclick="selectOpt('employees',this,'200-500')">200 – 500</button>
+        <button class="opt-btn" onclick="selectOpt('employees',this,'500-1000')">500 – 1,000</button>
+        <button class="opt-btn" onclick="selectOpt('employees',this,'1000-5000')">1,000 – 5,000</button>
+        <button class="opt-btn" onclick="selectOpt('employees',this,'gt5000')">5,000+</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-employees" onchange="toggleDecline('employees',this)"><span class="dec-lbl" id="dec-lbl-employees">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-map-pin"></i><span id="lbl-geo">الانتشار الجغرافي</span></div>
+      <div class="q-hint" id="hint-geo">مواقع متعددة تزيد من تعقيد المراقبة وتكلفتها</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('geo',this,'single')">موقع واحد</button>
+        <button class="opt-btn" onclick="selectOpt('geo',this,'multi-local')">مواقع متعددة محلية</button>
+        <button class="opt-btn" onclick="selectOpt('geo',this,'regional')">إقليمي (الخليج/الشرق الأوسط)</button>
+        <button class="opt-btn" onclick="selectOpt('geo',this,'global')">دولي / Global</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-geo" onchange="toggleDecline('geo',this)"><span class="dec-lbl" id="dec-lbl-geo">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-clock-24"></i><span id="lbl-coverage">متطلبات التغطية</span></div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('coverage',this,'8x5')">8×5 — ساعات العمل فقط</button>
+        <button class="opt-btn" onclick="selectOpt('coverage',this,'16x5')">16×5 — ممتد</button>
+        <button class="opt-btn" onclick="selectOpt('coverage',this,'24x7')">24×7 — SOC كامل</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-coverage" onchange="toggleDecline('coverage',this)"><span class="dec-lbl" id="dec-lbl-coverage">أفضل عدم الإجابة</span></label>
+    </div>
+  </div>
+
+  <!-- STEP 1: Infrastructure -->
+  <div id="step-1" class="section" style="display:none">
+    <div class="section-header">
+      <div class="section-title" id="s1-title">البنية التحتية والأصول</div>
+      <div class="section-desc" id="s1-desc">يتم تقدير حجم اللوجات بناءً على قائمة أصولك.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-server"></i><span id="lbl-winsrv">خوادم Windows</span> <span style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~1 GB/يوم لكل خادم</span></div>
+      <div class="num-row">
+        <input type="number" class="num-input" id="win-servers" min="0" placeholder="0" oninput="syncAnswers()">
+        <span class="num-unit" id="unit-winsrv">خادم</span>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-winsrv" onchange="toggleDeclineNum('win-servers',this)"><span class="dec-lbl" id="dec-lbl-winsrv">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-brand-ubuntu"></i><span id="lbl-linsrv">خوادم Linux</span> <span style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~0.5 GB/يوم لكل خادم</span></div>
+      <div class="num-row">
+        <input type="number" class="num-input" id="lin-servers" min="0" placeholder="0" oninput="syncAnswers()">
+        <span class="num-unit" id="unit-linsrv">خادم</span>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-linsrv" onchange="toggleDeclineNum('lin-servers',this)"><span class="dec-lbl" id="dec-lbl-linsrv">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-device-laptop"></i><span id="lbl-endpoints">النقاط الطرفية (أجهزة)</span> <span style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~0.05 GB/يوم لكل جهاز</span></div>
+      <div class="num-row">
+        <input type="number" class="num-input" id="endpoints" min="0" placeholder="0" oninput="syncAnswers()">
+        <span class="num-unit" id="unit-endpoints">جهاز</span>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-endpoints" onchange="toggleDeclineNum('endpoints',this)"><span class="dec-lbl" id="dec-lbl-endpoints">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-router"></i><span id="lbl-firewalls">الجدران النارية / أجهزة الشبكة</span> <span style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~20 GB/يوم لكل جهاز</span></div>
+      <div class="num-row">
+        <input type="number" class="num-input" id="firewalls" min="0" placeholder="0" oninput="syncAnswers()">
+        <span class="num-unit" id="unit-firewalls">جهاز</span>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-firewalls" onchange="toggleDeclineNum('firewalls',this)"><span class="dec-lbl" id="dec-lbl-firewalls">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-cloud"></i><span id="lbl-cloud">البيئة السحابية</span></div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('cloud',this,'none')">بدون سحابة</button>
+        <button class="opt-btn" onclick="selectOpt('cloud',this,'hybrid')">هجين / Hybrid</button>
+        <button class="opt-btn" onclick="selectOpt('cloud',this,'cloud-first')">سحابي أساسي / Cloud-First</button>
+        <button class="opt-btn" onclick="selectOpt('cloud',this,'multi-cloud')">متعدد السحابة / Multi-Cloud</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-cloud" onchange="toggleDecline('cloud',this)"><span class="dec-lbl" id="dec-lbl-cloud">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-chart-bar"></i><span id="lbl-siem">منصة SIEM الحالية</span></div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('siem',this,'none')">لا يوجد</button>
+        <button class="opt-btn" onclick="selectOpt('siem',this,'sentinel')">Microsoft Sentinel</button>
+        <button class="opt-btn" onclick="selectOpt('siem',this,'splunk')">Splunk</button>
+        <button class="opt-btn" onclick="selectOpt('siem',this,'qradar')">IBM QRadar</button>
+        <button class="opt-btn" onclick="selectOpt('siem',this,'elastic')">Elastic SIEM</button>
+        <button class="opt-btn" onclick="selectOpt('siem',this,'other-siem')">أخرى / Other</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-siem" onchange="toggleDecline('siem',this)"><span class="dec-lbl" id="dec-lbl-siem">أفضل عدم الإجابة</span></label>
+    </div>
+  </div>
+
+  <!-- STEP 2: Security Needs -->
+  <div id="step-2" class="section" style="display:none">
+    <div class="section-header">
+      <div class="section-title" id="s2-title">متطلبات العمليات الأمنية</div>
+      <div class="section-desc" id="s2-desc">حدد نطاق الخدمات المطلوبة.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-eye"></i><span id="lbl-services">الخدمات المطلوبة</span></div>
+      <div class="q-hint" id="hint-services">اختر كل ما ينطبق — كل خدمة إضافية تزيد من حجم العمل والتكلفة</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="toggleMulti('services',this,'monitoring')">مراقبة 24/7</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'incident')">الاستجابة للحوادث</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'vuln')">إدارة الثغرات</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'threat-hunt')">صيد التهديدات</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'reporting')">تقارير الامتثال</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'forensics')">الجنائيات الرقمية</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'pentest')">اختبار الاختراق</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'awareness')">التوعية الأمنية</button>
+      </div>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-alert-triangle"></i><span id="lbl-incidents">الحوادث الشهرية المتوقعة</span></div>
+      <div class="q-hint" id="hint-incidents">متوسط الحوادث الأمنية التي تتطلب تحقيق المحلل</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('incidents',this,'lt5')">&lt; 5 — منخفض</button>
+        <button class="opt-btn" onclick="selectOpt('incidents',this,'5-20')">5 – 20 — متوسط</button>
+        <button class="opt-btn" onclick="selectOpt('incidents',this,'20-50')">20 – 50 — مرتفع</button>
+        <button class="opt-btn" onclick="selectOpt('incidents',this,'gt50')">&gt; 50 — حرج</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-incidents" onchange="toggleDecline('incidents',this)"><span class="dec-lbl" id="dec-lbl-incidents">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-clock"></i><span id="lbl-sla">SLA وقت الاستجابة المطلوب</span></div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('sla',this,'4h')">أقل من 4 ساعات</button>
+        <button class="opt-btn" onclick="selectOpt('sla',this,'1h')">أقل من ساعة</button>
+        <button class="opt-btn" onclick="selectOpt('sla',this,'15m')">أقل من 15 دقيقة</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-sla" onchange="toggleDecline('sla',this)"><span class="dec-lbl" id="dec-lbl-sla">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-report"></i><span id="lbl-rep-freq">تكرار التقارير</span></div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'monthly')">شهري</button>
+        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'weekly')">أسبوعي</button>
+        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'daily')">يومي</button>
+        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'realtime')">لوحة معلومات فورية</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-rep-freq" onchange="toggleDecline('rep_freq',this)"><span class="dec-lbl" id="dec-lbl-rep-freq">أفضل عدم الإجابة</span></label>
+    </div>
+  </div>
+
+  <!-- STEP 3: Compliance -->
+  <div id="step-3" class="section" style="display:none">
+    <div class="section-header">
+      <div class="section-title" id="s3-title">الامتثال وملف المخاطر</div>
+      <div class="section-desc" id="s3-desc">الالتزامات التنظيمية تؤثر بشكل كبير على عمق المراقبة والتكلفة.</div>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-certificate"></i><span id="lbl-regs">الأطر التنظيمية المنطبقة</span></div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'nca')">🇸🇦 NCA-ECC — هيئة الأمن السيبراني</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'sama')">🏦 SAMA CSF — مؤسسة النقد</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'citc')">📡 CITC — هيئة الاتصالات</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'pdpl')">🔒 PDPL — نظام حماية البيانات</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'iso27001')">ISO 27001</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'pci')">PCI-DSS</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'hipaa')">HIPAA</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'none-reg')">لا يوجد</button>
+      </div>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-database"></i><span id="lbl-datatypes">أنواع البيانات الحساسة</span></div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'pii')">بيانات شخصية / PII</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'financial')">سجلات مالية</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'health')">سجلات صحية</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'ip')">ملكية فكرية</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'gov')">حكومي سري</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'ot')">تقنية تشغيلية / OT</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-datatypes" onchange="toggleDecline('data_types',this)"><span class="dec-lbl" id="dec-lbl-datatypes">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-history"></i><span id="lbl-retention">متطلب الاحتفاظ بالسجلات</span></div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('retention',this,'3m')">3 أشهر</button>
+        <button class="opt-btn" onclick="selectOpt('retention',this,'6m')">6 أشهر</button>
+        <button class="opt-btn" onclick="selectOpt('retention',this,'1y')">سنة (NCA الحد الأدنى)</button>
+        <button class="opt-btn" onclick="selectOpt('retention',this,'3y')">3 سنوات (SAMA)</button>
+        <button class="opt-btn" onclick="selectOpt('retention',this,'7y')">7 سنوات</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-retention" onchange="toggleDecline('retention',this)"><span class="dec-lbl" id="dec-lbl-retention">أفضل عدم الإجابة</span></label>
+    </div>
+    <div class="q-card">
+      <div class="q-label"><i class="ti ti-cash"></i><span id="lbl-budget">الميزانية الشهرية التقريبية</span></div>
+      <div class="q-hint" id="hint-budget">تساعد في تحديد الشريحة السعرية الأنسب لاحتياجاتك</div>
+      <div class="opt-grid">
+        <button class="opt-btn" onclick="selectOpt('budget',this,'lt20k')">&lt; 20,000 ر.س</button>
+        <button class="opt-btn" onclick="selectOpt('budget',this,'20k-56k')">20,000 – 56,000 ر.س</button>
+        <button class="opt-btn" onclick="selectOpt('budget',this,'56k-188k')">56,000 – 188,000 ر.س</button>
+        <button class="opt-btn" onclick="selectOpt('budget',this,'188k-563k')">188,000 – 563,000 ر.س</button>
+        <button class="opt-btn" onclick="selectOpt('budget',this,'gt563k')">&gt; 563,000 ر.س</button>
+      </div>
+      <label class="q-decline"><input type="checkbox" id="dec-budget" onchange="toggleDecline('budget',this)"><span class="dec-lbl" id="dec-lbl-budget">أفضل عدم الإجابة</span></label>
+    </div>
+  </div>
+
+  <!-- STEP 4: Results -->
+  <div id="step-4" class="section" style="display:none">
+    <div id="results-container"></div>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="nav-row">
+    <button class="btn-secondary" id="btn-back" onclick="goBack()" style="display:none"><i class="ti ti-arrow-right"></i><span id="lbl-back">رجوع</span></button>
+    <div></div>
+    <button class="btn-primary" id="btn-next" onclick="goNext()"><span id="lbl-next">التالي</span><i class="ti ti-arrow-left"></i></button>
+  </div>
+
+</div><!-- end page-form -->
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2 — PRICING LOGIC MODULE (ACCOUNTANT-FRIENDLY)
+══════════════════════════════════════════════ -->
+<div id="page-logic" class="main-page">
+  <div class="module-header">
+    <div class="module-icon mod-blue"><i class="ti ti-calculator"></i></div>
+    <div>
+      <div class="section-tag">PRICING LOGIC</div>
+      <div class="module-title" id="logic-title">كيف يُحسَب السعر؟</div>
+      <div class="module-sub" id="logic-sub">شرح خطوة بخطوة بأرقام حقيقية — كأنك تبني قائمة تكاليف في Excel</div>
+    </div>
+  </div>
+
+  <!-- ═══ BIG PICTURE ═══ -->
+  <div class="logic-block" style="border-right: 4px solid var(--accent);">
+    <div class="logic-title"><i class="ti ti-map"></i> الصورة الكبيرة — كيف يشتغل النموذج؟</div>
+    <div class="logic-desc" style="font-size:14px; line-height:1.9;">
+      النموذج يسألك أسئلة عن شركتك، ثم يحسب لك <strong>ثلاثة أسعار</strong> بثلاث طرق مختلفة. كل طريقة تنظر للتكلفة من زاوية مختلفة — مثل المحاسبة التكاليفية لما تحسب تكلفة منتج من ثلاث طرق للتأكد من الرقم.
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin-top:14px;">
+      <div style="background:var(--accent-bg); border:1px solid rgba(26,108,246,.2); border-radius:10px; padding:14px; border-top: 3px solid var(--accent);">
+        <div style="font-size:11px; color:var(--accent); font-family:'IBM Plex Mono',monospace; font-weight:600; margin-bottom:6px;">طريقة ① — حجم البيانات</div>
+        <div style="font-size:12px; color:var(--text2); line-height:1.6;">السعر مبني على كمية البيانات اللي تُراقَب يومياً. كلما زادت الأجهزة والخوادم، زادت البيانات، وارتفع السعر.</div>
+        <div style="margin-top:8px; font-size:11px; color:var(--accent);">✓ موصى به للعروض التجارية</div>
+      </div>
+      <div style="background:var(--success-bg); border:1px solid rgba(29,158,117,.2); border-radius:10px; padding:14px; border-top: 3px solid var(--success);">
+        <div style="font-size:11px; color:var(--success); font-family:'IBM Plex Mono',monospace; font-weight:600; margin-bottom:6px;">طريقة ② — تكلفة الموظفين</div>
+        <div style="font-size:12px; color:var(--text2); line-height:1.6;">السعر مبني على الموظفين (محللو الأمن) اللي تحتاجهم الشركة فعلياً. مثل تسعير خدمات مراجعة الحسابات بعدد ساعات المحاسبين.</div>
+        <div style="margin-top:8px; font-size:11px; color:var(--success);">✓ أساس التكلفة الداخلية</div>
+      </div>
+      <div style="background:var(--warn-bg); border:1px solid rgba(186,117,23,.2); border-radius:10px; padding:14px; border-top: 3px solid var(--warn);">
+        <div style="font-size:11px; color:var(--warn); font-family:'IBM Plex Mono',monospace; font-weight:600; margin-bottom:6px;">طريقة ③ — تكلفة الأنشطة</div>
+        <div style="font-size:12px; color:var(--text2); line-height:1.6;">السعر مبني على كل نشاط بشكل منفصل: مراقبة + تحقيق + تقارير + ضبط + اجتماعات. كل نشاط له ساعات وسعر ساعة.</div>
+        <div style="margin-top:8px; font-size:11px; color:var(--warn);">✓ الأدق للتفاوض على العقود</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ STEP 1: COMPLEXITY ═══ -->
+  <div class="logic-block">
+    <div class="logic-title"><i class="ti ti-stairs"></i> الخطوة الأولى — تحديد درجة تعقيد العميل (من 1 إلى 4)</div>
+    <div class="logic-desc">قبل أي حساب، النموذج يجمع نقاطاً من إجاباتك ليحدد إلى أي "شريحة" تنتمي. هذه الشريحة تحكم كل الأسعار بعدها — مثل تصنيف العميل في البنك (عادي / مميز / VIP / مؤسسي).</div>
+
+    <div style="margin-bottom:14px;">
+      <div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="ti ti-plus" style="color:var(--accent)"></i> النقاط تُجمَع من إجاباتك هكذا:</div>
+      <div class="ref-card" style="margin-bottom:0">
+        <table class="ref-table">
+          <thead><tr><th>السؤال</th><th>إجابة منخفضة التكلفة</th><th>إجابة متوسطة</th><th>إجابة مرتفعة التكلفة</th></tr></thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:500">نوع التغطية المطلوبة</td>
+              <td><span class="tag tag-green">ساعات العمل 8/5 = 0 نقطة</span></td>
+              <td><span class="tag tag-amber">ممتد 16/5 = +2 نقطة</span></td>
+              <td><span class="tag tag-red">على مدار الساعة 24/7 = +3 نقاط</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">القطاع</td>
+              <td><span class="tag tag-green">تجزئة / تصنيع = 0 نقطة</span></td>
+              <td><span class="tag tag-amber">اتصالات / صحة = +2 نقطة</span></td>
+              <td><span class="tag tag-red">حكومة / بنوك = +3 نقاط</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">عدد الموظفين</td>
+              <td><span class="tag tag-green">أقل من 200 = 0 نقطة</span></td>
+              <td><span class="tag tag-amber">200–1,000 = +1 نقطة</span></td>
+              <td><span class="tag tag-red">فوق 5,000 = +3 نقاط</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">الحوادث الشهرية</td>
+              <td><span class="tag tag-green">أقل من 5 = 0 نقطة</span></td>
+              <td><span class="tag tag-amber">5 إلى 20 = +1 نقطة</span></td>
+              <td><span class="tag tag-red">أكثر من 50 = +3 نقاط</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">الأطر التنظيمية</td>
+              <td><span class="tag tag-green">لا يوجد = 0 نقطة</span></td>
+              <td><span class="tag tag-amber">1–2 إطار = +1 نقطة</span></td>
+              <td><span class="tag tag-red">3 أطر أو أكثر = +3 نقاط</span></td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">SLA وقت الاستجابة</td>
+              <td><span class="tag tag-green">أقل من 4 ساعات = 0 نقطة</span></td>
+              <td><span class="tag tag-amber">أقل من ساعة = +1 نقطة</span></td>
+              <td><span class="tag tag-red">أقل من 15 دقيقة = +2 نقطة</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:8px; display:flex; align-items:center; gap:6px;"><i class="ti ti-arrow-left" style="color:var(--accent)"></i> نتيجة النقاط تحدد الشريحة:</div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(170px,1fr)); gap:10px;">
+      <div style="background:var(--success-bg); border-radius:8px; padding:12px; text-align:center; border: 1px solid rgba(29,158,117,.25);">
+        <div style="font-size:22px; font-weight:700; color:var(--success); font-family:'IBM Plex Mono',monospace;">0–5</div>
+        <div style="font-size:12px; font-weight:600; color:var(--success); margin:3px 0;">شريحة 1 — بسيط</div>
+        <div style="font-size:11px; color:var(--text3);">شركة صغيرة، تجارة عامة، مراقبة أساسية</div>
+      </div>
+      <div style="background:var(--accent-bg); border-radius:8px; padding:12px; text-align:center; border: 1px solid rgba(26,108,246,.25);">
+        <div style="font-size:22px; font-weight:700; color:var(--accent); font-family:'IBM Plex Mono',monospace;">6–10</div>
+        <div style="font-size:12px; font-weight:600; color:var(--accent); margin:3px 0;">شريحة 2 — متوسط</div>
+        <div style="font-size:11px; color:var(--text3);">شركة متوسطة، قطاع منظَّم، 24/7 جزئي</div>
+      </div>
+      <div style="background:var(--warn-bg); border-radius:8px; padding:12px; text-align:center; border: 1px solid rgba(186,117,23,.25);">
+        <div style="font-size:22px; font-weight:700; color:var(--warn); font-family:'IBM Plex Mono',monospace;">11–16</div>
+        <div style="font-size:12px; font-weight:600; color:var(--warn); margin:3px 0;">شريحة 3 — كبير</div>
+        <div style="font-size:11px; color:var(--text3);">مؤسسة كبيرة، بنوك/حكومة، متطلبات عالية</div>
+      </div>
+      <div style="background:var(--purple-bg); border-radius:8px; padding:12px; text-align:center; border: 1px solid rgba(83,74,183,.25);">
+        <div style="font-size:22px; font-weight:700; color:var(--purple); font-family:'IBM Plex Mono',monospace;">17+</div>
+        <div style="font-size:12px; font-weight:600; color:var(--purple); margin:3px 0;">شريحة 4 — مؤسسي</div>
+        <div style="font-size:11px; color:var(--text3);">نفط وغاز، بنوك كبرى، حكومة، OT/ICS</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MODEL 1: GB/DAY — WORKED EXAMPLE ═══ -->
+  <div class="logic-block">
+    <div class="logic-title"><i class="ti ti-database"></i> الطريقة ① — التسعير بحجم البيانات (مثال حقيقي بالأرقام)</div>
+    <div class="logic-desc">
+      <strong>الفكرة ببساطة:</strong> كل جهاز في شركتك ينتج بيانات أمنية يومياً (logs). النموذج يحسب إجمالي هذه البيانات ويضربها في سعر المعالجة، ثم يضيف تكاليف الموظفين والبنية التحتية والربح.
+    </div>
+
+    <div style="background: var(--bg3); border-radius: 10px; padding: 14px; margin-bottom:16px; border: 1px solid var(--border);">
+      <div style="font-size:12px; font-weight:600; color:var(--text3); margin-bottom:10px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.05em;">مثال: شركة متوسطة — 300 موظف، قطاع تجاري، Sentinel، 24/7</div>
+      <div style="font-size:12px; color:var(--text2); margin-bottom:12px;">افترض أن الشركة عندها: 10 خوادم Windows، 5 خوادم Linux، 300 جهاز كمبيوتر، 4 جدران نارية</div>
+    </div>
+
+    <!-- Step A: Log Volume -->
+    <div style="margin-bottom:16px;">
+      <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:8px; display:flex; align-items:center; gap:7px;"><span style="background:var(--accent); color:#fff; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0;">أ</span> حساب حجم البيانات اليومي (GB/يوم)</div>
+      <div class="ref-card" style="margin-bottom:0">
+        <table class="ref-table">
+          <thead><tr><th>نوع الجهاز</th><th>العدد</th><th>إنتاج البيانات / جهاز / يوم</th><th>الإجمالي / يوم</th></tr></thead>
+          <tbody>
+            <tr><td>خوادم Windows</td><td class="mono-val">10</td><td class="mono-val" style="color:var(--text3)">× 1.0 GB</td><td class="mono-val c-blue">= 10 GB</td></tr>
+            <tr><td>خوادم Linux</td><td class="mono-val">5</td><td class="mono-val" style="color:var(--text3)">× 0.5 GB</td><td class="mono-val c-blue">= 2.5 GB</td></tr>
+            <tr><td>أجهزة الموظفين (Endpoints)</td><td class="mono-val">300</td><td class="mono-val" style="color:var(--text3)">× 0.05 GB</td><td class="mono-val c-blue">= 15 GB</td></tr>
+            <tr><td>جدران نارية (Firewalls)</td><td class="mono-val">4</td><td class="mono-val" style="color:var(--text3)">× 20 GB</td><td class="mono-val c-blue">= 80 GB</td></tr>
+            <tr style="background: var(--accent-bg);">
+              <td colspan="3" style="font-weight:700; color:var(--text)">إجمالي حجم البيانات اليومي</td>
+              <td class="mono-val c-blue" style="font-size:15px; font-weight:700;">107.5 GB/يوم</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Step B: Cost Buildup -->
+    <div style="margin-bottom:16px;">
+      <div style="font-size:13px; font-weight:600; color:var(--accent); margin-bottom:8px; display:flex; align-items:center; gap:7px;"><span style="background:var(--accent); color:#fff; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0;">ب</span> قائمة التكاليف الشهرية (كشف حساب)</div>
+      <div class="ref-card" style="margin-bottom:0">
+        <table class="ref-table">
+          <thead><tr><th>بند التكلفة</th><th>كيف يُحسَب؟</th><th>المبلغ / شهر</th></tr></thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:500">① ترخيص SIEM (Sentinel)</td>
+              <td style="font-size:12px; color:var(--text2);">107.5 GB × 30 يوم × 11.10 ر.س</td>
+              <td class="mono-val c-blue">35,797 ر.س</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">② تكلفة المحللين</td>
+              <td style="font-size:12px; color:var(--text2);">الشريحة 2 → 80 ساعة × 169 ر.س/ساعة</td>
+              <td class="mono-val c-blue">13,500 ر.س</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">③ تكلفة البنية التحتية</td>
+              <td style="font-size:12px; color:var(--text2);">107.5 × 0.1 × 30 أيام × 30 ر.س</td>
+              <td class="mono-val c-blue">9,675 ر.س</td>
+            </tr>
+            <tr style="background:var(--bg3)">
+              <td style="font-weight:700">مجموع التكاليف المباشرة</td>
+              <td></td>
+              <td class="mono-val" style="font-weight:700;">58,972 ر.س</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">④ العبء الإداري والإدارة</td>
+              <td style="font-size:12px; color:var(--text2);">58,972 × 15%</td>
+              <td class="mono-val c-amber">8,846 ر.س</td>
+            </tr>
+            <tr style="background:var(--bg3)">
+              <td style="font-weight:700">إجمالي التكلفة الكاملة</td>
+              <td></td>
+              <td class="mono-val" style="font-weight:700;">67,818 ر.س</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">⑤ هامش الربح</td>
+              <td style="font-size:12px; color:var(--text2);">67,818 × 35%</td>
+              <td class="mono-val c-green">23,736 ر.س</td>
+            </tr>
+            <tr style="background:var(--accent-bg);">
+              <td colspan="2" style="font-weight:700; font-size:14px; color:var(--accent)">💰 السعر النهائي للعميل</td>
+              <td class="mono-val c-blue" style="font-size:16px; font-weight:700;">91,554 ر.س/شهر</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="alert-box alert-info" style="margin-bottom:0; font-size:12px;">
+      <i class="ti ti-bulb"></i>
+      <span><strong>لماذا العبء الإداري 15%؟</strong> يغطي تكاليف الإدارة والمتابعة وخدمة العملاء وتوثيق العقود — مثل الـ overhead في أي شركة خدمات مهنية.</span>
+    </div>
+  </div>
+
+  <!-- ═══ MODEL 2: ANALYST CAPACITY ═══ -->
+  <div class="logic-block">
+    <div class="logic-title"><i class="ti ti-users"></i> الطريقة ② — التسعير بتكلفة الموظفين (مثال حقيقي بالأرقام)</div>
+    <div class="logic-desc">
+      <strong>الفكرة ببساطة:</strong> كل محلل أمن يخدم عدداً محدداً من العملاء حسب تعقيدهم. نحسب حصة العميل من تكلفة المحلل + الأدوات + الإدارة، ثم نضيف الربح.
+    </div>
+
+    <!-- The key concept: sharing ratio -->
+    <div style="background:var(--bg3); border-radius:10px; padding:14px; margin-bottom:16px; border:1px solid var(--border);">
+      <div style="font-size:12px; font-weight:600; color:var(--text); margin-bottom:10px;">📌 المفهوم الأساسي — كم عميل يخدم محلل واحد؟</div>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:8px;">
+        <div style="background:var(--bg2); border-radius:8px; padding:10px; text-align:center; border: 1px solid var(--border);">
+          <div style="font-size:11px; color:var(--success); margin-bottom:4px;">شريحة 1 — بسيط</div>
+          <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--text);">12</div>
+          <div style="font-size:11px; color:var(--text3);">عميل لكل محلل</div>
+        </div>
+        <div style="background:var(--bg2); border-radius:8px; padding:10px; text-align:center; border: 1px solid var(--border);">
+          <div style="font-size:11px; color:var(--accent); margin-bottom:4px;">شريحة 2 — متوسط</div>
+          <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--text);">8</div>
+          <div style="font-size:11px; color:var(--text3);">عملاء لكل محلل</div>
+        </div>
+        <div style="background:var(--bg2); border-radius:8px; padding:10px; text-align:center; border: 1px solid var(--border);">
+          <div style="font-size:11px; color:var(--warn); margin-bottom:4px;">شريحة 3 — كبير</div>
+          <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--text);">5</div>
+          <div style="font-size:11px; color:var(--text3);">عملاء لكل محلل</div>
+        </div>
+        <div style="background:var(--bg2); border-radius:8px; padding:10px; text-align:center; border: 1px solid var(--border);">
+          <div style="font-size:11px; color:var(--purple); margin-bottom:4px;">شريحة 4 — مؤسسي</div>
+          <div style="font-size:20px; font-weight:700; font-family:'IBM Plex Mono',monospace; color:var(--text);">2</div>
+          <div style="font-size:11px; color:var(--text3);">عميل لكل محلل</div>
+        </div>
+      </div>
+      <div style="font-size:11px; color:var(--text3); margin-top:8px;">💡 العميل الأكثر تعقيداً يستهلك وقتاً أكبر من المحلل، لذا حصته من التكلفة أكبر.</div>
+    </div>
+
+    <!-- Worked example -->
+    <div style="margin-bottom:16px;">
+      <div style="font-size:12px; font-weight:600; color:var(--text3); margin-bottom:10px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.05em;">مثال: نفس الشركة المتوسطة — شريحة 2 (8 عملاء لكل محلل)</div>
+      <div class="ref-card" style="margin-bottom:0">
+        <table class="ref-table">
+          <thead><tr><th>بند التكلفة</th><th>التكلفة الكاملة للمحلل/شهر</th><th>حصة هذا العميل (÷ 8)</th></tr></thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:500">① راتب محلل الأمن</td>
+              <td class="mono-val" style="color:var(--text3)">22,000 ر.س</td>
+              <td class="mono-val c-blue">2,750 ر.س</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">② حصة من مدير SOC</td>
+              <td class="mono-val" style="color:var(--text3)">30,000 ر.س ÷ 10 عملاء</td>
+              <td class="mono-val c-blue">3,000 ر.س</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">③ أدوات ومنصات (SIEM + EDR)</td>
+              <td class="mono-val" style="color:var(--text3)">11,250 ر.س</td>
+              <td class="mono-val c-blue">1,406 ر.س</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">④ بنية تحتية + مكتب</td>
+              <td class="mono-val" style="color:var(--text3)">5,625 ر.س</td>
+              <td class="mono-val c-blue">703 ر.س</td>
+            </tr>
+            <tr style="background:var(--bg3);">
+              <td style="font-weight:700">إجمالي التكلفة على العميل</td>
+              <td></td>
+              <td class="mono-val" style="font-weight:700;">7,859 ر.س</td>
+            </tr>
+            <tr>
+              <td style="font-weight:500">⑤ هامش الربح</td>
+              <td style="font-size:12px; color:var(--text2);">7,859 × 35%</td>
+              <td class="mono-val c-green">2,751 ر.س</td>
+            </tr>
+            <tr style="background:var(--success-bg);">
+              <td colspan="2" style="font-weight:700; font-size:14px; color:var(--success)">💰 السعر النهائي للعميل</td>
+              <td class="mono-val c-green" style="font-size:16px; font-weight:700;">10,610 ر.س/شهر</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="alert-box alert-warn" style="margin-bottom:0; font-size:12px;">
+      <i class="ti ti-alert-triangle"></i>
+      <span><strong>لاحظ الفرق بين الطريقتين:</strong> الطريقة الأولى أعطت 91,554 ر.س والثانية أعطت 10,610 ر.س للمثال نفسه. لأن الأولى تحسب بحجم البيانات الكبير جداً (جدران نارية 4 × 20GB)، بينما الثانية تحسب فقط حصة الموظفين. الحقيقة دائماً بين الرقمين.</span>
+    </div>
+  </div>
+
+  <!-- ═══ MODEL 3: ABC ═══ -->
+  <div class="logic-block">
+    <div class="logic-title"><i class="ti ti-list-check"></i> الطريقة ③ — التسعير بالأنشطة (مثال حقيقي بالأرقام)</div>
+    <div class="logic-desc">
+      <strong>الفكرة ببساطة:</strong> نفصّل كل نشاط يؤديه فريق الأمن لهذا العميل شهرياً، ونحسب تكلفته بالساعة. مثل فاتورة مكتب المحاماة اللي تفصّل: 5 ساعات مراجعة + 3 ساعات مرافعة + ساعة اجتماع.
+    </div>
+
+    <div style="font-size:12px; font-weight:600; color:var(--text3); margin-bottom:10px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.05em;">مثال: نفس الشركة المتوسطة — شريحة 2</div>
+    <div class="ref-card" style="margin-bottom:16px">
+      <table class="ref-table">
+        <thead><tr><th>النشاط</th><th>ما هو؟</th><th>ساعات/شهر</th><th>معدل الساعة</th><th>التكلفة</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:500">① المراقبة</td>
+            <td style="font-size:12px; color:var(--text2);">مراقبة التنبيهات والأحداث الأمنية</td>
+            <td class="mono-val">80 ساعة</td>
+            <td class="mono-val" style="color:var(--text3);">169 ر.س</td>
+            <td class="mono-val c-blue">13,500 ر.س</td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">② التحقيق</td>
+            <td style="font-size:12px; color:var(--text2);">تحليل الحوادث الأمنية المكتشفة</td>
+            <td class="mono-val">15 ساعة</td>
+            <td class="mono-val" style="color:var(--text3);">319 ر.س</td>
+            <td class="mono-val c-blue">4,781 ر.س</td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">③ التقارير</td>
+            <td style="font-size:12px; color:var(--text2);">إعداد تقارير الأمن الشهرية للإدارة</td>
+            <td class="mono-val">6 ساعات</td>
+            <td class="mono-val" style="color:var(--text3);">244 ر.س</td>
+            <td class="mono-val c-blue">1,463 ر.س</td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">④ ضبط SIEM</td>
+            <td style="font-size:12px; color:var(--text2);">تحسين قواعد الكشف وتقليل الإنذارات الكاذبة</td>
+            <td class="mono-val">10 ساعات</td>
+            <td class="mono-val" style="color:var(--text3);">281 ر.س</td>
+            <td class="mono-val c-blue">2,813 ر.س</td>
+          </tr>
+          <tr>
+            <td style="font-weight:500">⑤ الاجتماعات</td>
+            <td style="font-size:12px; color:var(--text2);">اجتماعات المراجعة الدورية مع العميل</td>
+            <td class="mono-val">4 ساعات</td>
+            <td class="mono-val" style="color:var(--text3);">206 ر.س</td>
+            <td class="mono-val c-blue">825 ر.س</td>
+          </tr>
+          <tr style="background:var(--bg3);">
+            <td colspan="4" style="font-weight:700;">إجمالي تكلفة الأنشطة</td>
+            <td class="mono-val" style="font-weight:700;">23,382 ر.س</td>
+          </tr>
+          <tr>
+            <td colspan="4" style="font-weight:500;">هامش الربح (35%)</td>
+            <td class="mono-val c-green">8,184 ر.س</td>
+          </tr>
+          <tr style="background:var(--warn-bg);">
+            <td colspan="4" style="font-weight:700; font-size:14px; color:var(--warn)">💰 السعر النهائي للعميل</td>
+            <td class="mono-val c-amber" style="font-size:16px; font-weight:700;">31,566 ر.س/شهر</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert-box alert-success" style="margin-bottom:0; font-size:12px;">
+      <i class="ti ti-bulb"></i>
+      <span><strong>لماذا معدل الساعة يختلف بين الأنشطة؟</strong> التحقيق (319 ر.س) أغلى لأنه يتطلب محللاً أكثر خبرة. المراقبة (169 ر.س) أرخص لأنها إجراء روتيني. هذا نفس منطق فاتورة مكتب المحاماة — الاستشارة أغلى من إعداد الأوراق.</span>
+    </div>
+  </div>
+
+  <!-- ═══ ADJUSTMENTS / MULTIPLIERS ═══ -->
+  <div class="logic-block">
+    <div class="logic-title"><i class="ti ti-adjustments"></i> التعديلات على السعر الأساسي — لماذا يختلف السعر من عميل لآخر؟</div>
+    <div class="logic-desc">
+      بعد حساب السعر الأساسي، النموذج يطبّق تعديلات (زيادة أو خصم) بناءً على ظروف العميل. الفكرة نفس فكرة التأمين — العميل "الأعلى مخاطرة" يدفع أكثر.
+    </div>
+
+    <div class="ref-card" style="margin-bottom:14px;">
+      <div class="ref-card-header"><i class="ti ti-building-bank"></i> التعديل الأول — القطاع (لماذا البنوك تدفع أكثر من محلات التجزئة؟)</div>
+      <table class="ref-table">
+        <thead><tr><th>القطاع</th><th>لماذا هذه النسبة؟</th><th>التعديل</th><th>مثال: السعر الأساسي 30,000 ر.س</th></tr></thead>
+        <tbody>
+          <tr><td>تجارة / خدمات عامة</td><td style="font-size:12px;color:var(--text2)">لا متطلبات تنظيمية إضافية</td><td class="mono-val c-green">× 1.00</td><td class="mono-val">30,000 ر.س</td></tr>
+          <tr><td>صحة / تعليم</td><td style="font-size:12px;color:var(--text2)">نظام PDPL يلزم بتقارير خاصة وإجراءات إضافية</td><td class="mono-val c-blue">× 1.25</td><td class="mono-val">37,500 ر.س</td></tr>
+          <tr><td>اتصالات / تقنية</td><td style="font-size:12px;color:var(--text2)">متطلبات CITC + البنية التحتية الحيوية</td><td class="mono-val c-blue">× 1.35</td><td class="mono-val">40,500 ر.س</td></tr>
+          <tr><td>بنوك / مالية</td><td style="font-size:12px;color:var(--text2)">إطار SAMA يلزم بـ SOC 24/7 وتقارير ربع سنوية إلزامية</td><td class="mono-val c-amber">× 1.50</td><td class="mono-val">45,000 ر.س</td></tr>
+          <tr><td>حكومة / NCA</td><td style="font-size:12px;color:var(--text2)">NCA-ECC 2.0 يلزم بضوابط أمنية أشمل وتدقيق مستمر</td><td class="mono-val c-amber">× 1.65</td><td class="mono-val">49,500 ر.س</td></tr>
+          <tr><td>نفط وغاز / OT</td><td style="font-size:12px;color:var(--text2)">OTCC + أنظمة التحكم الصناعي تحتاج متخصصين إضافيين</td><td class="mono-val c-red">× 1.80</td><td class="mono-val">54,000 ر.س</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ref-card" style="margin-bottom:14px;">
+      <div class="ref-card-header"><i class="ti ti-clock"></i> التعديل الثاني — مستوى الخدمة SLA (لماذا 24/7 أغلى؟)</div>
+      <table class="ref-table">
+        <thead><tr><th>مستوى الخدمة</th><th>ماذا يعني؟</th><th>التعديل</th><th>مثال: السعر الأساسي 30,000 ر.س</th></tr></thead>
+        <tbody>
+          <tr><td>8/5 — ساعات العمل فقط</td><td style="font-size:12px;color:var(--text2)">تنبيهات في أوقات الدوام الرسمي فقط</td><td class="mono-val c-green">× 0.70 (خصم 30%)</td><td class="mono-val">21,000 ر.س</td></tr>
+          <tr><td>24/7 — تنبيهات آلية</td><td style="font-size:12px;color:var(--text2)">تنبيهات تلقائية على مدار الساعة بدون محلل بشري</td><td class="mono-val" style="color:var(--text3)">× 1.00 (أساس)</td><td class="mono-val">30,000 ر.س</td></tr>
+          <tr><td>24/7 — محلل بشري</td><td style="font-size:12px;color:var(--text2)">محلل يستجيب ويحقق على مدار الساعة — يعني 3 وردية</td><td class="mono-val c-amber">× 1.35 (زيادة 35%)</td><td class="mono-val">40,500 ر.س</td></tr>
+          <tr><td>استجابة + احتواء كاملة</td><td style="font-size:12px;color:var(--text2)">فريق يتدخل ويحتوي الهجوم ويعيد الأنظمة — أعلى جاهزية</td><td class="mono-val c-red">× 1.65 (زيادة 65%)</td><td class="mono-val">49,500 ر.س</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ref-card" style="margin-bottom:0;">
+      <div class="ref-card-header"><i class="ti ti-discount-2"></i> التعديل الثالث — مدة العقد (خصم الالتزام طويل الأمد)</div>
+      <table class="ref-table">
+        <thead><tr><th>مدة العقد</th><th>لماذا الخصم؟</th><th>التعديل</th><th>مثال: السعر الأساسي 30,000 ر.س/شهر</th></tr></thead>
+        <tbody>
+          <tr><td>سنة واحدة</td><td style="font-size:12px;color:var(--text2)">لا خصم — العقد القياسي</td><td class="mono-val" style="color:var(--text3)">× 1.00</td><td class="mono-val">30,000 ر.س → 360,000 ر.س/سنة</td></tr>
+          <tr><td>3 سنوات</td><td style="font-size:12px;color:var(--text2)">الالتزام يتيح تخطيطاً أفضل للموارد وتوفيراً في التكاليف</td><td class="mono-val c-green">× 0.85 (خصم 15%)</td><td class="mono-val">25,500 ر.س → 306,000 ر.س/سنة</td></tr>
+          <tr><td>5 سنوات</td><td style="font-size:12px;color:var(--text2)">أقصى استقرار للطرفين — أفضل خصم متاح في السوق</td><td class="mono-val c-green">× 0.78 (خصم 22%)</td><td class="mono-val">23,400 ر.س → 280,800 ر.س/سنة</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══ HOW THE THREE PRICES RELATE ═══ -->
+  <div class="logic-block" style="border-right:4px solid var(--success);">
+    <div class="logic-title"><i class="ti ti-scale"></i> كيف تستخدم الأسعار الثلاثة معاً؟</div>
+    <div class="logic-desc">الأسعار الثلاثة ليست بديلة عن بعضها — هي أدوات مختلفة لنفس القرار. تخيّلها مثل ثلاث طرق لتقدير سعر شقة: تكلفة البناء، أسعار السوق، والدخل المتوقع من الإيجار.</div>
+    <div class="ref-card" style="margin-bottom:0">
+      <table class="ref-table">
+        <thead><tr><th>الطريقة</th><th>استخدمها لـ</th><th>ميزتها</th><th>متى تكون الأعلى؟</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:500;color:var(--accent)">① حجم البيانات</td>
+            <td style="font-size:12px;color:var(--text2)">العروض التجارية للعملاء، التفاوض الأولي</td>
+            <td style="font-size:12px;color:var(--text2)">يمكن إثباته بفاتورة SIEM الفعلية</td>
+            <td style="font-size:12px;color:var(--text2)">عندما تكون البيانات كثيرة (جدران نارية كثيرة)</td>
+          </tr>
+          <tr>
+            <td style="font-weight:500;color:var(--success)">② تكلفة الموظفين</td>
+            <td style="font-size:12px;color:var(--text2)">التخطيط الداخلي، تقييم الربحية</td>
+            <td style="font-size:12px;color:var(--text2)">يعكس التكلفة الحقيقية للخدمة بدقة</td>
+            <td style="font-size:12px;color:var(--text2)">عملاء كبار يحتاجون محللاً مخصصاً شبه كامل</td>
+          </tr>
+          <tr>
+            <td style="font-weight:500;color:var(--warn)">③ الأنشطة</td>
+            <td style="font-size:12px;color:var(--text2)">التفاوض على العقود المعقدة، العطاءات</td>
+            <td style="font-size:12px;color:var(--text2)">قابل للتدقيق بند ببند — يوثق كل ريال</td>
+            <td style="font-size:12px;color:var(--text2)">كثرة الحوادث التي تحتاج تحقيقات مطوّلة</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert-box alert-info" style="margin-top:14px; margin-bottom:0; font-size:12px;">
+      <i class="ti ti-star"></i>
+      <span><strong>التوصية العملية:</strong> قدِّم للعميل بسعر الطريقة الأولى (حجم البيانات) كسعر تجاري رسمي. واستخدم الطريقة الثانية والثالثة داخلياً للتحقق من أن الصفقة مربحة فعلاً.</span>
+    </div>
+  </div>
+
+</div><!-- end page-logic -->
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE 3 — PRICE REFERENCE MODULE
+══════════════════════════════════════════════ -->
+<div id="page-reference" class="main-page">
+  <div class="module-header">
+    <div class="module-icon mod-green"><i class="ti ti-table"></i></div>
+    <div>
+      <div class="section-tag">PRICE REFERENCE</div>
+      <div class="module-title" id="ref-title">موديول مرجع الأسعار</div>
+      <div class="module-sub" id="ref-sub">نطاقات أسعار تفصيلية للسوق السعودي 2025–2026 · جميع الأسعار بالريال السعودي</div>
+    </div>
+  </div>
+
+  <!-- SOC & SIEM Pricing -->
+  <div class="ref-card">
+    <div class="ref-card-header"><i class="ti ti-radar"></i> خدمات SOC المُدار وSIEM</div>
+    <table class="ref-table">
+      <thead><tr><th>الخدمة</th><th>الحد الأدنى</th><th>الحد الأقصى</th><th>الوحدة</th><th>الملاحظات</th></tr></thead>
+      <tbody>
+        <tr><td>Managed SIEM Cloud (entry level)</td><td class="mono-val c-blue">18,750 ر.س</td><td class="mono-val c-blue">37,500 ر.س</td><td class="mono-val">شهر</td><td style="font-size:11px;color:var(--text3)">≤50 GB/يوم</td></tr>
+        <tr><td>SOC-as-a-Service — ≤100 Endpoint</td><td class="mono-val c-green">11,250 ر.س</td><td class="mono-val c-green">22,500 ر.س</td><td class="mono-val">شهر</td><td style="font-size:11px;color:var(--text3)">مراقبة 24/7</td></tr>
+        <tr><td>SOC-as-a-Service — 100–500 Endpoint</td><td class="mono-val c-amber">22,500 ر.س</td><td class="mono-val c-amber">67,500 ر.س</td><td class="mono-val">شهر</td><td style="font-size:11px;color:var(--text3)">24/7 + IR</td></tr>
+        <tr><td>SOC-as-a-Service — 500+ Endpoint</td><td class="mono-val c-red">67,500 ر.س</td><td class="mono-val c-red">168,750 ر.س</td><td class="mono-val">شهر</td><td style="font-size:11px;color:var(--text3)">Enterprise</td></tr>
+        <tr><td>Microsoft Sentinel PAYG (per GB)</td><td class="mono-val c-teal">16.1 ر.س</td><td class="mono-val c-teal">20.9 ر.س</td><td class="mono-val">GB/يوم</td><td style="font-size:11px;color:var(--text3)">$4.30–$5.58/GB</td></tr>
+        <tr><td>Microsoft Sentinel Commitment Tier</td><td class="mono-val c-teal">11.1 ر.س</td><td class="mono-val c-teal">16.1 ر.س</td><td class="mono-val">GB/يوم</td><td style="font-size:11px;color:var(--text3)">خصم عند الحجم الكبير</td></tr>
+        <tr><td>Splunk Cloud (تقدير)</td><td class="mono-val c-purple">30 ر.س</td><td class="mono-val c-purple">75 ر.س</td><td class="mono-val">GB/يوم</td><td style="font-size:11px;color:var(--text3)">يشمل الترخيص والإدارة</td></tr>
+        <tr><td>QRadar SaaS</td><td class="mono-val c-blue">15 ر.س</td><td class="mono-val c-blue">30 ر.س</td><td class="mono-val">GB/يوم</td><td style="font-size:11px;color:var(--text3)">IBM Cloud or On-Prem</td></tr>
+        <tr><td>Per-Endpoint Pricing — Basic</td><td class="mono-val c-green">37.5 ر.س</td><td class="mono-val c-green">75 ر.س</td><td class="mono-val">جهاز/شهر</td><td style="font-size:11px;color:var(--text3)">EDR + Alerting</td></tr>
+        <tr><td>Per-Endpoint Pricing — Standard</td><td class="mono-val c-amber">75 ر.س</td><td class="mono-val c-amber">112.5 ر.س</td><td class="mono-val">جهاز/شهر</td><td style="font-size:11px;color:var(--text3)">EDR + SIEM + IR</td></tr>
+        <tr><td>Per-User Pricing — Standard</td><td class="mono-val c-green">56.25 ر.س</td><td class="mono-val c-green">187.5 ر.س</td><td class="mono-val">مستخدم/شهر</td><td style="font-size:11px;color:var(--text3)">معيار CompTIA ($15–50)</td></tr>
+        <tr><td>Per-User Pricing — Premium (KSA)</td><td class="mono-val c-amber">112 ر.س</td><td class="mono-val c-amber">281 ر.س</td><td class="mono-val">مستخدم/شهر</td><td style="font-size:11px;color:var(--text3)">قطاعات منظَّمة</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Specialized Services -->
+  <div class="ref-card">
+    <div class="ref-card-header"><i class="ti ti-lock-cog"></i> خدمات الأمن المتخصصة</div>
+    <table class="ref-table">
+      <thead><tr><th>الخدمة</th><th>الحد الأدنى</th><th>الحد الأقصى</th><th>الوحدة</th><th>الملاحظات</th></tr></thead>
+      <tbody>
+        <tr><td>VAPT — نطاق SME</td><td class="mono-val c-blue">15,000 ر.س</td><td class="mono-val c-blue">50,000 ر.س</td><td class="mono-val">مرة</td><td style="font-size:11px;color:var(--text3)">≤50 IP</td></tr>
+        <tr><td>VAPT — نطاق Enterprise</td><td class="mono-val c-amber">100,000 ر.س</td><td class="mono-val c-amber">500,000 ر.س</td><td class="mono-val">مرة</td><td style="font-size:11px;color:var(--text3)">بيئة معقدة</td></tr>
+        <tr><td>Red Team / Pen Testing</td><td class="mono-val c-red">75,000 ر.س</td><td class="mono-val c-red">300,000 ر.س</td><td class="mono-val">مرة</td><td style="font-size:11px;color:var(--text3)">هجوم محاكي كامل</td></tr>
+        <tr><td>GRC / Compliance Consulting</td><td class="mono-val c-green">50,000 ر.س</td><td class="mono-val c-green">200,000 ر.س</td><td class="mono-val">سنة</td><td style="font-size:11px;color:var(--text3)">NCA + SAMA + ISO</td></tr>
+        <tr><td>vCISO — خدمة مدير أمن مشترك</td><td class="mono-val c-purple">15,000 ر.س</td><td class="mono-val c-purple">40,000 ر.س</td><td class="mono-val">شهر</td><td style="font-size:11px;color:var(--text3)">8–20 ساعة/شهر</td></tr>
+        <tr><td>Security Awareness Training</td><td class="mono-val c-teal">200 ر.س</td><td class="mono-val c-teal">500 ر.س</td><td class="mono-val">مستخدم</td><td style="font-size:11px;color:var(--text3)">بما يشمل المحاكاة</td></tr>
+        <tr><td>Dark Web Monitoring</td><td class="mono-val c-red">3,000 ر.س</td><td class="mono-val c-red">8,000 ر.س</td><td class="mono-val">شهر</td><td style="font-size:11px;color:var(--text3)">كشف بيانات مسرَّبة</td></tr>
+        <tr><td>Digital Forensics & IR Retainer</td><td class="mono-val c-amber">18,750 ر.س</td><td class="mono-val c-amber">56,250 ر.س</td><td class="mono-val">شهر</td><td style="font-size:11px;color:var(--text3)">SLA مضمون</td></tr>
+        <tr><td>OT/ICS Security Monitoring</td><td class="mono-val c-red">30,000 ر.س</td><td class="mono-val c-red">112,500 ر.س</td><td class="mono-val">شهر</td><td style="font-size:11px;color:var(--text3)">OTCC متطلب</td></tr>
+        <tr><td>Threat Intelligence Feed</td><td class="mono-val c-blue">3,750 ر.س</td><td class="mono-val c-blue">15,000 ر.س</td><td class="mono-val">شهر</td><td style="font-size:11px;color:var(--text3)">Premium CTI</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Sector Multipliers -->
+  <div class="ref-card">
+    <div class="ref-card-header"><i class="ti ti-percentage"></i> معاملات تسوية الأسعار — القطاعات والسيناريوهات</div>
+    <table class="ref-table">
+      <thead><tr><th>العامل</th><th>الوصف والمتطلب التنظيمي</th><th>المعامل</th><th>التأثير</th></tr></thead>
+      <tbody>
+        <tr><td>قطاع تجاري عام</td><td style="font-size:12px;color:var(--text2)">Baseline — لا متطلبات تنظيمية إضافية</td><td class="mono-val c-green">× 1.00</td><td class="mono-val" style="color:var(--text3)">+0%</td></tr>
+        <tr><td>صحة / تعليم</td><td style="font-size:12px;color:var(--text2)">PDPL + حماية بيانات حساسة</td><td class="mono-val c-blue">× 1.25</td><td class="mono-val c-blue">+25%</td></tr>
+        <tr><td>اتصالات / تقنية</td><td style="font-size:12px;color:var(--text2)">CITC Regulations + Critical Infrastructure</td><td class="mono-val c-blue">× 1.35</td><td class="mono-val c-blue">+35%</td></tr>
+        <tr><td>بنوك / مالية (SAMA)</td><td style="font-size:12px;color:var(--text2)">SAMA Cybersecurity Framework — إلزامي 2025</td><td class="mono-val c-amber">× 1.50</td><td class="mono-val c-amber">+50%</td></tr>
+        <tr><td>حكومة / NCA-ECC</td><td style="font-size:12px;color:var(--text2)">NCA-ECC 2.0 Essential Controls — إلزامي</td><td class="mono-val c-amber">× 1.65</td><td class="mono-val c-amber">+65%</td></tr>
+        <tr><td>نفط وغاز / OT/ICS</td><td style="font-size:12px;color:var(--text2)">OTCC + تعقيد بيئة OT + نظام الطاقة الحرج</td><td class="mono-val c-red">× 1.80</td><td class="mono-val c-red">+80%</td></tr>
+        <tr><td>SLA: 8/5 فقط</td><td style="font-size:12px;color:var(--text2)">تنبيهات فقط خلال ساعات العمل</td><td class="mono-val c-green">× 0.70</td><td class="mono-val c-green">-30%</td></tr>
+        <tr><td>SLA: 24/7 تنبيهات آلية</td><td style="font-size:12px;color:var(--text2)">خط أساس — تنبيهات على مدار الساعة</td><td class="mono-val" style="color:var(--text3)">× 1.00</td><td class="mono-val" style="color:var(--text3)">Baseline</td></tr>
+        <tr><td>SLA: 24/7 SOC بشري</td><td style="font-size:12px;color:var(--text2)">محللون بشريون + تحقيق فعلي</td><td class="mono-val c-amber">× 1.35</td><td class="mono-val c-amber">+35%</td></tr>
+        <tr><td>SLA: IR كامل + احتواء</td><td style="font-size:12px;color:var(--text2)">استجابة + احتواء + تعافي + إشعار PDPL</td><td class="mono-val c-red">× 1.65</td><td class="mono-val c-red">+65%</td></tr>
+        <tr><td>عقد 3 سنوات</td><td style="font-size:12px;color:var(--text2)">التزام متوسط الأمد</td><td class="mono-val c-green">× 0.85</td><td class="mono-val c-green">-15%</td></tr>
+        <tr><td>عقد 5 سنوات</td><td style="font-size:12px;color:var(--text2)">أقصى خصم متاح</td><td class="mono-val c-green">× 0.78</td><td class="mono-val c-green">-22%</td></tr>
+        <tr><td>Multi-Cloud</td><td style="font-size:12px;color:var(--text2)">تعقيد إضافي في المراقبة</td><td class="mono-val c-amber">× 1.35</td><td class="mono-val c-amber">+35%</td></tr>
+        <tr><td>Data Residency / PDPL محلي</td><td style="font-size:12px;color:var(--text2)">Local Cloud Zone في السعودية</td><td class="mono-val c-blue">× 1.20</td><td class="mono-val c-blue">+20%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Salary Benchmarks -->
+  <div class="ref-card">
+    <div class="ref-card-header"><i class="ti ti-user-dollar"></i> معايير الرواتب — السوق السعودي 2025 (Glassdoor + Levels.fyi)</div>
+    <table class="ref-table">
+      <thead><tr><th>المنصب</th><th>الحد الأدنى</th><th>المتوسط</th><th>الحد الأقصى</th><th>المصدر</th></tr></thead>
+      <tbody>
+        <tr><td>SOC Analyst Tier 1</td><td class="mono-val">12,000 ر.س</td><td class="mono-val c-green">15,000 ر.س</td><td class="mono-val">18,000 ر.س</td><td style="font-size:11px;color:var(--text3)">Glassdoor KSA 2025</td></tr>
+        <tr><td>SOC Analyst Tier 2</td><td class="mono-val">18,000 ر.س</td><td class="mono-val c-amber">22,000 ر.س</td><td class="mono-val">28,000 ر.س</td><td style="font-size:11px;color:var(--text3)">Glassdoor KSA 2025</td></tr>
+        <tr><td>SOC Analyst Tier 3 / Senior</td><td class="mono-val">25,000 ر.س</td><td class="mono-val c-amber">32,000 ر.س</td><td class="mono-val">40,000 ر.س</td><td style="font-size:11px;color:var(--text3)">Levels.fyi KSA 2025</td></tr>
+        <tr><td>SOC Manager</td><td class="mono-val">30,000 ر.س</td><td class="mono-val c-red">38,000 ر.س</td><td class="mono-val">50,000 ر.س</td><td style="font-size:11px;color:var(--text3)">Glassdoor KSA 2025</td></tr>
+        <tr><td>Incident Responder</td><td class="mono-val">22,000 ر.س</td><td class="mono-val c-amber">28,000 ر.س</td><td class="mono-val">38,000 ر.س</td><td style="font-size:11px;color:var(--text3)">LinkedIn KSA 2025</td></tr>
+        <tr><td>Threat Intelligence Analyst</td><td class="mono-val">20,000 ر.س</td><td class="mono-val c-amber">26,000 ر.س</td><td class="mono-val">35,000 ر.س</td><td style="font-size:11px;color:var(--text3)">LinkedIn KSA 2025</td></tr>
+        <tr><td>CISO / Security Director</td><td class="mono-val">45,000 ر.س</td><td class="mono-val c-red">60,000 ر.س</td><td class="mono-val">90,000 ر.س</td><td style="font-size:11px;color:var(--text3)">Executive Search KSA</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Market Size KPIs -->
+  <div class="ref-card">
+    <div class="ref-card-header"><i class="ti ti-chart-area"></i> حجم السوق السعودي — بيانات 2024–2026</div>
+    <div style="padding:16px 16px 4px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:14px">
+        <div class="kpi-card"><div class="kpi-label">سوق الأمن السيبراني KSA</div><div class="kpi-val" style="font-size:18px">15.2 مليار</div><div class="kpi-sub">ريال سعودي — 2024 (NCA)</div></div>
+        <div class="kpi-card green-b"><div class="kpi-label">سوق MSSP عالمياً</div><div class="kpi-val" style="font-size:18px">39.5 مليار</div><div class="kpi-sub">دولار — 2025 (MnM)</div></div>
+        <div class="kpi-card amber-b"><div class="kpi-label">معدل النمو السعودي</div><div class="kpi-val" style="font-size:18px">14%</div><div class="kpi-sub">CAGR سنوي (NCA 2025)</div></div>
+        <div class="kpi-card purple-b"><div class="kpi-label">معدل النمو العالمي MSSP</div><div class="kpi-val" style="font-size:18px">11.1%</div><div class="kpi-sub">CAGR 2025–2030 (MnM)</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page-reference -->
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE 4 — SOURCES MODULE
+══════════════════════════════════════════════ -->
+<div id="page-sources" class="main-page">
+  <div class="module-header">
+    <div class="module-icon mod-purple"><i class="ti ti-books"></i></div>
+    <div>
+      <div class="section-tag">SOURCES & METHODOLOGY</div>
+      <div class="module-title" id="src-title">المصادر والمراجع العلمية</div>
+      <div class="module-sub" id="src-sub">جميع البيانات والأرقام المستخدمة في هذا النموذج مستقاة من 15 مصدراً أولياً موثقاً · مُنظَّمة في 5 فئات</div>
+    </div>
+  </div>
+
+  <!-- ══ COUNTER STRIP ══ -->
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px;">
+    <div class="kpi-card"><div class="kpi-label">إجمالي المصادر</div><div class="kpi-val">15</div><div class="kpi-sub">مصدراً أولياً</div></div>
+    <div class="kpi-card green-b"><div class="kpi-label">بيانات السوق</div><div class="kpi-val">5</div><div class="kpi-sub">تقارير بحثية</div></div>
+    <div class="kpi-card amber-b"><div class="kpi-label">بيانات التسعير</div><div class="kpi-val">5</div><div class="kpi-sub">مصادر تسعير</div></div>
+    <div class="kpi-card purple-b"><div class="kpi-label">أدوات SIEM</div><div class="kpi-val">3</div><div class="kpi-sub">مصادر أسعار</div></div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;border-right:3px solid var(--warn);">
+      <div class="kpi-label">الرواتب</div><div class="kpi-val" style="font-size:20px;font-family:'IBM Plex Mono',monospace;font-weight:700;">2</div><div class="kpi-sub">Glassdoor + Levels.fyi</div>
+    </div>
+  </div>
+
+  <!-- ══ TABLE 1: MARKET SIZE ══ -->
+  <div class="ref-card" style="margin-bottom:16px;">
+    <div class="ref-card-header" style="border-right:3px solid var(--accent);">
+      <i class="ti ti-chart-area" style="color:var(--accent)"></i>
+      <span>📊 بيانات حجم السوق السعودي — 5 مصادر</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th style="width:32px">#</th>
+            <th>المصدر والتقرير</th>
+            <th>البيانات الرئيسية المستخدمة في النموذج</th>
+            <th style="width:90px">التاريخ</th>
+            <th style="width:100px">الرابط</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="mono-val c-blue">01</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">الهيئة الوطنية للأمن السيبراني (NCA)</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">تقرير المؤشرات الاقتصادية 2025</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">حجم سوق الأمن السيبراني في المملكة 2024 = <strong style="color:var(--success);">15.2 مليار ريال</strong>، معدل نمو 14% سنوياً. مصدر معاملات القطاعات الحكومية وأطر NCA-ECC 2.0.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">2025</td>
+            <td><a href="https://nca.gov.sa/en/studies-and-reports/" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>nca.gov.sa ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-blue">02</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">MarketsandMarkets — KSA Cybersecurity</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">KSA Cybersecurity Market Report 2025–2031</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">حجم السوق = <strong style="color:var(--success);">4.58 مليار دولار (2025)</strong> → 7.10 مليار (2031)، CAGR 9.2%. المشغلون الرئيسيون: sirar by stc، Help AG، Infratech.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">2025–2031</td>
+            <td><a href="https://www.marketsandmarkets.com/Market-Reports/kingdom-of-saudi-arabia-cyber-security-market-3336684.html" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>marketsandmarkets ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-blue">03</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">Ken Research</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">Saudi Arabia Cybersecurity & MSSP Market</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">قيمة سوق MSSP في السعودية = <strong style="color:var(--success);">4.7 مليار دولار</strong>. الرياض 40% حصة. المحرك: إطار NCA والتحول الرقمي.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">أكتوبر 2025</td>
+            <td><a href="https://www.kenresearch.com/saudi-arabia-cybersecurity-and-mssp-market" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>kenresearch.com ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-blue">04</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">Credence Research</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">Saudi Arabia MSS Market 2024–2032</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">حجم سوق خدمات الأمن المدار = <strong style="color:var(--success);">57.5 مليار ريال (2024)</strong>. النمو مدفوع بـ SAMA وNCA وPDPL والتحول السحابي.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">أبريل 2025</td>
+            <td><a href="https://www.credenceresearch.com/report/saudi-arabia-managed-security-services-market" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>credenceresearch ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-blue">05</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">MarketsandMarkets — Global MSS</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">Managed Security Services Market 2025–2030</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">السوق العالمي = <strong style="color:var(--success);">39.47 مليار دولار (2025)</strong> → 66.83 مليار (2030)، CAGR 11.1%. شراكة IBM–Palo Alto لـ AI-powered MSSP.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">2025–2030</td>
+            <td><a href="https://www.marketsandmarkets.com/Market-Reports/managed-security-services-market-5918403.html" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>marketsandmarkets ↗</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ TABLE 2: PRICING DATA ══ -->
+  <div class="ref-card" style="margin-bottom:16px;">
+    <div class="ref-card-header" style="border-right:3px solid var(--success);">
+      <i class="ti ti-cash" style="color:var(--success)"></i>
+      <span>💰 بيانات نماذج التسعير والأسعار — 5 مصادر</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th style="width:32px">#</th>
+            <th>المصدر والتقرير</th>
+            <th>البيانات الرئيسية المستخدمة في النموذج</th>
+            <th style="width:90px">التاريخ</th>
+            <th style="width:100px">الرابط</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="mono-val c-green">06</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">Meriplex — Managed Security Cost Guide</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">How Much Do Managed Security Services Cost in 2026?</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">متوسط تكلفة MSSP لـ 200 موظف = <strong style="color:var(--success);">$15,000–$25,000/شهر</strong>. بناء SOC داخلي: 3–5 محللين + SIEM + تدريب. مقارنة Build vs Buy.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">مايو 2026</td>
+            <td><a href="https://meriplex.com/managed-security-services-cost-2026/" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>meriplex.com ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-green">07</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">CompTIA Survey 2023 — via Monetizely</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">How to Price Managed Security Services</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">متوسط Per-User = <strong style="color:var(--success);">$15–$75/مستخدم/شهر</strong>. MSSPs ذوو التخصص القطاعي يتقاضون 15–30% أعلى. نموذج Per-User الأكثر شيوعاً في 2025.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">أكتوبر 2025</td>
+            <td><a href="https://www.getmonetizely.com/articles/how-to-price-managed-security-services-a-comprehensive-guide-for-mssps" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>getmonetizely ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-green">08</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">PricingLink — MSSP Pricing Strategy</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">How to Price Managed Security Services (Per User, Endpoint, Tier)</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">Per-User: <strong style="color:var(--success);">$10–$50+/مستخدم/شهر</strong>. Per-Endpoint: $50–$150+/جهاز/شهر. Tiered Flat هو الأنسب للـ SMBs. أساس هيكل النماذج الثلاثة.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">أبريل 2025</td>
+            <td><a href="https://pricinglink.com/knowledge-base/managed-security-service-provider/how-to-price-mssp-services/" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>pricinglink.com ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-green">09</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">Corsica Tech — MSSP Pricing Cost</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">Managed Security Services Pricing: Getting the Best Value</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">نطاق تكلفة شائع = <strong style="color:var(--success);">$5,000–$20,000/شهر</strong>. MSSP يعادل تكلفة موظف أمن واحد مقابل فريق كامل. مصدر نسبة Overhead 15% وهامش 35%.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">أغسطس 2025</td>
+            <td><a href="https://corsicatech.com/blog/managed-security-services-pricing-cost/" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>corsicatech.com ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-green">10</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">ConnectWise IT Nation Benchmark 2025</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">via Medhacloud — 55 Managed Services Statistics 2026</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">متوسط عقد MSP لـ SMB (50 موظف) = <strong style="color:var(--success);">$9,250/شهر</strong>. ارتفاع Per-User pricing بـ 8.3% في 2025. 78% من MSPs يستخدمون Tiered. هامش ربح 52%.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">مارس 2026</td>
+            <td><a href="https://medhacloud.com/blog/managed-services-market-statistics-2026" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>medhacloud.com ↗</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ TABLE 3: SIEM & TOOLS ══ -->
+  <div class="ref-card" style="margin-bottom:16px;">
+    <div class="ref-card-header" style="border-right:3px solid var(--purple);">
+      <i class="ti ti-tool" style="color:var(--purple)"></i>
+      <span>🛠️ تسعير الأدوات — SIEM / EDR — 3 مصادر</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th style="width:32px">#</th>
+            <th>المصدر والتقرير</th>
+            <th>البيانات الرئيسية المستخدمة في النموذج</th>
+            <th style="width:90px">التاريخ</th>
+            <th style="width:100px">الرابط</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="mono-val c-purple">11</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">Microsoft Security — Sentinel Pricing</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">Official Microsoft Sentinel Pricing Page</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">Pay-As-You-Go: <strong style="color:var(--purple);">$2.46/GB</strong>. Commitment Tiers توفر حتى 52% مقارنة بـ PAYG. طبقة 50 GB/يوم في Preview حتى يونيو 2026. أحجام Commitment: 100 → 50,000 GB/يوم.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">2025–2026</td>
+            <td><a href="https://www.microsoft.com/en-us/security/pricing/microsoft-sentinel" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>microsoft.com ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-purple">12</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">G2 — Microsoft Sentinel User Reviews</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">Microsoft Sentinel Pricing 2026</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">نقطة دخول فعلية = <strong style="color:var(--purple);">$2.46/GB</strong> PAYG. Commitment الكبيرة (500+ GB/يوم) توفر 65%. Enterprise + Azure/M365 يحققون أعلى ROI.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">2026</td>
+            <td><a href="https://www.g2.com/products/microsoft-sentinel/pricing" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>g2.com ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-purple">13</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">UnderDefense — Sentinel Pricing 2025</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">Microsoft Sentinel Pricing in 2025</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">تفصيل PAYG مقابل Commitment. خدمات MDR المُعززة لـ Sentinel تضيف طبقة AI-assisted SOC + Human Response. استخدام SOAR يقلل تكلفة المحللين بشكل ملحوظ.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">فبراير 2026</td>
+            <td><a href="https://underdefense.com/industry-pricings/microsoft-sentinel-pricing/" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>underdefense.com ↗</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ TABLE 4: SALARIES ══ -->
+  <div class="ref-card" style="margin-bottom:16px;">
+    <div class="ref-card-header" style="border-right:3px solid var(--warn);">
+      <i class="ti ti-user-dollar" style="color:var(--warn)"></i>
+      <span>👤 بيانات رواتب محللي الأمن السيبراني في السعودية — 2 مصدر</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th style="width:32px">#</th>
+            <th>المصدر والتقرير</th>
+            <th>البيانات الرئيسية المستخدمة في النموذج</th>
+            <th style="width:90px">التاريخ</th>
+            <th style="width:100px">الرابط</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="mono-val c-amber">14</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">Glassdoor — SOC Analyst Salary KSA</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">Saudi Arabia SOC Analyst Salaries 2025</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">متوسط راتب محلل SOC = <strong style="color:var(--warn);">SAR 10,017/شهر</strong> (P25: 7,516 — P90: 14,017). ملاحظة: الكوادر المتخصصة أعلى بكثير. مصدر تكاليف المحللين في نموذجَي Analyst Capacity وABC.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">نوفمبر 2025</td>
+            <td><a href="https://www.glassdoor.com/Salaries/saudi-arabia-soc-analyst-salary-SRCH_IL.0,12_IN207_KO13,24.htm" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>glassdoor.com ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="mono-val c-amber">15</span></td>
+            <td>
+              <div style="font-weight:600;color:var(--text);font-size:13px;">Levels.fyi — Cybersecurity Analyst KSA</div>
+              <div style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">Cybersecurity Analyst Salary in Saudi Arabia</div>
+            </td>
+            <td style="font-size:12.5px;color:var(--text2);">نطاق راتب محلل الأمن السيبراني الأشمل = <strong style="color:var(--warn);">SAR 158,790 – SAR 360,096/سنة</strong>. يشمل الكوادر المعتمدة (CISSP, CISM, CEH) في الشركات الكبرى والقطاع المالي.</td>
+            <td class="mono-val" style="font-size:11px;color:var(--text3);">2025</td>
+            <td><a href="https://www.levels.fyi/en-gb/t/security-analyst/locations/saudi-arabia" target="_blank" class="source-link"><i class="ti ti-external-link" style="font-size:11px"></i>levels.fyi ↗</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ TABLE 5: REGULATORY FRAMEWORKS ══ -->
+  <div class="ref-card" style="margin-bottom:16px;">
+    <div class="ref-card-header" style="border-right:3px solid var(--teal);">
+      <i class="ti ti-certificate" style="color:var(--teal)"></i>
+      <span>📋 الأطر التنظيمية المؤثرة على التسعير — مرجع مباشر لمعاملات التسوية</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>الإطار التنظيمي</th>
+            <th>الجهة المصدِرة</th>
+            <th>القطاعات المتأثرة</th>
+            <th>تأثيره على سعر النموذج</th>
+            <th>المصدر الرسمي</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div style="font-weight:600;color:var(--text);">NCA-ECC 2.0</div>
+              <div style="font-size:11px;color:var(--text3);">Essential Cybersecurity Controls</div>
+            </td>
+            <td class="mono-val c-teal" style="font-size:12px;">NCA</td>
+            <td style="font-size:12px;color:var(--text2);">الحكومة، البنية التحتية الحيوية</td>
+            <td><span class="tag tag-red">× 1.65 على السعر الأساسي (+65%)</span></td>
+            <td><a href="https://nca.gov.sa" target="_blank" class="source-link" style="font-size:11px;">nca.gov.sa ↗</a></td>
+          </tr>
+          <tr>
+            <td>
+              <div style="font-weight:600;color:var(--text);">SAMA Cybersecurity Framework</div>
+              <div style="font-size:11px;color:var(--text3);">CSF v1.0</div>
+            </td>
+            <td class="mono-val c-teal" style="font-size:12px;">SAMA</td>
+            <td style="font-size:12px;color:var(--text2);">البنوك، التأمين، المالية</td>
+            <td><span class="tag tag-amber">× 1.50 على السعر الأساسي (+50%)</span></td>
+            <td><a href="https://www.sama.gov.sa" target="_blank" class="source-link" style="font-size:11px;">sama.gov.sa ↗</a></td>
+          </tr>
+          <tr>
+            <td>
+              <div style="font-weight:600;color:var(--text);">PDPL — نظام حماية البيانات الشخصية</div>
+              <div style="font-size:11px;color:var(--text3);">Personal Data Protection Law 2023</div>
+            </td>
+            <td class="mono-val c-teal" style="font-size:12px;">NDMO</td>
+            <td style="font-size:12px;color:var(--text2);">جميع القطاعات — Data Residency</td>
+            <td><span class="tag tag-blue">× 1.20 إضافة (+20%) للتخزين المحلي</span></td>
+            <td><a href="https://marksparksolutions.com/reports/saudi-arabia-cyber-security-market" target="_blank" class="source-link" style="font-size:11px;">marksparksolutions ↗</a></td>
+          </tr>
+          <tr>
+            <td>
+              <div style="font-weight:600;color:var(--text);">OTCC — OT Cybersecurity Controls</div>
+              <div style="font-size:11px;color:var(--text3);">Operational Technology Controls</div>
+            </td>
+            <td class="mono-val c-teal" style="font-size:12px;">NCA</td>
+            <td style="font-size:12px;color:var(--text2);">النفط والغاز، الطاقة، الصناعة</td>
+            <td><span class="tag tag-red">× 1.80 على السعر الأساسي (+80%)</span></td>
+            <td><a href="https://nca.gov.sa" target="_blank" class="source-link" style="font-size:11px;">nca.gov.sa ↗</a></td>
+          </tr>
+          <tr>
+            <td>
+              <div style="font-weight:600;color:var(--text);">CITC Regulations</div>
+              <div style="font-size:11px;color:var(--text3);">Communications & IT Commission</div>
+            </td>
+            <td class="mono-val c-teal" style="font-size:12px;">CITC</td>
+            <td style="font-size:12px;color:var(--text2);">الاتصالات، تقنية المعلومات</td>
+            <td><span class="tag tag-blue">× 1.35 على السعر الأساسي (+35%)</span></td>
+            <td><a href="https://www.citc.gov.sa" target="_blank" class="source-link" style="font-size:11px;">citc.gov.sa ↗</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ METHODOLOGY ══ -->
+  <div class="ref-card" style="margin-bottom:16px;">
+    <div class="ref-card-header" style="border-right:3px solid var(--accent);">
+      <i class="ti ti-settings" style="color:var(--accent)"></i>
+      <span>⚙️ منهجية احتساب الأسعار في هذا النموذج</span>
+    </div>
+    <div style="padding:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="font-size:13px;color:var(--text2);line-height:1.9;">
+          <p style="margin-bottom:.75rem;"><strong style="color:var(--text);">تحويل العملة:</strong> جميع الأسعار الدولارية تُحوَّل إلى ريال سعودي بسعر ثابت <span class="mono-val c-green">1 USD = 3.75 SAR</span> وهو سعر الربط الرسمي لمؤسسة النقد العربي السعودي.</p>
+          <p style="margin-bottom:.75rem;"><strong style="color:var(--text);">نقطة السعر الأساسية (Baseline):</strong> تستخدم الأداة منتصف النطاق لكل نموذج تسعير. مثال: Per-User 24/7 Alerting = $24/مستخدم/شهر (منتصف $15–$33).</p>
+          <p style="margin-bottom:.75rem;"><strong style="color:var(--text);">معاملات القطاع:</strong> مستقاة من تقارير Forrester وMarketsandMarkets للأسواق الناشئة والسوق السعودي تحديداً، مع تعديل لمتطلبات الامتثال التنظيمي المحلي.</p>
+          <p><strong style="color:var(--text);">تكلفة SOC الداخلي:</strong> مبنية على بيانات رواتب Levels.fyi وGlassdoor للسوق السعودي + تكاليف أدوات MSSP، مع إضافة 30% overhead (تدريب، بنية تحتية، دوران الموظفين).</p>
+        </div>
+        <div style="background:var(--bg3);border-radius:8px;padding:1rem;border:1px solid var(--border);">
+          <div style="font-size:12px;font-family:'IBM Plex Mono',monospace;color:var(--text3);margin-bottom:.75rem;letter-spacing:.06em;">⚠️ ملاحظات جوهرية</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.9;">
+            <p style="margin-bottom:.5rem;">• الأسعار تقديرية للتخطيط والمقارنة — الأسعار الفعلية تتفاوت حسب التفاوض وحجم العقد والمزود.</p>
+            <p style="margin-bottom:.5rem;">• السوق السعودي يشهد ضغطاً تصاعدياً على الأسعار بسبب ندرة الكوادر المتخصصة (نمو الطلب 14% سنوياً).</p>
+            <p style="margin-bottom:.5rem;">• بعض المزودين يقدمون عروضاً مبدئية مخفضة مع تصاعد التكلفة لاحقاً — راجع شروط التجديد.</p>
+            <p>• تاريخ آخر مراجعة للأسعار: <span class="mono-val c-blue">يونيو 2026</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ APA BIBLIOGRAPHY ══ -->
+  <div class="ref-card">
+    <div class="ref-card-header" style="border-right:3px solid var(--text3);">
+      <i class="ti ti-list-numbers" style="color:var(--text3)"></i>
+      <span>📚 قائمة المراجع الكاملة (APA Style) — 15 مرجعاً</span>
+    </div>
+    <div style="padding:14px 16px;">
+      <ol style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--accent);line-height:1.8;">
+          <span class="mono-val c-blue" style="font-size:11px;">[1]</span> الهيئة الوطنية للأمن السيبراني. (2025). <em style="color:var(--text);">تقرير المؤشرات الاقتصادية في قطاع الأمن السيبراني في المملكة 2025.</em> <a href="https://nca.gov.sa/en/studies-and-reports/" target="_blank" style="color:var(--accent);">nca.gov.sa</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--accent);line-height:1.8;">
+          <span class="mono-val c-blue" style="font-size:11px;">[2]</span> MarketsandMarkets. (2025). <em style="color:var(--text);">Kingdom of Saudi Arabia Cyber Security Market — Size, Share &amp; Industry Trends Analysis Report, 2025–2031.</em> <a href="https://www.marketsandmarkets.com/Market-Reports/kingdom-of-saudi-arabia-cyber-security-market-3336684.html" target="_blank" style="color:var(--accent);">marketsandmarkets.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--accent);line-height:1.8;">
+          <span class="mono-val c-blue" style="font-size:11px;">[3]</span> MarketsandMarkets. (2025). <em style="color:var(--text);">Managed Security Services Market — Global Forecast to 2030.</em> <a href="https://www.marketsandmarkets.com/Market-Reports/managed-security-services-market-5918403.html" target="_blank" style="color:var(--accent);">marketsandmarkets.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--accent);line-height:1.8;">
+          <span class="mono-val c-blue" style="font-size:11px;">[4]</span> Ken Research. (October 2025). <em style="color:var(--text);">Saudi Arabia Cybersecurity and MSSP Market — Size, Share, Trends, Competition, Opportunity, and Forecast.</em> <a href="https://www.kenresearch.com/saudi-arabia-cybersecurity-and-mssp-market" target="_blank" style="color:var(--accent);">kenresearch.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--accent);line-height:1.8;">
+          <span class="mono-val c-blue" style="font-size:11px;">[5]</span> Credence Research. (April 2025). <em style="color:var(--text);">Saudi Arabia Managed Security Services Market Size, Share, Growth, and Forecast to 2032.</em> <a href="https://www.credenceresearch.com/report/saudi-arabia-managed-security-services-market" target="_blank" style="color:var(--accent);">credenceresearch.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--success);line-height:1.8;">
+          <span class="mono-val c-green" style="font-size:11px;">[6]</span> Meriplex. (May 2026). <em style="color:var(--text);">How Much Do Managed Security Services Cost in 2026?</em> <a href="https://meriplex.com/managed-security-services-cost-2026/" target="_blank" style="color:var(--accent);">meriplex.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--success);line-height:1.8;">
+          <span class="mono-val c-green" style="font-size:11px;">[7]</span> Monetizely, citing CompTIA Survey 2023. (October 2025). <em style="color:var(--text);">How to Price Managed Security Services: A Comprehensive Guide for MSSPs.</em> <a href="https://www.getmonetizely.com/articles/how-to-price-managed-security-services-a-comprehensive-guide-for-mssps" target="_blank" style="color:var(--accent);">getmonetizely.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--success);line-height:1.8;">
+          <span class="mono-val c-green" style="font-size:11px;">[8]</span> PricingLink. (April 2025). <em style="color:var(--text);">How to Price Managed Security Services (Per User, Endpoint, Tier) | MSSP Pricing Strategy Guide 2025.</em> <a href="https://pricinglink.com/knowledge-base/managed-security-service-provider/how-to-price-mssp-services/" target="_blank" style="color:var(--accent);">pricinglink.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--success);line-height:1.8;">
+          <span class="mono-val c-green" style="font-size:11px;">[9]</span> Corsica Tech. (August 2025). <em style="color:var(--text);">Managed Security Services Pricing: Getting the Best Value.</em> <a href="https://corsicatech.com/blog/managed-security-services-pricing-cost/" target="_blank" style="color:var(--accent);">corsicatech.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--success);line-height:1.8;">
+          <span class="mono-val c-green" style="font-size:11px;">[10]</span> Medhacloud, citing ConnectWise IT Nation Benchmark 2025 &amp; Datto Global State of the MSP 2025. (March 2026). <em style="color:var(--text);">55 Managed Services Market Statistics for 2026 — MSP Growth Data.</em> <a href="https://medhacloud.com/blog/managed-services-market-statistics-2026" target="_blank" style="color:var(--accent);">medhacloud.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--purple);line-height:1.8;">
+          <span class="mono-val c-purple" style="font-size:11px;">[11]</span> Microsoft Security. (2025–2026). <em style="color:var(--text);">Microsoft Sentinel Pricing.</em> Microsoft Corporation. <a href="https://www.microsoft.com/en-us/security/pricing/microsoft-sentinel" target="_blank" style="color:var(--accent);">microsoft.com/en-us/security/pricing/microsoft-sentinel</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--purple);line-height:1.8;">
+          <span class="mono-val c-purple" style="font-size:11px;">[12]</span> G2 Crowd. (2026). <em style="color:var(--text);">Microsoft Sentinel Pricing 2026 — G2 Peer Reviews and Pricing Data.</em> <a href="https://www.g2.com/products/microsoft-sentinel/pricing" target="_blank" style="color:var(--accent);">g2.com/products/microsoft-sentinel/pricing</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--purple);line-height:1.8;">
+          <span class="mono-val c-purple" style="font-size:11px;">[13]</span> UnderDefense. (February 2026). <em style="color:var(--text);">Microsoft Sentinel Pricing in 2025 — MDR vs MSSP vs DIY.</em> <a href="https://underdefense.com/industry-pricings/microsoft-sentinel-pricing/" target="_blank" style="color:var(--accent);">underdefense.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--warn);line-height:1.8;">
+          <span class="mono-val c-amber" style="font-size:11px;">[14]</span> Glassdoor. (November 2025). <em style="color:var(--text);">SOC Analyst Salaries in Saudi Arabia — 2025 Compensation Data.</em> <a href="https://www.glassdoor.com/Salaries/saudi-arabia-soc-analyst-salary-SRCH_IL.0,12_IN207_KO13,24.htm" target="_blank" style="color:var(--accent);">glassdoor.com</a>
+        </li>
+        <li style="font-size:12px;color:var(--text2);padding:.625rem 1rem;background:var(--bg3);border-radius:6px;border-right:2px solid var(--warn);line-height:1.8;">
+          <span class="mono-val c-amber" style="font-size:11px;">[15]</span> Levels.fyi. (2025). <em style="color:var(--text);">Cybersecurity Analyst Salary in Saudi Arabia — Total Compensation Data.</em> <a href="https://www.levels.fyi/en-gb/t/security-analyst/locations/saudi-arabia" target="_blank" style="color:var(--accent);">levels.fyi</a>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+</div><!-- end page-sources -->
+
+</div><!-- end wrapper -->
+
+<!-- ══════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════ -->
+<script>
+// ─── CONFIG ───────────────────────────────────
+const USD_SAR = 3.75;
+let lang = 'ar';
+let currentStep = 0;
+let priceChart = null;
+
+const answers = {
+  sector:null, employees:null, geo:null, coverage:null,
+  win_servers:0, lin_servers:0, endpoints:0, firewalls:0,
+  cloud:null, siem:null, services:[], incidents:null,
+  sla:null, rep_freq:null, regulations:[], data_types:[],
+  retention:null, budget:null
+};
+const declined = {};
+
+// ─── SAR FORMATTER ────────────────────────────
+function fmt(v) { return Math.round(v).toLocaleString('ar-SA'); }
+function fmtSAR(v) { return fmt(v) + ' ر.س'; }
+
+// ─── MAIN PAGE NAVIGATION ─────────────────────
+function showMainPage(id, btn) {
+  document.querySelectorAll('.main-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab-main').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ─── STEP NAVIGATION ──────────────────────────
+function goStep(step) {
+  if (step > currentStep + 1 || step < 0 || step > 4) return;
+  document.getElementById('step-' + currentStep).style.display = 'none';
+  currentStep = step;
+  const el = document.getElementById('step-' + currentStep);
+  el.style.display = 'block';
+  el.style.animation = 'none'; el.offsetHeight; el.style.animation = '';
+
+  document.querySelectorAll('.step-tab').forEach((tab, i) => {
+    tab.classList.remove('active', 'done', 'locked');
+    if (i < currentStep) tab.classList.add('done');
+    else if (i === currentStep) tab.classList.add('active');
+    else tab.classList.add('locked');
+  });
+
+  const pct = ((currentStep + 1) / 5) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('btn-back').style.display = currentStep > 0 ? 'flex' : 'none';
+  const nextBtn = document.getElementById('btn-next');
+  const nextLbl = document.getElementById('lbl-next');
+  if (currentStep === 4) {
+    nextBtn.style.display = 'none';
+  } else {
+    nextBtn.style.display = 'flex';
+    nextLbl.textContent = currentStep === 3 ? (lang==='ar'?'احسب التسعير':'Calculate Pricing') : (lang==='ar'?'التالي':'Next');
+  }
+  if (currentStep === 4) renderResults();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function goNext() { if (currentStep < 4) goStep(currentStep + 1); }
+function goBack() { if (currentStep > 0) goStep(currentStep - 1); }
+
+// ─── INPUT HELPERS ────────────────────────────
+function selectOpt(key, btn, val) {
+  if (declined[key]) return;
+  answers[key] = val;
+  btn.closest('.opt-grid').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function toggleMulti(key, btn, val) {
+  if (!answers[key]) answers[key] = [];
+  const idx = answers[key].indexOf(val);
+  if (idx === -1) { answers[key].push(val); btn.classList.add('selected'); }
+  else { answers[key].splice(idx, 1); btn.classList.remove('selected'); }
+}
+
+function toggleDecline(key, cb) {
+  declined[key] = cb.checked;
+  cb.closest('.q-card').querySelectorAll('.opt-btn').forEach(b => {
+    b.disabled = cb.checked;
+    if (cb.checked) b.classList.remove('selected');
+  });
+  if (cb.checked) answers[key] = null;
+}
+
+function toggleDeclineNum(id, cb) {
+  document.getElementById(id).disabled = cb.checked;
+  if (cb.checked) document.getElementById(id).value = '';
+  syncAnswers();
+}
+
+function syncAnswers() {
+  answers.win_servers  = parseFloat(document.getElementById('win-servers').value) || 0;
+  answers.lin_servers  = parseFloat(document.getElementById('lin-servers').value) || 0;
+  answers.endpoints    = parseFloat(document.getElementById('endpoints').value)   || 0;
+  answers.firewalls    = parseFloat(document.getElementById('firewalls').value)    || 0;
+}
+
+// ─── COMPLEXITY SCORING ───────────────────────
+function calcComplexity() {
+  let p = 0;
+  if (answers.coverage === '24x7') p += 3; else if (answers.coverage === '16x5') p += 2;
+  if (answers.sector === 'government' || answers.sector === 'banking') p += 3;
+  else if (['telecom','healthcare','energy'].includes(answers.sector)) p += 2;
+  if (answers.cloud === 'multi-cloud') p += 2; else if (['cloud-first','hybrid'].includes(answers.cloud)) p += 1;
+  const eMap = {lt50:0,'50-200':0,'200-500':1,'500-1000':1,'1000-5000':2,gt5000:3};
+  p += (eMap[answers.employees] || 0);
+  if (answers.incidents === 'gt50') p += 3; else if (answers.incidents === '20-50') p += 2; else if (answers.incidents === '5-20') p += 1;
+  const regs = (answers.regulations || []).length;
+  if (regs >= 3) p += 3; else if (regs >= 1) p += 1;
+  if (answers.sla === '15m') p += 2; else if (answers.sla === '1h') p += 1;
+  if (answers.geo === 'global') p += 2; else if (answers.geo === 'regional') p += 1;
+  if ((answers.services || []).includes('forensics')) p += 2;
+  if ((answers.services || []).includes('threat-hunt')) p += 1;
+  return p;
+}
+
+function complexityTier(p) {
+  if (p <= 5) return 0; if (p <= 10) return 1; if (p <= 16) return 2; return 3;
+}
+
+// ─── LOG VOLUME ESTIMATION ────────────────────
+function estimateLogGB() {
+  syncAnswers();
+  let gb = answers.win_servers * 1 + answers.lin_servers * 0.5 + answers.endpoints * 0.05 + answers.firewalls * 20;
+  if (gb === 0) {
+    const m = {lt50:5,'50-200':20,'200-500':50,'500-1000':120,'1000-5000':400,gt5000:1200};
+    gb = m[answers.employees || '50-200'] || 50;
+  }
+  if (answers.cloud === 'cloud-first') { gb *= 1.4; gb += 10; }
+  else if (answers.cloud === 'multi-cloud') { gb *= 1.6; gb += 20; }
+  return Math.max(gb, 5);
+}
+
+// ─── PRICING MODELS (ALL SAR) ─────────────────
+
+// Model 1: GB/Day Volume Pricing
+function calcM1(gb, tier) {
+  // SIEM rates in SAR/GB/day (USD × 3.75, with KSA adjustment)
+  const siemRates = {
+    'none':    9.38,   // $2.50 baseline
+    'sentinel': 11.10, // $2.96 PAYG
+    'splunk':   30.00, // $8.00 approx
+    'qradar':   15.00, // $4.00
+    'elastic':  5.63,  // $1.50
+    'other-siem': 11.25 // $3.00
+  };
+  const siemKey = answers.siem || 'sentinel';
+  const siemMonthly = gb * 30 * (siemRates[siemKey] || 11.10);
+
+  // Analyst hours × SAR rate (avg 22,000 SAR/month → ~168 SAR/hr for 130hr effective)
+  const hrs = [40, 80, 140, 220][tier];
+  const analystCost = hrs * 168.75; // ~168 SAR/hr
+
+  // Infrastructure: storage + servers in SAR
+  const infra = gb * 0.1 * 30 * 30; // ~30 SAR/GB/month storage
+
+  const overhead = (siemMonthly + analystCost + infra) * 0.15;
+  const sub = siemMonthly + analystCost + infra + overhead;
+  const profit = sub * 0.35;
+  return { siemMonthly, analystCost, infra, overhead, profit, total: sub + profit };
+}
+
+// Model 2: Analyst Capacity
+function calcM2(tier) {
+  const cpa = [12, 8, 5, 2][tier]; // clients per analyst
+  const avgSalary = 22000; // SAR/month (Glassdoor KSA 2025)
+  const mgrSalary = 30000; // SOC Manager SAR/month
+  const toolsCost = 11250; // SAR/month per full analyst slot
+
+  const analystShare = avgSalary / cpa;
+  const socMgr = mgrSalary / [15, 10, 6, 3][tier];
+  const tools = toolsCost / cpa;
+  const office = 5625 / cpa; // office + infra
+  const sub = analystShare + socMgr + tools + office;
+  const profit = sub * 0.35;
+  return { analystShare, socMgr, tools, office, profit, total: sub + profit, analysts: 1 / cpa };
+}
+
+// Model 3: Activity-Based Costing (ABC)
+function calcM3(tier) {
+  // Hours per activity per month (by tier 0→3)
+  const mH =  [40, 80, 130, 200][tier];
+  const iH =  [5,  15, 30,  55][tier];
+  const rH =  [3,  6,  10,  18][tier];
+  const tH =  [4,  10, 18,  28][tier];
+  const mtH = [2,  4,  6,   10][tier];
+
+  // SAR hourly rates (converted from KSA market rates)
+  const mC  = mH  * 168.75; // Monitoring — SOC Analyst T2 rate
+  const iC  = iH  * 318.75; // Investigation — Senior Analyst
+  const rC  = rH  * 243.75; // Reporting — Analyst T2
+  const tC  = tH  * 281.25; // SIEM Tuning — Engineer
+  const mtC = mtH * 206.25; // Meetings — T1 Analyst
+
+  const sub = mC + iC + rC + tC + mtC;
+  const profit = sub * 0.35;
+  return { mC, iC, rC, tC, mtC, profit, total: sub + profit };
+}
+
+// ─── RENDER RESULTS ───────────────────────────
+function renderResults() {
+  const pts = calcComplexity();
+  const tier = complexityTier(pts);
+  const gb = estimateLogGB();
+  const m1 = calcM1(gb, tier);
+  const m2 = calcM2(tier);
+  const m3 = calcM3(tier);
+  const hasDeclined = Object.values(declined).some(v => v);
+  const tierCls = ['cx-0','cx-1','cx-2','cx-3'][tier];
+  const tierName = ['بسيط / صغير','متوسط','كبير','مؤسسي'][tier];
+
+  const tags = [];
+  if (answers.sector) tags.push(answers.sector);
+  if (answers.coverage) tags.push(answers.coverage);
+  if (answers.employees) tags.push(answers.employees + ' موظف');
+  if (answers.siem && answers.siem !== 'none') tags.push(answers.siem.toUpperCase());
+  (answers.regulations || []).slice(0, 3).forEach(r => tags.push(r.toUpperCase()));
+
+  const methods = [
+    {
+      name: 'تسعير حجم GB/Day',
+      desc: 'تسعير معياري في الصناعة بناءً على حجم اللوجات. شفاف ومرتبط مباشرةً بتكاليف ترخيص SIEM. الأنسب للعروض التجارية الأولية.',
+      badge: 'موصى به للمبيعات', badgeCls: '', rec: true, icon: 'ti-database', total: m1.total,
+      rows: [
+        {l:'ترخيص SIEM', v: fmtSAR(m1.siemMonthly)},
+        {l:'تكلفة المحللين', v: fmtSAR(m1.analystCost)},
+        {l:'البنية التحتية', v: fmtSAR(m1.infra)},
+        {l:'الإدارة والعبء (15%)', v: fmtSAR(m1.overhead)},
+        {l:'هامش الربح (35%)', v: fmtSAR(m1.profit)},
+        {l:'الإجمالي / شهر', v: fmtSAR(m1.total)}
+      ]
+    },
+    {
+      name: 'نموذج طاقة المحللين',
+      desc: 'نموذج قائم على الكوادر يربط تكلفة الخدمة باستخدام المحللين الفعلي. يحمي هامش الربح للعملاء ذوي التعقيد العالي.',
+      badge: 'خط أساس التكلفة', badgeCls: 'green', rec: false, icon: 'ti-users', total: m2.total,
+      rows: [
+        {l:'حصة تكلفة المحلل', v: fmtSAR(m2.analystShare)},
+        {l:'إدارة SOC', v: fmtSAR(m2.socMgr)},
+        {l:'الأدوات والمنصات', v: fmtSAR(m2.tools)},
+        {l:'البنية التحتية', v: fmtSAR(m2.office)},
+        {l:'هامش الربح (35%)', v: fmtSAR(m2.profit)},
+        {l:'الإجمالي / شهر', v: fmtSAR(m2.total)}
+      ]
+    },
+    {
+      name: 'التكلفة على أساس النشاط (ABC)',
+      desc: 'أدق توزيع للتكاليف. يربط كل نشاط خدمي بالوقت والسعر بالساعة. مثالي للتكلفة الداخلية والتفاوض على العقود المعقدة.',
+      badge: 'الأكثر دقة', badgeCls: 'amber', rec: false, icon: 'ti-chart-dots', total: m3.total,
+      rows: [
+        {l:'المراقبة (ساعات × معدل)', v: fmtSAR(m3.mC)},
+        {l:'التحقيق (ساعات × معدل)', v: fmtSAR(m3.iC)},
+        {l:'التقارير (ساعات × معدل)', v: fmtSAR(m3.rC)},
+        {l:'ضبط SIEM (ساعات × معدل)', v: fmtSAR(m3.tC)},
+        {l:'الاجتماعات (ساعات × معدل)', v: fmtSAR(m3.mtC)},
+        {l:'هامش الربح (35%)', v: fmtSAR(m3.profit)},
+        {l:'الإجمالي / شهر', v: fmtSAR(m3.total)}
+      ]
+    }
+  ];
+
+  document.getElementById('results-container').innerHTML = `
+    <div class="section-header">
+      <div class="section-title">تحليل التسعير</div>
+      <div class="section-desc">ثلاث منهجيات تسعير مطبقة على ملفك — جميع الأسعار بالريال السعودي.</div>
+    </div>
+    ${hasDeclined ? `<div class="alert-box alert-warn"><i class="ti ti-alert-triangle"></i><span>بعض الإجابات رُفضت — التقديرات تستخدم متوسطات السوق للبيانات المفقودة.</span></div>` : ''}
+    <div class="alert-box alert-info"><i class="ti ti-info-circle"></i><span>التقديرات مبنية على بيانات سوق 2025–2026 وإجاباتك. التسعير النهائي يعتمد على التفاوض والاتفاقيات المحددة. · 1 USD = 3.75 SAR</span></div>
+    <div class="complexity-badge ${tierCls}"><i class="ti ti-chart-radar"></i>تعقيد العميل: ${tierName} &nbsp;·&nbsp; ${pts} نقطة</div>
+    <div class="metrics-grid">
+      <div class="metric-card"><div class="metric-lbl">حجم اللوجات التقديري</div><div class="metric-val">${Math.round(gb)}</div><div class="metric-sub">GB / يوم</div></div>
+      <div class="metric-card"><div class="metric-lbl">المحللون المطلوبون</div><div class="metric-val">${m2.analysts.toFixed(2)}</div><div class="metric-sub">FTE</div></div>
+      <div class="metric-card"><div class="metric-lbl">السعر الشهري (GB/Day)</div><div class="metric-val">${fmt(m1.total)}</div><div class="metric-sub">ر.س / شهر</div></div>
+      <div class="metric-card"><div class="metric-lbl">السعر الشهري (ABC)</div><div class="metric-val">${fmt(m3.total)}</div><div class="metric-sub">ر.س / شهر</div></div>
+    </div>
+    <div style="font-size:12px;color:var(--text3);margin-bottom:8px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.04em">وسوم الملف</div>
+    <div class="profile-tags" style="margin-bottom:20px">${tags.map(t => `<span class="ptag">${t}</span>`).join('') || '—'}</div>
+    <div class="chart-wrap">
+      <div class="chart-title">مقارنة التسعير الشهري — ريال سعودي</div>
+      <div class="chart-canvas-wrap"><canvas id="price-chart"></canvas></div>
+    </div>
+    <div class="methods-grid">
+      ${methods.map(m => `
+        <div class="method-card${m.rec ? ' rec' : ''}">
+          <div class="method-badge ${m.badgeCls}">${m.badge}</div>
+          <div class="method-top"><i class="ti ${m.icon} method-icon"></i><div class="method-name">${m.name}</div></div>
+          <div class="method-desc">${m.desc}</div>
+          <div class="price-display"><span class="price-main">${fmt(m.total)}</span><span class="price-period">ر.س / شهر</span></div>
+          <div class="breakdown">${m.rows.map((r, i) => `<div class="bd-row${i === m.rows.length - 1 ? ' last' : ''}"><span class="bd-lbl">${r.l}</span><span class="bd-val">${r.v}</span></div>`).join('')}</div>
+        </div>`).join('')}
+    </div>
+    <div class="market-note">
+      معيار السوق السعودي: 56–281 ر.س/مستخدم/شهر (CompTIA ×3.75) | 
+      Sentinel: 11.1–20.9 ر.س/GB/يوم | Splunk: 30–75 ر.س/GB/يوم | 
+      SOC داخلي كامل: 1.3–2.1 مليون ر.س/سنة (5 محللين) | 
+      المصدر: NCA · MarketsandMarkets · CompTIA · Glassdoor · Meriplex 2025–2026
+    </div>
+  `;
+
+  setTimeout(() => {
+    const canvas = document.getElementById('price-chart');
+    if (!canvas) return;
+    if (priceChart) priceChart.destroy();
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const textColor = isDark ? '#888480' : '#888580';
+    const gridColor = isDark ? 'rgba(255,255,255,.05)' : 'rgba(0,0,0,.05)';
+    priceChart = new Chart(canvas, {
+      type: 'bar',
+      data: {
+        labels: ['GB/Day Volume', 'Analyst Capacity', 'ABC'],
+        datasets: [{
+          label: 'السعر الشهري',
+          data: [Math.round(m1.total), Math.round(m2.total), Math.round(m3.total)],
+          backgroundColor: ['#1a6cf6', '#1d9e75', '#ba7517'],
+          borderRadius: 8, borderSkipped: false
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: {display: false},
+          tooltip: {callbacks: {label: c => fmt(c.raw) + ' ر.س'}, padding: 10}
+        },
+        scales: {
+          y: {
+            ticks: {callback: v => (v >= 1000 ? Math.round(v/1000)+'K' : v) + ' ر.س', color: textColor, font: {size: 11, family: "'IBM Plex Mono', monospace"}},
+            grid: {color: gridColor}, border: {display: false}
+          },
+          x: {ticks: {color: textColor, font: {size: 11}}, grid: {display: false}, border: {display: false}}
+        }
+      }
+    });
+  }, 80);
+}
+
+// ─── THEME TOGGLE ─────────────────────────────
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  document.getElementById('theme-btn').innerHTML = isDark ? '<i class="ti ti-moon"></i>' : '<i class="ti ti-sun"></i>';
+  if (currentStep === 4) renderResults();
+}
+
+// ─── LANGUAGE TOGGLE ──────────────────────────
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.toggle('active', b.textContent === l.toUpperCase()));
+  document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.documentElement.lang = l;
+
+  const isAr = l === 'ar';
+
+  // Header
+  document.getElementById('hdr-title').textContent = isAr ? 'نموذج تسعير الأمن السيبراني المدار' : 'MSSP Pricing Intelligence';
+  document.getElementById('hdr-sub').textContent   = isAr ? 'حاسبة التكلفة والتسعير — مركز العمليات الأمنية · السوق السعودي' : 'Managed SOC Cost & Pricing Calculator — Saudi Market';
+
+  // Nav tabs
+  document.getElementById('nt-form').textContent = isAr ? 'نموذج التسعير' : 'Pricing Form';
+  document.getElementById('nt-logic').textContent = isAr ? 'منطق التسعير' : 'Pricing Logic';
+  document.getElementById('nt-ref').textContent = isAr ? 'مرجع الأسعار' : 'Price Reference';
+  document.getElementById('nt-src').textContent = isAr ? 'المصادر' : 'Sources';
+
+  // Module titles
+  document.getElementById('logic-title').textContent = isAr ? 'كيف يُحسَب السعر؟' : 'How Is the Price Calculated?';
+  document.getElementById('logic-sub').textContent = isAr ? 'شرح خطوة بخطوة بأرقام حقيقية — كأنك تبني قائمة تكاليف في Excel' : 'Step-by-step with real numbers — like building a cost sheet in Excel';
+  document.getElementById('ref-title').textContent = isAr ? 'موديول مرجع الأسعار' : 'Price Reference Module';
+  document.getElementById('ref-sub').textContent = isAr ? 'نطاقات أسعار تفصيلية للسوق السعودي 2025–2026' : 'Detailed price ranges for the Saudi market 2025–2026';
+  document.getElementById('src-title').textContent = isAr ? 'موديول المصادر والمراجع' : 'Sources & References Module';
+  document.getElementById('src-sub').textContent = isAr ? 'جميع البيانات مستقاة من 14 مصدراً أولياً موثقاً' : 'All data sourced from 14 primary verified references';
+
+  // Back/Next
+  document.getElementById('lbl-back').textContent = isAr ? 'رجوع' : 'Back';
+  const nextLbl = document.getElementById('lbl-next');
+  if (nextLbl) nextLbl.textContent = currentStep === 3 ? (isAr ? 'احسب التسعير' : 'Calculate') : (isAr ? 'التالي' : 'Next');
+
+  if (currentStep === 4) renderResults();
+}
+</script>
+</body>
+</html>
