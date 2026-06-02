@@ -276,6 +276,9 @@ select:focus{border-color:var(--accent)}
       <button class="nav-tab-main" onclick="showMainPage('realcost',this)">
         <i class="ti ti-coins"></i><span id="nt-realcost">التكلفة الأصلية</span>
       </button>
+      <button class="nav-tab-main" onclick="window.open('mssp-handbook.html','_blank')">
+        <i class="ti ti-book-2"></i><span id="nt-handbook">الدليل الشامل</span>
+      </button>
     </div>
     <div class="nav-right">
       <div class="lang-toggle">
@@ -323,14 +326,14 @@ select:focus{border-color:var(--accent)}
       <div class="q-label"><i class="ti ti-briefcase"></i><span id="lbl-sector">القطاع</span></div>
       <div class="q-hint" id="hint-sector">القطاعات المنظَّمة تتطلب مراقبة وتقارير أكثر كثافة وتؤثر على معامل السعر</div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="selectOpt('sector',this,'government')">🏛️ حكومي / Government</button>
-        <button class="opt-btn" onclick="selectOpt('sector',this,'banking')">🏦 بنوك وتمويل / Banking</button>
-        <button class="opt-btn" onclick="selectOpt('sector',this,'telecom')">📡 اتصالات / Telecom</button>
-        <button class="opt-btn" onclick="selectOpt('sector',this,'healthcare')">🏥 صحة / Healthcare</button>
-        <button class="opt-btn" onclick="selectOpt('sector',this,'energy')">⚡ طاقة ونفط / Energy</button>
-        <button class="opt-btn" onclick="selectOpt('sector',this,'retail')">🛒 تجزئة / Retail</button>
-        <button class="opt-btn" onclick="selectOpt('sector',this,'manufacturing')">🏭 تصنيع / Manufacturing</button>
-        <button class="opt-btn" onclick="selectOpt('sector',this,'other')">📋 أخرى / Other</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'government')" data-ar="🏛️ حكومي / Government" data-en="🏛️ Government">🏛️ حكومي / Government</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'banking')" data-ar="🏦 بنوك وتمويل / Banking" data-en="🏦 Banking & Finance">🏦 بنوك وتمويل / Banking</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'telecom')" data-ar="📡 اتصالات / Telecom" data-en="📡 Telecom">📡 اتصالات / Telecom</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'healthcare')" data-ar="🏥 صحة / Healthcare" data-en="🏥 Healthcare">🏥 صحة / Healthcare</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'energy')" data-ar="⚡ طاقة ونفط / Energy" data-en="⚡ Energy & Oil">⚡ طاقة ونفط / Energy</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'retail')" data-ar="🛒 تجزئة / Retail" data-en="🛒 Retail">🛒 تجزئة / Retail</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'manufacturing')" data-ar="🏭 تصنيع / Manufacturing" data-en="🏭 Manufacturing">🏭 تصنيع / Manufacturing</button>
+        <button class="opt-btn" onclick="selectOpt('sector',this,'other')" data-ar="📋 أخرى / Other" data-en="📋 Other">📋 أخرى / Other</button>
       </div>
       <label class="q-decline"><input type="checkbox" id="dec-sector" onchange="toggleDecline('sector',this)"><span class="dec-lbl" id="dec-lbl-sector">أفضل عدم الإجابة</span></label>
     </div>
@@ -351,19 +354,19 @@ select:focus{border-color:var(--accent)}
       <div class="q-label"><i class="ti ti-map-pin"></i><span id="lbl-geo">الانتشار الجغرافي</span></div>
       <div class="q-hint" id="hint-geo">مواقع متعددة تزيد من تعقيد المراقبة وتكلفتها</div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="selectOpt('geo',this,'single')">موقع واحد</button>
-        <button class="opt-btn" onclick="selectOpt('geo',this,'multi-local')">مواقع متعددة محلية</button>
-        <button class="opt-btn" onclick="selectOpt('geo',this,'regional')">إقليمي (الخليج/الشرق الأوسط)</button>
-        <button class="opt-btn" onclick="selectOpt('geo',this,'global')">دولي / Global</button>
+        <button class="opt-btn" onclick="selectOpt('geo',this,'single')" data-ar="موقع واحد" data-en="Single Location">موقع واحد</button>
+        <button class="opt-btn" onclick="selectOpt('geo',this,'multi-local')" data-ar="مواقع متعددة محلية" data-en="Multiple Local Sites">مواقع متعددة محلية</button>
+        <button class="opt-btn" onclick="selectOpt('geo',this,'regional')" data-ar="إقليمي (الخليج/الشرق الأوسط)" data-en="Regional (Gulf/Middle East)">إقليمي (الخليج/الشرق الأوسط)</button>
+        <button class="opt-btn" onclick="selectOpt('geo',this,'global')" data-ar="دولي / Global" data-en="Global">دولي / Global</button>
       </div>
       <label class="q-decline"><input type="checkbox" id="dec-geo" onchange="toggleDecline('geo',this)"><span class="dec-lbl" id="dec-lbl-geo">أفضل عدم الإجابة</span></label>
     </div>
     <div class="q-card">
       <div class="q-label"><i class="ti ti-clock-24"></i><span id="lbl-coverage">متطلبات التغطية</span></div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="selectOpt('coverage',this,'8x5')">8×5 — ساعات العمل فقط</button>
-        <button class="opt-btn" onclick="selectOpt('coverage',this,'16x5')">16×5 — ممتد</button>
-        <button class="opt-btn" onclick="selectOpt('coverage',this,'24x7')">24×7 — SOC كامل</button>
+        <button class="opt-btn" onclick="selectOpt('coverage',this,'8x5')" data-ar="8×5 — ساعات العمل فقط" data-en="8×5 — Business Hours Only">8×5 — ساعات العمل فقط</button>
+        <button class="opt-btn" onclick="selectOpt('coverage',this,'16x5')" data-ar="16×5 — ممتد" data-en="16×5 — Extended">16×5 — ممتد</button>
+        <button class="opt-btn" onclick="selectOpt('coverage',this,'24x7')" data-ar="24×7 — SOC كامل" data-en="24×7 — Full SOC">24×7 — SOC كامل</button>
       </div>
       <label class="q-decline"><input type="checkbox" id="dec-coverage" onchange="toggleDecline('coverage',this)"><span class="dec-lbl" id="dec-lbl-coverage">أفضل عدم الإجابة</span></label>
     </div>
@@ -376,7 +379,7 @@ select:focus{border-color:var(--accent)}
       <div class="section-desc" id="s1-desc">يتم تقدير حجم اللوجات بناءً على قائمة أصولك.</div>
     </div>
     <div class="q-card">
-      <div class="q-label"><i class="ti ti-server"></i><span id="lbl-winsrv">خوادم Windows</span> <span style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~1 GB/يوم لكل خادم</span></div>
+      <div class="q-label"><i class="ti ti-server"></i><span id="lbl-winsrv">خوادم Windows</span> <span id="hint-winsrv-inline" style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~1 GB/يوم لكل خادم</span></div>
       <div class="num-row">
         <input type="number" class="num-input" id="win-servers" min="0" placeholder="0" oninput="syncAnswers()">
         <span class="num-unit" id="unit-winsrv">خادم</span>
@@ -384,7 +387,7 @@ select:focus{border-color:var(--accent)}
       <label class="q-decline"><input type="checkbox" id="dec-winsrv" onchange="toggleDeclineNum('win-servers',this)"><span class="dec-lbl" id="dec-lbl-winsrv">أفضل عدم الإجابة</span></label>
     </div>
     <div class="q-card">
-      <div class="q-label"><i class="ti ti-brand-ubuntu"></i><span id="lbl-linsrv">خوادم Linux</span> <span style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~0.5 GB/يوم لكل خادم</span></div>
+      <div class="q-label"><i class="ti ti-brand-ubuntu"></i><span id="lbl-linsrv">خوادم Linux</span> <span id="hint-linsrv-inline" style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~0.5 GB/يوم لكل خادم</span></div>
       <div class="num-row">
         <input type="number" class="num-input" id="lin-servers" min="0" placeholder="0" oninput="syncAnswers()">
         <span class="num-unit" id="unit-linsrv">خادم</span>
@@ -392,7 +395,7 @@ select:focus{border-color:var(--accent)}
       <label class="q-decline"><input type="checkbox" id="dec-linsrv" onchange="toggleDeclineNum('lin-servers',this)"><span class="dec-lbl" id="dec-lbl-linsrv">أفضل عدم الإجابة</span></label>
     </div>
     <div class="q-card">
-      <div class="q-label"><i class="ti ti-device-laptop"></i><span id="lbl-endpoints">النقاط الطرفية (أجهزة)</span> <span style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~0.05 GB/يوم لكل جهاز</span></div>
+      <div class="q-label"><i class="ti ti-device-laptop"></i><span id="lbl-endpoints">النقاط الطرفية (أجهزة)</span> <span id="hint-endpoints-inline" style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~0.05 GB/يوم لكل جهاز</span></div>
       <div class="num-row">
         <input type="number" class="num-input" id="endpoints" min="0" placeholder="0" oninput="syncAnswers()">
         <span class="num-unit" id="unit-endpoints">جهاز</span>
@@ -400,7 +403,7 @@ select:focus{border-color:var(--accent)}
       <label class="q-decline"><input type="checkbox" id="dec-endpoints" onchange="toggleDeclineNum('endpoints',this)"><span class="dec-lbl" id="dec-lbl-endpoints">أفضل عدم الإجابة</span></label>
     </div>
     <div class="q-card">
-      <div class="q-label"><i class="ti ti-router"></i><span id="lbl-firewalls">الجدران النارية / أجهزة الشبكة</span> <span style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~20 GB/يوم لكل جهاز</span></div>
+      <div class="q-label"><i class="ti ti-router"></i><span id="lbl-firewalls">الجدران النارية / أجهزة الشبكة</span> <span id="hint-firewalls-inline" style="color:var(--text3);font-size:11px;font-weight:400;font-family:'IBM Plex Mono',monospace">&nbsp;~20 GB/يوم لكل جهاز</span></div>
       <div class="num-row">
         <input type="number" class="num-input" id="firewalls" min="0" placeholder="0" oninput="syncAnswers()">
         <span class="num-unit" id="unit-firewalls">جهاز</span>
@@ -410,22 +413,22 @@ select:focus{border-color:var(--accent)}
     <div class="q-card">
       <div class="q-label"><i class="ti ti-cloud"></i><span id="lbl-cloud">البيئة السحابية</span></div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="selectOpt('cloud',this,'none')">بدون سحابة</button>
-        <button class="opt-btn" onclick="selectOpt('cloud',this,'hybrid')">هجين / Hybrid</button>
-        <button class="opt-btn" onclick="selectOpt('cloud',this,'cloud-first')">سحابي أساسي / Cloud-First</button>
-        <button class="opt-btn" onclick="selectOpt('cloud',this,'multi-cloud')">متعدد السحابة / Multi-Cloud</button>
+        <button class="opt-btn" onclick="selectOpt('cloud',this,'none')" data-ar="بدون سحابة" data-en="No Cloud">بدون سحابة</button>
+        <button class="opt-btn" onclick="selectOpt('cloud',this,'hybrid')" data-ar="هجين / Hybrid" data-en="Hybrid">هجين / Hybrid</button>
+        <button class="opt-btn" onclick="selectOpt('cloud',this,'cloud-first')" data-ar="سحابي أساسي / Cloud-First" data-en="Cloud-First">سحابي أساسي / Cloud-First</button>
+        <button class="opt-btn" onclick="selectOpt('cloud',this,'multi-cloud')" data-ar="متعدد السحابة / Multi-Cloud" data-en="Multi-Cloud">متعدد السحابة / Multi-Cloud</button>
       </div>
       <label class="q-decline"><input type="checkbox" id="dec-cloud" onchange="toggleDecline('cloud',this)"><span class="dec-lbl" id="dec-lbl-cloud">أفضل عدم الإجابة</span></label>
     </div>
     <div class="q-card">
       <div class="q-label"><i class="ti ti-chart-bar"></i><span id="lbl-siem">منصة SIEM الحالية</span></div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="selectOpt('siem',this,'none')">لا يوجد</button>
+        <button class="opt-btn" onclick="selectOpt('siem',this,'none')" data-ar="لا يوجد" data-en="None">لا يوجد</button>
         <button class="opt-btn" onclick="selectOpt('siem',this,'sentinel')">Microsoft Sentinel</button>
         <button class="opt-btn" onclick="selectOpt('siem',this,'splunk')">Splunk</button>
         <button class="opt-btn" onclick="selectOpt('siem',this,'qradar')">IBM QRadar</button>
         <button class="opt-btn" onclick="selectOpt('siem',this,'elastic')">Elastic SIEM</button>
-        <button class="opt-btn" onclick="selectOpt('siem',this,'other-siem')">أخرى / Other</button>
+        <button class="opt-btn" onclick="selectOpt('siem',this,'other-siem')" data-ar="أخرى / Other" data-en="Other">أخرى / Other</button>
       </div>
       <label class="q-decline"><input type="checkbox" id="dec-siem" onchange="toggleDecline('siem',this)"><span class="dec-lbl" id="dec-lbl-siem">أفضل عدم الإجابة</span></label>
     </div>
@@ -441,43 +444,43 @@ select:focus{border-color:var(--accent)}
       <div class="q-label"><i class="ti ti-eye"></i><span id="lbl-services">الخدمات المطلوبة</span></div>
       <div class="q-hint" id="hint-services">اختر كل ما ينطبق — كل خدمة إضافية تزيد من حجم العمل والتكلفة</div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="toggleMulti('services',this,'monitoring')">مراقبة 24/7</button>
-        <button class="opt-btn" onclick="toggleMulti('services',this,'incident')">الاستجابة للحوادث</button>
-        <button class="opt-btn" onclick="toggleMulti('services',this,'vuln')">إدارة الثغرات</button>
-        <button class="opt-btn" onclick="toggleMulti('services',this,'threat-hunt')">صيد التهديدات</button>
-        <button class="opt-btn" onclick="toggleMulti('services',this,'reporting')">تقارير الامتثال</button>
-        <button class="opt-btn" onclick="toggleMulti('services',this,'forensics')">الجنائيات الرقمية</button>
-        <button class="opt-btn" onclick="toggleMulti('services',this,'pentest')">اختبار الاختراق</button>
-        <button class="opt-btn" onclick="toggleMulti('services',this,'awareness')">التوعية الأمنية</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'monitoring')" data-ar="مراقبة 24/7" data-en="24/7 Monitoring">مراقبة 24/7</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'incident')" data-ar="الاستجابة للحوادث" data-en="Incident Response">الاستجابة للحوادث</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'vuln')" data-ar="إدارة الثغرات" data-en="Vulnerability Management">إدارة الثغرات</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'threat-hunt')" data-ar="صيد التهديدات" data-en="Threat Hunting">صيد التهديدات</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'reporting')" data-ar="تقارير الامتثال" data-en="Compliance Reporting">تقارير الامتثال</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'forensics')" data-ar="الجنائيات الرقمية" data-en="Digital Forensics">الجنائيات الرقمية</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'pentest')" data-ar="اختبار الاختراق" data-en="Penetration Testing">اختبار الاختراق</button>
+        <button class="opt-btn" onclick="toggleMulti('services',this,'awareness')" data-ar="التوعية الأمنية" data-en="Security Awareness">التوعية الأمنية</button>
       </div>
     </div>
     <div class="q-card">
       <div class="q-label"><i class="ti ti-alert-triangle"></i><span id="lbl-incidents">الحوادث الشهرية المتوقعة</span></div>
       <div class="q-hint" id="hint-incidents">متوسط الحوادث الأمنية التي تتطلب تحقيق المحلل</div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="selectOpt('incidents',this,'lt5')">&lt; 5 — منخفض</button>
-        <button class="opt-btn" onclick="selectOpt('incidents',this,'5-20')">5 – 20 — متوسط</button>
-        <button class="opt-btn" onclick="selectOpt('incidents',this,'20-50')">20 – 50 — مرتفع</button>
-        <button class="opt-btn" onclick="selectOpt('incidents',this,'gt50')">&gt; 50 — حرج</button>
+        <button class="opt-btn" onclick="selectOpt('incidents',this,'lt5')" data-ar="&lt; 5 — منخفض" data-en="&lt; 5 — Low">&lt; 5 — منخفض</button>
+        <button class="opt-btn" onclick="selectOpt('incidents',this,'5-20')" data-ar="5 – 20 — متوسط" data-en="5 – 20 — Medium">5 – 20 — متوسط</button>
+        <button class="opt-btn" onclick="selectOpt('incidents',this,'20-50')" data-ar="20 – 50 — مرتفع" data-en="20 – 50 — High">20 – 50 — مرتفع</button>
+        <button class="opt-btn" onclick="selectOpt('incidents',this,'gt50')" data-ar="&gt; 50 — حرج" data-en="&gt; 50 — Critical">&gt; 50 — حرج</button>
       </div>
       <label class="q-decline"><input type="checkbox" id="dec-incidents" onchange="toggleDecline('incidents',this)"><span class="dec-lbl" id="dec-lbl-incidents">أفضل عدم الإجابة</span></label>
     </div>
     <div class="q-card">
       <div class="q-label"><i class="ti ti-clock"></i><span id="lbl-sla">SLA وقت الاستجابة المطلوب</span></div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="selectOpt('sla',this,'4h')">أقل من 4 ساعات</button>
-        <button class="opt-btn" onclick="selectOpt('sla',this,'1h')">أقل من ساعة</button>
-        <button class="opt-btn" onclick="selectOpt('sla',this,'15m')">أقل من 15 دقيقة</button>
+        <button class="opt-btn" onclick="selectOpt('sla',this,'4h')" data-ar="أقل من 4 ساعات" data-en="Under 4 Hours">أقل من 4 ساعات</button>
+        <button class="opt-btn" onclick="selectOpt('sla',this,'1h')" data-ar="أقل من ساعة" data-en="Under 1 Hour">أقل من ساعة</button>
+        <button class="opt-btn" onclick="selectOpt('sla',this,'15m')" data-ar="أقل من 15 دقيقة" data-en="Under 15 Minutes">أقل من 15 دقيقة</button>
       </div>
       <label class="q-decline"><input type="checkbox" id="dec-sla" onchange="toggleDecline('sla',this)"><span class="dec-lbl" id="dec-lbl-sla">أفضل عدم الإجابة</span></label>
     </div>
     <div class="q-card">
       <div class="q-label"><i class="ti ti-report"></i><span id="lbl-rep-freq">تكرار التقارير</span></div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'monthly')">شهري</button>
-        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'weekly')">أسبوعي</button>
-        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'daily')">يومي</button>
-        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'realtime')">لوحة معلومات فورية</button>
+        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'monthly')" data-ar="شهري" data-en="Monthly">شهري</button>
+        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'weekly')" data-ar="أسبوعي" data-en="Weekly">أسبوعي</button>
+        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'daily')" data-ar="يومي" data-en="Daily">يومي</button>
+        <button class="opt-btn" onclick="selectOpt('rep_freq',this,'realtime')" data-ar="لوحة معلومات فورية" data-en="Real-Time Dashboard">لوحة معلومات فورية</button>
       </div>
       <label class="q-decline"><input type="checkbox" id="dec-rep-freq" onchange="toggleDecline('rep_freq',this)"><span class="dec-lbl" id="dec-lbl-rep-freq">أفضل عدم الإجابة</span></label>
     </div>
@@ -492,36 +495,36 @@ select:focus{border-color:var(--accent)}
     <div class="q-card">
       <div class="q-label"><i class="ti ti-certificate"></i><span id="lbl-regs">الأطر التنظيمية المنطبقة</span></div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="toggleMulti('regulations',this,'nca')">🇸🇦 NCA-ECC — هيئة الأمن السيبراني</button>
-        <button class="opt-btn" onclick="toggleMulti('regulations',this,'sama')">🏦 SAMA CSF — مؤسسة النقد</button>
-        <button class="opt-btn" onclick="toggleMulti('regulations',this,'citc')">📡 CITC — هيئة الاتصالات</button>
-        <button class="opt-btn" onclick="toggleMulti('regulations',this,'pdpl')">🔒 PDPL — نظام حماية البيانات</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'nca')" data-ar="🇸🇦 NCA-ECC — هيئة الأمن السيبراني" data-en="🇸🇦 NCA-ECC — Cybersecurity Authority">🇸🇦 NCA-ECC — هيئة الأمن السيبراني</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'sama')" data-ar="🏦 SAMA CSF — مؤسسة النقد" data-en="🏦 SAMA CSF — Saudi Central Bank">🏦 SAMA CSF — مؤسسة النقد</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'citc')" data-ar="📡 CITC — هيئة الاتصالات" data-en="📡 CITC — Telecom Authority">📡 CITC — هيئة الاتصالات</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'pdpl')" data-ar="🔒 PDPL — نظام حماية البيانات" data-en="🔒 PDPL — Personal Data Protection Law">🔒 PDPL — نظام حماية البيانات</button>
         <button class="opt-btn" onclick="toggleMulti('regulations',this,'iso27001')">ISO 27001</button>
         <button class="opt-btn" onclick="toggleMulti('regulations',this,'pci')">PCI-DSS</button>
         <button class="opt-btn" onclick="toggleMulti('regulations',this,'hipaa')">HIPAA</button>
-        <button class="opt-btn" onclick="toggleMulti('regulations',this,'none-reg')">لا يوجد</button>
+        <button class="opt-btn" onclick="toggleMulti('regulations',this,'none-reg')" data-ar="لا يوجد" data-en="None">لا يوجد</button>
       </div>
     </div>
     <div class="q-card">
       <div class="q-label"><i class="ti ti-database"></i><span id="lbl-datatypes">أنواع البيانات الحساسة</span></div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="toggleMulti('data_types',this,'pii')">بيانات شخصية / PII</button>
-        <button class="opt-btn" onclick="toggleMulti('data_types',this,'financial')">سجلات مالية</button>
-        <button class="opt-btn" onclick="toggleMulti('data_types',this,'health')">سجلات صحية</button>
-        <button class="opt-btn" onclick="toggleMulti('data_types',this,'ip')">ملكية فكرية</button>
-        <button class="opt-btn" onclick="toggleMulti('data_types',this,'gov')">حكومي سري</button>
-        <button class="opt-btn" onclick="toggleMulti('data_types',this,'ot')">تقنية تشغيلية / OT</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'pii')" data-ar="بيانات شخصية / PII" data-en="Personal Data / PII">بيانات شخصية / PII</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'financial')" data-ar="سجلات مالية" data-en="Financial Records">سجلات مالية</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'health')" data-ar="سجلات صحية" data-en="Health Records">سجلات صحية</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'ip')" data-ar="ملكية فكرية" data-en="Intellectual Property">ملكية فكرية</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'gov')" data-ar="حكومي سري" data-en="Government Classified">حكومي سري</button>
+        <button class="opt-btn" onclick="toggleMulti('data_types',this,'ot')" data-ar="تقنية تشغيلية / OT" data-en="Operational Technology / OT">تقنية تشغيلية / OT</button>
       </div>
       <label class="q-decline"><input type="checkbox" id="dec-datatypes" onchange="toggleDecline('data_types',this)"><span class="dec-lbl" id="dec-lbl-datatypes">أفضل عدم الإجابة</span></label>
     </div>
     <div class="q-card">
       <div class="q-label"><i class="ti ti-history"></i><span id="lbl-retention">متطلب الاحتفاظ بالسجلات</span></div>
       <div class="opt-grid">
-        <button class="opt-btn" onclick="selectOpt('retention',this,'3m')">3 أشهر</button>
-        <button class="opt-btn" onclick="selectOpt('retention',this,'6m')">6 أشهر</button>
-        <button class="opt-btn" onclick="selectOpt('retention',this,'1y')">سنة (NCA الحد الأدنى)</button>
-        <button class="opt-btn" onclick="selectOpt('retention',this,'3y')">3 سنوات (SAMA)</button>
-        <button class="opt-btn" onclick="selectOpt('retention',this,'7y')">7 سنوات</button>
+        <button class="opt-btn" onclick="selectOpt('retention',this,'3m')" data-ar="3 أشهر" data-en="3 Months">3 أشهر</button>
+        <button class="opt-btn" onclick="selectOpt('retention',this,'6m')" data-ar="6 أشهر" data-en="6 Months">6 أشهر</button>
+        <button class="opt-btn" onclick="selectOpt('retention',this,'1y')" data-ar="سنة (NCA الحد الأدنى)" data-en="1 Year (NCA Minimum)">سنة (NCA الحد الأدنى)</button>
+        <button class="opt-btn" onclick="selectOpt('retention',this,'3y')" data-ar="3 سنوات (SAMA)" data-en="3 Years (SAMA)">3 سنوات (SAMA)</button>
+        <button class="opt-btn" onclick="selectOpt('retention',this,'7y')" data-ar="7 سنوات" data-en="7 Years">7 سنوات</button>
       </div>
       <label class="q-decline"><input type="checkbox" id="dec-retention" onchange="toggleDecline('retention',this)"><span class="dec-lbl" id="dec-lbl-retention">أفضل عدم الإجابة</span></label>
     </div>
@@ -2691,6 +2694,23 @@ function translateStaticContent(isAr) {
     el.textContent = isAr ? el.getAttribute('data-ar') : el.getAttribute('data-en');
   });
 
+  // Translate option buttons with data-ar/data-en (innerHTML safe since no child elements)
+  document.querySelectorAll('.opt-btn[data-ar][data-en]').forEach(btn => {
+    btn.textContent = isAr ? btn.getAttribute('data-ar') : btn.getAttribute('data-en');
+  });
+
+  // Inline GB/day hints in infrastructure section
+  const inlineHints = {
+    'hint-winsrv-inline':    [' ~1 GB/يوم لكل خادم',    ' ~1 GB/day per server'],
+    'hint-linsrv-inline':    [' ~0.5 GB/يوم لكل خادم',  ' ~0.5 GB/day per server'],
+    'hint-endpoints-inline': [' ~0.05 GB/يوم لكل جهاز', ' ~0.05 GB/day per device'],
+    'hint-firewalls-inline': [' ~20 GB/يوم لكل جهاز',   ' ~20 GB/day per device'],
+  };
+  Object.entries(inlineHints).forEach(([id, vals]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = '\u00A0' + (isAr ? vals[0] : vals[1]);
+  });
+
   // Reference module KPIs
   const refKpis = [
     ['ref-kpi-ksa-lbl','سوق الأمن السيبراني KSA','KSA Cybersecurity Market'],
@@ -2746,6 +2766,7 @@ function setLang(l) {
   document.getElementById('nt-ref').textContent      = isAr ? 'مرجع الأسعار'      : 'Price Reference';
   document.getElementById('nt-src').textContent      = isAr ? 'المصادر'           : 'Sources';
   document.getElementById('nt-realcost').textContent = isAr ? 'التكلفة الأصلية'   : 'Real Cost';
+  document.getElementById('nt-handbook').textContent = isAr ? 'الدليل الشامل'      : 'Full Handbook';
 
   // Step tabs
   document.getElementById('st0').textContent = isAr ? 'ملف الشركة'          : 'Company Profile';
