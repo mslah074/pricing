@@ -41,20 +41,24 @@ body {
 }
 
 /* ── SIDEBAR NAV ── */
-.layout { display: flex; min-height: 100vh; }
+.layout { display: block; min-height: 100vh; }
+
+.main { margin-right: 280px; }
 
 .sidebar {
   width: 280px;
   flex-shrink: 0;
   background: var(--ink);
   color: #e8e5df;
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 0; right: 0;
   height: 100vh;
   overflow-y: auto;
   padding: 0 0 40px;
+  z-index: 200;
   scrollbar-width: thin;
   scrollbar-color: #333 transparent;
+  transition: right .28s ease;
 }
 
 .sidebar-brand {
@@ -440,21 +444,124 @@ tbody td:first-child { font-family: var(--mono); font-size: 12px; color: var(--b
 .toc-name { font-size: 14px; color: var(--ink); flex: 1; }
 .toc-tag { font-family: var(--mono); font-size: 10px; padding: 2px 7px; border-radius: 4px; }
 
+/* ── TOPBAR (mobile only) ── */
+.topbar {
+  display: none;
+  position: sticky; top: 0; z-index: 300;
+  background: var(--ink); color: #fff;
+  height: 52px; padding: 0 16px;
+  align-items: center; justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0,0,0,.4);
+}
+.topbar-title { font-size: 14px; font-weight: 600; }
+.topbar-menu-btn {
+  background: none; border: none; color: #fff;
+  font-size: 22px; cursor: pointer; padding: 4px 6px; line-height: 1;
+}
+
+/* ── OVERLAY (mobile) ── */
+.sidebar-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 190;
+  background: rgba(0,0,0,.55);
+}
+.sidebar-overlay.visible { display: block; }
+
+/* ── CALC STEP TABLE ── */
+.calc-steps {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+.calc-steps-title {
+  background: var(--ink);
+  color: #fff;
+  padding: 11px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex; align-items: center; gap: 8px;
+}
+.calc-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--rule);
+}
+.calc-row:last-child { border-bottom: none; }
+.calc-row.total { background: var(--blue-bg); }
+.calc-row.subtotal { background: var(--bg3); }
+.calc-row-label {
+  flex: 1; padding: 11px 16px;
+  font-size: 13.5px; color: var(--ink2); line-height: 1.6;
+}
+.calc-row-label strong { color: var(--ink); }
+.calc-row-op {
+  width: 36px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: var(--ink3); font-weight: 300;
+  border-right: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+.calc-row-val {
+  width: 160px; flex-shrink: 0; padding: 11px 14px;
+  font-family: var(--mono); font-size: 13px;
+  color: var(--blue); text-align: left;
+  display: flex; align-items: center;
+}
+.calc-row.total .calc-row-val { font-size: 15px; font-weight: 700; color: var(--blue); }
+.calc-row.subtotal .calc-row-val { color: var(--amber); font-weight: 600; }
+
 /* ── RESPONSIVE ── */
-@media(max-width:900px) {
-  .sidebar { display: none; }
-  .chapter { padding: 28px 20px 60px; }
+@media(max-width:860px) {
+  .sidebar {
+    position: fixed; top: 0; right: -290px; height: 100vh;
+    width: 270px; z-index: 200;
+    transition: right .28s ease;
+  }
+  .sidebar.open { right: 0; }
+  .main { margin-right: 0 !important; }
+  .topbar { display: flex; }
+  .chapter { padding: 24px 16px 60px; }
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .ch-number { font-size: 52px; }
+  .ch-title { font-size: 24px; }
+  h2 { font-size: 17px; }
+  .calc-row-val { width: 120px; font-size: 12px; }
+  .calc-row-label { font-size: 13px; padding: 10px 12px; }
+  .mini-card .mc-val { font-size: 18px; }
+}
+
+@media(max-width:480px) {
+  .calc-row { flex-wrap: wrap; }
+  .calc-row-op { display: none; }
+  .calc-row-val {
+    width: 100%; border-top: 1px dashed var(--rule);
+    border-left: none; border-right: none;
+    padding: 6px 12px 10px;
+  }
+  .example-row { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .example-val { font-size: 12px; }
 }
 
 /* ── PRINT ── */
 @media print {
-  .sidebar { display: none; }
-  .chapter { display: block !important; page-break-before: always; }
+  .sidebar, .topbar { display: none !important; }
+  .main { margin-right: 0 !important; }
+  .chapter { display: block !important; page-break-before: always; padding: 20px; }
 }
 </style>
 </head>
 <body>
+
+<!-- ── MOBILE TOPBAR ── -->
+<div class="topbar" id="topbar">
+  <div class="topbar-title">🛡️ دليل MSSP</div>
+  <button class="topbar-menu-btn" onclick="openSidebar()" aria-label="القائمة">☰</button>
+</div>
+
+<!-- ── OVERLAY ── -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
 <div class="layout">
 
@@ -1040,20 +1147,15 @@ tbody td:first-child { font-family: var(--mono); font-size: 12px; color: var(--b
   <h2>معادلة حجم السجلات اليومي</h2>
   <p>هذه أهم معادلة في البنية التقنية. كل نوع من الأجهزة ينتج كمية مختلفة من السجلات:</p>
 
-  <div class="formula">
-<span class="comment">-- حجم السجلات اليومي (GB/يوم) --</span>
-<span class="label">حجم_السجلات</span> =
-  (<span class="highlight">خوادم_Windows</span> × <span class="result">1.0 GB</span>)
-+ (<span class="highlight">خوادم_Linux</span>   × <span class="result">0.5 GB</span>)
-+ (<span class="highlight">الأجهزة</span>        × <span class="result">0.05 GB</span>)
-+ (<span class="highlight">الجدران_النارية</span> × <span class="result">20.0 GB</span>)
-
-<span class="comment">-- تعديل البيئة السحابية --</span>
-إذا cloud-first  → الناتج × 1.4 + 10 GB
-إذا multi-cloud  → الناتج × 1.6 + 20 GB
-إذا hybrid       → الناتج × 1.1 (تقريباً)
-
-<span class="comment">-- الحد الأدنى دائماً 5 GB/يوم --</span>
+  <div class="calc-steps">
+    <div class="calc-steps-title">📊 كيف تُجمَع السجلات؟ — قاعدة بسيطة لكل نوع جهاز</div>
+    <div class="calc-row"><div class="calc-row-label">عدد <strong>خوادم Windows</strong> × 1.0 GB لكل خادم يومياً</div><div class="calc-row-op"></div><div class="calc-row-val">Windows = 1 GB/يوم</div></div>
+    <div class="calc-row"><div class="calc-row-label">عدد <strong>خوادم Linux</strong> × 0.5 GB لكل خادم يومياً</div><div class="calc-row-op"></div><div class="calc-row-val">Linux = 0.5 GB/يوم</div></div>
+    <div class="calc-row"><div class="calc-row-label">عدد <strong>الأجهزة والحواسب</strong> × 0.05 GB لكل جهاز يومياً (كل 20 جهاز = 1 GB)</div><div class="calc-row-op"></div><div class="calc-row-val">جهاز = 0.05 GB/يوم</div></div>
+    <div class="calc-row"><div class="calc-row-label">عدد <strong>الجدران النارية</strong> × 20 GB لكل جدار يومياً</div><div class="calc-row-op"></div><div class="calc-row-val">جدار ناري = 20 GB/يوم</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>إذا Cloud-First:</strong> الناتج × 1.4 ثم + 10 GB إضافية للخدمات السحابية</div><div class="calc-row-op"></div><div class="calc-row-val">+40% + 10 GB</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>إذا Multi-Cloud:</strong> الناتج × 1.6 ثم + 20 GB إضافية</div><div class="calc-row-op"></div><div class="calc-row-val">+60% + 20 GB</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>الحد الأدنى دائماً</strong> — حتى لو لا توجد أجهزة محددة</div><div class="calc-row-op"></div><div class="calc-row-val">5 GB / يوم</div></div>
   </div>
 
   <div class="box example">
@@ -1350,22 +1452,20 @@ tbody td:first-child { font-family: var(--mono); font-size: 12px; color: var(--b
   <p><strong>المكونات:</strong> تكلفة SIEM + تكلفة المحللين + تكلفة التخزين + Overhead + هامش الربح</p>
   <p><strong>الأنسب لـ:</strong> العروض التجارية الرسمية وتوقع الفواتير الشهرية.</p>
 
-  <div class="formula">
-<span class="comment">--- النموذج الأول: حجم البيانات ---</span>
-
-<span class="label">تكلفة_SIEM</span>   = GB/يوم × 30 يوم × سعر_GB/يوم
-<span class="label">تكلفة_محللين</span> = ساعات_الشريحة × 168.75 ر.س/ساعة × معامل_التغطية
-<span class="label">تكلفة_تخزين</span>  = GB/يوم × 0.1 × 30 يوم × 30 ر.س/GB
-<span class="label">Overhead</span>       = (SIEM + محللين + تخزين) × 15%
-<span class="label">مجموع_التكاليف</span> = SIEM + محللين + تخزين + Overhead
-<span class="result">السعر_النهائي</span>   = مجموع_التكاليف × 1.35
+  <div class="calc-steps">
+    <div class="calc-steps-title">🔢 مكونات السعر في النموذج الأول</div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكلفة SIEM:</strong> حجم GB يومياً × 30 يوم × سعر GB المختار (Sentinel = 11.10 ريال، Splunk = 30 ريال، Elastic = 5.63 ريال...)</div><div class="calc-row-op">=</div><div class="calc-row-val">تكلفة SIEM الشهرية</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكلفة المحللين:</strong> ساعات الشريحة (40/80/140/220) × 168.75 ريال/ساعة × معامل التغطية (8/5=1.0 — 16/5=1.20 — 24/7=1.45)</div><div class="calc-row-op">+</div><div class="calc-row-val">تكلفة المحللين</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكلفة التخزين:</strong> حجم GB يومياً × 10% × 30 يوم × 30 ريال/GB</div><div class="calc-row-op">+</div><div class="calc-row-val">تكلفة التخزين</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>Overhead 15%:</strong> ما سبق مضروباً في 15% — يشمل الإيجار والكهرباء والتدريب</div><div class="calc-row-op">+</div><div class="calc-row-val">15% من المجموع</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>السعر النهائي:</strong> إجمالي كل ما سبق × 1.35 (يشمل هامش ربح 35%)</div><div class="calc-row-op">=</div><div class="calc-row-val">السعر المقترح</div></div>
   </div>
 
-  <div class="box example">
+  <div class="box info">
     <div class="box-icon">📐</div>
     <div class="box-content">
-      <div class="box-title">معنى 168.75 ريال/ساعة</div>
-      متوسط راتب محلل أمن في السعودية = 22,000 ريال/شهر (Glassdoor KSA 2025). ÷ 130 ساعة عمل فعلية شهرياً = ~169 ريال/ساعة.
+      <div class="box-title">من أين جاء رقم 168.75 ريال/ساعة؟</div>
+      متوسط راتب محلل أمن في السعودية = 22,000 ريال/شهر (Glassdoor KSA 2025) ÷ 130 ساعة عمل فعلية شهرياً = حوالي 169 ريال/ساعة.
     </div>
   </div>
 
@@ -1387,16 +1487,13 @@ tbody td:first-child { font-family: var(--mono); font-size: 12px; color: var(--b
     </table>
   </div>
 
-  <div class="formula">
-<span class="comment">--- النموذج الثاني: طاقة المحللين ---</span>
-
-<span class="label">حصة_المحلل</span>  = راتب_محلل / عدد_العملاء_للمحلل
-<span class="label">راتب_محلل</span>   = 22,000 ر.س + مكافأة_ليل (0 أو 2,200 أو 5,500)
-<span class="label">حصة_مدير_SOC</span>= 30,000 ر.س / عدد_عملاء_المدير
-<span class="label">أدوات</span>        = 11,250 ر.س / عدد_العملاء_للمحلل
-<span class="label">مكتب</span>         = 5,625 ر.س / عدد_العملاء_للمحلل
-<span class="label">المجموع_الفرعي</span>= حصة_محلل + حصة_مدير + أدوات + مكتب
-<span class="result">السعر_النهائي</span> = المجموع_الفرعي × 1.35
+  <div class="calc-steps">
+    <div class="calc-steps-title">🔢 مكونات السعر في النموذج الثاني</div>
+    <div class="calc-row"><div class="calc-row-label"><strong>الراتب الكامل للمحلل:</strong> الراتب الأساسي 22,000 ريال + مكافأة الليل (صفر بـ 8/5 — 2,200 بـ 16/5 — 5,500 بـ 24/7)</div><div class="calc-row-op">=</div><div class="calc-row-val">22,000–27,500 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>حصة هذا العميل من المحلل:</strong> الراتب الكامل ÷ عدد العملاء الذين يخدمهم المحلل (10/5/2/0.5 حسب الشريحة والتغطية)</div><div class="calc-row-op">+</div><div class="calc-row-val">حصة المحلل</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>حصة من راتب مدير SOC:</strong> 30,000 ريال ÷ عدد العملاء الذين يديرهم المدير</div><div class="calc-row-op">+</div><div class="calc-row-val">حصة المدير</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>حصة من الأدوات والمكتب:</strong> 11,250 + 5,625 ريال مُقسَّمة على عدد العملاء</div><div class="calc-row-op">+</div><div class="calc-row-val">حصة الأدوات</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>السعر النهائي:</strong> مجموع كل الحصص × 1.35 (هامش ربح 35%)</div><div class="calc-row-op">=</div><div class="calc-row-val">السعر المقترح</div></div>
   </div>
 
   <hr class="divider">
@@ -1437,101 +1534,64 @@ tbody td:first-child { font-family: var(--mono); font-size: 12px; color: var(--b
   </div>
 
   <h2>معادلة حجم السجلات</h2>
-  <div class="formula">
-estimateLogGB():
-  gb = (خوادم_Win × 1.0)
-     + (خوادم_Lin × 0.5)
-     + (أجهزة × 0.05)
-     + (جدران_نارية × 20.0)
-
-  <span class="comment">// إذا كانت كل الأرقام صفراً، استخدم تقدير بعدد الموظفين:</span>
-  إذا gb == 0:
-    {أقل50:5, '50-200':20, '200-500':50,
-     '500-1000':120, '1000-5000':400, gt5000:1200}
-
-  <span class="comment">// تعديل السحابة:</span>
-  إذا cloud-first:  gb = gb × 1.4 + 10
-  إذا multi-cloud:  gb = gb × 1.6 + 20
-
-  <span class="result">الناتج: max(gb, 5)  // الحد الأدنى 5 GB/يوم</span>
+  <div class="calc-steps">
+    <div class="calc-steps-title">📊 كيف تُحسَب كمية السجلات؟ — مثال: 10 خوادم Windows + 5 Linux + 200 جهاز + 3 جدران نارية</div>
+    <div class="calc-row"><div class="calc-row-label">10 خوادم Windows × 1 GB — Windows يسجل كل حركة بتفصيل</div><div class="calc-row-op">=</div><div class="calc-row-val">10 GB</div></div>
+    <div class="calc-row"><div class="calc-row-label">5 خوادم Linux × 0.5 GB — Linux أقل تسجيلاً افتراضياً</div><div class="calc-row-op">+</div><div class="calc-row-val">2.5 GB</div></div>
+    <div class="calc-row"><div class="calc-row-label">200 جهاز × 0.05 GB — كل 20 جهاز ينتج 1 GB</div><div class="calc-row-op">+</div><div class="calc-row-val">10 GB</div></div>
+    <div class="calc-row"><div class="calc-row-label">3 جدران نارية × 20 GB — يرى كل حركة مرور الشبكة</div><div class="calc-row-op">+</div><div class="calc-row-val">60 GB</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>المجموع قبل تعديل السحابة</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">82.5 GB</div></div>
+    <div class="calc-row"><div class="calc-row-label">لو البيئة Cloud-First: الناتج × 1.4 ثم + 10 GB إضافية للسحابة</div><div class="calc-row-op">→</div><div class="calc-row-val">82.5 × 1.4 + 10</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>الحجم النهائي مع Cloud-First</strong> — الحد الأدنى دائماً 5 GB</div><div class="calc-row-op">=</div><div class="calc-row-val">125.5 GB / يوم</div></div>
   </div>
 
   <h2>معادلة حساب التعقيد (calcComplexity)</h2>
-  <div class="formula">
-calcComplexity():
-  نقاط = 0
-  + (التغطية === '24x7' ? 6 : '16x5' ? 2 : 0)
-  + (القطاع === 'حكومي/بنكي' ? 3 : 'اتصالات/صحة/طاقة' ? 2 : 0)
-  + (السحابة === 'multi-cloud' ? 2 : 'cloud-first/hybrid' ? 1 : 0)
-  + {أقل200:0, '200-500':1, '500-1000':1, '1000-5000':2, gt5000:3}[موظفون]
-  + (حوادث === 'gt50' ? 3 : '20-50' ? 2 : '5-20' ? 1 : 0)
-  + (أطر_تنظيمية.length >= 3 ? 3 : >= 1 ? 1 : 0)
-  + (SLA === '15m' ? 2 : '1h' ? 1 : 0)
-  + (جغرافي === 'عالمي' ? 2 : 'إقليمي' ? 1 : 0)
-  + (forensics_مفعّل ? 2 : 0)
-  + (threat_hunt_مفعّل ? 1 : 0)
-
-  <span class="comment">// قاعدة القفل:</span>
-  إذا التغطية === '24x7': نقاط = max(نقاط, 6)
-
-  الشريحة = (نقاط ≤ 5) ? 0 : (≤ 10) ? 1 : (≤ 16) ? 2 : 3
+  <div class="calc-steps">
+    <div class="calc-steps-title">🎯 كيف تُحسَب درجة التعقيد؟ — مثال شامل</div>
+    <div class="calc-row"><div class="calc-row-label">تغطية 24/7 — يُطبَّق تلقائياً الحد الأدنى 6 نقاط</div><div class="calc-row-op">=</div><div class="calc-row-val">+6 نقاط</div></div>
+    <div class="calc-row"><div class="calc-row-label">القطاع: حكومي أو بنكي = 3 نقاط / اتصالات أو صحة أو طاقة = 2 نقاط</div><div class="calc-row-op">+</div><div class="calc-row-val">2 أو 3 نقاط</div></div>
+    <div class="calc-row"><div class="calc-row-label">البيئة: Multi-Cloud = 2 نقطة / Cloud-First أو Hybrid = 1 نقطة</div><div class="calc-row-op">+</div><div class="calc-row-val">1 أو 2 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">3 أطر تنظيمية فأكثر = 3 نقاط / 1–2 إطار = 1 نقطة</div><div class="calc-row-op">+</div><div class="calc-row-val">1 أو 3 نقاط</div></div>
+    <div class="calc-row"><div class="calc-row-label">SLA أقل من 15 دقيقة = 2 نقطة / ساعة = 1 نقطة</div><div class="calc-row-op">+</div><div class="calc-row-val">1 أو 2 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">Forensics = 2 نقطة / Threat Hunting = 1 نقطة</div><div class="calc-row-op">+</div><div class="calc-row-val">1 أو 2 نقطة</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>الجمع الكلي يحدد الشريحة:</strong> 0–5 = بسيط | 6–10 = متوسط | 11–16 = كبير | 17+ = مؤسسي</div><div class="calc-row-op">=</div><div class="calc-row-val">الشريحة</div></div>
   </div>
 
   <h2>معادلة النموذج الأول (GB/Day)</h2>
-  <div class="formula">
-calcM1(gb, tier):
-  <span class="label">أسعار_SIEM (ريال/GB/يوم):</span>
-  {none:9.38, sentinel:11.10, splunk:30.0,
-   qradar:15.0, elastic:5.63, other:11.25}
-
-  siemMonthly   = gb × 30 × siem_rate
-  coverageMult  = (24x7 ? 1.45 : 16x5 ? 1.20 : 1.0)
-  analystCost   = [40,80,140,220][tier] × 168.75 × coverageMult
-  infra         = gb × 0.1 × 30 × 30   <span class="comment">// تخزين 30 ر.س/GB/شهر</span>
-  overhead      = (siemMonthly + analystCost + infra) × 0.15
-  subTotal      = siemMonthly + analystCost + infra + overhead
-  <span class="result">total         = subTotal × 1.35</span>
+  <div class="calc-steps">
+    <div class="calc-steps-title">💰 كيف يحسب النموذج الأول؟ — مثال: 26 GB/يوم، شريحة بسيطة، Sentinel، 8/5</div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكلفة SIEM:</strong> حجم GB/يوم × 30 يوم × سعر GB المختار — Sentinel = 11.10 ريال/GB</div><div class="calc-row-op">=</div><div class="calc-row-val">26×30×11.10 = 8,658 ر</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكلفة المحللين:</strong> ساعات الشريحة × 168.75 ريال/ساعة × معامل التغطية (8/5 = 1.0، 16/5 = 1.20، 24/7 = 1.45)</div><div class="calc-row-op">+</div><div class="calc-row-val">40×168.75×1.0 = 6,750 ر</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكلفة التخزين:</strong> GB/يوم × 10% × 30 يوم × 30 ريال/GB — 10% هي نسبة ما يُحفظ طويل الأمد</div><div class="calc-row-op">+</div><div class="calc-row-val">26×0.1×30×30 = 2,340 ر</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>مجموع التكاليف المباشرة</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">17,748 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>Overhead 15%:</strong> الإيجار والكهرباء والتأمين والتدريب وغيرها</div><div class="calc-row-op">+</div><div class="calc-row-val">2,662 ريال</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>إجمالي التكاليف</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">20,410 ريال</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>السعر النهائي بعد إضافة هامش ربح 35%</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">27,554 ريال/شهر</div></div>
   </div>
 
   <h2>معادلة النموذج الثاني (Analyst Capacity)</h2>
-  <div class="formula">
-calcM2(tier):
-  cpaBase = [10, 5, 2, 0.5][tier]  <span class="comment">// عملاء/محلل بـ 8/5</span>
-  cpa     = (24x7 ? cpaBase×0.6 : 16x5 ? cpaBase×0.8 : cpaBase)
-  cpa     = max(cpa, 0.5)
-
-  راتب_أساسي  = 22,000 ر.س
-  مكافأة_ليل  = (24x7 ? 5,500 : 16x5 ? 2,200 : 0)
-  راتب_كامل   = 22,000 + مكافأة_ليل
-
-  mgrClients  = (24x7 ? [6,4,2,1] : [12,6,3,1])[tier]
-
-  حصة_محلل   = راتب_كامل / cpa
-  حصة_مدير   = 30,000 / mgrClients
-  أدوات       = 11,250 / cpa
-  مكتب        = 5,625 / cpa
-  subTotal    = حصة_محلل + حصة_مدير + أدوات + مكتب
-  <span class="result">total       = subTotal × 1.35</span>
+  <div class="calc-steps">
+    <div class="calc-steps-title">👨‍💻 كيف يحسب النموذج الثاني؟ — مثال: شريحة متوسطة، 8/5</div>
+    <div class="calc-row"><div class="calc-row-label">في الشريحة المتوسطة بـ 8/5، <strong>محلل واحد يخدم 5 عملاء</strong> في آنٍ واحد</div><div class="calc-row-op"></div><div class="calc-row-val">5 عملاء/محلل</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>حصة هذا العميل من راتب المحلل:</strong> 22,000 ريال ÷ 5 عملاء</div><div class="calc-row-op">=</div><div class="calc-row-val">4,400 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>حصة من راتب مدير SOC:</strong> 30,000 ريال ÷ 6 عملاء (في الشريحة المتوسطة)</div><div class="calc-row-op">+</div><div class="calc-row-val">5,000 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>حصة من تكلفة الأدوات:</strong> 11,250 ريال ÷ 5 عملاء</div><div class="calc-row-op">+</div><div class="calc-row-val">2,250 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>حصة من تكلفة المكتب:</strong> 5,625 ريال ÷ 5 عملاء</div><div class="calc-row-op">+</div><div class="calc-row-val">1,125 ريال</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>مجموع التكاليف قبل الربح</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">12,775 ريال</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>السعر النهائي بعد هامش ربح 35%</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">17,247 ريال/شهر</div></div>
   </div>
 
   <h2>معادلة النموذج الثالث (ABC)</h2>
-  <div class="formula">
-calcM3(tier):
-  coverageMult = (24x7 ? 1.45 : 16x5 ? 1.20 : 1.0)
-
-  <span class="comment">// ساعات كل نشاط (الشريحة 0→3):</span>
-  مراقبة    = [40,  80,  130, 200][tier] × coverageMult
-  تحقيق     = [5,   15,  30,  55][tier]  × coverageMult
-  تقارير    = [3,   6,   10,  18][tier]  <span class="comment">// ثابت</span>
-  ضبط       = [4,   10,  18,  28][tier]  <span class="comment">// ثابت</span>
-  اجتماعات  = [2,   4,   6,   10][tier]  <span class="comment">// ثابت</span>
-
-  <span class="comment">// أسعار الساعة (ريال):</span>
-  monitoring:168.75  investigation:225.0  reporting:187.5
-  tuning:206.25      meetings:187.5
-
-  subTotal = مجموع(ساعات × سعر) × 1.15  <span class="comment">// Overhead 15%</span>
-  <span class="result">total    = subTotal × 1.35</span>
+  <div class="calc-steps">
+    <div class="calc-steps-title">📋 كيف يحسب النموذج الثالث؟ — مثال: شريحة متوسطة، 8/5</div>
+    <div class="calc-row"><div class="calc-row-label"><strong>مراقبة:</strong> 80 ساعة (شريحة متوسطة) × 168.75 ريال/ساعة</div><div class="calc-row-op">=</div><div class="calc-row-val">13,500 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تحقيق:</strong> 15 ساعة × 225 ريال/ساعة — الأعلى سعراً لأنه يحتاج خبراء متخصصين</div><div class="calc-row-op">+</div><div class="calc-row-val">3,375 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تقارير:</strong> 6 ساعات × 187.5 ريال/ساعة</div><div class="calc-row-op">+</div><div class="calc-row-val">1,125 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>ضبط الأنظمة:</strong> 10 ساعات × 206.25 ريال/ساعة</div><div class="calc-row-op">+</div><div class="calc-row-val">2,062 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>اجتماعات:</strong> 4 ساعات × 187.5 ريال/ساعة</div><div class="calc-row-op">+</div><div class="calc-row-val">750 ريال</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>مجموع الأنشطة</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">20,812 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>Overhead 15%</strong></div><div class="calc-row-op">+</div><div class="calc-row-val">3,122 ريال</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>السعر النهائي بعد هامش ربح 35%</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">32,344 ريال/شهر</div></div>
   </div>
 </div>
 
@@ -1566,14 +1626,13 @@ calcM3(tier):
   </div>
 
   <h2>كيف يحسب "سعرك الحقيقي"؟</h2>
-  <div class="formula">
-سعرك_الحقيقي = (إجمالي_التكاليف_الشهرية) × 1.35
-
-حيث:
-  إجمالي_التكاليف = تكاليف_موظفين + تكاليف_رخص + تكاليف_overhead
-
-<span class="comment">// تحويل التكاليف السنوية إلى شهرية تلقائياً:</span>
-  تكلفة_شهرية = (تكلفة_سنوية / 12)
+  <div class="calc-steps">
+    <div class="calc-steps-title">🔢 كيف يُحسب سعرك الحقيقي؟</div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكاليف الموظفين:</strong> عدد المحللين × الراتب الشهري (+ مديري SOC)</div><div class="calc-row-op">=</div><div class="calc-row-val">تكلفة الكوادر</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكاليف الرخص والأدوات:</strong> اشتراك SIEM + رخص EDR + أدوات أخرى</div><div class="calc-row-op">+</div><div class="calc-row-val">تكلفة البرامج</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكاليف Overhead:</strong> الإيجار + الكهرباء + الإنترنت + التدريب — إذا لديك تكاليف سنوية تُقسَّم تلقائياً على 12</div><div class="calc-row-op">+</div><div class="calc-row-val">التكاليف العامة</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>إجمالي التكاليف الشهرية الحقيقية</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">مجموع ما سبق</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>سعر البيع المقترح</strong> — الإجمالي × 1.35 (يشمل هامش ربح 35%)</div><div class="calc-row-op">=</div><div class="calc-row-val">سعرك الحقيقي</div></div>
   </div>
 
   <h2>قراءة المقارنة</h2>
@@ -1740,24 +1799,33 @@ calcM3(tier):
     </div>
   </div>
 
-  <div class="formula">
-<span class="comment">--- حساب النقاط ---</span>
-قطاع تجزئة = 0 نقاط
-50-200 موظف = 0 نقاط
-8/5 تغطية  = 0 نقاط
-بدون تنظيم = 0 نقاط
-<span class="result">المجموع = 0 نقاط → الشريحة الأولى (بسيط)</span>
+  <div class="calc-steps">
+    <div class="calc-steps-title">🎯 الخطوة الأولى — حساب نقاط التعقيد</div>
+    <div class="calc-row"><div class="calc-row-label">قطاع التجزئة — لا توجد متطلبات تنظيمية خاصة</div><div class="calc-row-op">=</div><div class="calc-row-val">0 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">50–200 موظف — حجم صغير</div><div class="calc-row-op">+</div><div class="calc-row-val">0 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">تغطية 8/5 — ساعات العمل الرسمية فقط</div><div class="calc-row-op">+</div><div class="calc-row-val">0 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">بدون أطر تنظيمية</div><div class="calc-row-op">+</div><div class="calc-row-val">0 نقطة</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>النتيجة ← الشريحة الأولى (بسيط)</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">0 نقطة</div></div>
+  </div>
 
-<span class="comment">--- حجم السجلات ---</span>
-(2 × 1.0) + (80 × 0.05) + (1 × 20) = 26 GB/يوم
+  <div class="calc-steps">
+    <div class="calc-steps-title">📊 الخطوة الثانية — حساب حجم السجلات اليومي</div>
+    <div class="calc-row"><div class="calc-row-label">خادمان Windows × 1 GB لكل خادم</div><div class="calc-row-op">=</div><div class="calc-row-val">2 GB</div></div>
+    <div class="calc-row"><div class="calc-row-label">80 جهاز كمبيوتر × 0.05 GB لكل جهاز</div><div class="calc-row-op">+</div><div class="calc-row-val">4 GB</div></div>
+    <div class="calc-row"><div class="calc-row-label">جدار ناري واحد × 20 GB</div><div class="calc-row-op">+</div><div class="calc-row-val">20 GB</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>إجمالي السجلات اليومية</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">26 GB / يوم</div></div>
+  </div>
 
-<span class="comment">--- النموذج الأول ---</span>
-SIEM  = 26 × 30 × 11.10 = 8,658 ر.س
-محللون = 40 × 168.75 × 1.0 = 6,750 ر.س
-تخزين = 26 × 0.1 × 30 × 30 = 2,340 ر.س
-overhead = (8658+6750+2340) × 15% = 2,657 ر.س
-subTotal = 20,405 ر.س
-<span class="result">السعر النهائي = 20,405 × 1.35 ≈ 27,547 ر.س/شهر</span>
+  <div class="calc-steps">
+    <div class="calc-steps-title">💰 الخطوة الثالثة — حساب السعر (النموذج الأول)</div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكلفة Sentinel:</strong> 26 GB × 30 يوم × 11.10 ريال لكل GB</div><div class="calc-row-op">=</div><div class="calc-row-val">8,658 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكلفة المحللين:</strong> 40 ساعة (الشريحة الأولى) × 168.75 ريال/ساعة، بدون مكافأة ليل (8/5)</div><div class="calc-row-op">+</div><div class="calc-row-val">6,750 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكلفة التخزين:</strong> 26 GB × 10% × 30 يوم × 30 ريال/GB</div><div class="calc-row-op">+</div><div class="calc-row-val">2,340 ريال</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>مجموع التكاليف المباشرة</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">17,748 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>Overhead 15%:</strong> تكاليف الإيجار والكهرباء والتدريب</div><div class="calc-row-op">+</div><div class="calc-row-val">2,662 ريال</div></div>
+    <div class="calc-row subtotal"><div class="calc-row-label"><strong>إجمالي التكاليف الكاملة</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">20,410 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>هامش ربح 35%</strong></div><div class="calc-row-op">+</div><div class="calc-row-val">7,144 ريال</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>السعر النهائي المقترح للعميل</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">27,554 ريال/شهر</div></div>
   </div>
 
   <div class="box success">
@@ -1782,20 +1850,31 @@ subTotal = 20,405 ر.س
     </div>
   </div>
 
-  <div class="formula">
-<span class="comment">--- حساب النقاط ---</span>
-قطاع صحة  = +2
-200-500    = +1
-24/7       = +6 (قفل الحد الأدنى)
-2 أطر تنظيمية = +1
-5-20 حوادث   = +1
-<span class="result">المجموع = 11 نقطة → الشريحة الثالثة (كبير)</span>
+  <div class="calc-steps">
+    <div class="calc-steps-title">🎯 حساب نقاط التعقيد</div>
+    <div class="calc-row"><div class="calc-row-label">قطاع الصحة — بنية تحتية حيوية</div><div class="calc-row-op">=</div><div class="calc-row-val">+2 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">200–500 موظف</div><div class="calc-row-op">+</div><div class="calc-row-val">+1 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">تغطية 24/7 — يُطبَّق الحد الأدنى (6 نقاط) تلقائياً</div><div class="calc-row-op">+</div><div class="calc-row-val">+6 نقاط</div></div>
+    <div class="calc-row"><div class="calc-row-label">إطاران تنظيميان (NCA + PDPL)</div><div class="calc-row-op">+</div><div class="calc-row-val">+1 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">5–20 حادثة شهرياً</div><div class="calc-row-op">+</div><div class="calc-row-val">+1 نقطة</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>المجموع ← الشريحة الثالثة (كبير)</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">11 نقطة</div></div>
+  </div>
 
-<span class="comment">--- حجم السجلات ---</span>
-(15×1) + (5×0.5) + (300×0.05) + (3×20) = 90 GB/يوم
+  <div class="calc-steps">
+    <div class="calc-steps-title">📊 حساب حجم السجلات اليومي</div>
+    <div class="calc-row"><div class="calc-row-label">15 خادم Windows × 1 GB</div><div class="calc-row-op">=</div><div class="calc-row-val">15 GB</div></div>
+    <div class="calc-row"><div class="calc-row-label">5 خوادم Linux × 0.5 GB</div><div class="calc-row-op">+</div><div class="calc-row-val">2.5 GB</div></div>
+    <div class="calc-row"><div class="calc-row-label">300 جهاز × 0.05 GB</div><div class="calc-row-op">+</div><div class="calc-row-val">15 GB</div></div>
+    <div class="calc-row"><div class="calc-row-label">3 جدران نارية × 20 GB</div><div class="calc-row-op">+</div><div class="calc-row-val">60 GB</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>إجمالي السجلات اليومية</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">92.5 GB / يوم</div></div>
+  </div>
 
-<span class="comment">--- السعر التقريبي ---</span>
-النموذج الأول ≈ 350,000 – 420,000 ر.س/شهر
+  <div class="calc-steps">
+    <div class="calc-steps-title">💰 السعر التقريبي — النموذج الأول (مع معامل 24/7)</div>
+    <div class="calc-row"><div class="calc-row-label">تكلفة Sentinel: 92.5 GB × 30 يوم × 11.10 ريال</div><div class="calc-row-op">=</div><div class="calc-row-val">30,803 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label"><strong>تكلفة المحللين:</strong> 140 ساعة (شريحة كبير) × 168.75 ريال × 1.45 (معامل 24/7)</div><div class="calc-row-op">+</div><div class="calc-row-val">34,256 ريال</div></div>
+    <div class="calc-row"><div class="calc-row-label">تكلفة التخزين + Overhead</div><div class="calc-row-op">+</div><div class="calc-row-val">~19,333 ريال</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>النطاق السعري النهائي (+ 35% ربح)</strong></div><div class="calc-row-op">≈</div><div class="calc-row-val">350,000–420,000 ريال/شهر</div></div>
   </div>
 
   <hr class="divider">
@@ -1815,21 +1894,25 @@ subTotal = 20,405 ر.س
     </div>
   </div>
 
-  <div class="formula">
-<span class="comment">--- حساب النقاط ---</span>
-قطاع بنكي   = +3
-1000-5000    = +2
-إقليمي      = +1
-24/7         = +6
-multi-cloud  = +2
-3 أطر        = +3
-SLA 15 دق   = +2
-forensics    = +2
-threat hunt  = +1
-<span class="result">المجموع = 22 نقطة → الشريحة الرابعة (مؤسسي) — أعلى مستوى</span>
+  <div class="calc-steps">
+    <div class="calc-steps-title">🎯 حساب نقاط التعقيد — البنك التجاري</div>
+    <div class="calc-row"><div class="calc-row-label">قطاع بنكي — أعلى متطلبات SAMA وNCA</div><div class="calc-row-op">=</div><div class="calc-row-val">+3 نقاط</div></div>
+    <div class="calc-row"><div class="calc-row-label">1000–5000 موظف</div><div class="calc-row-op">+</div><div class="calc-row-val">+2 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">تغطية جغرافية إقليمية (الخليج)</div><div class="calc-row-op">+</div><div class="calc-row-val">+1 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">تغطية 24/7 متواصلة</div><div class="calc-row-op">+</div><div class="calc-row-val">+6 نقاط</div></div>
+    <div class="calc-row"><div class="calc-row-label">Multi-Cloud — سحب متعددة</div><div class="calc-row-op">+</div><div class="calc-row-val">+2 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">3 أطر تنظيمية (NCA + SAMA + PDPL)</div><div class="calc-row-op">+</div><div class="calc-row-val">+3 نقاط</div></div>
+    <div class="calc-row"><div class="calc-row-label">SLA أقل من 15 دقيقة — استجابة فورية</div><div class="calc-row-op">+</div><div class="calc-row-val">+2 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">خدمة التحقيق الجنائي (Forensics)</div><div class="calc-row-op">+</div><div class="calc-row-val">+2 نقطة</div></div>
+    <div class="calc-row"><div class="calc-row-label">خدمة صيد التهديدات (Threat Hunting)</div><div class="calc-row-op">+</div><div class="calc-row-val">+1 نقطة</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>المجموع ← الشريحة الرابعة (مؤسسي) — أعلى مستوى</strong></div><div class="calc-row-op">=</div><div class="calc-row-val">22 نقطة</div></div>
+  </div>
 
-<span class="comment">--- النطاق السعري ---</span>
-<span class="result">النموذج الأول ≈ 900,000 – 1,200,000+ ر.س/شهر</span>
+  <div class="calc-steps">
+    <div class="calc-steps-title">💰 النطاق السعري المتوقع</div>
+    <div class="calc-row"><div class="calc-row-label">حجم السجلات اليومي (مع Multi-Cloud) يتجاوز 600–800 GB/يوم</div><div class="calc-row-op"></div><div class="calc-row-val">ضخم جداً</div></div>
+    <div class="calc-row"><div class="calc-row-label">220 ساعة محلل شهرياً (الشريحة الرابعة) × معامل 24/7 × 1.45</div><div class="calc-row-op"></div><div class="calc-row-val">تكلفة عالية</div></div>
+    <div class="calc-row total"><div class="calc-row-label"><strong>النطاق السعري التقديري للتفاوض</strong></div><div class="calc-row-op">≈</div><div class="calc-row-val">900,000–1,200,000+ ريال/شهر</div></div>
   </div>
 
   <div class="box warn">
@@ -1932,6 +2015,7 @@ function showChapter(id) {
   if (ch) ch.classList.add('active');
   event && event.currentTarget && event.currentTarget.classList.add('active');
   window.scrollTo({top:0, behavior:'smooth'});
+  closeSidebar();
 }
 
 // Activate nav links on click
@@ -1941,6 +2025,18 @@ document.querySelectorAll('.nav-link').forEach(link => {
     this.classList.add('active');
   });
 });
+
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebarOverlay').classList.add('visible');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('visible');
+  document.body.style.overflow = '';
+}
 </script>
 </body>
 </html>
